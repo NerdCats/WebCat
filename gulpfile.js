@@ -1,72 +1,40 @@
-var gulp = require('gulp'),
-    rename = require('gulp-rename'),
-    traceur = require('gulp-traceur'),
-    webserver = require('gulp-webserver');
+const gulp = require('gulp');
+const del = require('del');
+const typescript = require('gulp-typescript');
+const tscConfig = require('./tsconfig.json');
+const sourcemaps = require('gulp-sourcemaps');
 
-// run init tasks
-gulp.task('default', ['dependencies', 'js', 'html', 'css']);
-
-// run development task
-gulp.task('dev', ['watch', 'serve']);
-
-// serve the build dir
-gulp.task('serve', function () {
-  gulp.src('build')
-    .pipe(webserver({
-      open: true
-    }));
+// clean the contents of the distribution directory
+gulp.task('clean', function() {
+  return del('dist/**/*');
 });
 
-// watch for changes and run the relevant task
-gulp.task('watch', function () {
-  gulp.watch('src/**/*.js', ['js']);
-  gulp.watch('src/**/*.html', ['html']);
-  gulp.watch('src/**/*.css', ['css']);
+// TypeScript compile
+gulp.task('compile', function() {
+  return gulp
+    .src('src/app/**/*.ts')
+    .pipe(sourcemaps.init())
+    .pipe(typescript(tscConfig.compilerOptions))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/app'));
 });
 
-// move dependencies into build dir
-gulp.task('dependencies', function () {
+// copy dependencies
+gulp.task('copy:libs', function() {
   return gulp.src([
-    'node_modules/traceur/bin/traceur-runtime.js',
-    'node_modules/systemjs/dist/system-csp-production.src.js',
-    'node_modules/systemjs/dist/system.js',
-    'node_modules/reflect-metadata/Reflect.js',
-    'node_modules/angular2/bundles/angular2.js',
-    'node_modules/angular2/bundles/angular2-polyfills.js',
-    'node_modules/rxjs/bundles/Rx.js',
-    'node_modules/es6-shim/es6-shim.min.js',
-    'node_modules/es6-shim/es6-shim.map'
-  ])
-    .pipe(gulp.dest('build/lib'));
+      'node_modules/es6-shim/es6-shim.min.js',
+      'node_modules/zone.js/dist/zone.js',
+      'node_modules/reflect-metadata/Reflect.js',
+      'node_modules/systemjs/dist/system.src.js'
+    ])
+    .pipe(gulp.dest('dist/lib'));
 });
 
-// transpile & move js
-gulp.task('js', function () {
-  return gulp.src('src/**/*.js')
-    .pipe(rename({
-      extname: ''
-    }))
-    .pipe(traceur({
-      modules: 'instantiate',
-      moduleName: true,
-      annotations: true,
-      types: true,
-      memberVariables: true
-    }))
-    .pipe(rename({
-      extname: '.js'
-    }))
-    .pipe(gulp.dest('build'));
+// copy static assets - i.e. non TypeScript compiled source
+gulp.task('copy:assets', function() {
+  return gulp.src(['src/**/*', 'index.html', 'styles.css', '!src/app/**/*.ts'], { base : './' })
+    .pipe(gulp.dest('dist'));
 });
 
-// move html
-gulp.task('html', function () {
-  return gulp.src('src/**/*.html')
-    .pipe(gulp.dest('build'))
-});
-
-// move css
-gulp.task('css', function () {
-  return gulp.src('src/**/*.css')
-    .pipe(gulp.dest('build'))
-});
+gulp.task('build', ['clean','copy:libs', 'copy:assets', 'compile']);
+gulp.task('default', ['build']);
