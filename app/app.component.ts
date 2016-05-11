@@ -4,11 +4,13 @@ import { AppSettings } from './shared/app.config';
 
 @Component({
   selector: 'webcat',
-  template: '<h1>Welcome to webcat</h1>',
+  templateUrl: 'app/app.component.html',
   providers: [Title]
 })
 export class AppComponent {
+  AppTitle : string;
   constructor(title: Title) {
-    title.setTitle(AppSettings.APP_NAME);
+    this.AppTitle = AppSettings.APP_NAME;
+    title.setTitle(this.AppTitle);
   }
 }
