@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { CollapseDirective } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { AppSettings } from './shared/app.config';
 import { WrapHeaderComponent } from './wrapHeader/WrapHeader.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'webcat',
   templateUrl: 'app/app.component.html',
-  directives: [CollapseDirective, WrapHeaderComponent],
+  directives: [NavbarComponent, WrapHeaderComponent],
   providers: [Title]
 })
 export class AppComponent {
