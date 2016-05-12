@@ -1,0 +1,34 @@
+/* HeaderWrap */
+#headerwrap
+{
+    width: 100%;
+    min-height: 650px;
+    margin-top: -20px;
+    padding-top: 200px;
+    /* background: url(../img/bg01.jpg) no-repeat center top; */
+
+    background-color: #3498db;
+    background-attachment: relative;
+    background-position: center center;
+    -webkit-background-size: 100%;
+    -webkit-background-size: cover;
+       -moz-background-size: 100%;
+       -moz-background-size: cover;
+         -o-background-size: 100%;
+         -o-background-size: cover;
+            background-size: 100%;
+            background-size: cover;
+}
+
+#headerwrap h1
+{
+    font-size: 45px;
+    font-weight: 300;
+
+    margin-top: 60px;
+    margin-bottom: 15px;
+
+    letter-spacing: 1px;
+
+    color: white;
+}
