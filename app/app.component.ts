@@ -5,11 +5,12 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 import { AppSettings } from './shared/app.config';
 import { WrapHeaderComponent } from './wrapHeader/WrapHeader.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @Component({
   selector: 'webcat',
   templateUrl: 'app/app.component.html',
-  directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent],
+  directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent, SignupComponent],
   providers: [ROUTER_PROVIDERS, Title]
 })
 @RouteConfig([
@@ -18,7 +19,12 @@ import { NavbarComponent } from './navbar/navbar.component';
     name: 'Home',
     component: WrapHeaderComponent,
     useAsDefault: true
-  }
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: SignupComponent
+  },
 ])
 export class AppComponent {
   public isCollapsed: boolean = false;
