@@ -13,10 +13,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class AppComponent {
   public isCollapsed: boolean = false;
-  AppTitle: string;
 
   constructor(title: Title) {
-    this.AppTitle = AppSettings.APP_NAME;
-    title.setTitle(this.AppTitle);
+    title.setTitle(AppSettings.APP_NAME);
   }
 }
