@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { CollapseDirective } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { AppSettings } from '../shared/app.config';
-import { SignupComponent } from '../auth/signup/signup.component';
+import { SignupComponent } from '../account/signup/signup.component';
 
 @Component({
     selector: 'navbar',
