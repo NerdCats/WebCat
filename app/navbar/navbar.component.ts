@@ -1,20 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CollapseDirective } from 'ng2-bootstrap/ng2-bootstrap';
-import { ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 import { AppSettings } from '../shared/app.config';
+import { SignupComponent } from '../auth/signup/signup.component';
 
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective],
+    directives: [CollapseDirective, SignupComponent],
     styleUrls: ['app/navbar/navbar.component.css']
 })
 export class NavbarComponent {
     public isCollapsed: boolean = false;
+    @ViewChild('signup')
+    public signUpComponent: SignupComponent;
+
     AppTitle: string;
 
     constructor() {
         this.AppTitle = AppSettings.APP_NAME;
+    }
+
+    showSignUpComponent() {
+        this.signUpComponent.open();
     }
 }

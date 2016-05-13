@@ -13,10 +13,11 @@
     <div class="navbar-collapse collapse" [collapse]="isCollapsed">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a [routerLink]="['Signup']" >Sign Up</a>
+          <a (click)="showSignUpComponent()" >Sign Up</a>
         </li>
       </ul>
     </div>
     <!--/.nav-collapse -->
   </div>
 </div>
+<signup #signup></signup>
