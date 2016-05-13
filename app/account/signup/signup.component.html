@@ -6,29 +6,21 @@
         <modal-body>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control"
-                placeholder="Enter your desried username here"
-                [(ngModel)]="model.UserName"
-                [ngFormControl]="signupForm.controls['username']">
+                <input type="text" class="form-control" placeholder="Enter your desried username here" [(ngModel)]="model.UserName" [ngFormControl]="signupForm.controls['username']">
                 <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
                     Username is required
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control"
-                placeholder="ex: someone@somewhere.com"
-                [(ngModel)]="model.Email"
-                [ngFormControl]="signupForm.controls['email']">
+                <input type="email" class="form-control" placeholder="ex: someone@somewhere.com" [(ngModel)]="model.Email" [ngFormControl]="signupForm.controls['email']">
                 <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
                     Invalid email address
                 </div>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control"
-                [(ngModel)]="model.Password"
-                [ngFormControl]="signupForm.controls['password']">
+                <input type="password" class="form-control" [(ngModel)]="model.Password" [ngFormControl]="signupForm.controls['password']">
                 <div [hidden]="signupForm.controls['password'].valid || signupForm.controls['password'].pristine">
                     <div *ngIf="password.errors!=null && password.errors.minlength" class="alert alert-danger">
                         Password are required and has to be at least 6 characters long
@@ -37,15 +29,14 @@
             </div>
             <div class="form-group">
                 <label for="cpassword">Confirm Password</label>
-                <input type="password" class="form-control"
-                [(ngModel)]="model.ConfirmPassword"
-                [ngFormControl]="signupForm.controls['cpassword']">
+                <input type="password" class="form-control" [(ngModel)]="model.ConfirmPassword" [ngFormControl]="signupForm.controls['cpassword']">
+                <div [hidden]="signupForm.controls['cpassword'].valid || signupForm.controls['cpassword'].pristine" class="alert alert-danger">
+                    Passwords don't match'
+                </div>
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="text" class="form-control"
-                placeholder="ex: +8801XXXXXXXXX"
-                [ngFormControl]="signupForm.controls['phone']">
+                <input type="text" class="form-control" placeholder="ex: +8801XXXXXXXXX" [ngFormControl]="signupForm.controls['phone']">
             </div>
         </modal-body>
         <modal-footer>

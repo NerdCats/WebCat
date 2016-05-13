@@ -18,24 +18,17 @@ export class SignupComponent implements OnInit {
     public email: Control = new Control("", Validators.compose([Validators.required, Validators.pattern("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")]));
 
     public password: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6)]));
-    public cpassword: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6)]));
+    public cpassword: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6), (c) => {
+        if (c.value != this.password.value) {
+            return {
+                mismatchedPasswords: true
+            };
+        }
+    }]));
 
     public phone: Control = new Control("");
 
     ngOnInit() {
-    }
-
-    matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-        return (group: ControlGroup): { [key: string]: any } => {
-            let password = group.controls[passwordKey];
-            let confirmPassword = group.controls[confirmPasswordKey];
-
-            if (password.value !== confirmPassword.value) {
-                return {
-                    mismatchedPasswords: true
-                };
-            }
-        }
     }
 
     constructor(private formBuilder: FormBuilder) {
@@ -47,13 +40,12 @@ export class SignupComponent implements OnInit {
             "phone": this.phone,
             "password": this.password,
             "cpassword": this.cpassword
-        },{validator: this.matchingPasswords('password', 'cpassword')});
+        });
     }
 
     onSubmit() {
         this.submitted = true;
         console.log("registration form submitted");
-        console.log(this.signupForm.valid);
     }
 
     // Modal related section starts here
