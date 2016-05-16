@@ -1,13 +1,16 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators } from '@angular/common';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { HTTP_PROVIDERS } from '@angular/http';
 
 import { UserRegistration } from '../shared/user.registration';
+import { AccountService } from '../shared/account.service';
 
 @Component({
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
-    directives: [MODAL_DIRECTIVES, ModalComponent]
+    directives: [MODAL_DIRECTIVES, ModalComponent],
+    providers: [ HTTP_PROVIDERS, AccountService]
 })
 export class SignupComponent implements OnInit {
     public model: UserRegistration;
@@ -31,7 +34,7 @@ export class SignupComponent implements OnInit {
     ngOnInit() {
     }
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder, private accountService: AccountService) {
         this.model = new UserRegistration();
 
         this.signupForm = formBuilder.group({
