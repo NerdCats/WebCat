@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators } from '@angular/common';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
-import { UserRegistrationModel } from '../shared/user.registration.model';
+import { UserRegistration } from '../shared/user.registration';
 
 @Component({
     selector: 'signup',
@@ -10,7 +10,7 @@ import { UserRegistrationModel } from '../shared/user.registration.model';
     directives: [MODAL_DIRECTIVES, ModalComponent]
 })
 export class SignupComponent implements OnInit {
-    public model: UserRegistrationModel;
+    public model: UserRegistration;
     public submitted = false;
 
     public signupForm: ControlGroup;
@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
     }
 
     constructor(private formBuilder: FormBuilder) {
-        this.model = new UserRegistrationModel();
+        this.model = new UserRegistration();
 
         this.signupForm = formBuilder.group({
             "username": this.username,

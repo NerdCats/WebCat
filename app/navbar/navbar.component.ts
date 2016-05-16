@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { CollapseDirective } from 'ng2-bootstrap/ng2-bootstrap';
 
-import { AppSettings } from '../shared/app.config';
+import { AppSettings } from '../shared/app.settings';
 import { SignupComponent } from '../account/signup/signup.component';
 
 @Component({
