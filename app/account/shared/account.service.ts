@@ -17,7 +17,7 @@ export class AccountService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(AppSettings.TASKCAT_API_BASE + this.accountUrl, body, options)
+        return this.http.post(AppSettings.TASKCAT_API_BASE + this.accountUrl + "/register", body, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
