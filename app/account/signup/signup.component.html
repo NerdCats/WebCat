@@ -8,7 +8,7 @@
                 <label for="username">Username</label>
                 <input type="text" class="form-control" placeholder="Enter your desried username here" [(ngModel)]="registrationModel.UserName" [ngFormControl]="signupForm.controls['username']">
                 <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
-                    Username is required
+                    A valid and available username is required
                 </div>
             </div>
             <div class="form-group">
