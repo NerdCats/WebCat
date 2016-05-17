@@ -5,16 +5,19 @@ import { HTTP_PROVIDERS } from '@angular/http';
 
 import { UserRegistration } from '../shared/user.registration';
 import { AccountService } from '../shared/account.service';
+import { User } from '../shared/user';
 
 @Component({
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent],
-    providers: [ HTTP_PROVIDERS, AccountService]
+    providers: [HTTP_PROVIDERS, AccountService]
 })
 export class SignupComponent implements OnInit {
-    public model: UserRegistration;
+    public registrationModel: UserRegistration;
     public submitted = false;
+    private errorMessage: string;
+    private userModel: User;
 
     public signupForm: ControlGroup;
     public username: Control = new Control("", Validators.required);
@@ -35,7 +38,7 @@ export class SignupComponent implements OnInit {
     }
 
     constructor(private formBuilder: FormBuilder, private accountService: AccountService) {
-        this.model = new UserRegistration();
+        this.registrationModel = new UserRegistration();
 
         this.signupForm = formBuilder.group({
             "username": this.username,
@@ -48,6 +51,12 @@ export class SignupComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
+        this.accountService.register(this.registrationModel)
+            .subscribe(
+            result => this.userModel = result,
+            error => this.errorMessage = error
+            );
+
         console.log("registration form submitted");
     }
 
@@ -62,6 +71,4 @@ export class SignupComponent implements OnInit {
     open() {
         this.modal.open();
     }
-
-
 }

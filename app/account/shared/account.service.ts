@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { UserRegistration } from './user.registration';
+import { User } from './user';
 import { Observable } from 'rxjs/Rx';
 import { AppSettings } from '../../shared/app.settings';
 
@@ -11,7 +12,7 @@ export class AccountService {
 
     private accountUrl = 'account';  // URL to web API
 
-    register(registration: UserRegistration): Observable<UserRegistration> {
+    register(registration: UserRegistration): Observable<User> {
         let body = JSON.stringify(registration);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
