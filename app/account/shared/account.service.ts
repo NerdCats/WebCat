@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 
 import { UserRegistration } from './user.registration';
 import { User } from './user';
-import { Observable } from 'rxjs/Rx';
+import { UsernameAvailable } from './username.available';
 import { AppSettings } from '../../shared/app.settings';
 
 @Injectable()
 export class AccountService {
     constructor(private http: Http) { }
 
-    private accountUrl = 'account';  // URL to web API
+    private accountUrl = AppSettings.TASKCAT_API_BASE + 'account';  // URL to web API
 
     register(registration: UserRegistration): Observable<User> {
         let body = JSON.stringify(registration);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(AppSettings.TASKCAT_API_BASE + this.accountUrl + "/register", body, options)
+        return this.http.post(this.accountUrl + "/register", body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    checkUsername(suggestedUsername: string): Observable<UsernameAvailable> {
+        return this.http.get(this.accountUrl + '/username?suggestedUsername=' + suggestedUsername)
             .map(this.extractData)
             .catch(this.handleError);
     }

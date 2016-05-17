@@ -6,6 +6,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { UserRegistration } from '../shared/user.registration';
 import { AccountService } from '../shared/account.service';
 import { User } from '../shared/user';
+import { UsernameAvailable } from '../shared/username.available';
 
 @Component({
     selector: 'signup',
@@ -14,13 +15,30 @@ import { User } from '../shared/user';
     providers: [HTTP_PROVIDERS, AccountService]
 })
 export class SignupComponent implements OnInit {
-    public registrationModel: UserRegistration;
-    public submitted = false;
     private errorMessage: string;
     private userModel: User;
+    private usernameAvailableResult: UsernameAvailable;
 
+    public registrationModel: UserRegistration;
+    public submitted = false;
     public signupForm: ControlGroup;
-    public username: Control = new Control("", Validators.required);
+    public username: Control = new Control("", Validators.required, (c) => {
+        return new Promise(resolve => {
+            this.accountService.checkUsername(c.value)
+                .subscribe(
+                result => {
+                    if (!result.IsAvailable) {
+                        resolve({ usernameTaken: true });
+                    }
+                    else {
+                        resolve(null);
+                    }
+                },
+                error => this.errorMessage = error
+                );
+        });
+    });
+
     public email: Control = new Control("", Validators.compose([Validators.required, Validators.pattern("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")]));
 
     public password: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6)]));
