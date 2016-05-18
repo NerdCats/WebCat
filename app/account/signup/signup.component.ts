@@ -7,6 +7,7 @@ import { UserRegistration } from '../shared/user.registration';
 import { AccountService } from '../shared/account.service';
 import { User } from '../shared/user';
 import { UsernameAvailable } from '../shared/username.available';
+import { AppSettings } from  '../../shared/app.settings';
 
 @Component({
     selector: 'signup',
@@ -19,8 +20,11 @@ export class SignupComponent implements OnInit {
     private userModel: User;
     private usernameAvailableResult: UsernameAvailable;
 
-    public registrationModel: UserRegistration;
     public submitted = false;
+    public submitCompleted = false;
+    public submitResultMessage: string;
+
+    public registrationModel: UserRegistration;
     public signupForm: ControlGroup;
     public username: Control = new Control("", Validators.required, (c) => {
         return new Promise(resolve => {
@@ -71,9 +75,15 @@ export class SignupComponent implements OnInit {
         this.submitted = true;
         this.accountService.register(this.registrationModel)
             .subscribe(
-            result => this.userModel = result,
-            error => this.errorMessage = error
-            );
+            result => {
+                this.userModel = result;
+                this.submitResultMessage = "Please check your mail for account confirmation at " + this.userModel.Email + ".\n" +"In any case, you're already registered in " + AppSettings.APP_NAME;
+                this.submitCompleted = true;
+            },
+            error => {
+                this.submitResultMessage = error;
+                this.submitCompleted = true;
+            });
 
         console.log("registration form submitted");
     }
