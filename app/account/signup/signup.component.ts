@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators } from '@angular/common';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { HTTP_PROVIDERS } from '@angular/http';
+import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap';
 
 import { UserRegistration } from '../shared/user.registration';
 import { AccountService } from '../shared/account.service';
@@ -12,7 +13,7 @@ import { AppSettings } from  '../../shared/app.settings';
 @Component({
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
-    directives: [MODAL_DIRECTIVES, ModalComponent],
+    directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES],
     providers: [HTTP_PROVIDERS, AccountService]
 })
 export class SignupComponent implements OnInit {
@@ -23,6 +24,13 @@ export class SignupComponent implements OnInit {
     public submitted = false;
     public submitCompleted = false;
     public submitResultMessage: string;
+
+    // Area Typeahead
+    public localities: Array<string> = [
+        'Mohakhali',
+        'Mohammadpur'
+    ];
+    public selectedLocality: string = '';
 
     public registrationModel: UserRegistration;
     public signupForm: ControlGroup;
@@ -55,19 +63,22 @@ export class SignupComponent implements OnInit {
     }]));
 
     public phone: Control = new Control("");
+    public addressLine: Control = new Control("", Validators.required);
+    public locality: Control = new Control("", Validators.required);
 
     ngOnInit() {
     }
 
     constructor(private formBuilder: FormBuilder, private accountService: AccountService) {
         this.registrationModel = new UserRegistration();
-
         this.signupForm = formBuilder.group({
             "username": this.username,
             "email": this.email,
             "phone": this.phone,
             "password": this.password,
-            "cpassword": this.cpassword
+            "cpassword": this.cpassword,
+            'addressLine': this.addressLine,
+            'locality': this.locality
         });
     }
 
@@ -77,7 +88,7 @@ export class SignupComponent implements OnInit {
             .subscribe(
             result => {
                 this.userModel = result;
-                this.submitResultMessage = "Please check your mail for account confirmation at " + this.userModel.Email + ".\n" +"In any case, you're already registered in " + AppSettings.APP_NAME;
+                this.submitResultMessage = "Please check your mail for account confirmation at " + this.userModel.Email + ".\n" + "In any case, you're already registered in " + AppSettings.APP_NAME;
                 this.submitCompleted = true;
             },
             error => {
@@ -87,6 +98,7 @@ export class SignupComponent implements OnInit {
 
         console.log("registration form submitted");
     }
+
 
     // Modal related section starts here
     @ViewChild('modal')
