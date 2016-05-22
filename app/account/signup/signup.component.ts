@@ -30,7 +30,14 @@ export class SignupComponent implements OnInit {
         'Mohakhali',
         'Mohammadpur'
     ];
-    public selectedLocality: string = '';
+    public onLocalitySelect(e: any): void {
+        // The only reason we are doing this like this is an
+        // existing bug in Angular2 bootstrap
+        // details is on https://github.com/valor-software/ng2-bootstrap/issues/463
+        // If the bug is fixed please update the module and
+        // use [ngFormControl] to bind to the control
+        this.locality.updateValue(e.item);
+    }
 
     public registrationModel: UserRegistration;
     public signupForm: ControlGroup;
@@ -71,6 +78,12 @@ export class SignupComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder, private accountService: AccountService) {
         this.registrationModel = new UserRegistration();
+
+        // TODO: This is definitely a hack, we need to make it more generic so we
+        // can support multiple countries
+        this.registrationModel.Address.City = "Dhaka";
+        this.registrationModel.Address.Country = "Bangladesh";
+
         this.signupForm = formBuilder.group({
             "username": this.username,
             "email": this.email,
@@ -110,5 +123,19 @@ export class SignupComponent implements OnInit {
 
     open() {
         this.modal.open();
+    }
+
+    onModalClosed() {
+        this.resetForm();
+    }
+
+    onModelDismissed() {
+        this.resetForm();
+    }
+
+    resetForm() {
+        this.submitCompleted = false;
+        this.submitted = false;
+        this.submitResultMessage = "";
     }
 }

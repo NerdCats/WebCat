@@ -1,4 +1,4 @@
-<modal #modal [size]="sm">
+<modal #modal [size]="sm" (onClose)="onModalClosed()" (onDismiss)="onModelDismissed()">
     <form [ngFormModel]="signupForm" (ngSubmit)="onSubmit()">
         <modal-header [show-close]="true">
             <h4 class="modal-title">Sign Up</h4>
@@ -45,9 +45,18 @@
                 </div>
                 <div class="form-group">
                     <label for="area">Area</label>
-                    <input type="text" class="form-control"
+                    <!-- The reason you guys are not seeing a ngFromControl here is
+                    an existing bug in Angular2 bootstrap module. For details, go to
+                    https://github.com/valor-software/ng2-bootstrap/issues/463
+                    If its fixed update the process here -->
+                    <input
+                    autocomplete="off"
+                    type="text" class="form-control"
                     [(ngModel)]="registrationModel.Address.Locality"
                     [typeahead]="localities"
+                    (typeaheadOnSelect)="onLocalitySelect($event)"
+                    [typeaheadOptionsLimit]="7"
+                    required
                     >
                 </div>
             </div>
