@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { NgForm, FormBuilder, Control, ControlGroup, Validators } from '@angular/common';
+import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap';
@@ -13,7 +13,7 @@ import { AppSettings } from  '../../shared/app.settings';
 @Component({
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
-    directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES],
+    directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES],
     providers: [HTTP_PROVIDERS, AccountService]
 })
 export class SignupComponent implements OnInit {
