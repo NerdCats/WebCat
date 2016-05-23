@@ -23,20 +23,8 @@ export class AccountService {
             .catch(this.handleError);
     }
 
-    checkUsername(suggestedUsername: string): Observable<AvailibilityResponse> {
-        return this.http.get(this.accountUrl + '/check/Username/' + suggestedUsername)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-
-    checkEmail(suggestedEmail: string) {
-        return this.http.get(this.accountUrl + '/check/Email/' + suggestedEmail)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-
-    checkPhoneNumber(suggestedPhoneNumber: string) {
-        return this.http.get(this.accountUrl + '/check/PhoneNumber/' + suggestedPhoneNumber)
+    check(propertyName: string, suggestedValue: string) {
+        return this.http.get(this.accountUrl + '/check?' + propertyName + "=" + suggestedValue)
             .map(this.extractData)
             .catch(this.handleError);
     }

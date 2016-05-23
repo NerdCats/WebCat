@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
     public signupForm: ControlGroup;
     public username: Control = new Control("", Validators.required, (c) => {
         return new Promise(resolve => {
-            this.accountService.checkUsername(c.value)
+            this.accountService.check("username", c.value)
                 .subscribe(
                 result => {
                     if (!result.IsAvailable) {
@@ -58,7 +58,28 @@ export class SignupComponent implements OnInit {
         });
     });
 
-    public email: Control = new Control("", Validators.compose([Validators.required, Validators.pattern("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")]));
+    public email: Control = new Control("", Validators.compose(
+        [
+            Validators.required,
+            Validators.pattern("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")
+        ]),
+        (c) => {
+            return new Promise(resolve => {
+                this.accountService.check("email", c.value)
+                    .subscribe(
+                    result => {
+                        if (!result.IsAvailable) {
+                            resolve({ usernameTaken: true });
+                        }
+                        else {
+                            resolve(null);
+                        }
+                    },
+                    error => this.errorMessage = error
+                    );
+            });
+        }
+    );
 
     public password: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6)]));
     public cpassword: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6), (c) => {
@@ -69,7 +90,7 @@ export class SignupComponent implements OnInit {
         }
     }]));
 
-    public phone: Control = new Control("");
+    public phone: Control = new Control("", Validators.minLength(11));
     public addressLine: Control = new Control("", Validators.required);
     public locality: Control = new Control("", Validators.required);
 
@@ -81,8 +102,7 @@ export class SignupComponent implements OnInit {
 
         // TODO: This is definitely a hack, we need to make it more generic so we
         // can support multiple countries
-        this.registrationModel.Address.City = "Dhaka";
-        this.registrationModel.Address.Country = "Bangladesh";
+        this.setDefaultValues();
 
         this.signupForm = formBuilder.group({
             "username": this.username,
@@ -93,6 +113,12 @@ export class SignupComponent implements OnInit {
             'addressLine': this.addressLine,
             'locality': this.locality
         });
+    }
+
+    // TODO: Shameless hack here
+    setDefaultValues() {
+        this.registrationModel.Address.City = "Dhaka";
+        this.registrationModel.Address.Country = "Bangladesh";
     }
 
     onSubmit() {

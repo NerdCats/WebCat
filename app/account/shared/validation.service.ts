@@ -21,7 +21,7 @@ export class ValidationService {
 
     usernameValidatorAsync(control): Promise<ValidationError> {
         return new Promise(resolve => {
-            this.accountService.checkUsername(control.value)
+            this.accountService.check("username", control.value)
                 .subscribe(
                 result => {
                     if (!result.IsAvailable) {
