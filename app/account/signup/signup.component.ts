@@ -69,7 +69,7 @@ export class SignupComponent implements OnInit {
                     .subscribe(
                     result => {
                         if (!result.IsAvailable) {
-                            resolve({ usernameTaken: true });
+                            resolve({ emailTaken: true });
                         }
                         else {
                             resolve(null);
@@ -90,7 +90,22 @@ export class SignupComponent implements OnInit {
         }
     }]));
 
-    public phone: Control = new Control("", Validators.minLength(11));
+    public phone: Control = new Control("", Validators.minLength(11), (c) => {
+        return new Promise(resolve => {
+            this.accountService.check("phonenumber", c.value)
+                .subscribe(
+                result => {
+                    if (!result.IsAvailable) {
+                        resolve({ phonenumberTaken: true });
+                    }
+                    else {
+                        resolve(null);
+                    }
+                },
+                error => this.errorMessage = error
+                );
+        });
+    });
     public addressLine: Control = new Control("", Validators.required);
     public locality: Control = new Control("", Validators.required);
 
