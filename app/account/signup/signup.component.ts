@@ -7,7 +7,7 @@ import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap';
 import { UserRegistration } from '../shared/user.registration';
 import { AccountService } from '../shared/account.service';
 import { User } from '../shared/user';
-import { UsernameAvailable } from '../shared/username.available';
+import { AvailibilityResponse } from '../shared/availibilityResponse';
 import { AppSettings } from  '../../shared/app.settings';
 
 @Component({
@@ -19,7 +19,7 @@ import { AppSettings } from  '../../shared/app.settings';
 export class SignupComponent implements OnInit {
     private errorMessage: string;
     private userModel: User;
-    private usernameAvailableResult: UsernameAvailable;
+    private usernameAvailableResult: AvailibilityResponse;
 
     public submitted = false;
     public submitCompleted = false;

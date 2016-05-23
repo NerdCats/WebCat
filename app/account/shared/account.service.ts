@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { UserRegistration } from './user.registration';
 import { User } from './user';
-import { UsernameAvailable } from './username.available';
+import { AvailibilityResponse } from './availibilityResponse';
 import { AppSettings } from '../../shared/app.settings';
 
 @Injectable()
@@ -23,8 +23,20 @@ export class AccountService {
             .catch(this.handleError);
     }
 
-    checkUsername(suggestedUsername: string): Observable<UsernameAvailable> {
-        return this.http.get(this.accountUrl + '/username?suggestedUsername=' + suggestedUsername)
+    checkUsername(suggestedUsername: string): Observable<AvailibilityResponse> {
+        return this.http.get(this.accountUrl + '/check/Username/' + suggestedUsername)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    checkEmail(suggestedEmail: string) {
+        return this.http.get(this.accountUrl + '/check/Email/' + suggestedEmail)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    checkPhoneNumber(suggestedPhoneNumber: string) {
+        return this.http.get(this.accountUrl + '/check/PhoneNumber/' + suggestedPhoneNumber)
             .map(this.extractData)
             .catch(this.handleError);
     }

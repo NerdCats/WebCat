@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { ValidationError } from './validationError';
-import { AccountService } from '../account/shared/account.service';
+import { AccountService } from './account.service';
 
 @Injectable()
 export class ValidationService {
