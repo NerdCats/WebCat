@@ -20,6 +20,7 @@ export class SignupComponent implements OnInit {
     private errorMessage: string;
     private userModel: User;
     private usernameAvailableResult: AvailibilityResponse;
+    private countryCode = "+880";
 
     public submitted = false;
     public submitCompleted = false;
@@ -90,9 +91,15 @@ export class SignupComponent implements OnInit {
         }
     }]));
 
-    public phone: Control = new Control("", Validators.minLength(11), (c) => {
+    public phone: Control = new Control("", Validators.compose([Validators.required, (ctr) => {
+        if (ctr.value && ctr.value.length != 11) {
+            return {
+                wrongPhonenumberLength: true
+            };
+        }
+    }]), (c) => {
         return new Promise(resolve => {
-            this.accountService.check("phonenumber", c.value)
+            this.accountService.check("phonenumber", this.countryCode + c.value)
                 .subscribe(
                 result => {
                     if (!result.IsAvailable) {
@@ -138,6 +145,12 @@ export class SignupComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
+
+        // TODO: Phone number hack, this is here until we move to all phone number generic
+        if (this.registrationModel.PhoneNumber) {
+            this.registrationModel.PhoneNumber = this.countryCode + this.registrationModel.PhoneNumber;
+        }
+
         this.accountService.register(this.registrationModel)
             .subscribe(
             result => {
