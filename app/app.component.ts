@@ -15,7 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 @RouteConfig([
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
     component: WrapHeaderComponent,
     useAsDefault: true

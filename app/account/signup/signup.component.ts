@@ -91,7 +91,7 @@ export class SignupComponent implements OnInit {
         }
     }]));
 
-    public phone: Control = new Control("", Validators.compose([Validators.required, Validators.pattern("^\d{11}$")]), (c) => {
+    public phone: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(11)]), (c) => {
         return new Promise(resolve => {
             this.accountService.check("phonenumber", this.countryCode + c.value)
                 .subscribe(
