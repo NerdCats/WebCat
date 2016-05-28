@@ -16,7 +16,8 @@ export class ValidationService {
             'required': 'Required',
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
-            'usernameTaken': 'UserName is already taken'
+            'usernameTaken': 'UserName is already taken',
+            'serverConnctionError': 'Failed connecting to server, please try again later'
         };
         return config[code];
     }
@@ -42,9 +43,8 @@ export class ValidationService {
                     }
                 },
                 error => {
-                    resolve({ 'usernameTaken': false })
-                }
-                );
+                    resolve({ 'serverConnctionError': true });
+                });
         });
     }
 }

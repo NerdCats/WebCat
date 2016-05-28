@@ -160,7 +160,6 @@ export class SignupComponent implements OnInit {
         console.log("registration form submitted");
     }
 
-
     // Modal related section starts here
     @ViewChild('modal')
     modal: ModalComponent;

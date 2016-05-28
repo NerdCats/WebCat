@@ -19,7 +19,6 @@ export class ControlMessage {
                 return ValidationService.getValidatorErrorMessage(propertyName);
             }
         }
-
         return null;
     }
 }
