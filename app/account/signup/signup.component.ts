@@ -21,7 +21,6 @@ export class SignupComponent implements OnInit {
     private errorMessage: string;
     private userModel: User;
     private usernameAvailableResult: AvailibilityResponse;
-    private countryCode = "+880";
 
     public submitted = false;
     public submitCompleted = false;
@@ -85,11 +84,6 @@ export class SignupComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
-        // TODO: Phone number hack, this is here until we move to all phone number generic
-        if (this.registrationModel.PhoneNumber) {
-            this.registrationModel.PhoneNumber = this.countryCode + this.registrationModel.PhoneNumber;
-        }
 
         // INFO: Confirming password as the UI wouldnt have that now
         this.registrationModel.ConfirmPassword = this.registrationModel.Password;
