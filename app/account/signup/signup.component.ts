@@ -28,6 +28,9 @@ export class SignupComponent implements OnInit {
     public submitResultMessage: string;
 
     // Area Typeahead
+    // TODO: For some weird reason typeahead doesnt work without an ngModel
+    // if anyone finds a solution please fix this
+    public localityQuery: string;
     public localities: Array<string> = [
         'Mohakhali',
         'Mohammadpur'
