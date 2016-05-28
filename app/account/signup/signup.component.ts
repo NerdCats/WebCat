@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit {
                 '',
                 Validators.compose([
                     Validators.required,
-                    Validators.pattern(validationService.emailFormat)
+                    (c) => { return this.validationService.emailFormatValidator(c); }
                 ]),
                 (c) => { return this.validationService.emailAvailibilityValidatorAsync(c); }
             ],

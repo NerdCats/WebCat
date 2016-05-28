@@ -18,7 +18,7 @@ export class ValidationService {
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long',
             'usernameTaken': 'UserName is already taken',
-            'phonenumberTaken' : 'PhoneNumber is already taken',
+            'phonenumberTaken': 'PhoneNumber is already taken',
             'serverConnctionError': 'Failed connecting to server, please try again later'
         };
         return config[code];
@@ -27,6 +27,16 @@ export class ValidationService {
     // section email
     get emailFormat() {
         return "^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$";
+    }
+
+    emailFormatValidator(control): ValidationError {
+        var regex = new RegExp(this.emailFormat);
+        if (regex.test(control.value)) {
+            return null;
+        }
+        else {
+            return { 'invalidEmailAddress': true };
+        }
     }
 
     emailAvailibilityValidatorAsync(control: Control): Promise<ValidationError> {
