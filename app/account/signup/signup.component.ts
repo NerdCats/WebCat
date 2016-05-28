@@ -27,6 +27,7 @@ export class SignupComponent implements OnInit {
     public submitCompleted = false;
     public submitResultMessage: string;
 
+    public
 
     // Interested Locality Region
     public interestedLocalityControl: Control = new Control('');
@@ -35,14 +36,6 @@ export class SignupComponent implements OnInit {
         'Mohakhali',
         'Mohammadpur'
     ];
-    public onLocalitySelect(e: any): void {
-        // The only reason we are doing this like this is an
-        // existing bug in Angular2 bootstrap
-        // details is on https://github.com/valor-software/ng2-bootstrap/issues/463
-        // If the bug is fixed please update the module and
-        // use [ngFormControl] to bind to the control
-        this.interestedLocalityControl.updateValue(e.item);
-    }
 
     public registrationModel: UserRegistration;
     public signupForm: ControlGroup;
@@ -71,8 +64,21 @@ export class SignupComponent implements OnInit {
                 validationService.emailAvailibilityValidatorAsync
             ],
             "password": ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-            'locality': this.interestedLocalityControl
+            'interestedLocality': this.interestedLocalityControl
         });
+    }
+
+    public onLocalitySelect(e: any): void {
+        // The only reason we are doing this like this is an
+        // existing bug in Angular2 bootstrap
+        // details is on https://github.com/valor-software/ng2-bootstrap/issues/463
+        // If the bug is fixed please update the module and
+        // use [ngFormControl] to bind to the control
+        this.interestedLocalityControl.updateValue(e.item);
+
+        // TODO: Need to add the selected locality in the registration
+        this.registrationModel.InterestedLocalities = new Array<string>();
+        this.registrationModel.InterestedLocalities.push(e.item);
     }
 
     // TODO: Shameless hack here
@@ -88,6 +94,9 @@ export class SignupComponent implements OnInit {
         if (this.registrationModel.PhoneNumber) {
             this.registrationModel.PhoneNumber = this.countryCode + this.registrationModel.PhoneNumber;
         }
+
+        // INFO: Confirming password as the UI wouldnt have that now
+        this.registrationModel.ConfirmPassword = this.registrationModel.Password;
 
         this.accountService.register(this.registrationModel)
             .subscribe(result => {

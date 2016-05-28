@@ -6,9 +6,11 @@ export class UserRegistration {
     public ConfirmPassword: string;
     public Email: string;
     public PhoneNumber: string;
-    public Address: DefaultAddress
+    public Address: DefaultAddress;
+    public InterestedLocalities: Array<string>;
 
     constructor() {
         this.Address = new DefaultAddress();
+        this.InterestedLocalities = new Array<string>();
     }
 }
