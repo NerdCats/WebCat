@@ -5,13 +5,15 @@ import { ValidationService } from '../shared/validation.service';
 @Component({
     selector: 'control-message',
     inputs: ['controlName: control'],
-    template: `<div *ngIf="errorMessage !== null">{{errorMessage}}</div>`
+    template: `<div *ngIf="errorMessage !== null" class="alert alert-danger">
+                    {{errorMessage}}
+               </div>`
 })
 export class ControlMessage {
     controlName: string;
     constructor( @Host() private _formDir: NgFormModel) { }
 
-    public get ErrorMessage() {
+    public get errorMessage() {
         let c = this._formDir.form.find(this.controlName);
 
         for (let propertyName in c.errors) {

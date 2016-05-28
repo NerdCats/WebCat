@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { UserRegistration } from './user.registration';
 import { User } from './user';
-import { AvailibilityResponse } from './availibilityResponse';
+import { AvailibilityResponse } from './availibility-response';
 import { AppSettings } from '../../shared/app.settings';
 
 @Injectable()

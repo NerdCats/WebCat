@@ -4,17 +4,18 @@ import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap';
 
+import { ControlMessage } from './control-message.component';
 import { UserRegistration } from '../shared/user.registration';
 import { AccountService } from '../shared/account.service';
 import { ValidationService } from '../shared/validation.service';
 import { User } from '../shared/user';
-import { AvailibilityResponse } from '../shared/availibilityResponse';
+import { AvailibilityResponse } from '../shared/availibility-response';
 import { AppSettings } from  '../../shared/app.settings';
 
 @Component({
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
-    directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ControlMessage],
     providers: [HTTP_PROVIDERS, AccountService, ValidationService]
 })
 export class SignupComponent implements OnInit {
@@ -58,7 +59,7 @@ export class SignupComponent implements OnInit {
                 ]),
                 (c) => { return this.validationService.emailAvailibilityValidatorAsync(c); }
             ],
-            "password": ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+            "password": ['', Validators.compose([Validators.required, (c) => { return this.validationService.passwordValidator(c); }])],
             'interestedLocality': ['', Validators.required]
         });
     }

@@ -7,11 +7,13 @@
             <div *ngIf=!submitted>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" placeholder="Enter your desried username here" [(ngModel)]="registrationModel.UserName" [ngFormControl]="signupForm.controls['username']">
+                    <input ngControl="username" type="text" class="form-control" placeholder="Enter your desried username here" [(ngModel)]="registrationModel.UserName" [ngFormControl]="signupForm.controls['username']">
+                    <control-message control="username"></control-message>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" placeholder="ex: someone@somewhere.com" [(ngModel)]="registrationModel.Email" [ngFormControl]="signupForm.controls['email']">
+                    <input ngControl="email" type="email" class="form-control" placeholder="ex: someone@somewhere.com" [(ngModel)]="registrationModel.Email" [ngFormControl]="signupForm.controls['email']">
+                    <control-message control="email"></control-message>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -26,7 +28,6 @@
                     <input
                     autocomplete="off"
                     type="text" class="form-control"
-                    [(ngModel)]="registrationModel.Address.Locality"
                     [typeahead]="localities"
                     (typeaheadOnSelect)="onLocalitySelect($event)"
                     [typeaheadOptionsLimit]="7"

@@ -12,13 +12,13 @@ export class ValidationService {
 
     }
 
-    getValidatorErrorMessage(code: string) {
+    static getValidatorErrorMessage(code: string) {
         let config = {
             'required': 'Required',
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long',
-            'usernameTaken': 'UserName is already taken',
-            'phonenumberTaken': 'PhoneNumber is already taken',
+            'usernameTaken': 'Username already taken',
+            'phonenumberTaken': 'PhoneNumber already taken',
             'serverConnctionError': 'Failed connecting to server, please try again later'
         };
         return config[code];
@@ -92,5 +92,13 @@ export class ValidationService {
                     resolve({ 'serverConnctionError': true });
                 });
         });
+    }
+
+    //section password
+    passwordValidator(control): ValidationError {
+        if (control.value.length < 6) {
+            return { 'invalidPassword': true };
+        }
+        return null;
     }
 }
