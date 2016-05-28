@@ -27,6 +27,9 @@ export class SignupComponent implements OnInit {
     public submitCompleted = false;
     public submitResultMessage: string;
 
+
+    // Interested Locality Region
+    public interestedLocalityControl: Control = new Control('');
     // Area Typeahead
     public localities: Array<string> = [
         'Mohakhali',
@@ -38,39 +41,11 @@ export class SignupComponent implements OnInit {
         // details is on https://github.com/valor-software/ng2-bootstrap/issues/463
         // If the bug is fixed please update the module and
         // use [ngFormControl] to bind to the control
-        this.locality.updateValue(e.item);
+        this.interestedLocalityControl.updateValue(e.item);
     }
 
     public registrationModel: UserRegistration;
     public signupForm: ControlGroup;
-
-    public password: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6)]));
-    public cpassword: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6), (c) => {
-        if (c.value != this.password.value) {
-            return {
-                mismatchedPasswords: true
-            };
-        }
-    }]));
-
-    public phone: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(11)]), (c) => {
-        return new Promise(resolve => {
-            this.accountService.check("phonenumber", this.countryCode + c.value)
-                .subscribe(
-                result => {
-                    if (!result.IsAvailable) {
-                        resolve({ phonenumberTaken: true });
-                    }
-                    else {
-                        resolve(null);
-                    }
-                },
-                error => this.errorMessage = error
-                );
-        });
-    });
-    public addressLine: Control = new Control("", Validators.required);
-    public locality: Control = new Control("", Validators.required);
 
     ngOnInit() {
     }
@@ -87,15 +62,16 @@ export class SignupComponent implements OnInit {
 
         this.signupForm = formBuilder.group({
             "username": ['', Validators.required, validationService.usernameValidatorAsync],
-            "email": ['', Validators.compose([
-                Validators.required,
-                Validators.pattern(validationService.emailFormat)
-                ]), validationService.emailAvailibilityValidatorAsync],
-            "phone": this.phone,
-            "password": this.password,
-            "cpassword": this.cpassword,
-            'addressLine': this.addressLine,
-            'locality': this.locality
+            "email": [
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.pattern(validationService.emailFormat)
+                ]),
+                validationService.emailAvailibilityValidatorAsync
+            ],
+            "password": ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+            'locality': this.interestedLocalityControl
         });
     }
 
@@ -114,8 +90,7 @@ export class SignupComponent implements OnInit {
         }
 
         this.accountService.register(this.registrationModel)
-            .subscribe(
-            result => {
+            .subscribe(result => {
                 this.userModel = result;
                 this.submitResultMessage = "Please check your mail for account confirmation at " + this.userModel.Email + ".\n" + "In any case, you're already registered in " + AppSettings.APP_NAME;
                 this.submitCompleted = true;

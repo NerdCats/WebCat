@@ -16,8 +16,9 @@ export class ValidationService {
         let config = {
             'required': 'Required',
             'invalidEmailAddress': 'Invalid email address',
-            'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
+            'invalidPassword': 'Invalid password. Password must be at least 6 characters long',
             'usernameTaken': 'UserName is already taken',
+            'phonenumberTaken' : 'PhoneNumber is already taken',
             'serverConnctionError': 'Failed connecting to server, please try again later'
         };
         return config[code];
@@ -46,8 +47,7 @@ export class ValidationService {
     usernameValidatorAsync(control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("username", control.value)
-                .subscribe(
-                result => {
+                .subscribe(result => {
                     if (!result.IsAvailable) {
                         resolve({ 'usernameTaken': true });
                     }
@@ -59,6 +59,23 @@ export class ValidationService {
                     // TODO: I'm not sure resolving here this way is the
                     // right thing to do, I might need to reject the promise
                     // here
+                    resolve({ 'serverConnctionError': true });
+                });
+        });
+    }
+
+    phonenumberAvailibilityValidatorAsync(control): Promise<ValidationError> {
+        return new Promise(resolve => {
+            this.accountService.check("phonenumber", control.value)
+                .subscribe(result => {
+                    if (!result.IsAvailable) {
+                        resolve({ 'phonenumberTaken': true });
+                    }
+                    else {
+                        resolve(null);
+                    }
+                }, error => {
+                    // TODO: Same as aforementioned one
                     resolve({ 'serverConnctionError': true });
                 });
         });
