@@ -17,7 +17,7 @@ import { AppSettings } from  '../../shared/app.settings';
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ControlMessage],
-    providers: [HTTP_PROVIDERS, AccountService, ValidationService]
+    providers: [HTTP_PROVIDERS, AccountService, ValidationService, LocalityService]
 })
 export class SignupComponent implements OnInit {
     private errorMessage: string;
@@ -32,20 +32,19 @@ export class SignupComponent implements OnInit {
     // TODO: For some weird reason typeahead doesnt work without an ngModel
     // if anyone finds a solution please fix this
     public localityQuery: string;
-    public localities: Array<string> = [
-        'Mohakhali',
-        'Mohammadpur'
-    ];
+    public localities: Array<string>;
 
     public registrationModel: UserRegistration;
     public signupForm: ControlGroup;
 
     ngOnInit() {
+        this.localities = this.localityService.getLocalities();
     }
 
     constructor(private formBuilder: FormBuilder,
         private accountService: AccountService,
-        private validationService: ValidationService) {
+        private validationService: ValidationService,
+        private localityService: LocalityService) {
 
         this.registrationModel = new UserRegistration();
 
