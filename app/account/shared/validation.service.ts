@@ -24,6 +24,14 @@ export class ValidationService {
         return config[code];
     }
 
+    //section password
+    passwordValidator(control): ValidationError {
+        if (control.value!=null && control.value.length < 6) {
+            return { 'invalidPassword': true };
+        }
+        return null;
+    }
+
     // section email
     get emailFormat() {
         return "^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$";
@@ -92,13 +100,5 @@ export class ValidationService {
                     resolve({ 'serverConnctionError': true });
                 });
         });
-    }
-
-    //section password
-    passwordValidator(control): ValidationError {
-        if (control.value.length < 6) {
-            return { 'invalidPassword': true };
-        }
-        return null;
     }
 }
