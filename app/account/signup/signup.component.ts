@@ -15,7 +15,7 @@ import { AppSettings } from  '../../shared/app.settings';
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES],
-    providers: [HTTP_PROVIDERS, AccountService]
+    providers: [HTTP_PROVIDERS, AccountService, ValidationService]
 })
 export class SignupComponent implements OnInit {
     private errorMessage: string;
@@ -26,8 +26,6 @@ export class SignupComponent implements OnInit {
     public submitted = false;
     public submitCompleted = false;
     public submitResultMessage: string;
-
-    public
 
     // Interested Locality Region
     public interestedLocalityControl: Control = new Control('');

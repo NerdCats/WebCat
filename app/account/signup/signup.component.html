@@ -8,29 +8,17 @@
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" placeholder="Enter your desried username here" [(ngModel)]="registrationModel.UserName" [ngFormControl]="signupForm.controls['username']">
-                    <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
-                        A valid and available username is required
-                    </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" placeholder="ex: someone@somewhere.com" [(ngModel)]="registrationModel.Email" [ngFormControl]="signupForm.controls['email']">
-                    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-                        Invalid email address
-                    </div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" [(ngModel)]="registrationModel.Password" [ngFormControl]="signupForm.controls['password']">
-                    <div [hidden]="signupForm.controls['password'].valid || signupForm.controls['password'].pristine">
-                        <div *ngIf="password.errors!=null && password.errors.minlength" class="alert alert-danger">
-                            Password are required and has to be at least 6 characters long
-                        </div>
-                    </div>
-                </div>
                 </div>
                 <div class="form-group">
-                    <label for="area">Interested Area</label>
+                    <label for="area">Area</label>
                     <!-- The reason you guys are not seeing a ngFromControl here is
                     an existing bug in Angular2 bootstrap module. For details, go to
                     https://github.com/valor-software/ng2-bootstrap/issues/463
@@ -38,6 +26,7 @@
                     <input
                     autocomplete="off"
                     type="text" class="form-control"
+                    [(ngModel)]="registrationModel.Address.Locality"
                     [typeahead]="localities"
                     (typeaheadOnSelect)="onLocalitySelect($event)"
                     [typeaheadOptionsLimit]="7"
