@@ -5,20 +5,29 @@ import { ValidationService } from '../shared/validation.service';
 @Component({
     selector: 'control-message',
     inputs: ['controlName: control'],
-    template: `<div *ngIf="errorMessage !== null" class="alert alert-danger">
-                    {{errorMessage}}
+    template: `<div *ngIf="controlMessage !== null" class="alert alert-info">
+                    {{controlMessage}}
                </div>`
 })
 export class ControlMessage {
     controlName: string;
     constructor( @Host() private _formDir: NgFormModel) { }
 
-    public get errorMessage() {
-        let c = this._formDir.form.find(this.controlName);
+    public get controlMessage() {
+        let control = this._formDir.form.find(this.controlName);
 
-        for (let propertyName in c.errors) {
-            if (c.errors.hasOwnProperty(propertyName) && c.touched) {
-                return ValidationService.getValidatorErrorMessage(propertyName);
+        if (control.dirty) {
+            let selectedErrorProperty: string;
+            for (let propertyName in control.errors) {
+                if (control.errors.hasOwnProperty(propertyName)) {
+                    selectedErrorProperty = propertyName;
+                }
+            }
+            if (selectedErrorProperty) {
+                return ValidationService.getValidatorErrorMessage(selectedErrorProperty);
+            }
+            else {
+                return "Checking..";
             }
         }
         return null;
