@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Validators } from '@angular/common';
+import { Validators, Control } from '@angular/common';
 
 import { ValidationError } from './validationError';
 import { AccountService } from './account.service';
@@ -12,7 +12,7 @@ export class ValidationService {
 
     }
 
-    static getValidatorErrorMessage(code: string) {
+    getValidatorErrorMessage(code: string) {
         let config = {
             'required': 'Required',
             'invalidEmailAddress': 'Invalid email address',
@@ -24,11 +24,12 @@ export class ValidationService {
         return config[code];
     }
 
+    // section email
     get emailFormat() {
         return "^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$";
     }
 
-    emailAvailibilityValidatorAsync(control): Promise<ValidationError> {
+    emailAvailibilityValidatorAsync(control: Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("email", control.value)
                 .subscribe(result => {
@@ -44,7 +45,8 @@ export class ValidationService {
         });
     }
 
-    usernameValidatorAsync(control): Promise<ValidationError> {
+    //section username
+    usernameValidatorAsync(control: Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("username", control.value)
                 .subscribe(result => {
@@ -64,7 +66,8 @@ export class ValidationService {
         });
     }
 
-    phonenumberAvailibilityValidatorAsync(control): Promise<ValidationError> {
+    //section phonenumber
+    phonenumberAvailibilityValidatorAsync(control: Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("phonenumber", control.value)
                 .subscribe(result => {

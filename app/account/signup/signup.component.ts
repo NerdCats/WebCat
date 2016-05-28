@@ -27,8 +27,6 @@ export class SignupComponent implements OnInit {
     public submitCompleted = false;
     public submitResultMessage: string;
 
-    // Interested Locality Region
-    public interestedLocalityControl: Control = new Control('');
     // Area Typeahead
     public localities: Array<string> = [
         'Mohakhali',
@@ -52,17 +50,17 @@ export class SignupComponent implements OnInit {
         this.setDefaultValues();
 
         this.signupForm = formBuilder.group({
-            "username": ['', Validators.required, validationService.usernameValidatorAsync],
+            "username": ['', Validators.required, (c) => { return this.validationService.usernameValidatorAsync(c); }],
             "email": [
                 '',
                 Validators.compose([
                     Validators.required,
                     Validators.pattern(validationService.emailFormat)
                 ]),
-                validationService.emailAvailibilityValidatorAsync
+                (c) => { return this.validationService.emailAvailibilityValidatorAsync(c); }
             ],
             "password": ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-            'interestedLocality': this.interestedLocalityControl
+            'interestedLocality': ['', Validators.required]
         });
     }
 
@@ -72,7 +70,7 @@ export class SignupComponent implements OnInit {
         // details is on https://github.com/valor-software/ng2-bootstrap/issues/463
         // If the bug is fixed please update the module and
         // use [ngFormControl] to bind to the control
-        this.interestedLocalityControl.updateValue(e.item);
+        this.signupForm['interestedLocality'].updateValue(e.item);
 
         // TODO: Need to add the selected locality in the registration
         this.registrationModel.InterestedLocalities = new Array<string>();
