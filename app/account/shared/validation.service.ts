@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { Validators } from '@angular/common';
 
 import { ValidationError } from './validationError';
 import { AccountService } from './account.service';
@@ -22,12 +23,24 @@ export class ValidationService {
         return config[code];
     }
 
-    emailValidator(control): ValidationError {
-        if (control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
-            return null;
-        } else {
-            return { 'invalidEmailAddress': true };
-        }
+    get emailFormat() {
+        return "^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$";
+    }
+
+    emailAvailibilityValidatorAsync(control): Promise<ValidationError> {
+        return new Promise(resolve => {
+            this.accountService.check("email", control.value)
+                .subscribe(result => {
+                    if (!result.IsAvailable) {
+                        resolve({ 'emailTaken': true });
+                    }
+                    else {
+                        resolve(null);
+                    }
+                }, error => {
+                    resolve({ 'serverConnctionError': true });
+                });
+        });
     }
 
     usernameValidatorAsync(control): Promise<ValidationError> {
@@ -43,6 +56,9 @@ export class ValidationService {
                     }
                 },
                 error => {
+                    // TODO: I'm not sure resolving here this way is the
+                    // right thing to do, I might need to reject the promise
+                    // here
                     resolve({ 'serverConnctionError': true });
                 });
         });

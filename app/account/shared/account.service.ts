@@ -23,7 +23,7 @@ export class AccountService {
             .catch(this.handleError);
     }
 
-    check(propertyName: string, suggestedValue: string) {
+    check(propertyName: string, suggestedValue: string): Observable<AvailibilityResponse> {
         return this.http.get(this.accountUrl + '/check?' + propertyName + "=" + suggestedValue)
             .map(this.extractData)
             .catch(this.handleError);

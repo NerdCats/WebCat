@@ -6,6 +6,7 @@ import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap';
 
 import { UserRegistration } from '../shared/user.registration';
 import { AccountService } from '../shared/account.service';
+import { ValidationService } from '../shared/validation.service';
 import { User } from '../shared/user';
 import { AvailibilityResponse } from '../shared/availibilityResponse';
 import { AppSettings } from  '../../shared/app.settings';
@@ -42,45 +43,6 @@ export class SignupComponent implements OnInit {
 
     public registrationModel: UserRegistration;
     public signupForm: ControlGroup;
-    public username: Control = new Control("", Validators.required, (c) => {
-        return new Promise(resolve => {
-            this.accountService.check("username", c.value)
-                .subscribe(
-                result => {
-                    if (!result.IsAvailable) {
-                        resolve({ usernameTaken: true });
-                    }
-                    else {
-                        resolve(null);
-                    }
-                },
-                error => this.errorMessage = error
-                );
-        });
-    });
-
-    public email: Control = new Control("", Validators.compose(
-        [
-            Validators.required,
-            Validators.pattern("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")
-        ]),
-        (c) => {
-            return new Promise(resolve => {
-                this.accountService.check("email", c.value)
-                    .subscribe(
-                    result => {
-                        if (!result.IsAvailable) {
-                            resolve({ emailTaken: true });
-                        }
-                        else {
-                            resolve(null);
-                        }
-                    },
-                    error => this.errorMessage = error
-                    );
-            });
-        }
-    );
 
     public password: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6)]));
     public cpassword: Control = new Control("", Validators.compose([Validators.required, Validators.minLength(6), (c) => {
@@ -113,7 +75,10 @@ export class SignupComponent implements OnInit {
     ngOnInit() {
     }
 
-    constructor(private formBuilder: FormBuilder, private accountService: AccountService) {
+    constructor(private formBuilder: FormBuilder,
+        private accountService: AccountService,
+        private validationService: ValidationService) {
+
         this.registrationModel = new UserRegistration();
 
         // TODO: This is definitely a hack, we need to make it more generic so we
@@ -121,8 +86,11 @@ export class SignupComponent implements OnInit {
         this.setDefaultValues();
 
         this.signupForm = formBuilder.group({
-            "username": this.username,
-            "email": this.email,
+            "username": ['', Validators.required, validationService.usernameValidatorAsync],
+            "email": ['', Validators.compose([
+                Validators.required,
+                Validators.pattern(validationService.emailFormat)
+                ]), validationService.emailAvailibilityValidatorAsync],
             "phone": this.phone,
             "password": this.password,
             "cpassword": this.cpassword,
