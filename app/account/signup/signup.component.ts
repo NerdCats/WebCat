@@ -8,6 +8,7 @@ import { ControlMessage } from './control-message.component';
 import { UserRegistration } from '../shared/user.registration';
 import { AccountService } from '../shared/account.service';
 import { ValidationService } from '../shared/validation.service';
+import { LocalityService } from '../../shared/app-locality.service';
 import { User } from '../shared/user';
 import { AvailibilityResponse } from '../shared/availibility-response';
 import { AppSettings } from  '../../shared/app.settings';
