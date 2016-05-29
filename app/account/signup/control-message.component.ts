@@ -16,7 +16,7 @@ export class ControlMessage {
     public get controlMessage() {
         let control = this._formDir.form.find(this.controlName);
 
-        if (control.dirty) {
+        if (control.dirty && !control.valid) {
             let selectedErrorProperty: string;
             for (let propertyName in control.errors) {
                 if (control.errors.hasOwnProperty(propertyName)) {
