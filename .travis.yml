@@ -6,8 +6,8 @@ branches:
     - master
 deploy:
   provider: azure_web_apps
-  on:
-    branch: master
+  verbose: true
+  on: master
   skip_cleanup: true
   username: "nerdcats"
   password: "Welovecats"
