@@ -8,6 +8,7 @@ deploy:
   provider: azure_web_apps
   on:
     branch: master
+  skip_cleanup: true
   username: "nerdcats"
   password: "Welovecats"
   site: "WebCatDev"
