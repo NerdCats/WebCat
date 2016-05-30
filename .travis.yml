@@ -4,17 +4,11 @@ node_js:
 branches:
   only:
     - master
-before_script:
-  - npm install -g gulp
-  - gulp build
-before_deploy:
-  - chmod +x before_deploy.sh
-  - ./before_deploy.sh
 deploy:
   provider: azure_web_apps
   on:
     master
   skip_cleanup: true
-  username: "WebCatDev\nerdcats"
+  username: "nerdcats"
   password: "Welovecats"
   site: "WebCatDev"
