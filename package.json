@@ -36,9 +36,14 @@
     "concurrently": "^2.0.0",
     "del": "^2.1.0",
     "gulp": "^3.9.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-inject": "^4.1.0",
+    "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-tslint": "^5.0.0",
     "gulp-typescript": "^2.8.0",
     "lite-server": "^2.2.0",
+    "tslint": "^3.10.2",
     "typescript": "^1.8.10",
     "typings": "^0.8.1"
   }
