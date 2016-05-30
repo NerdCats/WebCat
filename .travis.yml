@@ -11,4 +11,4 @@ deploy:
   skip_cleanup: true
   username: "nerdcats"
   password: "Welovecats"
-  site: "WebCatDev"
+  site: "devwebcat"
