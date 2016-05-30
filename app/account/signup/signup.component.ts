@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { HTTP_PROVIDERS } from '@angular/http';
-import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap';
+import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/components/typeahead';
 
 import { ControlMessage } from './control-message.component';
 import { UserRegistration } from '../shared/user.registration';

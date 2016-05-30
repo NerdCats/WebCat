@@ -3,6 +3,7 @@
      "files.trimTrailingWhitespace": true,
      "files.exclude": {
         "app/**/*.js": true,
-        "app/**/*.map": true
+        "app/**/*.map": true,
+        "dist/**/*": true
     }
 }
