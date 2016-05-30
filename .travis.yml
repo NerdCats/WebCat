@@ -8,6 +8,7 @@ before_script:
   - npm install -g gulp
   - gulp build
 before_deploy:
+  - chmod +x before_deploy.sh
   - ./before_deploy.sh
 deploy:
   provider: azure_web_apps
