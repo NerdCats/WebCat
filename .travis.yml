@@ -6,6 +6,7 @@ branches:
     - master
 deploy:
   provider: azure_web_apps
+  edge: true
   verbose: true
   on: master
   skip_cleanup: true
