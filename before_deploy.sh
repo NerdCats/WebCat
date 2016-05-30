@@ -5,5 +5,5 @@ rm .jshintrc
 
 rm -rf !(dist)
 
-cp -r dist .
+cp -ar ./dist/. ./
 rm -rf dist
