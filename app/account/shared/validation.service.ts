@@ -16,6 +16,7 @@ export class ValidationService {
         let config = {
             'required': 'Required',
             'invalidEmailAddress': 'Invalid email address',
+            'emailTaken': 'Email already taken',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long',
             'usernameTaken': 'Username already taken',
             'phonenumberTaken': 'PhoneNumber already taken',

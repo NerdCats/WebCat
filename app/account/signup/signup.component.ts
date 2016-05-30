@@ -37,6 +37,8 @@ export class SignupComponent implements OnInit {
     public registrationModel: UserRegistration;
     public signupForm: ControlGroup;
 
+    public interestedLocality : Control = new Control("", Validators.required);
+
     ngOnInit() {
         this.localities = this.localityService.getLocalities();
     }
@@ -50,7 +52,6 @@ export class SignupComponent implements OnInit {
 
         // TODO: This is definitely a hack, we need to make it more generic so we
         // can support multiple countries
-        this.setDefaultValues();
 
         this.signupForm = formBuilder.group({
             "username": ['', Validators.required, (c) => { return this.validationService.usernameValidatorAsync(c); }],
@@ -63,7 +64,7 @@ export class SignupComponent implements OnInit {
                 (c) => { return this.validationService.emailAvailibilityValidatorAsync(c); }
             ],
             "password": ['', Validators.compose([Validators.required, (c) => { return this.validationService.passwordValidator(c); }])],
-            'interestedLocality': ['', Validators.required]
+            'interestedLocality': this.interestedLocality
         });
     }
 
@@ -73,17 +74,11 @@ export class SignupComponent implements OnInit {
         // details is on https://github.com/valor-software/ng2-bootstrap/issues/463
         // If the bug is fixed please update the module and
         // use [ngFormControl] to bind to the control
-        this.signupForm['interestedLocality'].updateValue(e.item);
+        this.interestedLocality.updateValue(e.item);
 
         // TODO: Need to add the selected locality in the registration
         this.registrationModel.InterestedLocalities = new Array<string>();
         this.registrationModel.InterestedLocalities.push(e.item);
-    }
-
-    // TODO: Shameless hack here
-    setDefaultValues() {
-        this.registrationModel.Address.City = "Dhaka";
-        this.registrationModel.Address.Country = "Bangladesh";
     }
 
     onSubmit() {
