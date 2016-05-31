@@ -14,12 +14,13 @@ export class CatShowPassword{
         this.el = el.nativeElement;
     }
 
+    @Input("catShowPassword")  passwordInputId : string;
+
     mouseDown() {
-        document.getElementById('sign-up-password').setAttribute('type', 'text');
-        console.log(document.getElementById('sign-up-password'));
+        document.getElementById(this.passwordInputId).setAttribute('type', 'text');
     }
 
     mouseUp() {
-        document.getElementById('sign-up-password').setAttribute('type', 'password');
+        document.getElementById(this.passwordInputId).setAttribute('type', 'password');
     }
 }

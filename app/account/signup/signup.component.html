@@ -20,7 +20,7 @@
                     <div class="input-group">
                         <input ngControl="password" type="password" id="sign-up-password" class="form-control" placeholder="Enter your password" [(ngModel)]="registrationModel.Password" [ngFormControl]="signupForm.controls['password']">
                         <span class="input-group-btn">
-                            <button catShowPassword type="button" id="btnpassword" class="btn btn-default" type="button">
+                            <button [catShowPassword]="'sign-up-password'" type="button" id="btnpassword" class="btn btn-default" type="button">
                             <span class="glyphicon glyphicon-eye-open" style="height:20px"></span></button>
                         </span>
                     </div>
