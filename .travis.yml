@@ -10,4 +10,4 @@ script:
   - npm install
   - gulp
 after_success:
-  - gulp deploy
+  "gulp deploy --user $FTP_USER --password $FTP_PASSWORD --host $FTP_SITE"

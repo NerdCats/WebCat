@@ -3,6 +3,8 @@ const gutil = require('gulp-util');
 const ftp = require('vinyl-ftp');
 const del = require('del');
 const runSequence = require('run-sequence');
+const minimist = require('minimist');
+var args = minimist(process.argv.slice(2));
 
 // Loading typescript requirements
 const typescript = require('gulp-typescript');
@@ -106,9 +108,9 @@ gulp.task('build', function (callback) {
 
 gulp.task('deploy', function () {
     var conn = ftp.create({
-        host: gutil.env.FTP_SITE,
-        user: gutil.env.FTP_USER,
-        password:  gutil.env.FTP_PASSWORD,
+        host: args.host,
+        user: args.user,
+        password: args.password,
         parallel: 20,
         log: gutil.log
     });
