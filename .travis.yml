@@ -6,4 +6,4 @@ branches:
     - master
 after_success:
   - cd dist
-  - find . -type f -exec curl --user FTP_USER:FTP_PASSWORD --ftp-create-dirs -T {} FTP_SITE{} \;
+  - find . -type f -exec curl --user $FTP_USER:$FTP_PASSWORD --ftp-create-dirs -T {} $FTP_SITE{} \;
