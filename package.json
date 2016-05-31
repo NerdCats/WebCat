@@ -2,7 +2,11 @@
   "name": "webcat",
   "version": "0.1.0",
   "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
+    "clean": "gulp clean",
+    "compile": "gulp compile",
+    "build": "gulp build",
+    "prestart": "npm run build",
+    "start": "concurrently --kill-others \"gulp watch-folder\" \"lite-server\"",
     "lite": "lite-server",
     "postinstall": "typings install",
     "tsc": "tsc",
@@ -43,7 +47,9 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^5.0.0",
     "gulp-typescript": "^2.8.0",
+    "gulp-watch": "^4.3.6",
     "lite-server": "^2.2.0",
+    "run-sequence": "^1.2.1",
     "tslint": "^3.10.2",
     "typescript": "^1.8.10",
     "typings": "^0.8.1"
