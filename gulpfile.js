@@ -111,17 +111,13 @@ gulp.task('deploy', function () {
         host: args.host,
         user: args.user,
         password: args.password,
-        parallel: 20,
+        parallel: 5,
         log: gutil.log
     });
 
-    var globs = [
-        'dist/**'
-    ];
-
-    return gulp.src(globs, { base: '.', buffer: false })
-        .pipe(conn.newer('/site/wwwroot')) // only upload newer files
-        .pipe(conn.dest('/site/wwwroot'));
+    return gulp.src("dist/**", { base: 'dist/', buffer: false })
+        .pipe(conn.newer('site/wwwroot')) // only upload newer files
+        .pipe(conn.dest('site/wwwroot'));
 });
 
 gulp.task('default', ['build'], function () {
