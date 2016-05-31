@@ -13,10 +13,11 @@ import { User } from '../shared/user';
 import { AvailibilityResponse } from '../shared/availibility-response';
 import { AppSettings } from  '../../shared/app.settings';
 
+import { CatShowPassword } from '../../directives/cat-show-password';
 @Component({
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
-    directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ControlMessage],
+    directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ControlMessage, CatShowPassword],
     providers: [HTTP_PROVIDERS, AccountService, ValidationService, LocalityService]
 })
 export class SignupComponent implements OnInit {
