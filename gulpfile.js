@@ -1,4 +1,6 @@
 const gulp = require('gulp');
+const gutil = require('gulp-util');
+const ftp = require('vinyl-ftp');
 const del = require('del');
 const runSequence = require('run-sequence');
 
@@ -96,6 +98,28 @@ gulp.task('build', function (callback) {
         'compile',
         ['copy:assets', 'copy:libs'],
         callback);
+});
+
+/**
+ * The deploy script
+ */
+
+gulp.task('deploy', function () {
+    var conn = ftp.create({
+        host: gutil.env.FTP_SITE,
+        user: gutil.env.FTP_USER,
+        password:  gutil.env.FTP_PASSWORD,
+        parallel: 20,
+        log: gutil.log
+    });
+
+    var globs = [
+        'dist/**'
+    ];
+
+    return gulp.src(globs, { base: '.', buffer: false })
+        .pipe(conn.newer('/site/wwwroot')) // only upload newer files
+        .pipe(conn.dest('/site/wwwroot'));
 });
 
 gulp.task('default', ['build'], function () {

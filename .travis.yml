@@ -4,6 +4,10 @@ node_js:
 branches:
   only:
     - master
+before_script:
+  - npm install -g gulp
+script:
+  - npm install
+  - gulp
 after_success:
-  - cd dist
-  - find . -type f -exec curl --user $FTP_USER:$FTP_PASSWORD --ftp-create-dirs -T {} $FTP_SITE{} \;
+  - gulp deploy
