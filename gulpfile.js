@@ -1,28 +1,31 @@
 const gulp = require('gulp');
 const del = require('del');
+const runSequence = require('run-sequence');
 
 // Loading typescript requirements
 const typescript = require('gulp-typescript');
 const tscConfig = require('./tsconfig.json');
 const sourcemaps = require('gulp-sourcemaps');
 const tslint = require('gulp-tslint');
+var watch = require('gulp-watch');
 
 // npm
 var install = require("gulp-install");
 
-// Cleanup the dist folder
-gulp.task('clean', function () {
-    return del(['dist/**/*', '!dist/node_modules', '!dist/node_modules/**/*']);
+/**
+ * Remove dist directory.
+ */
+gulp.task('clean', function (cb) {
+    del(["dist"]).then(function (paths) {
+        console.log('Deleted files and folders:\n', paths.join('\n'));
+        cb();
+    });
 });
 
-// Hard cleanup the dist folder
-gulp.task('clean:hard', function () {
-    return del(['dist/**/*']);
-});
-
-
-// Compile Typescript
-gulp.task('compile', ['clean'], function () {
+/**
+ * Compile TypeScript sources and create sourcemaps in build directory.
+ */
+gulp.task('compile', function () {
     var tsProject = typescript.createProject('tsconfig.json');
     return tsProject
         .src('app/**/*.ts')
@@ -32,36 +35,73 @@ gulp.task('compile', ['clean'], function () {
         .pipe(gulp.dest('dist/app'));
 });
 
-// Tslint
-gulp.task('tslint', function() {
-  return gulp.src('app/**/*.ts')
-    .pipe(tslint())
-    .pipe(tslint.report('verbose'));
+/**
+ * Lint all custom TypeScript files.
+ */
+gulp.task('tslint', function () {
+    return gulp.src('app/**/*.ts')
+        .pipe(tslint())
+        .pipe(tslint.report('verbose'));
 });
 
 // copy dependencies from node_modules
 // we are just mimicking the dev environment now, but for production a lot more has to be done
-gulp.task('copy:libs', ['clean'], function () {
+gulp.task('copy:libs', function () {
     return gulp.src([
-        'node_modules/**/*'
-    ])
-        .pipe(gulp.dest('dist/node_modules'))
+        'es6-shim/es6-shim.min.js',
+        'systemjs/dist/system-polyfills.js',
+        'systemjs/dist/system.src.js',
+        'reflect-metadata/Reflect.js',
+        'rxjs/**',
+        'zone.js/dist/zone.js',
+        'angular2-in-memory-web-api/web-api.js',
+        '@angular/**',
+        'moment/moment.js',
+        'ng2-bootstrap/**',
+        'ng2-bs3-modal/**'
+    ], { cwd: "node_modules/**" }) /* Glob required here. */
+        .pipe(gulp.dest("dist/lib"));
 });
 
-// copy static assets - i.e. non TypeScript compiled source
-gulp.task('copy:assets', ['clean'], function () {
-    return gulp.src(['app/**/*', 'assets/**/*', 'systemjs.config.js', 'config.js', 'package.json', 'index.html', 'styles.css', '!app/**/*.ts'], { base: './' })
-        .pipe(gulp.dest('dist'))
+/**
+ * copy static assets - i.e. non TypeScript compiled source
+ */
+gulp.task('copy:assets', function (cb) {
+    console.log("copying assets");
+    gulp.src(['app/**/*', 'assets/**/*', 'systemjs.config.js', 'config.js', 'package.json', 'index.html', 'styles.css', '!app/**/*.ts'], { base: './' })
+        .pipe(gulp.dest('dist'));
+    cb();
 });
 
-// install packages in dist, its still dev mode, we will have different folders for dev and prod mode later
-gulp.task('copy:dep', ['copy:assets'], function () {
-    gulp.src(['./dist/package.json'])
-        .pipe(install());
+/**
+ * Watch for changes in TypeScript, HTML and CSS files.
+ */
+gulp.task('watch', function () {
+    gulp.src('/**/*', { base: "./" })
+        .pipe(watch("app/**/*.ts", { base: "./" }))
+        .pipe(gulp.dest("./dist"));
+
+    gulp.src('', { base: "./" })
+        .pipe(watch(["app/**/*.html", "app/**/*.css", "assets/**/*", "styles.css", "index.html", "bs-config.json", "systemjs.config.js", "tsconfig.json"], { base: "./" }))
+        .pipe(gulp.dest("./dist"));
 });
 
-gulp.task('build', ['copy:dep', 'compile']);
-gulp.task('default', ['build']);
+
+/**
+ * The build script
+ */
+
+gulp.task('build', function (callback) {
+    runSequence('clean',
+        'compile',
+        ['copy:assets', 'copy:libs'],
+        callback);
+});
+
+gulp.task('default', ['build'], function () {
+    console.log("Building WebCat ...");
+});
+
 
 
 
