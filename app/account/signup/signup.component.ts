@@ -13,11 +13,11 @@ import { User } from '../shared/user';
 import { AvailibilityResponse } from '../shared/availibility-response';
 import { AppSettings } from  '../../shared/app.settings';
 
-import { CatShowPassword } from '../../directives/cat-show-password';
+import { NcShowPassword } from '../shared/nc-show-password.directive';
 @Component({
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
-    directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ControlMessage, CatShowPassword],
+    directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ControlMessage, NcShowPassword],
     providers: [HTTP_PROVIDERS, AccountService, ValidationService, LocalityService]
 })
 export class SignupComponent implements OnInit {
