@@ -4,8 +4,6 @@ node_js:
 branches:
   only:
     - master
-deploy:
-  provider: azure_web_apps
-  edge: true
-  verbose: true
-  skip_cleanup: true
+after_success:
+  - cd dist
+  - find . -type f -exec curl --user FTP_USER:FTP_PASSWORD --ftp-create-dirs -T {} FTP_SITE{} \;
