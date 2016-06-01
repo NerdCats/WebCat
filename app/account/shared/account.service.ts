@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 
@@ -26,6 +26,16 @@ export class AccountService {
 
     check(propertyName: string, suggestedValue: string): Observable<AvailibilityResponse> {
         return this.http.get(this.accountUrl + '/check?' + propertyName + "=" + suggestedValue)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    confirmEmail(userId: string, code: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('userId', userId);
+        params.set('code', code);
+
+        return this.http.get(this.accountUrl + '/ConfirmEmail', { search: params })
             .map(this.extractData)
             .catch(this.handleError);
     }
