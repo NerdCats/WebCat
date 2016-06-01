@@ -4,6 +4,6 @@ export class AppSettings {
    }
 
    public static get TASKCAT_API_BASE(): string {
-     return 'http://localhost:23873/api/';
+     return 'http://taskcatdev.azurewebsites.net/api/';
    }
 }
