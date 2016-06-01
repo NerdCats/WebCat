@@ -1,7 +1,7 @@
-<div class="confirmEmail" *ngIf=isSuccessful>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
+<div *ngIf=isSuccessful>
+  <div>
+    <div>
+      <div>
         <h1>Thank you for confirming your email address</h1>
         <br/>
         <p>We will contact with you soon when {{AppName}} goes live!</p>
@@ -9,10 +9,10 @@
     </div>
   </div>
 </div>
-<div class="confirmEmail" *ngIf="!isSuccessful">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
+<div *ngIf="!isSuccessful">
+  <div >
+    <div>
+      <div >
         <h1>Ooops! There have been an error confirming your email!</h1>
         <br/>
         <button type="submit" class="btn btn-warning btn-lg">Resend Confirmation Mail</button>

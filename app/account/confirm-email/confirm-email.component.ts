@@ -7,8 +7,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 @Component({
     selector: 'confirm-email',
     templateUrl: 'app/account/confirm-email/confirm-email.component.html',
-    providers: [AccountService, HTTP_PROVIDERS],
-    styleUrls: ['app/account/confirm-email/confirm-email.component.css']
+    providers: [AccountService, HTTP_PROVIDERS]
 })
 export class ConfirmEmailComponent implements OnInit {
     AppName: string = AppSettings.APP_NAME;
