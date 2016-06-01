@@ -54,7 +54,7 @@ export class ValidationService {
         return new Observable((obs: any) => {
             control
                 .valueChanges
-                .debounceTime(400)
+                .throttleTime(200)
                 .flatMap((value: AvailibilityResponse) => this.accountService.check("email", control.value))
                 .subscribe(data => {
                     if (data.IsAvailable) {

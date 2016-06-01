@@ -70,24 +70,25 @@ gulp.task('copy:libs', function () {
 /**
  * copy static assets - i.e. non TypeScript compiled source
  */
-gulp.task('copy:assets', function (cb) {
-    console.log("copying assets");
-    gulp.src(['app/**/*', 'assets/**/*', 'systemjs.config.js', 'config.js', 'package.json', 'index.html', 'styles.css', '!app/**/*.ts'], { base: './' })
+gulp.task('copy:assets', function () {
+    return gulp.src(['app/**/*', 'assets/**/*', 'systemjs.config.js', 'config.js', 'package.json', 'index.html', 'styles.css', '!app/**/*.ts'], { base: './' })
         .pipe(gulp.dest('dist'));
-    cb();
 });
 
 /**
- * Watch for changes in TypeScript, HTML and CSS files.
+ * Watch for changes in HTML and CSS files.
  */
 gulp.task('watch', function () {
-    gulp.src('/**/*', { base: "./" })
-        .pipe(watch("app/**/*.ts", { base: "./" }))
-        .pipe(gulp.dest("./dist"));
-
-    gulp.src('', { base: "./" })
+    return gulp.src('', { base: "./" })
         .pipe(watch(["app/**/*.html", "app/**/*.css", "assets/**/*", "styles.css", "index.html", "bs-config.json", "systemjs.config.js", "tsconfig.json"], { base: "./" }))
         .pipe(gulp.dest("./dist"));
+});
+
+/**
+ * Watch for changes in TypeScript files.
+ */
+gulp.task('watch-ts', function () {
+    gulp.watch('app/**/*.ts', ['compile']);
 });
 
 

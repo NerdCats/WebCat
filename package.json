@@ -6,7 +6,7 @@
     "compile": "gulp compile",
     "build": "gulp build",
     "prestart": "npm run build",
-    "start": "concurrently --kill-others \"gulp watch-folder\" \"lite-server\"",
+    "start": "concurrently --kill-others \"gulp watch\" \"gulp watch-ts\" \"lite-server\"",
     "lite": "lite-server",
     "postinstall": "typings install",
     "tsc": "tsc",
