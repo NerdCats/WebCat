@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 import { Validators, Control } from '@angular/common';
 
 import { ValidationError } from './validationError';
 import { AccountService } from './account.service';
+import { AvailibilityResponse } from './availibility-response';
 
 @Injectable()
 export class ValidationService {
@@ -27,7 +29,7 @@ export class ValidationService {
 
     //section password
     passwordValidator(control): ValidationError {
-        if (control.value!=null && control.value.length < 6) {
+        if (control.value != null && control.value.length < 6) {
             return { 'invalidPassword': true };
         }
         return null;
@@ -48,19 +50,28 @@ export class ValidationService {
         }
     }
 
-    emailAvailibilityValidatorAsync(control: Control): Promise<ValidationError> {
-        return new Promise(resolve => {
-            this.accountService.check("email", control.value)
-                .subscribe(result => {
-                    if (!result.IsAvailable) {
-                        resolve({ 'emailTaken': true });
+    emailAvailibilityValidatorAsync(control: Control): Observable<ValidationError> {
+        return new Observable<ValidationError>((obs: any) => {
+            control
+                .valueChanges
+                .debounceTime(300)
+                .distinctUntilChanged()
+                .take(1)
+                .switchMap((value: AvailibilityResponse) => this.accountService.check("email", control.value))
+                .subscribe(data => {
+                    if (data.IsAvailable) {
+                        obs.next({ 'emailTaken': true });
                     }
                     else {
-                        resolve(null);
+                        obs.next(null);
                     }
-                }, error => {
-                    resolve({ 'serverConnctionError': true });
-                });
+                    obs.complete();
+                },
+                error => {
+                    let message = error;
+                    obs.next({ 'serverConnctionError': true });
+                    obs.complete();
+                })
         });
     }
 
@@ -68,6 +79,8 @@ export class ValidationService {
     usernameValidatorAsync(control: Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("username", control.value)
+                .debounceTime(300)
+                .distinctUntilChanged()
                 .subscribe(result => {
                     if (!result.IsAvailable) {
                         resolve({ 'usernameTaken': true });
@@ -89,6 +102,8 @@ export class ValidationService {
     phonenumberAvailibilityValidatorAsync(control: Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("phonenumber", control.value)
+                .debounceTime(300)
+                .distinctUntilChanged()
                 .subscribe(result => {
                     if (!result.IsAvailable) {
                         resolve({ 'phonenumberTaken': true });
