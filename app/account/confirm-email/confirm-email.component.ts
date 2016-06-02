@@ -12,6 +12,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 export class ConfirmEmailComponent implements OnInit {
     AppName: string = AppSettings.APP_NAME;
 
+    emailConfirmationStatus: string = "Processing..";
     isSuccessful: boolean;
 
     constructor(private accountService: AccountService, private routeParams: RouteParams) { }
@@ -25,9 +26,11 @@ export class ConfirmEmailComponent implements OnInit {
     verifyEmailConfirmation(userId: string, code: string) {
         this.accountService.confirmEmail(userId, code)
             .subscribe(result => {
+                this.emailConfirmationStatus = "Thank you for confirming your email address";
                 this.isSuccessful = true;
             },
             error => {
+                this.emailConfirmationStatus = "Oops! Something went wrong.";
                 this.isSuccessful = false;
             });
     }
