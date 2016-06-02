@@ -14,11 +14,14 @@ export class ConfirmEmailComponent implements OnInit {
     AppName: string = AppSettings.APP_NAME;
 
     emailConfirmationStatus: string = "Processing..";
+
+    isProcessing: boolean;
     isSuccessful: boolean;
 
     constructor(private accountService: AccountService, private routeParams: RouteParams) { }
 
     ngOnInit() {
+        this.isProcessing = true;
         let userId = this.routeParams.get('userId');
         let code = this.routeParams.get('code');
         this.verifyEmailConfirmation(userId, code);
@@ -29,10 +32,12 @@ export class ConfirmEmailComponent implements OnInit {
             .subscribe(result => {
                 this.emailConfirmationStatus = "Thank you for confirming your email address";
                 this.isSuccessful = true;
+                this.isProcessing = false;
             },
             error => {
                 this.emailConfirmationStatus = "Oops! Something went wrong.";
                 this.isSuccessful = false;
+                this.isProcessing = false;
             });
     }
 }
