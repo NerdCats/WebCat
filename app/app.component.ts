@@ -5,6 +5,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 import { AppSettings } from './shared/app.settings';
 import { WrapHeaderComponent } from './wrapHeader/WrapHeader.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.component'
 
 
 @Component({
@@ -19,6 +20,11 @@ import { NavbarComponent } from './navbar/navbar.component';
     name: 'Home',
     component: WrapHeaderComponent,
     useAsDefault: true
+  },
+  {
+    path: '/confirm/:userId/:code',
+    name: 'ConfirmEmail',
+    component: ConfirmEmailComponent
   }
 ])
 export class AppComponent {

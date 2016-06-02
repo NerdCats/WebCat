@@ -80,7 +80,7 @@ gulp.task('copy:assets', function () {
  */
 gulp.task('watch', function () {
     return gulp.src('', { base: "./" })
-        .pipe(watch(["app/**/*.html", "app/**/*.css", "assets/**/*", "styles.css", "index.html", "bs-config.json", "systemjs.config.js", "tsconfig.json"], { base: "./" }))
+        .pipe(watch(["app/**/*.html", "app/**/*.css", "assets/**/*", "styles.css", "index.html", "systemjs.config.js"], { base: "./" }))
         .pipe(gulp.dest("./dist"));
 });
 
