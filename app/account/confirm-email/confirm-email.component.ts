@@ -8,7 +8,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
     selector: 'confirm-email',
     templateUrl: 'app/account/confirm-email/confirm-email.component.html',
     providers: [AccountService, HTTP_PROVIDERS],
-    styles: ["#emailConfirmContainer { padding-top: 200px; }"]
+    styles: ["#emailConfirmContainer { padding-top: 100px; }"]
 })
 export class ConfirmEmailComponent implements OnInit {
     AppName: string = AppSettings.APP_NAME;
@@ -18,12 +18,15 @@ export class ConfirmEmailComponent implements OnInit {
     isProcessing: boolean;
     isSuccessful: boolean;
 
+    userId: string;
+
     constructor(private accountService: AccountService, private routeParams: RouteParams) { }
 
     ngOnInit() {
         this.isProcessing = true;
         let userId = this.routeParams.get('userId');
         let code = this.routeParams.get('code');
+        this.userId = userId;
         this.verifyEmailConfirmation(userId, code);
     }
 
@@ -38,6 +41,16 @@ export class ConfirmEmailComponent implements OnInit {
                 this.emailConfirmationStatus = "Oops! Something went wrong.";
                 this.isSuccessful = false;
                 this.isProcessing = false;
+            });
+    }
+
+    resendEmailConfirmation() {
+        this.emailConfirmationStatus = "Resending confirmation email";
+        this.accountService.resendConfirmEmail(this.userId)
+            .subscribe(result => {
+                this.emailConfirmationStatus = "Thank you. A new account confirmation mail has been sent to your email address";
+            }, error => {
+                this.emailConfirmationStatus = "Oopsie! even resending confirmation email failed!";
             });
     }
 }

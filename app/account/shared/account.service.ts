@@ -40,6 +40,15 @@ export class AccountService {
             .catch(this.handleError);
     }
 
+    resendConfirmEmail(userId: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('userId', userId);
+
+        return this.http.get(this.accountUrl + '/ResendConfirmEmail', { search: params })
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Response status: ' + res.status);
