@@ -5,9 +5,9 @@
         <h1>{{emailConfirmationStatus}}</h1>
         <br/>
         <p *ngIf="isSuccessful && !isProcessing">We will contact with you soon when {{AppName}} goes live!</p>
-        <button *ngIf="!isSuccessful && !isProcessing" type="submit" class="btn btn-info btn-lg">Resend Confirmation Mail</button>
+        <button *ngIf="!isSuccessful && !isProcessing" type="submit"
+        class="btn btn-info btn-lg" (click)="resendEmailConfirmation()">Resend Confirmation Mail</button>
       </div>
     </div>
   </div>
 </div>
-
