@@ -1,16 +1,11 @@
-import {DefaultAddress} from '../../shared/geocoding.defaultAddress';
+import {UserRegistrationBase} from './user-registration-base';
 
-export class UserRegistration {
-    public UserName: string;
-    public Password: string;
-    public ConfirmPassword: string;
-    public Email: string;
-    public PhoneNumber: string;
+export class UserRegistration extends UserRegistrationBase {
     public InterestedLocalities: Array<string>;
 
-    public Type: string;
-
     constructor() {
+        super();
         this.InterestedLocalities = new Array<string>();
+        this.Type = "USER";
     }
 }
