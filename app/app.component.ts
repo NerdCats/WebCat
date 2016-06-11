@@ -22,7 +22,7 @@ import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.com
     useAsDefault: true
   },
   {
-    path: '/confirm/:userId/:code',
+    path: '/confirm',
     name: 'ConfirmEmail',
     component: ConfirmEmailComponent
   }
