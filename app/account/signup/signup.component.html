@@ -4,9 +4,9 @@
             <h4 class="modal-title">Sign Up</h4>
         </modal-header>
         <modal-body>
-            <div class="buttonmenu">
-                <button type="button" class="btn btn-block btn-lg btn-primary">Own a business? Sign up as an Enterprise User</button>
-                <button type="button" class="btn btn-block btn-lg btn-primary">Sign up as a User</button>
+            <div class="buttonmenu" *ngIf="!userTypeSelected">
+                <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onSelectUser()">Own a business? Sign up as an Enterprise User</button>
+                <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onSelectEnterpriseUser()">Sign up as a User</button>
             </div>
             <div *ngIf="!submitted && userTypeSelected">
                 <div class="form-group">
@@ -51,7 +51,7 @@
             </div>
         </modal-body>
         <modal-footer *ngIf="!submitted && userTypeSelected">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-default" (click)="onBackPressed()">Back</button>
             <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">
             Sign Up
             </button>

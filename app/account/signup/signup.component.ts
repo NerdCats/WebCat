@@ -71,7 +71,7 @@ export class SignupComponent implements OnInit {
         });
     }
 
-    public onLocalitySelect(e: any): void {
+    onLocalitySelect(e: any): void {
         // The only reason we are doing this like this is an
         // existing bug in Angular2 bootstrap
         // details is on https://github.com/valor-software/ng2-bootstrap/issues/463
@@ -82,6 +82,18 @@ export class SignupComponent implements OnInit {
         // TODO: Need to add the selected locality in the registration
         this.registrationModel.InterestedLocalities = new Array<string>();
         this.registrationModel.InterestedLocalities.push(e.item);
+    }
+
+    onSelectUser(): void {
+        this.userTypeSelected = true;
+    }
+
+    onSelectEnterpriseUser(): void {
+        this.userTypeSelected = true;
+    }
+
+    onBackPressed(): void {
+        this.userTypeSelected = false;
     }
 
     onSubmit() {
