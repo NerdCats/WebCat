@@ -5,7 +5,9 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/components/typeahead';
 
 import { ControlMessage } from './control-message.component';
+import { UserRegistrationBase } from '../shared/user-registration-base';
 import { UserRegistration } from '../shared/user-registration';
+import { EnterpriseUserRegistration } from '../shared/enterprise-user-registration';
 import { AccountService } from '../shared/account.service';
 import { ValidationService } from '../shared/validation.service';
 import { LocalityService } from '../../shared/app-locality.service';
@@ -38,7 +40,7 @@ export class SignupComponent implements OnInit {
     public localityQuery: string;
     public localities: Array<string>;
 
-    public registrationModel: UserRegistration;
+    public registrationModel: UserRegistrationBase;
     public signupForm: ControlGroup;
 
     public interestedLocality: Control = new Control("", Validators.required);
@@ -52,12 +54,12 @@ export class SignupComponent implements OnInit {
         private validationService: ValidationService,
         private localityService: LocalityService) {
 
+        this.registrationModel = new UserRegistration();
+        this.registrationModel = new EnterpriseUserRegistration();
         this.initiateForm();
     }
 
     initiateForm() {
-        this.registrationModel = new UserRegistration();
-
         // TODO: This is definitely a hack, we need to make it more generic so we
         // can support multiple countries
         let baseControls = {
@@ -83,10 +85,12 @@ export class SignupComponent implements OnInit {
         // If the bug is fixed please update the module and
         // use [ngFormControl] to bind to the control
         this.interestedLocality.updateValue(e.item);
-
-        // TODO: Need to add the selected locality in the registration
-        this.registrationModel.InterestedLocalities = new Array<string>();
-        this.registrationModel.InterestedLocalities.push(e.item);
+        if (this.registrationModel instanceof UserRegistration) {
+            // TODO: Need to add the selected locality in the registration
+            let interestedLocality = new Array<string>();
+            interestedLocality.push(e.item);
+            (<UserRegistration>this.registrationModel).InterestedLocalities = interestedLocality;
+        }
     }
 
     onSelectUser(): void {
