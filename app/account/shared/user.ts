@@ -1,4 +1,4 @@
-import { UserBase } from './user.base';
+import { UserBase } from './user-base';
 
 export class User extends UserBase{
     public UserName:string;

@@ -5,7 +5,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/components/typeahead';
 
 import { ControlMessage } from './control-message.component';
-import { UserRegistration } from '../shared/user.registration';
+import { UserRegistration } from '../shared/user-registration';
 import { AccountService } from '../shared/account.service';
 import { ValidationService } from '../shared/validation.service';
 import { LocalityService } from '../../shared/app-locality.service';

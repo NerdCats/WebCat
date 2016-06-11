@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 
-import { UserRegistration } from './user.registration';
+import { UserRegistration } from './user-registration';
 import { User } from './user';
 import { AvailibilityResponse } from './availibility-response';
 import { AppSettings } from '../../shared/app.settings';
