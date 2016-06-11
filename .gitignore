@@ -3,3 +3,5 @@ build/
 app/**/*.js
 app/**/*.js.map
 dist/
+npm-debug.log
+typings/
