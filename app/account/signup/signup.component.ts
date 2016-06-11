@@ -18,15 +18,17 @@ import { NcShowPassword } from '../shared/nc-show-password.directive';
     selector: 'signup',
     templateUrl: 'app/account/signup/signup.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ControlMessage, NcShowPassword],
-    providers: [HTTP_PROVIDERS, AccountService, ValidationService, LocalityService]
+    providers: [HTTP_PROVIDERS, AccountService, ValidationService, LocalityService],
+    styleUrls: ['app/account/signup/signup.component.css']
 })
 export class SignupComponent implements OnInit {
     private errorMessage: string;
     private userModel: User;
     private usernameAvailableResult: AvailibilityResponse;
 
-    public submitted = false;
-    public submitCompleted = false;
+    public userTypeSelected = false;
+    public submitted = false; // INFO: Submit button is pressed
+    public submitCompleted = false; // INFO: Whole submit process is completed
     public submitResultMessage: string;
 
     // Area Typeahead
