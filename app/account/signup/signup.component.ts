@@ -12,6 +12,7 @@ import { LocalityService } from '../../shared/app-locality.service';
 import { User } from '../shared/user';
 import { AvailibilityResponse } from '../shared/availibility-response';
 import { AppSettings } from  '../../shared/app.settings';
+import { UserTypes } from '../shared/user-types';
 
 import { NcShowPassword } from '../shared/nc-show-password.directive';
 @Component({
@@ -26,7 +27,7 @@ export class SignupComponent implements OnInit {
     private userModel: User;
     private usernameAvailableResult: AvailibilityResponse;
 
-    public userTypeSelected = false;
+    public selectedUserType: any = false;
     public submitted = false; // INFO: Submit button is pressed
     public submitCompleted = false; // INFO: Whole submit process is completed
     public submitResultMessage: string;
@@ -40,7 +41,7 @@ export class SignupComponent implements OnInit {
     public registrationModel: UserRegistration;
     public signupForm: ControlGroup;
 
-    public interestedLocality : Control = new Control("", Validators.required);
+    public interestedLocality: Control = new Control("", Validators.required);
 
     ngOnInit() {
         this.localities = this.localityService.getLocalities();
@@ -51,12 +52,15 @@ export class SignupComponent implements OnInit {
         private validationService: ValidationService,
         private localityService: LocalityService) {
 
+        this.initiateForm();
+    }
+
+    initiateForm() {
         this.registrationModel = new UserRegistration();
 
         // TODO: This is definitely a hack, we need to make it more generic so we
         // can support multiple countries
-
-        this.signupForm = formBuilder.group({
+        let baseControls = {
             "username": ['', Validators.required, (c) => { return this.validationService.usernameValidatorAsync(c); }],
             "email": [
                 '',
@@ -66,9 +70,10 @@ export class SignupComponent implements OnInit {
                 ]),
                 (c) => { return this.validationService.emailAvailibilityValidatorAsync(c); }
             ],
-            "password": ['', Validators.compose([Validators.required, (c) => { return this.validationService.passwordValidator(c); }])],
-            'interestedLocality': this.interestedLocality
-        });
+            "password": ['', Validators.compose([Validators.required, (c) => { return this.validationService.passwordValidator(c); }])]
+        };
+
+        this.signupForm = this.formBuilder.group(baseControls);
     }
 
     onLocalitySelect(e: any): void {
@@ -85,15 +90,16 @@ export class SignupComponent implements OnInit {
     }
 
     onSelectUser(): void {
-        this.userTypeSelected = true;
+        this.selectedUserType = UserTypes.TYPE_USER;
+        this.signupForm.addControl('interestedLocality', this.interestedLocality);
     }
 
     onSelectEnterpriseUser(): void {
-        this.userTypeSelected = true;
+        this.selectedUserType = UserTypes.TYPE_ENTERPRISE;
     }
 
     onBackPressed(): void {
-        this.userTypeSelected = false;
+        this.selectedUserType = false;
     }
 
     onSubmit() {

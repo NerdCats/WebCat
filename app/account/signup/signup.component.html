@@ -4,11 +4,11 @@
             <h4 class="modal-title">Sign Up</h4>
         </modal-header>
         <modal-body>
-            <div class="buttonmenu" *ngIf="!userTypeSelected">
-                <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onSelectUser()">Own a business? Sign up as an Enterprise User</button>
-                <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onSelectEnterpriseUser()">Sign up as a User</button>
+            <div class="buttonmenu" *ngIf="!selectedUserType">
+                <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onSelectEnterpriseUser()">Own a business? Sign up as an Enterprise User</button>
+                <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onSelectUser()">Sign up as a User</button>
             </div>
-            <div *ngIf="!submitted && userTypeSelected">
+            <div *ngIf="!submitted && selectedUserType">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input ngControl="username" type="text" class="form-control" placeholder="Enter your desried username here" [(ngModel)]="registrationModel.UserName" [ngFormControl]="signupForm.controls['username']">
@@ -30,7 +30,7 @@
                     </div>
                     <control-message control="password"></control-message>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="selectedUserType=='USER'" >
                     <label for="area">Area you're interested to recieve service from</label>
                     <!-- The reason you guys are not seeing a ngFromControl here is
                     an existing bug in Angular2 bootstrap module. For details, go to
@@ -50,7 +50,7 @@
                 <h3>{{submitResultMessage}}</h3>
             </div>
         </modal-body>
-        <modal-footer *ngIf="!submitted && userTypeSelected">
+        <modal-footer *ngIf="!submitted && selectedUserType">
             <button type="button" class="btn btn-default" (click)="onBackPressed()">Back</button>
             <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">
             Sign Up

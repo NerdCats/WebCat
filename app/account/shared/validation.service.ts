@@ -59,7 +59,7 @@ export class ValidationService {
                 .take(1)
                 .switchMap((value: AvailibilityResponse) => this.accountService.check("email", control.value))
                 .subscribe(data => {
-                    if (data.IsAvailable) {
+                    if (!data.IsAvailable) {
                         obs.next({ 'emailTaken': true });
                     }
                     else {
