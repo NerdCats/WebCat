@@ -54,6 +54,9 @@ export class ValidationService {
         return new Observable<ValidationError>((obs: any) => {
             control
                 .valueChanges
+                .debounceTime(300)
+                .distinctUntilChanged()
+                .take(1)
                 .switchMap((value: AvailibilityResponse) => this.accountService.check("email", control.value))
                 .subscribe(data => {
                     if (!data.IsAvailable) {
@@ -76,6 +79,8 @@ export class ValidationService {
     usernameValidatorAsync(control: Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("username", control.value)
+                .debounceTime(300)
+                .distinctUntilChanged()
                 .subscribe(result => {
                     if (!result.IsAvailable) {
                         resolve({ 'usernameTaken': true });
@@ -97,6 +102,8 @@ export class ValidationService {
     phonenumberAvailibilityValidatorAsync(control: Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("phonenumber", control.value)
+                .debounceTime(300)
+                .distinctUntilChanged()
                 .subscribe(result => {
                     if (!result.IsAvailable) {
                         resolve({ 'phonenumberTaken': true });
