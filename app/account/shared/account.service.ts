@@ -4,7 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 
 import { UserRegistration } from './user-registration';
+import { UserRegistrationBase } from './user-registration-base';
+import { EnterpriseUserRegistration } from './enterprise-user-registration';
 import { User } from './user';
+import { UserTypes } from './user-types';
 import { AvailibilityResponse } from './availibility-response';
 import { AppSettings } from '../../shared/app.settings';
 
@@ -14,8 +17,22 @@ export class AccountService {
 
     private accountUrl = AppSettings.TASKCAT_API_BASE + 'account';  // URL to web API
 
-    register(registration: UserRegistration): Observable<User> {
-        let body = JSON.stringify(registration);
+    private getRequestBody(registration: UserRegistrationBase): string {
+        if (registration.Type == UserTypes.TYPE_USER) {
+            var data = registration as UserRegistration;
+            console.log(data);
+            return JSON.stringify(registration as UserRegistration);
+        }
+        else if (registration.Type == UserTypes.TYPE_ENTERPRISE) {
+            return JSON.stringify(registration as EnterpriseUserRegistration);
+        }
+
+        throw new Error("Invalid/Unsupported User Type provided");
+    }
+
+    register(registration: UserRegistrationBase): Observable<User> {
+        let body: string = this.getRequestBody(registration);
+
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 

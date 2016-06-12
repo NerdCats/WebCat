@@ -50,28 +50,25 @@ export class ValidationService {
         }
     }
 
-    emailAvailibilityValidatorAsync(control: Control): Observable<ValidationError> {
-        return new Observable<ValidationError>((obs: any) => {
-            control
-                .valueChanges
+    emailAvailibilityValidatorAsync(control: Control): Promise<ValidationError> {
+        return new Promise(resolve => {
+            this.accountService.check("email", control.value)
                 .debounceTime(300)
                 .distinctUntilChanged()
-                .take(1)
-                .switchMap((value: AvailibilityResponse) => this.accountService.check("email", control.value))
-                .subscribe(data => {
-                    if (data.IsAvailable) {
-                        obs.next({ 'emailTaken': true });
+                .subscribe(result => {
+                    if (!result.IsAvailable) {
+                        resolve({ 'emailTaken': true });
                     }
                     else {
-                        obs.next(null);
+                        resolve(null);
                     }
-                    obs.complete();
                 },
                 error => {
-                    let message = error;
-                    obs.next({ 'serverConnctionError': true });
-                    obs.complete();
-                })
+                    // TODO: I'm not sure resolving here this way is the
+                    // right thing to do, I might need to reject the promise
+                    // here
+                    resolve({ 'serverConnctionError': true });
+                });
         });
     }
 
