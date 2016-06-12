@@ -17,14 +17,21 @@ export class AccountService {
 
     private accountUrl = AppSettings.TASKCAT_API_BASE + 'account';  // URL to web API
 
-    register(registration: UserRegistrationBase): Observable<User> {
-        let body: string;
+    private getRequestBody(registration: UserRegistrationBase): string {
         if (registration.Type == UserTypes.TYPE_USER) {
-            body = JSON.stringify(registration as UserRegistration);
+            var data = registration as UserRegistration;
+            console.log(data);
+            return JSON.stringify(registration as UserRegistration);
         }
         else if (registration.Type == UserTypes.TYPE_ENTERPRISE) {
-            body = JSON.stringify(registration as EnterpriseUserRegistration);
+            return JSON.stringify(registration as EnterpriseUserRegistration);
         }
+
+        throw new Error("Invalid/Unsupported User Type provided");
+    }
+
+    register(registration: UserRegistrationBase): Observable<User> {
+        let body: string = this.getRequestBody(registration);
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });

@@ -54,8 +54,6 @@ export class SignupComponent implements OnInit {
         private validationService: ValidationService,
         private localityService: LocalityService) {
 
-        this.registrationModel = new UserRegistration();
-        this.registrationModel = new EnterpriseUserRegistration();
         this.initiateForm();
     }
 
@@ -85,7 +83,7 @@ export class SignupComponent implements OnInit {
         // If the bug is fixed please update the module and
         // use [ngFormControl] to bind to the control
         this.interestedLocality.updateValue(e.item);
-        if (this.registrationModel instanceof UserRegistration) {
+        if (this.registrationModel.Type == UserTypes.TYPE_USER) {
             // TODO: Need to add the selected locality in the registration
             let interestedLocality = new Array<string>();
             interestedLocality.push(e.item);
@@ -95,10 +93,12 @@ export class SignupComponent implements OnInit {
 
     onSelectUser(): void {
         this.selectedUserType = UserTypes.TYPE_USER;
+        this.registrationModel = new UserRegistration();
         this.signupForm.addControl('interestedLocality', this.interestedLocality);
     }
 
     onSelectEnterpriseUser(): void {
+        this.registrationModel = new EnterpriseUserRegistration();
         this.selectedUserType = UserTypes.TYPE_ENTERPRISE;
     }
 
@@ -108,9 +108,9 @@ export class SignupComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
         // INFO: Confirming password as the UI wouldnt have that now
         this.registrationModel.ConfirmPassword = this.registrationModel.Password;
+        console.log(this.registrationModel);
 
         this.accountService.register(this.registrationModel)
             .subscribe(result => {
