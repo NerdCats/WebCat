@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
     public submitted = false; // INFO: Submit button is pressed
     public submitCompleted = false; // INFO: Whole submit process is completed
     public submitResultMessage: string;
+    public isFormActive = false;
 
     // Area Typeahead
     // TODO: For some weird reason typeahead doesnt work without an ngModel
@@ -92,18 +93,21 @@ export class SignupComponent implements OnInit {
     }
 
     onSelectUser(): void {
+        this.isFormActive = true;
         this.selectedUserType = UserTypes.TYPE_USER;
         this.registrationModel = new UserRegistration();
         this.signupForm.addControl('interestedLocality', this.interestedLocality);
     }
 
     onSelectEnterpriseUser(): void {
+        this.isFormActive = true;
         this.registrationModel = new EnterpriseUserRegistration();
         this.selectedUserType = UserTypes.TYPE_ENTERPRISE;
     }
 
     onBackPressed(): void {
         this.selectedUserType = false;
+        this.resetForm();
     }
 
     onSubmit() {
@@ -150,5 +154,8 @@ export class SignupComponent implements OnInit {
         this.submitCompleted = false;
         this.submitted = false;
         this.submitResultMessage = "";
+
+        this.isFormActive = false;
+        setTimeout(()=> this.isFormActive=true, 0);
     }
 }
