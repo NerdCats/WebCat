@@ -45,6 +45,7 @@ export class SignupComponent implements OnInit {
     public signupForm: ControlGroup;
 
     public interestedLocality: Control = new Control("", Validators.required);
+    public phonenumber: Control = new Control("", Validators.required, (c)=>{return this.validationService.phonenumberAvailibilityValidatorAsync});
 
     ngOnInit() {
         this.localities = this.localityService.getLocalities();
@@ -71,8 +72,7 @@ export class SignupComponent implements OnInit {
                 ]),
                 (c) => { return this.validationService.emailAvailibilityValidatorAsync(c); }
             ],
-            "password": ['', Validators.compose([Validators.required, (c) => { return this.validationService.passwordValidator(c); }])],
-            "phonenumber": ['', Validators.required, (c) => { return this.validationService.phonenumberAvailibilityValidatorAsync(c) }]
+            "password": ['', Validators.compose([Validators.required, (c) => { return this.validationService.passwordValidator(c); }])]
         };
 
         this.signupForm = this.formBuilder.group(baseControls);
@@ -98,6 +98,10 @@ export class SignupComponent implements OnInit {
         this.selectedUserType = UserTypes.TYPE_USER;
         this.registrationModel = new UserRegistration();
         this.signupForm.addControl('interestedLocality', this.interestedLocality);
+
+        this.signupForm.addControl('phonenumber', this.phonenumber);
+        // this.phonenumber.validator.apply();
+
     }
 
     onSelectEnterpriseUser(): void {
