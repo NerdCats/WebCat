@@ -5,7 +5,7 @@ import { ValidationService } from '../shared/validation.service';
 @Component({
     selector: 'control-message',
     inputs: ['controlName: control'],
-    template: `<div *ngIf="controlMessage !== null" class="alert alert-info alert_control_msg">
+    template: `<div *ngIf="controlMessage !== null" class="alert alert-{{controlMessageType}} alert_control_msg">
                     {{controlMessage}}
                </div>`,
     styleUrls: ['app/account/signup/signup.component.css']
@@ -15,6 +15,16 @@ export class ControlMessage {
     constructor( @Host() private _formDir: NgFormModel) { }
 
     public get controlMessage() {
+        var message = this.getControlMessage();
+        return message.message;
+    }
+
+    public get controlMessageType() {
+        var message = this.getControlMessage();
+        return message.type;
+    }
+
+    public getControlMessage() {
         let control = this._formDir.form.find(this.controlName);
 
         if (control.dirty && !control.valid) {
@@ -25,12 +35,21 @@ export class ControlMessage {
                 }
             }
             if (selectedErrorProperty) {
-                return ValidationService.getValidatorErrorMessage(selectedErrorProperty);
+                return {
+                    message: ValidationService.getValidatorErrorMessage(selectedErrorProperty),
+                    type: 'danger'
+                };
             }
             else {
-                return "Checking...";
+                return {
+                    message: "Checking...",
+                    type: 'info'
+                };
             }
         }
-        return null;
+        return {
+                    message: null,
+                    type: null
+                };
     }
 }
