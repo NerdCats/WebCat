@@ -5,9 +5,10 @@ import { ValidationService } from '../shared/validation.service';
 @Component({
     selector: 'control-message',
     inputs: ['controlName: control'],
-    template: `<div *ngIf="controlMessage !== null" class="alert alert-info">
+    template: `<div *ngIf="controlMessage !== null" class="alert alert-info alert_control_msg">
                     {{controlMessage}}
-               </div>`
+               </div>`,
+    styleUrls: ['app/account/signup/signup.component.css']
 })
 export class ControlMessage {
     controlName: string;
@@ -27,7 +28,7 @@ export class ControlMessage {
                 return ValidationService.getValidatorErrorMessage(selectedErrorProperty);
             }
             else {
-                return "Checking..";
+                return "Checking...";
             }
         }
         return null;
