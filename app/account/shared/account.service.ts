@@ -71,7 +71,7 @@ export class AccountService {
             throw new Error('Response status: ' + res.status);
         }
 
-        if (res == undefined) {
+        if (res) {
             return  res.json() || {};
         }
         return {};
