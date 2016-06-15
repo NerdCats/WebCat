@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
     public signupForm: ControlGroup;
 
     public interestedLocality: Control = new Control("", Validators.required);
-    public phonenumber: Control = new Control("", Validators.required, (c)=>{return this.validationService.phonenumberAvailibilityValidatorAsync});
+    public phonenumber: Control = new Control("", Validators.required, (c) => { return this.validationService.phonenumberAvailibilityValidatorAsync(c); });
 
     ngOnInit() {
         this.localities = this.localityService.getLocalities();
@@ -100,8 +100,6 @@ export class SignupComponent implements OnInit {
         this.signupForm.addControl('interestedLocality', this.interestedLocality);
 
         this.signupForm.addControl('phonenumber', this.phonenumber);
-        // this.phonenumber.validator.apply();
-
     }
 
     onSelectEnterpriseUser(): void {
@@ -161,6 +159,6 @@ export class SignupComponent implements OnInit {
         this.submitResultMessage = "";
 
         this.isFormActive = false;
-        setTimeout(()=> this.isFormActive=true, 0);
+        setTimeout(() => this.isFormActive = true, 0);
     }
 }
