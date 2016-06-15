@@ -71,7 +71,7 @@ export class SignupComponent implements OnInit {
                     Validators.required,
                     (c) => { return this.validationService.emailFormatValidator(c); }
                 ]),
-                (c) => { return this.validationService.emailAvailibilityValidatorAsync(c); }
+                AsyncValidator.debounce(control => this.validationService.emailAvailibilityValidatorAsync(control))
             ],
             "password": ['', Validators.compose([Validators.required, (c) => { return this.validationService.passwordValidator(c); }])]
         };
