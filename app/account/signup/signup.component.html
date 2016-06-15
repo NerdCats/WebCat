@@ -20,7 +20,7 @@
                     <control-message control="email"></control-message>
                 </div>
                 <div class="form-group" *ngIf="selectedUserType=='USER'">
-                    <label for="phonenumber">phonenumber</label>
+                    <label for="phonenumber">Phone Number</label>
                     <input ngControl="phonenumber" type="text" class="form-control" placeholder="Enter your phonenumber here ex: 01XXXXXXXXX" [(ngModel)]="registrationModel.PhoneNumber" [ngFormControl]="signupForm.controls['phonenumber']">
                     <control-message control="phonenumber"></control-message>
                 </div>
