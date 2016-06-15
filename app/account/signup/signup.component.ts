@@ -15,6 +15,7 @@ import { User } from '../shared/user';
 import { AvailibilityResponse } from '../shared/availibility-response';
 import { AppSettings } from  '../../shared/app.settings';
 import { UserTypes } from '../shared/user-types';
+import { AsyncValidator } from '../shared/async-validator';
 
 import { NcShowPassword } from '../shared/nc-show-password.directive';
 @Component({
@@ -45,7 +46,7 @@ export class SignupComponent implements OnInit {
     public signupForm: ControlGroup;
 
     public interestedLocality: Control = new Control("", Validators.required);
-    public phonenumber: Control = new Control("", Validators.required, (c) => { return this.validationService.phonenumberAvailibilityValidatorAsync(c); });
+    public phonenumber: Control;
 
     ngOnInit() {
         this.localities = this.localityService.getLocalities();
@@ -63,7 +64,7 @@ export class SignupComponent implements OnInit {
         // TODO: This is definitely a hack, we need to make it more generic so we
         // can support multiple countries
         let baseControls = {
-            "username": ['', Validators.required, (c) => { return this.validationService.usernameValidatorAsync(c); }],
+            "username": ['', Validators.required, AsyncValidator.debounce(control => this.validationService.usernameValidatorAsync(control))],
             "email": [
                 '',
                 Validators.compose([
@@ -99,6 +100,8 @@ export class SignupComponent implements OnInit {
         this.registrationModel = new UserRegistration();
         this.signupForm.addControl('interestedLocality', this.interestedLocality);
 
+        let validator = AsyncValidator.debounce(control => this.validationService.phonenumberAvailibilityValidatorAsync(control));
+        this.phonenumber = new Control("", Validators.required, validator);
         this.signupForm.addControl('phonenumber', this.phonenumber);
     }
 

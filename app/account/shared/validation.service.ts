@@ -53,9 +53,8 @@ export class ValidationService {
     emailAvailibilityValidatorAsync(control: Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("email", control.value)
-                .debounceTime(300)
-                .distinctUntilChanged()
-                .subscribe(result => {
+                .toPromise()
+                .then(result => {
                     if (!result.IsAvailable) {
                         resolve({ 'emailTaken': true });
                     }
@@ -76,9 +75,8 @@ export class ValidationService {
     usernameValidatorAsync(control: Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("username", control.value)
-                .debounceTime(300)
-                .distinctUntilChanged()
-                .subscribe(result => {
+                .toPromise()
+                .then(result => {
                     if (!result.IsAvailable) {
                         resolve({ 'usernameTaken': true });
                     }
@@ -87,11 +85,8 @@ export class ValidationService {
                     }
                 },
                 error => {
-                    // TODO: I'm not sure resolving here this way is the
-                    // right thing to do, I might need to reject the promise
-                    // here
                     resolve({ 'serverConnctionError': true });
-                });
+                })
         });
     }
 
@@ -99,19 +94,18 @@ export class ValidationService {
     phonenumberAvailibilityValidatorAsync(control: AbstractControl): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("phonenumber", control.value)
-                .debounceTime(300)
-                .distinctUntilChanged()
-                .subscribe(result => {
+                .toPromise()
+                .then(result => {
                     if (!result.IsAvailable) {
                         resolve({ 'phonenumberTaken': true });
                     }
                     else {
                         resolve(null);
                     }
-                }, error => {
-                    // TODO: Same as aforementioned one
+                }
+                , error => {
                     resolve({ 'serverConnctionError': true });
-                });
+                })
         });
     }
 }
