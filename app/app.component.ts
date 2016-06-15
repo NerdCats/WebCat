@@ -19,12 +19,12 @@ import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.com
     path: '/',
     name: 'Home',
     component: WrapHeaderComponent,
-    useAsDefault: true
   },
   {
     path: '/confirm',
     name: 'ConfirmEmail',
-    component: ConfirmEmailComponent
+    component: ConfirmEmailComponent,
+    useAsDefault: true
   }
 ])
 export class AppComponent {

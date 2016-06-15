@@ -2,11 +2,16 @@ import { Component, Host } from '@angular/core';
 import { NgFormModel } from '@angular/common';
 import { ValidationService } from '../shared/validation.service';
 
+interface IControlMessage {
+    message: string,
+    type: string
+}
+
 @Component({
     selector: 'control-message',
     inputs: ['controlName: control'],
-    template: `<div *ngIf="controlMessage !== null" class="alert alert-{{controlMessageType}} alert_control_msg">
-                    {{controlMessage}}
+    template: `<div *ngIf="ControlMessage !== null" class="alert alert-{{ControlMessage.type}} alert_control_msg">
+                    {{ControlMessage.message}}
                </div>`,
     styleUrls: ['app/account/signup/signup.component.css']
 })
@@ -14,17 +19,7 @@ export class ControlMessage {
     controlName: string;
     constructor( @Host() private _formDir: NgFormModel) { }
 
-    public get controlMessage() {
-        var message = this.getControlMessage();
-        return message.message;
-    }
-
-    public get controlMessageType() {
-        var message = this.getControlMessage();
-        return message.type;
-    }
-
-    public getControlMessage() {
+    public get ControlMessage(): IControlMessage {
         let control = this._formDir.form.find(this.controlName);
 
         if (control.dirty && !control.valid) {
@@ -48,8 +43,8 @@ export class ControlMessage {
             }
         }
         return {
-                    message: null,
-                    type: null
-                };
+            message: null,
+            type: null
+        };
     }
 }
