@@ -53,6 +53,7 @@ gulp.task('tslint', function () {
 gulp.task('copy:libs', function () {
     return gulp.src([
         'es6-shim/es6-shim.min.js',
+        'es6-shim/es6-shim.map',
         'systemjs/dist/system-polyfills.js',
         'systemjs/dist/system.src.js',
         'reflect-metadata/Reflect.js',
@@ -117,7 +118,7 @@ gulp.task('deploy', function () {
     });
 
     return gulp.src("dist/**", { base: 'dist/', buffer: false })
-        .pipe(conn.newer('site/wwwroot')) // only upload newer files
+        .pipe(conn.newerOrDifferentSize('site/wwwroot')) // only upload newer files
         .pipe(conn.dest('site/wwwroot'));
 });
 
