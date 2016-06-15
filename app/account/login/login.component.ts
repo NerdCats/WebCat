@@ -1,6 +1,8 @@
 
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
+import { Router } from '@angular/router-deprecated';
+
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -30,10 +32,12 @@ export class LoginComponent implements OnInit{
      *
      */
     constructor(private formBuilder: FormBuilder,
-    private loginService: LoginService) {
+    private loginService: LoginService,
+    private router: Router) {
         this.loginModel = new Login();
         this.initiateForm();
     }
+
     initiateForm(){
         let loginControls = {
             "username": ['', Validators.required],
@@ -45,11 +49,12 @@ export class LoginComponent implements OnInit{
     }
 
     onSubmit(){
-        console.log(this.loginForm)
         this.loginService.login(this.loginForm.value)
         .subscribe((result)=>{
             if (result) {
                 console.log(result);
+                console.log("Navigate: ")
+                // this.router.navigate(['Home']);
             }
         });
 

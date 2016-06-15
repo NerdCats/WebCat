@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AppSettings } from '../../shared/app.settings';
-// import { LocalStorage } from 'angular2-local-storage/local_storage';
+import { LocalStorage } from 'angular2-local-storage/local_storage';
 
 
 @Injectable()
@@ -10,7 +10,7 @@ export class LoginService{
     private loggedIn = false;
     private loginUrl = AppSettings.TASKCAT_BASE + "token";
 
-    constructor(private http:Http){
+    constructor(private http:Http, private localStorage: LocalStorage){
         this.loggedIn = false;
     }
 
@@ -22,7 +22,6 @@ export class LoginService{
                             "&client_id=" + formValue.client_id;
 
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        console.log(formValue);
         return this.http.post(
                 this.loginUrl,
                 urlEncodedParam,
@@ -30,8 +29,8 @@ export class LoginService{
             )
             .map(res=>res.json())
                 .map((res)=> {
-                    console.log(res);
                     if (res) {
+                        this.localStorage.set("access_token", res.access_token);
                         this.loggedIn = true;
                     }
                     return res;
@@ -40,7 +39,12 @@ export class LoginService{
         }
 
 
-    printMeh(){
-        // console.log(LocalStorage);
+    logout(){
+        this.localStorage.remove("access_token");
+        this.loggedIn = false;
+    }
+
+    isLoggedIn(){
+        return this.loggedIn;
     }
 }
