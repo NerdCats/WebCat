@@ -4,6 +4,7 @@ import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { HTTP_PROVIDERS } from '@angular/http';
 
+import { Login } from '../shared/login'
 
 import { ValidationService } from '../shared/validation.service';
 
@@ -16,8 +17,26 @@ import { ValidationService } from '../shared/validation.service';
 })
 export class LoginComponent implements OnInit{
 
+    public loginForm: ControlGroup;
+    public isFormActive = false;
+    public loginModel: Login;
     ngOnInit(){
 
+    }
+
+    /**
+     *
+     */
+    constructor(private formBuilder: FormBuilder) {
+        this.loginModel = new Login();
+        this.initiateForm();
+    }
+    initiateForm(){
+        let loginControls = {
+            "username": ['', Validators.required],
+            "password": ['', Validators.required]
+        };
+        this.loginForm = this.formBuilder.group(loginControls);
     }
 
     @ViewChild('modal')
@@ -29,6 +48,18 @@ export class LoginComponent implements OnInit{
 
     open(){
         this.modal.open();
+    }
+
+    onModalClosed(){
+        this.resetForm();
+    }
+
+    onModalDismissed(){
+        this.resetForm();
+    }
+
+    resetForm(){
+
     }
 }
 
