@@ -9,6 +9,6 @@ export class Login {
 
     constructor() {
         this.GrantType = "password";
-        this.ClientId = "GoFetchWebApp";
+        this.ClientId = "GoFetchDevWebApp";
     }
 }

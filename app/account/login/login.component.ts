@@ -3,16 +3,18 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { HTTP_PROVIDERS } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 import { Login } from '../shared/login'
 
 import { ValidationService } from '../shared/validation.service';
+import { LoginService } from './login.service';
 
 @Component({
     selector: 'login',
     templateUrl: 'app/account/login/login.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, CORE_DIRECTIVES, FORM_DIRECTIVES],
-    providers: [HTTP_PROVIDERS, ValidationService],
+    providers: [HTTP_PROVIDERS, ValidationService, LoginService],
     styleUrls: ['app/account/login/login.component.css']
 })
 export class LoginComponent implements OnInit{
@@ -27,7 +29,8 @@ export class LoginComponent implements OnInit{
     /**
      *
      */
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder,
+    private loginService: LoginService) {
         this.loginModel = new Login();
         this.initiateForm();
     }
@@ -42,9 +45,13 @@ export class LoginComponent implements OnInit{
     }
 
     onSubmit(){
-        console.log(this.loginModel);
-        console.log(this.loginForm.value);
-
+        console.log(this.loginForm)
+        this.loginService.login(this.loginForm.value)
+        .subscribe((result)=>{
+            if (result) {
+                console.log(result);
+            }
+        });
 
     }
 
