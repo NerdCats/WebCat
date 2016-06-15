@@ -34,9 +34,18 @@ export class LoginComponent implements OnInit{
     initiateForm(){
         let loginControls = {
             "username": ['', Validators.required],
-            "password": ['', Validators.required]
+            "password": ['', Validators.required],
+            "grant_type": [this.loginModel.GrantType],
+            "client_id": [this.loginModel.ClientId]
         };
         this.loginForm = this.formBuilder.group(loginControls);
+    }
+
+    onSubmit(){
+        console.log(this.loginModel);
+        console.log(this.loginForm.value);
+
+
     }
 
     @ViewChild('modal')
