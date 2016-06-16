@@ -12,6 +12,11 @@ export const Routes = [
         name: 'ConfirmEmail',
         component: ConfirmEmailComponent,
         useAsDefault: true
+    },
+    {
+        path: '/order',
+        name: 'Order',
+        component: OrderComponent,
     }
 ]
 

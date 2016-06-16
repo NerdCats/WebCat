@@ -6,6 +6,7 @@ import { AppSettings } from './shared/app.settings';
 import { WrapHeaderComponent } from './wrapHeader/WrapHeader.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.component';
+import { OrderComponent } from './order/order.component';
 import { LoginService } from './account/login/login.service'
 import { Routes } from './shared/router.config';
 import { SecureRouterOutlet } from './shared/secure-router-outlet.directive';
@@ -15,9 +16,12 @@ import { SecureRouterOutlet } from './shared/secure-router-outlet.directive';
   templateUrl: 'app/app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent, SecureRouterOutlet],
   providers: [ROUTER_PROVIDERS, Title, LoginService]
+
 })
 
+
 @RouteConfig(Routes)
+
 export class AppComponent {
   public isCollapsed: boolean = false;
 
