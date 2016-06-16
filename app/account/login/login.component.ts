@@ -16,26 +16,25 @@ import { LoginService } from './login.service';
     selector: 'login',
     templateUrl: 'app/account/login/login.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, CORE_DIRECTIVES, FORM_DIRECTIVES],
-    providers: [HTTP_PROVIDERS, ValidationService, LoginService],
-    styleUrls: ['app/account/login/login.component.css']
+    providers: [HTTP_PROVIDERS, ValidationService, LoginService]
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
     public loginForm: ControlGroup;
     public isFormActive = false;
     public loginModel: Login;
-    ngOnInit(){
+    ngOnInit() {
 
     }
 
     constructor(private formBuilder: FormBuilder,
-    private loginService: LoginService,
-    private router: Router) {
+        private loginService: LoginService,
+        private router: Router) {
         this.loginModel = new Login();
         this.initiateForm();
     }
 
-    initiateForm(){
+    initiateForm() {
         let loginControls = {
             "username": ['', Validators.required],
             "password": ['', Validators.required],
@@ -45,37 +44,37 @@ export class LoginComponent implements OnInit{
         this.loginForm = this.formBuilder.group(loginControls);
     }
 
-    onSubmit(){
+    onSubmit() {
         this.loginService.login(this.loginForm.value)
-        .subscribe((result)=>{
-            if (result) {
-                this.close();
-                this.router.navigate(["Home"]);
-            }
-        });
+            .subscribe((result) => {
+                if (result) {
+                    this.close();
+                    this.router.navigate(["Home"]);
+                }
+            });
 
     }
 
     @ViewChild('modal')
     modal: ModalComponent;
 
-    close(){
+    close() {
         this.modal.close();
     }
 
-    open(){
+    open() {
         this.modal.open();
     }
 
-    onModalClosed(){
+    onModalClosed() {
         this.resetForm();
     }
 
-    onModalDismissed(){
+    onModalDismissed() {
         this.resetForm();
     }
 
-    resetForm(){
+    resetForm() {
 
     }
 }
