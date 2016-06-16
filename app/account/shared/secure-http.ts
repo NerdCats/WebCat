@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HTTP_PROVIDERS, Http, Request, RequestOptionsArgs, Response, XHRBackend, RequestOptions, ConnectionBackend, Headers} from '@angular/http';
+import {Http, Request, RequestOptionsArgs, Response, RequestOptions, ConnectionBackend, Headers} from '@angular/http';
 import {ROUTER_PROVIDERS, Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {LocalStorage} from '../../shared/local-storage'
