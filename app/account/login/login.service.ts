@@ -11,7 +11,7 @@ export class LoginService {
     private loggedIn = false;
     private tokenUrl = AppSettings.TASKCAT_BASE + "token";
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private _localStorage: LocalStorage) {
         this.loggedIn = false;
     }
 
@@ -30,7 +30,7 @@ export class LoginService {
                 if (res.status < 200 || res.status >= 300) {
                     throw new Error('Response status: ' + res.status);
                 }
-                return this._extractAuthData(res);
+                return this._extractAndSaveAuthData(res);
             })
             .catch((error: Response) => {
                 this.loggedIn = false;
@@ -44,7 +44,8 @@ export class LoginService {
         console.error(errorMsg);
         return Observable.throw(errorMsg);
     }
-    private _extractAuthData(res: Response) {
+
+    private _extractAndSaveAuthData(res: Response) {
         let data = res.json();
         if (data) {
             this.loggedIn = true;
@@ -52,6 +53,8 @@ export class LoginService {
         else {
             throw new Error("Invalid/blank auth data, Fatal Error");
         }
+
+        this._localStorage.setObject('auth_token', data);
         return data;
     }
 
