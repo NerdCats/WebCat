@@ -1,0 +1,27 @@
+<modal #modal [size]="sm" (onClose)="onModalClosed()" (onDismiss)="onModalDismissed()">
+    <modal-header>
+        <h4>Login</h4>
+    </modal-header>
+    <modal-body>
+        <form [ngFormModel]="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input ngControl="username" type="text" class="form-control" placeholder="Enter your Username" [(ngModel)]="loginModel.UserName" [ngFormControl]="loginForm.controls['username']">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <input ngControl="password" type="password" id="login-password" class="form-control" placeholder="Enter your Password" [(ngModel)]="loginModel.Password" [ngFormControl]="loginForm.controls['password']">
+                    <span class="input-group-btn">
+                        <button ncShowPassword [ncPasswordControl]="'login-password'" type="button" class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-eye-open" style="height:20px"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!loginForm.valid">Login</button>
+    </modal-footer>
+</modal>
