@@ -4,6 +4,10 @@ export class AppSettings {
    }
 
    public static get TASKCAT_API_BASE(): string {
-     return 'http://taskcatdev.azurewebsites.net/api/';
+     return this.TASKCAT_BASE + 'api/';
+   }
+
+   public static get TASKCAT_BASE(): string{
+     return 'http://taskcatdev.azurewebsites.net/'
    }
 }
