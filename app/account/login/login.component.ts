@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { Router } from '@angular/router-deprecated';
 
@@ -18,7 +18,7 @@ import { AppSettings } from '../../shared/app.settings';
     directives: [MODAL_DIRECTIVES, ModalComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, NcShowPassword],
     providers: [ValidationService, LoginService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
     public loginForm: ControlGroup;
     public isFormActive = false;
@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
     public submitCompleted = false; // INFO: Whole submit process is completed
     public loginFailed = false;
     public submitResultMessage: string = "";
-
-    ngOnInit() { }
 
     constructor(private formBuilder: FormBuilder,
         private loginService: LoginService,

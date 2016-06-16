@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 import { Control, AbstractControl } from '@angular/common';
 
 import { ValidationError } from './validationError';
