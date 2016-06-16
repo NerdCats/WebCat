@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
-import { Validators, Control, AbstractControl } from '@angular/common';
+import { Observable } from 'rxjs/Rx';
+import { Control, AbstractControl } from '@angular/common';
 
 import { ValidationError } from './validationError';
 import { AccountService } from './account.service';
-import { AvailibilityResponse } from './availibility-response';
 
 @Injectable()
 export class ValidationService {
@@ -91,7 +89,7 @@ export class ValidationService {
     }
 
     //section phonenumber
-    phonenumberAvailibilityValidatorAsync(control: AbstractControl): Promise<ValidationError> {
+    phonenumberAvailibilityValidatorAsync(control: AbstractControl | Control): Promise<ValidationError> {
         return new Promise(resolve => {
             this.accountService.check("phonenumber", control.value)
                 .toPromise()

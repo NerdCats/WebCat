@@ -1,9 +1,8 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { Router } from '@angular/router-deprecated';
 
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-import { HTTP_PROVIDERS } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Login } from './login'
@@ -17,9 +16,9 @@ import { AppSettings } from '../../shared/app.settings';
     selector: 'login',
     templateUrl: 'app/account/login/login.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, NcShowPassword],
-    providers: [HTTP_PROVIDERS, ValidationService, LoginService]
+    providers: [ValidationService, LoginService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
     public loginForm: ControlGroup;
     public isFormActive = false;
@@ -29,8 +28,6 @@ export class LoginComponent implements OnInit {
     public submitCompleted = false; // INFO: Whole submit process is completed
     public loginFailed = false;
     public submitResultMessage: string = "";
-
-    ngOnInit() { }
 
     constructor(private formBuilder: FormBuilder,
         private loginService: LoginService,
