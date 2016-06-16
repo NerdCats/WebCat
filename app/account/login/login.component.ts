@@ -87,7 +87,7 @@ export class LoginComponent {
     }
 
     resetForm() {
-        this.loginStatus = LoginStatus.SUCCESS;
+        this.loginStatus = "PENDING";
         this.submitResultMessage = "";
         this.loginModel.UserName = "";
         this.loginModel.Password = "";
