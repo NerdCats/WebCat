@@ -6,6 +6,7 @@ import { AppSettings } from './shared/app.settings';
 import { WrapHeaderComponent } from './wrapHeader/WrapHeader.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.component';
+import { OrderComponent } from './order/order.component';
 import { LoginService } from './account/login/login.service'
 
 
@@ -14,6 +15,7 @@ import { LoginService } from './account/login/login.service'
   templateUrl: 'app/app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent],
   providers: [ROUTER_PROVIDERS, Title, LoginService]
+
 })
 
 @RouteConfig([
@@ -27,6 +29,11 @@ import { LoginService } from './account/login/login.service'
     name: 'ConfirmEmail',
     component: ConfirmEmailComponent,
     useAsDefault: true
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    component: OrderComponent,
   }
 ])
 
