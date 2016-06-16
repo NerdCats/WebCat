@@ -11,6 +11,8 @@ import { ValidationService } from '../shared/validation.service';
 import { LoginService } from './login.service';
 import { NcShowPassword } from '../shared/nc-show-password.directive';
 
+import { AppSettings } from '../../shared/app.settings';
+
 @Component({
     selector: 'login',
     templateUrl: 'app/account/login/login.component.html',
@@ -28,7 +30,7 @@ export class LoginComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
         private loginService: LoginService,
         private router: Router) {
-        this.loginModel = new Login("password", "GoFetchDevWebApp");
+        this.loginModel = new Login("password", AppSettings.CLIENT_ID);
         this.initiateForm();
     }
 
@@ -48,7 +50,6 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(["Home"]);
                 }
             });
-
     }
 
     @ViewChild('modal')

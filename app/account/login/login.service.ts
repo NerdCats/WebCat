@@ -30,6 +30,7 @@ export class LoginService {
                 if (data) {
                     this.loggedIn = true;
                 }
+
                 return data;
             })
             .catch((error) => {
