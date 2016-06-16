@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
         private loginService: LoginService,
         private router: Router) {
-        this.loginModel = new Login();
+        this.loginModel = new Login("password", "GoFetchDevWebApp");
         this.initiateForm();
     }
 

@@ -1,5 +1,5 @@
 /**
- * Login
+ * Login Model
  */
 export class Login {
     public UserName: string;
@@ -7,8 +7,8 @@ export class Login {
     public GrantType: string;
     public ClientId: string;
 
-    constructor() {
-        this.GrantType = "password";
-        this.ClientId = "GoFetchDevWebApp";
+    constructor(grantType: string, clientId: string) {
+        this.GrantType = grantType;
+        this.ClientId = clientId;
     }
 }
