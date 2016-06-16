@@ -28,9 +28,6 @@ export class LoginComponent implements OnInit{
 
     }
 
-    /**
-     *
-     */
     constructor(private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router) {

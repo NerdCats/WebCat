@@ -35,6 +35,5 @@ export class AppComponent {
 
   constructor(title: Title, loginService: LoginService) {
     title.setTitle(AppSettings.APP_NAME);
-    console.log(loginService.isLoggedIn());
   }
 }

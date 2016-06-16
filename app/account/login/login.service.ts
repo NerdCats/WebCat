@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AppSettings } from '../../shared/app.settings';
-// import { LocalStorage } from 'angular2-local-storage/local_storage';
-
 
 @Injectable()
 export class LoginService{
@@ -30,7 +28,6 @@ export class LoginService{
             .map(res=>res.json())
                 .map((res)=> {
                     if (res) {
-                        // this.localStorage.set("access_token", res.access_token);
                         this.loggedIn = true;
                     }
                     return res;
@@ -40,7 +37,6 @@ export class LoginService{
 
 
     logout(){
-        // this.localStorage.remove("access_token");
         this.loggedIn = false;
     }
 
