@@ -25,6 +25,11 @@ export class LoginComponent implements OnInit {
     public isFormActive = false;
     public loginModel: Login;
 
+    public submitted = false; // INFO: Submit button is pressed
+    public submitCompleted = false; // INFO: Whole submit process is completed
+    public errorMessage = false;
+    public submitResultMessage: string = "";
+
     ngOnInit() { }
 
     constructor(private formBuilder: FormBuilder,
@@ -43,12 +48,20 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
+        this.submitted = true;
+        this.submitCompleted = false;
+        this.errorMessage = false;
+        this.submitResultMessage = "";
         this.loginService.login(this.loginModel)
             .subscribe((result) => {
-                if (result) {
-                    this.close();
-                    this.router.navigate(["Home"]);
-                }
+                this.submitCompleted = true;
+                this.close();
+                this.router.navigate(["Home"]);
+            },
+            (error)=>{
+                this.errorMessage = true;
+                this.submitCompleted = true;
+                this.submitResultMessage = error;
             });
     }
 
@@ -72,7 +85,7 @@ export class LoginComponent implements OnInit {
     }
 
     resetForm() {
-
+        this.submitted = false;
     }
 }
 
