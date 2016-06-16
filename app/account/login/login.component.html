@@ -1,10 +1,12 @@
 <modal #modal [size]="sm" (onClose)="onModalClosed()" (onDismiss)="onModalDismissed()">
-    <modal-header>
-        <h4>Login</h4>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Login</h4>
     </modal-header>
     <modal-body>
-        <div *ngIf="errorMessage" class="form-group">
-            <h3 id="error_message">{{submitResultMessage}}</h3>
+        <div *ngIf="loginFailed" class="form-group">
+            <div class="alert alert-danger">
+                {{submitResultMessage}}
+            </div>
         </div>
         <form [ngFormModel]="loginForm">
             <div class="form-group">

@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
     public submitted = false; // INFO: Submit button is pressed
     public submitCompleted = false; // INFO: Whole submit process is completed
-    public errorMessage = false;
+    public loginFailed = false;
     public submitResultMessage: string = "";
 
     ngOnInit() { }
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
         this.submitCompleted = false;
-        this.errorMessage = false;
+        this.loginFailed = false;
         this.submitResultMessage = "";
         this.loginService.login(this.loginModel)
             .subscribe((result) => {
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(["Home"]);
             },
             (error)=>{
-                this.errorMessage = true;
+                this.loginFailed = true;
                 this.submitCompleted = true;
                 this.submitResultMessage = error;
             });
@@ -86,6 +86,10 @@ export class LoginComponent implements OnInit {
 
     resetForm() {
         this.submitted = false;
+        this.loginFailed = false;
+        this.submitResultMessage = "";
+        this.loginModel.UserName = "";
+        this.loginModel.Password = "";
     }
 }
 
