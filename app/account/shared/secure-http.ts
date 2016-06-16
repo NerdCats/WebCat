@@ -32,7 +32,7 @@ export class SecureHttp extends Http {
     }
 
     secureDelete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this._intercept(super.delete(url, options));
+        return this._intercept(super.delete(url, this._getRequestOptionArgs(options)));
     }
 
 
