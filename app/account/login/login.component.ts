@@ -12,21 +12,27 @@ import { NcShowPassword } from '../shared/nc-show-password.directive';
 
 import { AppSettings } from '../../shared/app.settings';
 
+type LoginStatus =
+    "PENDING"
+    | "IN_PROGRESS"
+    | "SUCCESS"
+    | "FAILED";
+
+
 @Component({
     selector: 'login',
     templateUrl: 'app/account/login/login.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, NcShowPassword],
-    providers: [ValidationService, LoginService]
+    providers: [ValidationService, LoginService],
+    styleUrls: ['app/account/login/login.component.css']
 })
 export class LoginComponent {
 
     public loginForm: ControlGroup;
-    public isFormActive = false;
     public loginModel: Login;
 
-    public submitted = false; // INFO: Submit button is pressed
-    public submitCompleted = false; // INFO: Whole submit process is completed
-    public loginFailed = false;
+    public loginStatus: LoginStatus = "PENDING";
+
     public submitResultMessage: string = "";
 
     constructor(private formBuilder: FormBuilder,
@@ -45,19 +51,18 @@ export class LoginComponent {
     }
 
     onSubmit() {
-        this.submitted = true;
-        this.submitCompleted = false;
-        this.loginFailed = false;
+        this.loginStatus = "IN_PROGRESS";
+
         this.submitResultMessage = "";
+
         this.loginService.login(this.loginModel)
             .subscribe((result) => {
-                this.submitCompleted = true;
+                this.loginStatus = "SUCCESS";
                 this.close();
                 this.router.navigate(["Home"]);
             },
-            (error)=>{
-                this.loginFailed = true;
-                this.submitCompleted = true;
+            (error) => {
+                this.loginStatus = "FAILED";
                 this.submitResultMessage = error;
             });
     }
@@ -82,8 +87,7 @@ export class LoginComponent {
     }
 
     resetForm() {
-        this.submitted = false;
-        this.loginFailed = false;
+        this.loginStatus = LoginStatus.SUCCESS;
         this.submitResultMessage = "";
         this.loginModel.UserName = "";
         this.loginModel.Password = "";
