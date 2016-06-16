@@ -30,6 +30,7 @@ import { LoginService } from './account/login/login.service'
     useAsDefault: true
   }
 ])
+
 export class AppComponent {
   public isCollapsed: boolean = false;
 
