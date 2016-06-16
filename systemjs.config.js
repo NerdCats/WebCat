@@ -7,8 +7,7 @@
     '@angular':                   'lib/@angular',
     'ng2-bootstrap':              'lib/ng2-bootstrap',
     'moment':                     'lib/moment',
-    'ng2-bs3-modal':              'lib/ng2-bs3-modal',
-    'angular2-local-storage':     'lib/angular2-local-storage'
+    'ng2-bs3-modal':              'lib/ng2-bs3-modal'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -18,8 +17,7 @@
     'angular2-in-memory-web-api': { main: 'web-api.js', defaultExtension: 'js' },
     'ng2-bootstrap':              { main: 'ng2-bootstrap.js', defaultExtension: 'js'},
     'moment':                     { main: 'moment.js', defaultExtension: 'js'},
-    'ng2-bs3-modal':              { main: 'ng2-bs3-modal.js', defaultExtension: 'js'},
-    'angular2-local-storage':     { main: 'local_storage.js', defaultExtension: '.js'}
+    'ng2-bs3-modal':              { main: 'ng2-bs3-modal.js', defaultExtension: 'js'}
   };
 
   var packageNames = [

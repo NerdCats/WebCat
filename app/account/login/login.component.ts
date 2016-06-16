@@ -52,9 +52,8 @@ export class LoginComponent implements OnInit{
         this.loginService.login(this.loginForm.value)
         .subscribe((result)=>{
             if (result) {
-                console.log(result);
-                console.log("Navigate: ")
-                // this.router.navigate(['Home']);
+                this.close();
+                this.router.navigate(["Home"]);
             }
         });
 
