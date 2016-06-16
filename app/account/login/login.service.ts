@@ -1,46 +1,50 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AppSettings } from '../../shared/app.settings';
+import { Login } from './login';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class LoginService{
+export class LoginService {
 
     private loggedIn = false;
-    private loginUrl = AppSettings.TASKCAT_BASE + "token";
+    private tokenUrl = AppSettings.TASKCAT_BASE + "token";
 
-    constructor(private http:Http){
+    constructor(private http: Http) {
         this.loggedIn = false;
     }
 
-    login(formValue){
+    login(loginModel: Login) {
         let headers = new Headers();
-        let urlEncodedParam = "grant_type="+ formValue.grant_type +
-                            "&username="+ formValue.username +
-                            "&password="+ formValue.password +
-                            "&client_id=" + formValue.client_id;
+        let urlEncodedParam =
+            "grant_type=" + loginModel.GrantType +
+            "&username=" + loginModel.UserName +
+            "&password=" + loginModel.Password +
+            "&client_id=" + loginModel.ClientId;
 
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        return this.http.post(
-                this.loginUrl,
-                urlEncodedParam,
-                { headers }
-            )
-            .map(res=>res.json())
-                .map((res)=> {
-                    if (res) {
-                        this.loggedIn = true;
-                    }
-                    return res;
+
+        return this.http.post(this.tokenUrl, urlEncodedParam, { headers })
+            .map((res) => {
+                let data = res.json();
+                if (data) {
+                    this.loggedIn = true;
                 }
-            )
-        }
+                return data;
+            })
+            .catch((error) => {
+                this.loggedIn = false;
+                let errorMsg = error.message || 'Server error';
+                console.error(errorMsg);
+                return Observable.throw(errorMsg);
+            });
+    }
 
-
-    logout(){
+    logout() {
         this.loggedIn = false;
     }
 
-    isLoggedIn(){
+    isLoggedIn() {
         return this.loggedIn;
     }
 }
