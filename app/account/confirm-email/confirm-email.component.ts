@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AppSettings } from  '../../shared/app.settings';
 import { AccountService } from '../shared/account.service';
 import { RouteParams } from '@angular/router-deprecated';
-import { HTTP_PROVIDERS } from '@angular/http';
 
 @Component({
     selector: 'confirm-email',
     templateUrl: 'app/account/confirm-email/confirm-email.component.html',
-    providers: [AccountService, HTTP_PROVIDERS],
+    providers: [AccountService],
     styles: ["#emailConfirmContainer { padding-top: 100px; }"]
 })
 export class ConfirmEmailComponent implements OnInit {

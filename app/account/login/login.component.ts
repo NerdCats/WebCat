@@ -3,7 +3,6 @@ import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES
 import { Router } from '@angular/router-deprecated';
 
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-import { HTTP_PROVIDERS } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Login } from './login'
@@ -17,7 +16,7 @@ import { AppSettings } from '../../shared/app.settings';
     selector: 'login',
     templateUrl: 'app/account/login/login.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, NcShowPassword],
-    providers: [HTTP_PROVIDERS, ValidationService, LoginService]
+    providers: [ValidationService, LoginService]
 })
 export class LoginComponent implements OnInit {
 
