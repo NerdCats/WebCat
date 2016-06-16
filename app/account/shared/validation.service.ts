@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/toPromise';
+
 import { Control, AbstractControl } from '@angular/common';
 
 import { ValidationError } from './validationError';
