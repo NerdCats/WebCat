@@ -3,7 +3,7 @@ import { CollapseDirective } from 'ng2-bootstrap/components/collapse/collapse.di
 
 import { AppSettings } from '../shared/app.settings';
 import { SignupComponent } from '../account/signup/signup.component';
-import { LoginComponent } from '../account/login/login.component';
+import { LoginComponent, LoginStatus } from '../account/login/login.component';
 
 type NavbarState = "PUBLIC" | "SECURED";
 
@@ -25,6 +25,13 @@ export class NavbarComponent {
 
     constructor() {
         this.AppTitle = AppSettings.APP_NAME;
+    }
+
+    onLoginCompleted(loginStatus: LoginStatus) {
+        if(loginStatus=="SUCCESS")
+        {
+            this.State = "SECURED";
+        }
     }
 
     showSignUpComponent() {
