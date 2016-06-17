@@ -4,6 +4,10 @@ import { CollapseDirective } from 'ng2-bootstrap/components/collapse/collapse.di
 import { AppSettings } from '../shared/app.settings';
 import { SignupComponent } from '../account/signup/signup.component';
 import { LoginComponent, LoginStatus } from '../account/login/login.component';
+import { LoginService } from '../account/login/login.service';
+
+import { LocalStorage } from '../shared/local-storage';
+import { Router } from '@angular/router-deprecated';
 
 type NavbarState = "PUBLIC" | "SECURED";
 
@@ -11,6 +15,7 @@ type NavbarState = "PUBLIC" | "SECURED";
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
     directives: [CollapseDirective, SignupComponent, LoginComponent],
+    providers: [LocalStorage],
     styleUrls: ['app/navbar/navbar.component.css']
 })
 export class NavbarComponent {
@@ -22,16 +27,30 @@ export class NavbarComponent {
 
     AppTitle: string;
     State: NavbarState = "PUBLIC";
+    UserNameString: string;
 
-    constructor() {
+    constructor(
+        private localStorage: LocalStorage,
+        private loginService: LoginService,
+        private router: Router) {
         this.AppTitle = AppSettings.APP_NAME;
     }
 
     onLoginCompleted(loginStatus: LoginStatus) {
-        if(loginStatus=="SUCCESS")
-        {
+        if (loginStatus == "SUCCESS") {
             this.State = "SECURED";
+            let authToken = this.localStorage.getObject("auth_token");
+            this.UserNameString = authToken["userName"];
         }
+    }
+
+    // INFO: This is definitely bad design
+    // need to find a proper way to take this responsibilty
+    // off navbar
+    logout() {
+        this.loginService.logout();
+        this.State = "PUBLIC";
+        this.router.navigate(["Home"]);
     }
 
     showSignUpComponent() {

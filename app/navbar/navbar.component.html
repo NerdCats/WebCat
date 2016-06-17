@@ -22,10 +22,10 @@
       </ul>
       <ul *ngIf="State=='SECURED'" class="nav navbar-nav navbar-right">
         <li>
-          <a>UserName</a>
+          <a>{{UserNameString}}</a>
         </li>
         <li>
-          <a>Log Out</a>
+          <a (click)="logout()">Log Out</a>
         </li>
       </ul>
     </div>
