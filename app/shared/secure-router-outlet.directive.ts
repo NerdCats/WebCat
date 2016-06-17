@@ -10,7 +10,8 @@ import {
     ComponentInstruction } from '@angular/router-deprecated';
 
 // INFO: This needs to relocate properly
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../account/login/login.service';
+import { PublicRoutes } from './router.config';
 
 @Directive({
     selector: 'router-outlet'
@@ -29,7 +30,7 @@ export class SecureRouterOutlet extends RouterOutlet {
         super(containerRef, loader, parentRouter, nameAttr);
 
         this.parentRouter = parentRouter;
-        this.publicRoutes = ['', 'Home', 'ConfirmEmail'];
+        this.publicRoutes = PublicRoutes;
     }
 
     activate(instruction: ComponentInstruction) {

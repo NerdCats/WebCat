@@ -8,9 +8,14 @@ export const Routes = [
         component: WrapHeaderComponent,
     },
     {
-        path: '/confirm',
+        path: '/confirmEmail',
         name: 'ConfirmEmail',
         component: ConfirmEmailComponent,
         useAsDefault: true
     }
+]
+
+export const PublicRoutes = [
+     '',
+     'confirmEmail'
 ]
