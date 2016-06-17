@@ -14,6 +14,7 @@ export class LoginService {
 
     private loggedIn = false;
     private tokenUrl = AppSettings.TASKCAT_BASE + "token";
+    private AUTH_TOKEN_KEY = "auth_token";
 
     constructor(private http: Http, private _localStorage: LocalStorage) {
         this.loggedIn = false;
@@ -58,16 +59,25 @@ export class LoginService {
             throw new Error("Invalid/blank auth data, Fatal Error");
         }
 
-        this._localStorage.setObject('auth_token', data);
+        this._localStorage.setObject(this.AUTH_TOKEN_KEY, data);
         return data;
     }
 
+    private _checkAlreadyLoggedIn() {
+        if (this._localStorage.getObject(this.AUTH_TOKEN_KEY)) {
+            // INFO: Refresh token usage might be good here
+            // Or we can automatically login every time ;)
+            this.loggedIn = true;
+        }
+    }
+
     logout() {
-        this._localStorage.remove('auth_token');
+        this._localStorage.remove(this.AUTH_TOKEN_KEY);
         this.loggedIn = false;
     }
 
     public get isLoggedIn() {
+        this._checkAlreadyLoggedIn();
         return this.loggedIn;
     }
 }
