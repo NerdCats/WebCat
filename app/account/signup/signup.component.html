@@ -4,8 +4,8 @@
     </modal-header>
     <modal-body>
         <div class="buttonmenu" *ngIf="!selectedUserType">
-            <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onSelectEnterpriseUser()">Own a business? Sign up as an Enterprise User</button>
-            <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onSelectUser()">Sign up as a User</button>
+            <button type="button" class="btn btn-block btn-lg btn-primary btn_wrap" (click)="onSelectEnterpriseUser()">Own a business? Sign up as an Enterprise User</button>
+            <button type="button" class="btn btn-block btn-lg btn-primary btn_wrap" (click)="onSelectUser()">Sign up as a User</button>
         </div>
         <form [ngFormModel]="signupForm" *ngIf="isFormActive">
             <div *ngIf="!submitted && selectedUserType">

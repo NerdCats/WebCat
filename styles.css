@@ -1,4 +1,4 @@
-/*
+    /*
  * Author: Carlos Alvarez
  * URL: http://alvarez.is
  *
@@ -7,145 +7,121 @@
  * URL: http://blacktie.co
  */
 
-body
-{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 300;
+    body {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        color: #555;
+        background-color: #f2f2f2;
+        -webkit-font-smoothing: antialiased;
+        -webkit-overflow-scrolling: touch;
+    }
+    /* Titles */
 
-    color: #555;
-    background-color: #f2f2f2;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        color: #333;
+    }
 
-    -webkit-font-smoothing: antialiased;
-    -webkit-overflow-scrolling: touch;
-}
+    h1 {
+        font-size: 40px;
+    }
 
-/* Titles */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6
-{
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    h3 {
+        font-weight: 400;
+        color: #95a5a6;
+    }
 
-    color: #333;
-}
+    h4 {
+        font-size: 20px;
+        font-weight: 400;
+        color: #95a5a6;
+    }
+    /* Paragraph & Typographic */
 
-h1
-{
-    font-size: 40px;
-}
+    p {
+        font-size: 16px;
+        line-height: 28px;
+        margin-bottom: 25px;
+    }
 
-h3
-{
-    font-weight: 400;
+    .centered {
+        text-align: center;
+    }
+    /* Links */
 
-    color: #95a5a6;
-}
-
-h4
-{
-    font-size: 20px;
-    font-weight: 400;
-
-    color: #95a5a6;
-}
-
-/* Paragraph & Typographic */
-p
-{
-    font-size: 16px;
-    line-height: 28px;
-
-    margin-bottom: 25px;
-}
-
-.centered
-{
-    text-align: center;
-}
-
-/* Links */
-a
-{
-    -webkit-transition: color .1s ease-in, background .1s ease-in;
-       -moz-transition: color .1s ease-in, background .1s ease-in;
+    a {
+        -webkit-transition: color .1s ease-in, background .1s ease-in;
+        -moz-transition: color .1s ease-in, background .1s ease-in;
         -ms-transition: color .1s ease-in, background .1s ease-in;
-         -o-transition: color .1s ease-in, background .1s ease-in;
-            transition: color .1s ease-in, background .1s ease-in;
-    word-wrap: break-word;
+        -o-transition: color .1s ease-in, background .1s ease-in;
+        transition: color .1s ease-in, background .1s ease-in;
+        word-wrap: break-word;
+        color: #3498db;
+    }
 
-    color: #3498db;
-}
+    a:hover,
+    a:focus {
+        text-decoration: none;
+        color: #7b7b7b;
+        outline: 0;
+    }
 
-a:hover,
-a:focus
-{
-    text-decoration: none;
-
-    color: #7b7b7b;
-    outline: 0;
-}
-
-a:before,
-a:after
-{
-    -webkit-transition: color .1s ease-in, background .1s ease-in;
-       -moz-transition: color .1s ease-in, background .1s ease-in;
+    a:before,
+    a:after {
+        -webkit-transition: color .1s ease-in, background .1s ease-in;
+        -moz-transition: color .1s ease-in, background .1s ease-in;
         -ms-transition: color .1s ease-in, background .1s ease-in;
-         -o-transition: color .1s ease-in, background .1s ease-in;
-            transition: color .1s ease-in, background .1s ease-in;
-}
-
-hr
-{
-    display: block;
-
-    height: 1px;
-    margin: 1em 0;
-    padding: 0;
-
-    border: 0;
-    border-top: 1px solid #ccc;
-}
-
-/* Helpers */
-
-.mt
-{
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-i
-{
-    margin: 8px;
-
-    color: #3498db;
-}
-
-/* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
-    /* this will vertically center modals in devices larger tha phones */
-    .modal.modal_vcenter {
-    text-align: center;
-    padding: 0!important;
+        -o-transition: color .1s ease-in, background .1s ease-in;
+        transition: color .1s ease-in, background .1s ease-in;
     }
 
-    .modal.modal_vcenter:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -4px;
+    hr {
+        display: block;
+        height: 1px;
+        margin: 1em 0;
+        padding: 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+    /* Helpers */
+
+    .mt {
+        margin-top: 40px;
+        margin-bottom: 40px;
     }
 
-    .modal_vcenter .modal-dialog {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
+    i {
+        margin: 8px;
+        color: #3498db;
     }
-}
+    /* Small Devices, Tablets */
+
+    @media only screen and (min-width: 768px) {
+        /* this will vertically center modals in devices larger tha phones */
+        .modal.modal_vcenter {
+            text-align: center;
+            padding: 0!important;
+        }
+        .modal.modal_vcenter:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px;
+        }
+        .modal_vcenter .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+        .btn_wrap {
+            white-space: normal;
+        }
+    }
