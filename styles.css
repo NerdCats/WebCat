@@ -127,21 +127,25 @@ i
     color: #3498db;
 }
 
-.modal.modal_vcenter {
-  text-align: center;
-  padding: 0!important;
-}
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    /* this will vertically center modals in devices larger tha phones */
+    .modal.modal_vcenter {
+    text-align: center;
+    padding: 0!important;
+    }
 
-.modal.modal_vcenter:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px;
-}
+    .modal.modal_vcenter:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+    }
 
-.modal_vcenter .modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
+    .modal_vcenter .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    }
 }
