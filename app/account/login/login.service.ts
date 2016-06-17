@@ -67,7 +67,7 @@ export class LoginService {
         this.loggedIn = false;
     }
 
-    isLoggedIn() {
+    public get isLoggedIn() {
         return this.loggedIn;
     }
 }
