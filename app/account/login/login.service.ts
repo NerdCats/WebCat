@@ -63,6 +63,7 @@ export class LoginService {
     }
 
     logout() {
+        this._localStorage.remove('auth_token');
         this.loggedIn = false;
     }
 
