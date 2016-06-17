@@ -5,6 +5,8 @@ import { AppSettings } from '../shared/app.settings';
 import { SignupComponent } from '../account/signup/signup.component';
 import { LoginComponent } from '../account/login/login.component';
 
+type NavbarState = "PUBLIC" | "SECURED";
+
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
@@ -12,15 +14,14 @@ import { LoginComponent } from '../account/login/login.component';
     styleUrls: ['app/navbar/navbar.component.css']
 })
 export class NavbarComponent {
-    public isCollapsed: boolean = false;
     @ViewChild('signup')
     public signUpComponent: SignupComponent;
 
     @ViewChild('login')
     public loginComponent: LoginComponent;
 
-
     AppTitle: string;
+    State: NavbarState = "PUBLIC";
 
     constructor() {
         this.AppTitle = AppSettings.APP_NAME;
@@ -30,7 +31,7 @@ export class NavbarComponent {
         this.signUpComponent.open();
     }
 
-    showLoginComponent(){
+    showLoginComponent() {
         this.loginComponent.open();
     }
 }
