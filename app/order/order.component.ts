@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { LocalStorage } from '../shared/local-storage'
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
+import { LocalityService } from '../shared/app-locality.service';
 import { OrderModel, OrderCartModel, PackageListModel } from '../shared/order-model';
 import { OrderService } from './order.service';
 
@@ -14,7 +15,7 @@ import { OrderService } from './order.service';
     selector: 'order',
     templateUrl: 'app/order/order.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, FORM_DIRECTIVES, CORE_DIRECTIVES],
-    providers: [OrderService, LocalStorage],
+    providers: [OrderService, LocalStorage, LocalityService],
     styleUrls: ['app/order/order.component.css']
 })
 
@@ -23,14 +24,16 @@ export class OrderComponent{
     public orderModel: OrderModel;
     public packageListItem: PackageListModel;
     public isUpdating: boolean;
-    public orderCreationStatus: string = "NOT_SUMITTED";
+    public orderCreationStatus: string = 'PENDING';
 
     public orderResponseMessage: string = "";
+    public areas: Array<string>;
 
     constructor(private formBuilder: FormBuilder,
         private orderService: OrderService,
         private router: Router,
-        private _localStorage: LocalStorage) {
+        private _localStorage: LocalStorage,
+        private localityService: LocalityService) {
         this.initiateForm();
         this.orderModel = new OrderModel();
         this.orderModel.Type = "Delivery";
@@ -42,7 +45,7 @@ export class OrderComponent{
         this.orderModel.UserId = JSON.parse(this._localStorage.get('auth_token')).userId;
         this.packageListItem = new PackageListModel();
         this.isUpdating = false;
-
+        this.areas = this.localityService.getLocalities();
     }
 
     initiateForm(){
@@ -60,10 +63,10 @@ export class OrderComponent{
 
     onSubmit(){
         console.log(JSON.stringify(this.orderModel));
-        this.orderCreationStatus = "IN_PROGRESS";
+        this.orderCreationStatus = 'IN_PROGRESS';
         this.orderService.createOrder(this.orderModel)
             .subscribe((result)=>{
-                this.orderCreationStatus = "SUCCESS";
+                this.orderCreationStatus = 'SUCCESS';
                 alert("success");
             },
             (error) => {
