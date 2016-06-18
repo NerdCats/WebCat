@@ -1,82 +1,85 @@
-<form class="form-horizontal">
-<fieldset>
+<form [ngFormModel]="orderForm" class="form-horizontal">
+  <fieldset>
 
-<!-- Form Name -->
-<legend>order</legend>
+    <div class="form-group">
+      <div class="col-md-7">
+        <h1 class="control-label">Create a Delivery Order</h1>
+      </div>
+    </div>
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="pickup-address">Pickup Address</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="pickup-address" name="pickup-address" [(ngModel)]="orderModel.From.AddressLine1" [ngFormControl]="orderForm.controls['pickupAddress']"></textarea>
+      </div>
+    </div>
 
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="pickup-address">Pickup Address</label>
-  <div class="col-md-4">
-    <textarea class="form-control" id="pickup-address" name="pickup-address"></textarea>
-  </div>
-</div>
-
-<!-- Select Basic -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="select-pick-up-area">Pickup Area</label>
-  <div class="col-md-4">
-    <select id="select-pick-up-area" name="select-pick-up-area" class="form-control">
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="select-pick-up-area">Pickup Area</label>
+      <div class="col-md-4">
+        <select id="select-pick-up-area" name="select-pick-up-area" class="form-control">
       <option value="Banani">Banani</option>
       <option value="Gulshan 1">Gulshan 1</option>
       <option value="Gulshan 2">Gulshan 2</option>
     </select>
-  </div>
-</div>
+      </div>
+    </div>
 
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="delivery-address">Delivery Address</label>
-  <div class="col-md-4">
-    <textarea class="form-control" id="delivery-address" name="delivery-address"></textarea>
-  </div>
-</div>
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="delivery-address">Delivery Address</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="delivery-address" name="delivery-address"></textarea>
+      </div>
+    </div>
 
-<!-- Select Basic -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="delivery-area">Delivery Area</label>
-  <div class="col-md-4">
-    <select id="delivery-area" name="delivery-area" class="form-control">
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="delivery-area">Delivery Area</label>
+      <div class="col-md-4">
+        <select id="delivery-area" name="delivery-area" class="form-control">
       <option value="Banani">Banani</option>
       <option value="Gulshan 1">Gulshan 1</option>
       <option value="Gulshan 2">Gulshan 2</option>
     </select>
-  </div>
-</div>
+      </div>
+    </div>
 
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="description">Package Description</label>
-  <div class="col-md-4">
-    <textarea class="form-control" id="description" name="description"></textarea>
-  </div>
-</div>
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="description">Package Description</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="description" name="description"></textarea>
+      </div>
+    </div>
 
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="note-to-delivery-man">Note To Delivery Man</label>
-  <div class="col-md-4">
-    <textarea class="form-control" id="note-to-delivery-man" name="note-to-delivery-man"></textarea>
-  </div>
-</div>
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="note-to-delivery-man">Note To Delivery Man</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="note-to-delivery-man" name="note-to-delivery-man"></textarea>
+      </div>
+    </div>
 
-<!-- Select Basic -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="payment-method">Payment Method</label>
-  <div class="col-md-4">
-    <select id="payment-method" name="payment-method" class="form-control">
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="payment-method">Payment Method</label>
+      <div class="col-md-4">
+        <select id="payment-method" name="payment-method" class="form-control">
       <option value="CashOnDelivery">Cash On Delivery</option>
     </select>
-  </div>
-</div>
+      </div>
+    </div>
 
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
-  <div class="col-md-4">
-    <button id="submit" name="submit" class="btn btn-primary">Create Order</button>
-  </div>
-</div>
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="submit"></label>
+      <div class="col-md-4">
+        <button id="submit" name="submit" class="btn btn-primary"  (click)="onSubmit()">Create Order</button>
+      </div>
+    </div>
 
-</fieldset>
+  </fieldset>
 </form>
+<!--disabled="!orderForm.valid"-->

@@ -13,7 +13,7 @@ import { LoginService } from './account/login/login.service'
 @Component({
   selector: 'webcat',
   templateUrl: 'app/app.component.html',
-  directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent],
+  directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent, OrderComponent],
   providers: [ROUTER_PROVIDERS, Title, LoginService]
 
 })
