@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { Router } from '@angular/router-deprecated';
-import { OrderModel } from '../shared/order-model';
+import { OrderModel, OrderCartModel, PackageListModel } from '../shared/order-model';
 import { OrderService } from './order.service';
 
 
@@ -23,6 +23,13 @@ export class OrderComponent{
         private router: Router) {
         this.initiateForm();
         this.orderModel = new OrderModel();
+        this.orderModel.Type = "Delivery";
+        this.orderModel.PayloadType = "default";
+
+        this.orderModel.OrderCart.PackageList = [];
+        this.orderModel.OrderCart.PackageList.push(new PackageListModel());
+        //FIXME: this value will be replaced by the userId of the currently logged in user's ID
+        this.orderModel.UserId = "575f9647b477aa9971d8041a";
     }
 
     initiateForm(){
@@ -40,5 +47,13 @@ export class OrderComponent{
 
     onSubmit(){
         console.log(JSON.stringify(this.orderModel));
+    }
+
+    addMoreItem(){
+        this.orderModel.OrderCart.PackageList.push(new PackageListModel());
+    }
+
+    removeItem(index: number){
+        this.orderModel.OrderCart.PackageList.splice(index);
     }
 }

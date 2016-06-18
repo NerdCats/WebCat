@@ -1,8 +1,8 @@
-<form [ngFormModel]="orderForm" class="form-horizontal">
+<form [ngFormModel]="orderForm" class="form-horizontal center-block">
   <fieldset>
 
     <div class="form-group">
-      <div class="col-md-7">
+      <div class="col-md-7 col-sm-7">
         <h1 class="control-label">Create a Delivery Order</h1>
       </div>
     </div>
@@ -18,19 +18,17 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="select-pick-up-area">Pickup Area</label>
       <div class="col-md-4">
-        <select id="select-pick-up-area" name="select-pick-up-area" class="form-control">
-      <option value="Banani">Banani</option>
-      <option value="Gulshan 1">Gulshan 1</option>
-      <option value="Gulshan 2">Gulshan 2</option>
-    </select>
+        <select id="select-pick-up-area" name="select-pick-up-area" class="form-control" [(ngModel)]="orderModel.From.Locality">
+          <option *ngFor="let area of ['Banani', 'Gulshan 1', 'Gulshan 2', 'Uttara']" [value]="area">{{area}}</option>
+        </select>
       </div>
     </div>
-
+    <br>
     <!-- Textarea -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="delivery-address">Delivery Address</label>
       <div class="col-md-4">
-        <textarea class="form-control" id="delivery-address" name="delivery-address"></textarea>
+        <textarea class="form-control" id="delivery-address" name="delivery-address" [(ngModel)]="orderModel.To.AddressLine1"></textarea>
       </div>
     </div>
 
@@ -38,19 +36,52 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="delivery-area">Delivery Area</label>
       <div class="col-md-4">
-        <select id="delivery-area" name="delivery-area" class="form-control">
-      <option value="Banani">Banani</option>
-      <option value="Gulshan 1">Gulshan 1</option>
-      <option value="Gulshan 2">Gulshan 2</option>
-    </select>
+        <select id="delivery-area" name="delivery-area" class="form-control" [(ngModel)]="orderModel.To.Locality">
+          <option *ngFor="let area of ['Banani', 'Gulshan 1', 'Gulshan 2', 'Uttara']" [value]="area">{{area}}</option>
+        </select>
+      </div>
+    </div>
+    <br>
+
+    <!-- Textarea -->
+    <div *ngFor="let item of orderModel.OrderCart.PackageList; let i = index">
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="item">Item Name</label>
+        <div class="col-md-4">
+          <input class="form-control" id="item" name="item" [(ngModel)]="item.Item">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="item">Quantity</label>
+        <div class="col-md-1">
+          <input class="form-control" id="quantity" name="quantity" [(ngModel)]="item.Quantity">
+        </div>
+
+        <label class="col-md-1 control-label" for="item">Price</label>
+        <div class="col-md-1">
+          <input class="form-control" id="price" name="price" [(ngModel)]="item.Price">
+        </div>
+
+
+        <div class="col-md-1 control-label">
+          <button id="remove-item" name="remove-item" class="btn btn-default" (click)="removeItem(i)">Remove</button>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="form-group">
+      <div class="col-md-8 control-label">
+        <button id="add-more" name="add-more" class="btn btn-default" (click)="addMoreItem()">Add More Item</button>
       </div>
     </div>
 
+    <br>
     <!-- Textarea -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="description">Package Description</label>
       <div class="col-md-4">
-        <textarea class="form-control" id="description" name="description"></textarea>
+        <textarea class="form-control" id="description" name="description" [(ngModel)]="orderModel.Description"></textarea>
       </div>
     </div>
 
@@ -58,7 +89,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="note-to-delivery-man">Note To Delivery Man</label>
       <div class="col-md-4">
-        <textarea class="form-control" id="note-to-delivery-man" name="note-to-delivery-man"></textarea>
+        <textarea class="form-control" id="note-to-delivery-man" name="note-to-delivery-man" [(ngModel)]="orderModel.NoteToDeliveryMan"></textarea>
       </div>
     </div>
 
@@ -66,9 +97,9 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="payment-method">Payment Method</label>
       <div class="col-md-4">
-        <select id="payment-method" name="payment-method" class="form-control">
-      <option value="CashOnDelivery">Cash On Delivery</option>
-    </select>
+        <select id="payment-method" name="payment-method" class="form-control" [(ngModel)]="orderModel.PaymentMethod">
+          <option value="CashOnDelivery">Cash On Delivery</option>
+        </select>
       </div>
     </div>
 
@@ -76,7 +107,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="submit"></label>
       <div class="col-md-4">
-        <button id="submit" name="submit" class="btn btn-primary"  (click)="onSubmit()">Create Order</button>
+        <button id="submit" name="submit" class="btn btn-primary" (click)="onSubmit()">Create Order</button>
       </div>
     </div>
 

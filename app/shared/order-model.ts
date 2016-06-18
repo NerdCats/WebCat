@@ -45,15 +45,7 @@ export class PackageListModel {
     public VATAmount: number;
     public TotalPlusVAT: number;
     public Weight: number;
-    constructor(item, picurl, quantity, price, vat, total, vatamout, totalplusvat, weight) {
-        this.Item = item;
-        this.PicUrl = picurl;
-        this.Quantity = quantity;
-        this.Price = price;
-        this.VAT = vat;
-        this.Total = total;
-        this.VATAmount = vatamout;
-        this.TotalPlusVAT = totalplusvat;
-        this.Weight = weight;
+    constructor() {
+
     }
 }
