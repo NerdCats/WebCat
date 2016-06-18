@@ -46,7 +46,6 @@ export class NavbarComponent {
     constructor(
         private localStorage: LocalStorage,
         private loginService: LoginService,
-        private cdr: ChangeDetectorRef,
         private router: Router) {
         this.AppTitle = AppSettings.APP_NAME;
 
