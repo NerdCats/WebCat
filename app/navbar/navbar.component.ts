@@ -35,17 +35,14 @@ export class NavbarComponent {
         private router: Router) {
         this.AppTitle = AppSettings.APP_NAME;
 
-        this.loginService.loggedInAnnounced.subscribe(isLoggedIn => {
-            console.log("subscription works");
-            this.State = isLoggedIn ? "SECURED" : "PUBLIC";
-        });
+        if (this.loginService.isLoggedIn) {
+            this.setToSecuredState();
+        }
     }
 
     onLoginCompleted(loginStatus: LoginStatus) {
         if (loginStatus == "SUCCESS") {
-            this.State = "SECURED";
-            let authToken = this.localStorage.getObject("auth_token");
-            this.UserNameString = authToken["userName"];
+            this.setToSecuredState();
         }
     }
 
@@ -64,5 +61,11 @@ export class NavbarComponent {
 
     showLoginComponent() {
         this.loginComponent.open();
+    }
+
+    private setToSecuredState() {
+        this.State = "SECURED";
+        let authToken = this.localStorage.getObject("auth_token");
+        this.UserNameString = authToken["userName"];
     }
 }
