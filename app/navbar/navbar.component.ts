@@ -29,6 +29,8 @@ export class NavbarComponent {
     State: NavbarState = "PUBLIC";
     UserNameString: string;
 
+    isCollapsed: boolean;
+
     constructor(
         private localStorage: LocalStorage,
         private loginService: LoginService,
