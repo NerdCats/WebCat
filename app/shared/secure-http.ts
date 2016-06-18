@@ -35,6 +35,10 @@ export class SecureHttp extends Http {
         return this._intercept(super.delete(url, this._getRequestOptionArgs(options)));
     }
 
+    secureGet(url: string, options?: RequestOptionsArgs): Observable<Response> {
+        return this._intercept(super.get(url, this._getRequestOptionArgs(options)));
+    }
+
 
     private _getRequestOptionArgs(options?: RequestOptionsArgs): RequestOptionsArgs {
         if (!options) {
@@ -54,7 +58,7 @@ export class SecureHttp extends Http {
     private _intercept(observable: Observable<Response>): Observable<Response> {
         return observable.catch((err, source) => {
             if (err.status == 401) {
-                this._router.navigate(['/login']);
+                this._router.navigate(['/Home']);
                 return Observable.empty();
             } else {
                 return Observable.throw(err);
