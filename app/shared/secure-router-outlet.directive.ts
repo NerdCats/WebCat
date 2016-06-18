@@ -9,6 +9,8 @@ import {
     RouterOutlet,
     ComponentInstruction } from '@angular/router-deprecated';
 
+import { Subject } from 'rxjs/Subject';
+
 // INFO: This needs to relocate properly
 import { LoginService } from '../account/login/login.service';
 import { PublicRoutes } from './router.config';
@@ -42,7 +44,6 @@ export class SecureRouterOutlet extends RouterOutlet {
     }
 
     private _canActivate(url) {
-        console.log(this.loginService.isLoggedIn);
         return this.publicRoutes.indexOf(url) !== -1
             || this.loginService.isLoggedIn;
     }
