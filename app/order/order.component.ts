@@ -10,13 +10,15 @@ import { OrderService } from './order.service';
     selector: 'order',
     templateUrl: 'app/order/order.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, FORM_DIRECTIVES, CORE_DIRECTIVES],
-    providers: [OrderService]
+    providers: [OrderService],
+    styleUrls: ['app/order/order.component.css']
 })
 
 export class OrderComponent{
     public orderForm: ControlGroup;
     public orderModel: OrderModel;
     public packageListItem: PackageListModel;
+    public isUpdating: boolean;
 
     public orderSubmittedMessage: string = "";
 
@@ -33,6 +35,7 @@ export class OrderComponent{
         //FIXME: this value will be replaced by the userId of the currently logged in user's ID
         this.orderModel.UserId = "575f9647b477aa9971d8041a";
         this.packageListItem = new PackageListModel();
+        this.isUpdating = false;
     }
 
     initiateForm(){
@@ -53,12 +56,24 @@ export class OrderComponent{
     }
 
     addMoreItem(){
-        this.orderModel.OrderCart.PackageList.push(this.packageListItem);
+        if (this.isUpdating) {
+            this.isUpdating = !this.isUpdating;
+        } else {
+            this.orderModel.OrderCart.PackageList.push(this.packageListItem);
+        }
+        this.packageListItem = new PackageListModel();
         this.close();
     }
 
     removeItem(index: number){
         this.orderModel.OrderCart.PackageList.splice(index);
+        console.log(index);
+    }
+
+    editItem(item: PackageListModel){
+        this.isUpdating = true;
+        this.packageListItem = item;
+        this.open();
     }
 
     @ViewChild('itemModal')
@@ -69,7 +84,6 @@ export class OrderComponent{
     }
 
     open() {
-        this.packageListItem = new PackageListModel();
         this.modal.open();
     }
 

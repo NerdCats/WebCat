@@ -1,0 +1,4 @@
+.wrap{
+    word-wrap: break-word;
+    max-width: 70px;
+}

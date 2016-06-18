@@ -57,16 +57,16 @@
           </div>
           <div class="form-group">
             <label class="control-label" for="item">Quantity</label>
-            <input class="form-control" id="quantity" name="quantity" [(ngModel)]="packageListItem.Quantity">
+            <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="packageListItem.Quantity">
           </div>
           <div class="form-group">
             <label class="control-label" for="item">Price</label>
-            <input class="form-control" id="price" name="price" [(ngModel)]="packageListItem.Price">
+            <input type="number" class="form-control" id="price" name="price" [(ngModel)]="packageListItem.Price">
           </div>
         </div>
       </modal-body>
       <modal-footer>
-        <button class="btn btn-default" (click)="addMoreItem()">Submit</button>
+        <button class="btn btn-primary" (click)="addMoreItem()">Add</button>
       </modal-footer>
     </modal>
     <!-- Textarea -->
@@ -74,6 +74,34 @@
     <div class="form-group">
       <div class="col-md-8 control-label">
         <button id="add-more" name="add-more" class="btn btn-default" (click)="open()">Add Item</button>
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="" class="col-md-4 control-label">Package List</label>
+      <div class="col-md-4 table-responsive">
+        <table class="table table-bordered table-hover col-md-4">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Item Name</th>
+              <th>Quantity</th>
+              <th>Unit Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of orderModel.OrderCart.PackageList; let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td class="wrap">{{item.Item}}</td>
+              <td>{{item.Quantity}}</td>
+              <td>{{item.Price}}</td>
+              <td>{{item.Price * item.Quantity}}</td>
+              <button class="btn btn-warning" (click)="editItem(item)">Edit</button>
+              <button class="btn btn-danger" (click)="removeItem(i)">Remove</button>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
