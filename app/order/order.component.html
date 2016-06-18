@@ -43,36 +43,37 @@
     </div>
     <br>
 
+    <modal #itemModal class="modal_vcenter" [size]="sm" (onClose)="onModalClosed()" (onDismiss)="onModalDismissed()">
+      <modal-header [show-close]="true">
+        <h4 class="modal-title">Add Item</h4>
+      </modal-header>
+      <modal-body>
+        <div>
+          <div class="form-group">
+            <label class="control-label" for="item">Item Name</label>
+            <div>
+              <input class="form-control" id="item" name="item" [(ngModel)]="packageListItem.Item">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="item">Quantity</label>
+            <input class="form-control" id="quantity" name="quantity" [(ngModel)]="packageListItem.Quantity">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="item">Price</label>
+            <input class="form-control" id="price" name="price" [(ngModel)]="packageListItem.Price">
+          </div>
+        </div>
+      </modal-body>
+      <modal-footer>
+        <button class="btn btn-default" (click)="addMoreItem()">Submit</button>
+      </modal-footer>
+    </modal>
     <!-- Textarea -->
-    <div *ngFor="let item of orderModel.OrderCart.PackageList; let i = index">
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="item">Item Name</label>
-        <div class="col-md-4">
-          <input class="form-control" id="item" name="item" [(ngModel)]="item.Item">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="item">Quantity</label>
-        <div class="col-md-1">
-          <input class="form-control" id="quantity" name="quantity" [(ngModel)]="item.Quantity">
-        </div>
 
-        <label class="col-md-1 control-label" for="item">Price</label>
-        <div class="col-md-1">
-          <input class="form-control" id="price" name="price" [(ngModel)]="item.Price">
-        </div>
-
-
-        <div class="col-md-1 control-label">
-          <button id="remove-item" name="remove-item" class="btn btn-default" (click)="removeItem(i)">Remove</button>
-        </div>
-
-      </div>
-
-    </div>
     <div class="form-group">
       <div class="col-md-8 control-label">
-        <button id="add-more" name="add-more" class="btn btn-default" (click)="addMoreItem()">Add More Item</button>
+        <button id="add-more" name="add-more" class="btn btn-default" (click)="open()">Add Item</button>
       </div>
     </div>
 
