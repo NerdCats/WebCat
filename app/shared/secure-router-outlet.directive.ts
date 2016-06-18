@@ -14,7 +14,7 @@ import { LoginService } from '../account/login/login.service';
 import { PublicRoutes } from './router.config';
 
 @Directive({
-    selector: 'router-outlet'
+    selector: 'secure-router-outlet'
 })
 export class SecureRouterOutlet extends RouterOutlet {
     publicRoutes: Array<string>;
@@ -42,6 +42,7 @@ export class SecureRouterOutlet extends RouterOutlet {
     }
 
     private _canActivate(url) {
+        console.log(this.loginService.isLoggedIn);
         return this.publicRoutes.indexOf(url) !== -1
             || this.loginService.isLoggedIn;
     }
