@@ -34,6 +34,11 @@ export class NavbarComponent {
         private loginService: LoginService,
         private router: Router) {
         this.AppTitle = AppSettings.APP_NAME;
+
+        this.loginService.loggedInAnnounced.subscribe(isLoggedIn => {
+            console.log("subscription works");
+            this.State = isLoggedIn ? "SECURED" : "PUBLIC";
+        });
     }
 
     onLoginCompleted(loginStatus: LoginStatus) {
