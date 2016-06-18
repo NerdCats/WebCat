@@ -14,13 +14,17 @@ import { SecureRouterOutlet } from './shared/secure-router-outlet.directive';
 @Component({
   selector: 'webcat',
   templateUrl: 'app/app.component.html',
+
   directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent, SecureRouterOutlet, OrderComponent],
+
   providers: [ROUTER_PROVIDERS, Title, LoginService]
 
 })
 
 
+
 @RouteConfig(Routes)
+
 
 export class AppComponent {
   public isCollapsed: boolean = false;
