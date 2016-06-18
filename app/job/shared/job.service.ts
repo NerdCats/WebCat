@@ -10,10 +10,11 @@ import { AppSettings } from '../../shared/app.settings';
 
 @Injectable()
 export class JobService {
-    constructor(private shttp: SecureHttp) { }
+    constructor(private shttp: Http) { }
 
     private jobUrl = AppSettings.TASKCAT_API_BASE + 'job';
 
-    getHistory(userId:string) {
+    getHistory() {
+        return this.shttp.get(this.jobUrl);
     }
 }

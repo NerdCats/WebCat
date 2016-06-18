@@ -53,9 +53,6 @@ export class NavbarComponent {
             this._setToSecuredState();
         }
 
-        console.log(this.loginService.isLoggedIn);
-        console.log(this.State);
-
         this._initiatePublicNavElements();
         this._initiateSecureNavElements();
     }

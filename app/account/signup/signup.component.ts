@@ -119,7 +119,6 @@ export class SignupComponent implements OnInit {
         this.submitted = true;
         // INFO: Confirming password as the UI wouldnt have that now
         this.registrationModel.ConfirmPassword = this.registrationModel.Password;
-        console.log(this.registrationModel);
 
         this.accountService.register(this.registrationModel)
             .subscribe(result => {
@@ -131,8 +130,6 @@ export class SignupComponent implements OnInit {
                 this.submitResultMessage = error;
                 this.submitCompleted = true;
             });
-
-        console.log("registration form submitted");
     }
 
     // Modal related section starts here

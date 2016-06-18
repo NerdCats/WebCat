@@ -1,5 +1,6 @@
 import {WrapHeaderComponent} from '../wrapHeader/wrapHeader.component';
 import {ConfirmEmailComponent} from '../account/confirm-email/confirm-email.component';
+import {JobHistoryComponent} from '../job/job-history/job-history.component';
 
 export const Routes = [
     {
@@ -12,6 +13,11 @@ export const Routes = [
         name: 'ConfirmEmail',
         component: ConfirmEmailComponent,
         useAsDefault: true
+    },
+    {
+        path: '/job',
+        name: 'Job',
+        component: JobHistoryComponent
     }
 ]
 

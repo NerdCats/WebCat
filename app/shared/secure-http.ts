@@ -12,7 +12,7 @@ export class SecureHttp extends Http {
      */
     constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private _router: Router, private _localStorage: LocalStorage) {
         super(backend, defaultOptions);
-        this._authToken = this._localStorage.get('auth_token');
+        this._authToken = this._localStorage.getObject('auth_token');
         if (!this._authToken) {
             throw new Error("Auth token is empty");
 
