@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { AppSettings } from '../../shared/app.settings';
 import { Login } from './login';
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -14,10 +15,16 @@ export class LoginService {
 
     private loggedIn = false;
     private tokenUrl = AppSettings.TASKCAT_BASE + "token";
+    private AUTH_TOKEN_KEY = "auth_token";
+
+    private isLoggedInSource = new Subject<boolean>();
+
+    loggedInAnnounced = this.isLoggedInSource.asObservable();
 
     constructor(private http: Http, private _localStorage: LocalStorage) {
         this.loggedIn = false;
     }
+
 
     login(loginModel: Login) {
         let headers = new Headers();
@@ -42,6 +49,22 @@ export class LoginService {
             });
     }
 
+    logout() {
+        this._localStorage.remove(this.AUTH_TOKEN_KEY);
+        this.loggedIn = false;
+    }
+
+    announceLoggedIn(isLoggedIn: boolean) {
+        console.log("Announcing " + isLoggedIn);
+        this.isLoggedInSource.next(isLoggedIn);
+    }
+
+    public get isLoggedIn() {
+        this._checkAlreadyLoggedIn();
+        this.announceLoggedIn(this.loggedIn);
+        return this.loggedIn;
+    }
+
     private _extractAuthError(res: Response) {
         let error = res.json();
         let errorMsg = error.error_description || 'Server error';
@@ -58,15 +81,15 @@ export class LoginService {
             throw new Error("Invalid/blank auth data, Fatal Error");
         }
 
-        this._localStorage.setObject('auth_token', data);
+        this._localStorage.setObject(this.AUTH_TOKEN_KEY, data);
         return data;
     }
 
-    logout() {
-        this.loggedIn = false;
-    }
-
-    isLoggedIn() {
-        return this.loggedIn;
+    private _checkAlreadyLoggedIn() {
+        if (this._localStorage.getObject(this.AUTH_TOKEN_KEY)) {
+            // INFO: Refresh token usage might be good here
+            // Or we can automatically login every time ;)
+            this.loggedIn = true;
+        }
     }
 }

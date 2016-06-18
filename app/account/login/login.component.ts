@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, EventEmitter, Output } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { Router } from '@angular/router-deprecated';
 
@@ -12,7 +12,7 @@ import { NcShowPassword } from '../shared/nc-show-password.directive';
 
 import { AppSettings } from '../../shared/app.settings';
 
-type LoginStatus =
+export type LoginStatus =
     "PENDING"
     | "IN_PROGRESS"
     | "SUCCESS"
@@ -27,6 +27,7 @@ type LoginStatus =
     styleUrls: ['app/account/login/login.component.css']
 })
 export class LoginComponent {
+    @Output() onLoginCompleted = new EventEmitter<LoginStatus>();
 
     public loginForm: ControlGroup;
     public loginModel: Login;
@@ -59,6 +60,7 @@ export class LoginComponent {
             .subscribe((result) => {
                 this.loginStatus = "SUCCESS";
                 this.close();
+                this.onLoginCompleted.emit(this.loginStatus);
                 this.router.navigate(["Home"]);
             },
             (error) => {

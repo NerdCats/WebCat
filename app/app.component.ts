@@ -7,29 +7,17 @@ import { WrapHeaderComponent } from './wrapHeader/WrapHeader.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.component';
 import { LoginService } from './account/login/login.service'
-
+import { Routes } from './shared/router.config';
+import { SecureRouterOutlet } from './shared/secure-router-outlet.directive';
 
 @Component({
   selector: 'webcat',
   templateUrl: 'app/app.component.html',
-  directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent],
+  directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent, SecureRouterOutlet],
   providers: [ROUTER_PROVIDERS, Title, LoginService]
 })
 
-@RouteConfig([
-  {
-    path: '/',
-    name: 'Home',
-    component: WrapHeaderComponent,
-  },
-  {
-    path: '/confirm',
-    name: 'ConfirmEmail',
-    component: ConfirmEmailComponent,
-    useAsDefault: true
-  }
-])
-
+@RouteConfig(Routes)
 export class AppComponent {
   public isCollapsed: boolean = false;
 
