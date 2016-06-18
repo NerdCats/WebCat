@@ -1,7 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
+
 import { Router } from '@angular/router-deprecated';
+import { Observable } from 'rxjs/Observable';
+import { LocalStorage } from '../shared/local-storage'
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+
 import { OrderModel, OrderCartModel, PackageListModel } from '../shared/order-model';
 import { OrderService } from './order.service';
 
@@ -10,7 +14,7 @@ import { OrderService } from './order.service';
     selector: 'order',
     templateUrl: 'app/order/order.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, FORM_DIRECTIVES, CORE_DIRECTIVES],
-    providers: [OrderService],
+    providers: [OrderService, LocalStorage],
     styleUrls: ['app/order/order.component.css']
 })
 
@@ -19,12 +23,14 @@ export class OrderComponent{
     public orderModel: OrderModel;
     public packageListItem: PackageListModel;
     public isUpdating: boolean;
+    public orderCreationStatus: string = "NOT_SUMITTED";
 
-    public orderSubmittedMessage: string = "";
+    public orderResponseMessage: string = "";
 
     constructor(private formBuilder: FormBuilder,
         private orderService: OrderService,
-        private router: Router) {
+        private router: Router,
+        private _localStorage: LocalStorage) {
         this.initiateForm();
         this.orderModel = new OrderModel();
         this.orderModel.Type = "Delivery";
@@ -33,9 +39,10 @@ export class OrderComponent{
         this.orderModel.OrderCart.PackageList = [];
         this.orderModel.OrderCart.PackageList.push(new PackageListModel());
         //FIXME: this value will be replaced by the userId of the currently logged in user's ID
-        this.orderModel.UserId = "575f9647b477aa9971d8041a";
+        this.orderModel.UserId = JSON.parse(this._localStorage.get('auth_token')).userId;
         this.packageListItem = new PackageListModel();
         this.isUpdating = false;
+
     }
 
     initiateForm(){
@@ -53,6 +60,18 @@ export class OrderComponent{
 
     onSubmit(){
         console.log(JSON.stringify(this.orderModel));
+        this.orderCreationStatus = "IN_PROGRESS";
+        this.orderService.createOrder(this.orderModel)
+            .subscribe((result)=>{
+                this.orderCreationStatus = "SUCCESS";
+                alert("success");
+            },
+            (error) => {
+                this.orderResponseMessage = error;
+                console.log(error);
+                this.orderCreationStatus = 'FAILED';
+            });
+
     }
 
     addMoreItem(){

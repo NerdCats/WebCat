@@ -15,7 +15,7 @@ export class DefaultAddress {
     }
 }
 
-class GeoPoint{
+export class GeoPoint{
     public type:string;
     public coordinates: number[];
 }
