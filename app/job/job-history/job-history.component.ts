@@ -3,7 +3,8 @@ import {Observable} from 'rxjs/Observable';
 import {HTTP_PROVIDERS } from '@angular/http';
 
 import {JobService} from '../shared/job.service';
-import { ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import {PageEnvelope} from '../../shared/pagination';
 
 @Component({
     selector: 'job-history',
@@ -16,8 +17,7 @@ export class JobHistoryComponent {
 
     constructor(private jobService: JobService) {
         this.jobService.getHistory()
-            .subscribe((job)=>{
-
+            .subscribe((job) => {
             })
     }
 }

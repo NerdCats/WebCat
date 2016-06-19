@@ -7,8 +7,7 @@ export interface Pagination {
     Returned: number
 }
 
-export interface PageEnvelope {
+export interface PageEnvelope<T>  {
     pagination: Pagination;
-    data: Array<any>
+    data: Array<T>
 }
-

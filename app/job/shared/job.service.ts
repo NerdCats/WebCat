@@ -6,7 +6,10 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { AppSettings } from '../../shared/app.settings';
+import {PageEnvelope} from '../../shared/pagination';
+
+import {AppSettings} from '../../shared/app.settings';
+import {Job} from '../shared/job';
 
 @Injectable()
 export class JobService {
@@ -14,7 +17,19 @@ export class JobService {
 
     private jobUrl = AppSettings.TASKCAT_API_BASE + 'job';
 
-    getHistory() {
-        return this.shttp.secureGet(this.jobUrl);
+    getHistory(): Observable<PageEnvelope<Job>> {
+        return this.shttp.secureGet(this.jobUrl)
+            .map((res: Response) => {
+                if (res.status < 200 || res.status >= 300) {
+                    throw new Error('Response status: ' + res.status);
+                }
+                var json = res ? res.json() || {} : {};
+                return Job.fromJSON(json);
+            })
+            .catch(error => {
+                let errMsg = error.message || 'Exception when fetching job history';
+                console.error(errMsg); // log to console instead
+                return Observable.throw(errMsg);
+            });
     }
 }
