@@ -11,6 +11,7 @@ import { ROUTER_PROVIDERS} from '@angular/router-deprecated';
     providers: [JobService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
 export class JobHistoryComponent {
+
     ngOnInit() { }
 
     constructor(private jobService: JobService) {
