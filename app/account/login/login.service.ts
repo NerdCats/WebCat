@@ -55,7 +55,6 @@ export class LoginService {
     }
 
     announceLoggedIn(isLoggedIn: boolean) {
-        console.log("Announcing " + isLoggedIn);
         this.isLoggedInSource.next(isLoggedIn);
     }
 

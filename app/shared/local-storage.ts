@@ -1,5 +1,7 @@
 import {provide} from '@angular/core';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class LocalStorage {
     public localStorage: any;
 
