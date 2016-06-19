@@ -18,7 +18,7 @@ export class JobService {
     private jobUrl = AppSettings.TASKCAT_API_BASE + 'job';
 
     getHistory(): Observable<PageEnvelope<Job>> {
-        return this.shttp.secureGet(this.jobUrl)
+        return this.shttp.secureGet(this.jobUrl + '/odata')
             .map((res: Response) => {
                 if (res.status < 200 || res.status >= 300) {
                     throw new Error('Response status: ' + res.status);
