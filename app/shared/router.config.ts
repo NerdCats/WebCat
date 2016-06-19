@@ -1,5 +1,6 @@
 import {WrapHeaderComponent} from '../wrapHeader/wrapHeader.component';
 import {ConfirmEmailComponent} from '../account/confirm-email/confirm-email.component';
+import { OrderComponent } from '../order/order.component';
 
 export const Routes = [
     {
