@@ -22,7 +22,6 @@ export class AccountService {
     private getRequestBody(registration: UserRegistrationBase): string {
         if (registration.Type == UserTypes.TYPE_USER) {
             var data = registration as UserRegistration;
-            console.log(data);
             return JSON.stringify(registration as UserRegistration);
         }
         else if (registration.Type == UserTypes.TYPE_ENTERPRISE) {

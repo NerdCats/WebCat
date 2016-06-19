@@ -1,21 +1,23 @@
 import {Injectable} from '@angular/core';
-import {Http, Request, RequestOptionsArgs, Response, RequestOptions, ConnectionBackend, Headers} from '@angular/http';
-import {ROUTER_PROVIDERS, Router} from '@angular/router';
+import {Http, Request, XHRBackend, RequestOptionsArgs, Response, RequestOptions, ConnectionBackend, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {LocalStorage} from '../shared/local-storage'
+import {LocalStorage, LOCAL_STORAGE_PROVIDERS} from '../shared/local-storage';
+import { provide } from '@angular/core';
+import { Router, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 @Injectable()
 export class SecureHttp extends Http {
     private _authToken: string;
+    private localStorage: LocalStorage;
     /**
      * SecureHttp Constructor
      */
-    constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private _router: Router, private _localStorage: LocalStorage) {
+    constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private _router: Router, _localStorage: LocalStorage) {
         super(backend, defaultOptions);
-        this._authToken = this._localStorage.get('auth_token');
+        this.localStorage = _localStorage;
+        this._authToken = this.localStorage.getObject('auth_token');
         if (!this._authToken) {
             throw new Error("Auth token is empty");
-
         }
     }
 
@@ -35,6 +37,10 @@ export class SecureHttp extends Http {
         return this._intercept(super.delete(url, this._getRequestOptionArgs(options)));
     }
 
+    secureGet(url: string, options?: RequestOptionsArgs): Observable<Response> {
+        return this._intercept(super.get(url, this._getRequestOptionArgs(options)));
+    }
+
 
     private _getRequestOptionArgs(options?: RequestOptionsArgs): RequestOptionsArgs {
         if (!options) {
@@ -44,7 +50,7 @@ export class SecureHttp extends Http {
             options.headers = new Headers();
         }
         options.headers.append('Content-Type', 'application/json');
-        options.headers.append("Authorization", "bearer " + this._authToken);
+        options.headers.append("Authorization", "bearer " + this._authToken["access_token"]);
 
         return options;
     }
@@ -54,7 +60,7 @@ export class SecureHttp extends Http {
     private _intercept(observable: Observable<Response>): Observable<Response> {
         return observable.catch((err, source) => {
             if (err.status == 401) {
-                this._router.navigate(['/login']);
+                this._router.navigate(['/Home']);
                 return Observable.empty();
             } else {
                 return Observable.throw(err);
@@ -62,3 +68,11 @@ export class SecureHttp extends Http {
         });
     }
 }
+
+export const SECURE_HTTP_PROVIDERS: any[] = [
+    ROUTER_PROVIDERS,
+    provide(SecureHttp, {
+        useFactory: (connBackend: XHRBackend, requestOptions: RequestOptions, router: Router, localStorage: LocalStorage) => new SecureHttp(connBackend, requestOptions, router, localStorage),
+        deps: [XHRBackend, RequestOptions, Router, LocalStorage]
+    })
+];

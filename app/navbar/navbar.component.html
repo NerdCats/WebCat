@@ -12,20 +12,9 @@
       </a>
     </div>
     <div class="navbar-collapse collapse" [collapse]="isCollapsed">
-      <ul *ngIf="State=='PUBLIC'" class="nav navbar-nav navbar-right">
-        <li>
-          <a (click)="showSignUpComponent()">Sign Up</a>
-        </li>
-        <li>
-          <a (click)="showLoginComponent()">Log In</a>
-        </li>
-      </ul>
-      <ul *ngIf="State=='SECURED'" class="nav navbar-nav navbar-right">
-        <li>
-          <a>{{UserNameString}}</a>
-        </li>
-        <li>
-          <a (click)="logout()">Log Out</a>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngFor="let elm of navBarElementDict[State]">
+          <a (click)="elm.Event()">{{elm.Title}}</a>
         </li>
       </ul>
     </div>
