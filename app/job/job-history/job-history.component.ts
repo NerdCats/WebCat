@@ -5,6 +5,7 @@ import {HTTP_PROVIDERS } from '@angular/http';
 import {JobService} from '../shared/job.service';
 import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {PageEnvelope} from '../../shared/pagination';
+import {Job} from '../shared/job';
 
 @Component({
     selector: 'job-history',
@@ -12,12 +13,15 @@ import {PageEnvelope} from '../../shared/pagination';
     providers: [JobService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
 export class JobHistoryComponent {
-
-    ngOnInit() { }
-
+    jobs: Array<Job>;
     constructor(private jobService: JobService) {
+
+    }
+
+    ngOnInit() {
         this.jobService.getHistory()
-            .subscribe((job) => {
-            })
+            .subscribe((pagedJob) => {
+                this.jobs = pagedJob.data;
+            });
     }
 }

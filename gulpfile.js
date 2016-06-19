@@ -63,7 +63,10 @@ gulp.task('copy:libs', function () {
         '@angular/**',
         'moment/moment.js',
         'ng2-bootstrap/**',
-        'ng2-bs3-modal/**'
+        'ng2-bs3-modal/**',
+        'rdash-ui/dist/css/rdash.css',
+        'font-awesome/css/font-awesome.css',
+        'font-awesome/fonts/**'
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("dist/lib"));
 });

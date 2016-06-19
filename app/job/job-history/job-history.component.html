@@ -1,13 +1,14 @@
 <div class="table-responsive">
     <table class="table">
         <tbody>
-
-        <tr *ngFor="#server of model">
-            <td>{{server.name}}</td>
-            <td>{{server.ip}}</td>
+        <tr *ngFor="let job of jobs">
+            <td>{{job.HRID}}</td>
+            <td>{{job.Name}}</td>
             <td>
-                <span class="{{server.tooltipcls}}"><i
-                        class="fa {{server.icon}}"></i></span></td>
+                <span class="text-success">
+                    <i class="fa fa-check" title="done"></i>
+                </span>
+            </td>
             <!--tooltip="{{serverItem.tooltip}}"-->
         </tr>
 
