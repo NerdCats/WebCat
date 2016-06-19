@@ -3,7 +3,7 @@
 
     <div class="form-group">
       <div class="col-md-7 col-sm-7">
-        <h1 class="control-label">Create a Delivery Order</h1>
+        <h1 class="control-label">{{formTitle}}</h1>
         <br>
         <div *ngIf="orderCreationStatus =='FAILED'" class="form-group">
             <label class="col-md-8 control-label" for="error"></label>
@@ -16,7 +16,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="pickup-address">Pickup Address</label>
       <div class="col-md-4">
-        <textarea class="form-control" id="pickup-address" name="pickup-address" [(ngModel)]="orderModel.From.AddressLine1" [ngFormControl]="orderForm.controls['pickupAddress']"></textarea>
+        <textarea class="form-control" id="pickup-address" name="pickup-address" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.From.AddressLine1" [ngFormControl]="orderForm.controls['pickupAddress']"></textarea>
       </div>
     </div>
 
@@ -24,7 +24,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="select-pick-up-area">Pickup Area</label>
       <div class="col-md-4">
-        <select id="select-pick-up-area" name="select-pick-up-area" class="form-control" [(ngModel)]="orderModel.From.Locality">
+        <select id="select-pick-up-area" name="select-pick-up-area" class="form-control" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.From.Locality">
           <option *ngFor="let area of areas" [value]="area">{{area}}</option>
         </select>
       </div>
@@ -34,7 +34,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="delivery-address">Delivery Address</label>
       <div class="col-md-4">
-        <textarea class="form-control" id="delivery-address" name="delivery-address" [(ngModel)]="orderModel.To.AddressLine1" [ngFormControl]="orderForm.controls['deliveryAddress']"></textarea>
+        <textarea class="form-control" id="delivery-address" name="delivery-address" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.To.AddressLine1" [ngFormControl]="orderForm.controls['deliveryAddress']"></textarea>
       </div>
     </div>
 
@@ -42,7 +42,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="delivery-area">Delivery Area</label>
       <div class="col-md-4">
-        <select id="delivery-area" name="delivery-area" class="form-control" [(ngModel)]="orderModel.To.Locality">
+        <select id="delivery-area" name="delivery-area" class="form-control" [disabled]="orderCreationStatus=='IN_PROGRESS'"[(ngModel)]="orderModel.To.Locality">
           <option *ngFor="let area of areas" [value]="area">{{area}}</option>
         </select>
       </div>
@@ -75,13 +75,7 @@
         <button class="btn btn-primary" (click)="addMoreItem()">Add</button>
       </modal-footer>
     </modal>
-    <!-- Textarea -->
 
-    <div class="form-group">
-      <div class="col-md-8 control-label">
-        <button id="add-more" name="add-more" class="btn btn-default" (click)="open()">Add Item</button>
-      </div>
-    </div>
     <br>
     <div class="form-group">
       <label for="" class="col-md-4 control-label">Package List</label>
@@ -110,13 +104,18 @@
         </table>
       </div>
     </div>
-
+    <br>
+    <div class="form-group">
+      <div class="col-md-8 control-label">
+        <button id="add-more" name="add-more" class="btn btn-important" [disabled]="orderCreationStatus=='IN_PROGRESS'" (click)="open()">Add Item</button>
+      </div>
+    </div>
     <br>
     <!-- Textarea -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="description">Package Description</label>
       <div class="col-md-4">
-        <textarea class="form-control" id="description" name="description" [(ngModel)]="orderModel.Description"></textarea>
+        <textarea class="form-control" id="description" name="description" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.Description"></textarea>
       </div>
     </div>
 
@@ -124,7 +123,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="note-to-delivery-man">Note To Delivery Man</label>
       <div class="col-md-4">
-        <textarea class="form-control" id="note-to-delivery-man" name="note-to-delivery-man" [(ngModel)]="orderModel.NoteToDeliveryMan"></textarea>
+        <textarea class="form-control" id="note-to-delivery-man" name="note-to-delivery-man" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.NoteToDeliveryMan"></textarea>
       </div>
     </div>
 
@@ -132,7 +131,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="payment-method">Payment Method</label>
       <div class="col-md-4">
-        <select id="payment-method" name="payment-method" class="form-control" [(ngModel)]="orderModel.PaymentMethod" [ngFormControl]="orderForm.controls['paymentMethod']">
+        <select id="payment-method" name="payment-method" class="form-control" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.PaymentMethod" [ngFormControl]="orderForm.controls['paymentMethod']">
           <option value="CashOnDelivery">Cash On Delivery</option>
         </select>
       </div>
@@ -142,7 +141,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="submit"></label>
       <div class="col-md-4">
-        <button id="submit" name="submit" class="btn btn-primary" (click)="onSubmit()">
+        <button id="submit" name="submit" class="btn btn-primary" [disabled]="!orderForm.valid || orderCreationStatus=='IN_PROGRESS'" (click)="onSubmit()">
            <span *ngIf="orderCreationStatus=='IN_PROGRESS'" class="glyphicon glyphicon-repeat fast-right-spinner"></span>
             Create Order
         </button>

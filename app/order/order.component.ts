@@ -55,19 +55,18 @@ export class OrderComponent{
             "packageDescription": [''],
             "noteToDeliveryMan": [''],
             "paymentMethod": ['CashOnDelivery', Validators.required],
-            "item": ["", Validators.required],
-            "quantity": [0, Validators.required]
+            "item": [""],
+            "quantity": [0]
         };
         this.orderForm = this.formBuilder.group(orderControls);
     }
 
     onSubmit(){
-        console.log(JSON.stringify(this.orderModel));
         this.orderCreationStatus = 'IN_PROGRESS';
         this.orderService.createOrder(this.orderModel)
             .subscribe((result)=>{
                 this.orderCreationStatus = 'SUCCESS';
-                alert("success");
+                this.resetForm();
             },
             (error) => {
                 this.orderResponseMessage = error;
@@ -115,5 +114,9 @@ export class OrderComponent{
 
     onModalDismissed() {
 
+    }
+
+    resetForm(){
+        this.orderModel = new OrderModel();
     }
 }
