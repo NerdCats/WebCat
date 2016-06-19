@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { AppSettings } from '../shared/app.settings';
-import { LocalStorage } from '../shared/local-storage'
+import { SecureHttp } from '../shared/secure-http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -13,22 +13,15 @@ import { OrderModel } from '../shared/order-model'
 @Injectable()
 export class OrderService {
     private url = AppSettings.TASKCAT_API_BASE;
-    private _authToken: Object; // FIXME:
-                                // couldn't make use of secureHttp service written by
-                                // Prateek vai, need to come back and fix it later
 
-    constructor(private http: Http, private _localStorage: LocalStorage) {
-        this._authToken = JSON.parse(this._localStorage.get('auth_token'));
+    constructor(private http: SecureHttp) {
     }
 
     createOrder(order: OrderModel) {
         let orderPostUrl = this.url + "Order/";
         let orderJson = JSON.stringify(order);
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append("Authorization", "bearer " + this._authToken.access_token);
 
-        return this.http.post(orderPostUrl, orderJson, { headers })
+        return this.http.securePost(orderPostUrl, orderJson)
             .map((res: Response) => {
                 if (res.status < 200 || res.status >= 300) {
                     throw new Error("Response status: " + res.status);
@@ -36,6 +29,7 @@ export class OrderService {
                 return res;
             })
             .catch((error: Response) => {
+                console.log(error)
                 return  this._extractOrderCreationError(error);
             });
     }

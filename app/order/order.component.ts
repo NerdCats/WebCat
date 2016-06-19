@@ -40,8 +40,6 @@ export class OrderComponent{
         this.orderModel.PayloadType = "default";
 
         this.orderModel.OrderCart.PackageList = [];
-        this.orderModel.OrderCart.PackageList.push(new PackageListModel());
-        //FIXME: this value will be replaced by the userId of the currently logged in user's ID
         this.orderModel.UserId = JSON.parse(this._localStorage.get('auth_token')).userId;
         this.packageListItem = new PackageListModel();
         this.isUpdating = false;
@@ -54,9 +52,11 @@ export class OrderComponent{
             "pickupArea": [''],
             "deliveryAddress": ['', Validators.required],
             "deliveryArea": [''],
-            "packageDescription": ['', Validators.required],
+            "packageDescription": [''],
             "noteToDeliveryMan": [''],
-            "paymentMethod": ['CashOnDelivery', Validators.required]
+            "paymentMethod": ['CashOnDelivery', Validators.required],
+            "item": ["", Validators.required],
+            "quantity": [0, Validators.required]
         };
         this.orderForm = this.formBuilder.group(orderControls);
     }

@@ -34,7 +34,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="delivery-address">Delivery Address</label>
       <div class="col-md-4">
-        <textarea class="form-control" id="delivery-address" name="delivery-address" [(ngModel)]="orderModel.To.AddressLine1"></textarea>
+        <textarea class="form-control" id="delivery-address" name="delivery-address" [(ngModel)]="orderModel.To.AddressLine1" [ngFormControl]="orderForm.controls['deliveryAddress']"></textarea>
       </div>
     </div>
 
@@ -58,12 +58,12 @@
           <div class="form-group">
             <label class="control-label" for="item">Item Name</label>
             <div>
-              <input class="form-control" id="item" name="item" [(ngModel)]="packageListItem.Item">
+              <input class="form-control" id="item" name="item" [(ngModel)]="packageListItem.Item" [ngFormControl]="orderForm.controls['item']">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label" for="item">Quantity</label>
-            <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="packageListItem.Quantity">
+            <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="packageListItem.Quantity" [ngFormControl]="orderForm.controls['quantity']">
           </div>
           <div class="form-group">
             <label class="control-label" for="item">Price</label>
@@ -102,9 +102,9 @@
               <td class="wrap">{{item.Item}}</td>
               <td>{{item.Quantity}}</td>
               <td>{{item.Price}}</td>
-              <td>{{item.Price * item.Quantity}}</td>
-              <button class="btn btn-warning" (click)="editItem(item)">Edit</button>
-              <button class="btn btn-danger" (click)="removeItem(i)">Remove</button>
+              <td>{{item.Price * item.Quantity || ""}}</td>
+              <td><button class="btn btn-link" (click)="editItem(item)">Edit</button></td>
+              <td><button class="btn btn-link" (click)="removeItem(i)">Remove</button></td>
             </tr>
           </tbody>
         </table>
@@ -132,7 +132,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="payment-method">Payment Method</label>
       <div class="col-md-4">
-        <select id="payment-method" name="payment-method" class="form-control" [(ngModel)]="orderModel.PaymentMethod">
+        <select id="payment-method" name="payment-method" class="form-control" [(ngModel)]="orderModel.PaymentMethod" [ngFormControl]="orderForm.controls['paymentMethod']">
           <option value="CashOnDelivery">Cash On Delivery</option>
         </select>
       </div>
