@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {HTTP_PROVIDERS } from '@angular/http';
 
@@ -12,16 +12,22 @@ import {Job} from '../shared/job';
     templateUrl: 'app/job/job-history/job-history.component.html',
     providers: [JobService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
-export class JobHistoryComponent {
-    jobs: Array<Job>;
-    constructor(private jobService: JobService) {
+export class JobHistoryComponent implements OnInit {
+    jobs: Array<any> = new Array<any>();
 
+    constructor(private jobService: JobService) {
     }
 
     ngOnInit() {
+        this.getJobs();
+    }
+
+    getJobs() {
+        this.jobs = new Array<any>();
         this.jobService.getHistory()
             .subscribe((pagedJob) => {
                 this.jobs = pagedJob.data;
             });
     }
 }
+
