@@ -16,6 +16,8 @@ export class JobHistoryComponent {
 
     constructor(private jobService: JobService) {
         this.jobService.getHistory()
-            .subscribe(x => console.log(x));
+            .subscribe((job)=>{
+
+            })
     }
 }
