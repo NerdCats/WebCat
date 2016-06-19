@@ -8,4 +8,14 @@ export class DefaultAddress {
     public City: string;
     public State: string;
     public Locality: string;
+    public Point: GeoPoint;
+    constructor(){
+        this.Point = new GeoPoint();
+        this.City = "Dhaka";
+    }
+}
+
+export class GeoPoint{
+    public type:string;
+    public coordinates: number[];
 }
