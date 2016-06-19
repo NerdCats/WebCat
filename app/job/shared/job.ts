@@ -46,7 +46,9 @@ export class Job {
     static fromJSON(json: IJobJson) {
         let job = Object.create(Job.prototype);
         return Object.assign(job, json, {
-            CreateTime: new Date(json.CreateTime)
+            CreateTime: new Date(json.CreateTime),
+            ModifiedTime: new Date(json.ModifiedTime),
+            PreferredDeliveryTime: new Date(json.PreferredDeliveryTime)
         });
     }
 }
