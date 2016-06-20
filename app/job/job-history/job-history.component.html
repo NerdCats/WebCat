@@ -15,11 +15,24 @@
         <div class="table-responsive">
             <table class="table">
                 <tbody>
+                    <tr>
+                        <th>HRID</th>
+                        <th>Name</th>
+                        <th>State</th>
+                        <th>User</th>
+                        <th>Payment Method</th>
+                        <th>Payment Status</th>
+                    </tr>
                     <tr *ngFor="let job of jobs">
                         <td>{{job.HRID}}</td>
                         <td>{{job.Name}}</td>
                         <td>
                             <span [ngClass]="setJobStatusLabelClass(job.State)">{{job.State}}</span>
+                        </td>
+                        <td>{{job.User.UserName}}</td>
+                        <td>{{job.PaymentMethod}}</td>
+                        <td>
+                            <span [ngClass]="setPaymentStatusLabelClass(job.PaymentStatus)">{{job.PaymentStatus | uppercase}}</span>
                         </td>
                     </tr>
                 </tbody>

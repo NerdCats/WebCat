@@ -50,4 +50,23 @@ export class JobHistoryComponent implements OnInit {
                 break;
         }
     }
+
+    setPaymentStatusLabelClass(state: string) {
+        switch (state) {
+            case "Pending":
+                return "label label-primary";
+            case "Authorized":
+                return "label label-info";
+            case "Paid":
+                return "label label-success";
+            case "PartiallyRefunded":
+                return "label label-warning";
+            case "Refunded":
+                return "label label-danger";
+            case "Voided":
+                return "label label-default";
+            default:
+                break;
+        }
+    }
 }
