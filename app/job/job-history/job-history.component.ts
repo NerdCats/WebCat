@@ -4,7 +4,7 @@ import {HTTP_PROVIDERS } from '@angular/http';
 
 import {JobService} from '../shared/job.service';
 import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {PageEnvelope} from '../../shared/pagination';
+import {PageEnvelope, Pagination} from '../../shared/pagination';
 import {Job, JobState} from '../shared/job';
 
 import {ComponentServiceStatus} from '../../shared/component-service-status';
@@ -15,7 +15,7 @@ import {ComponentServiceStatus} from '../../shared/component-service-status';
     providers: [JobService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
 export class JobHistoryComponent implements OnInit {
-    jobs: Array<any> = new Array<any>();
+    jobs: Array<Job> = new Array<Job>();
     status: ComponentServiceStatus = "IN_PROGRESS";
 
     constructor(private jobService: JobService) {
@@ -26,7 +26,7 @@ export class JobHistoryComponent implements OnInit {
     }
 
     getJobs() {
-        this.jobs = new Array<any>();
+        this.jobs = new Array<Job>();
         this.jobService.getHistory()
             .subscribe((pagedJob) => {
                 this.status = "SUCCESSFUL";

@@ -46,13 +46,14 @@ export class Job {
         });
     }
 
-    static fromJSON(json: IJobJson) {
+    static fromJSON(json: IJobJson) : Job {
         let job = Object.create(Job.prototype);
-        return Object.assign(job, json, {
+        var assignedJob =  Object.assign(job, json, {
             CreateTime: new Date(json.CreateTime),
             ModifiedTime: new Date(json.ModifiedTime),
             PreferredDeliveryTime: new Date(json.PreferredDeliveryTime)
         });
+        return assignedJob as Job;
     }
 }
 

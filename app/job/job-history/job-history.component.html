@@ -23,6 +23,7 @@
                         <th>Payment Method</th>
                         <th>Payment Status</th>
                         <th>Order Total</th>
+                        <th>Created</th>
                     </tr>
                     <tr *ngFor="let job of jobs">
                         <td>{{job.HRID}}</td>
@@ -37,6 +38,9 @@
                         </td>
                         <td>
                             {{job.Order.OrderCart.TotalToPay}}
+                        </td>
+                        <td>
+                            {{job.CreateTime | date:"EEE d MMM y,h:m TT"}}
                         </td>
                     </tr>
                 </tbody>
