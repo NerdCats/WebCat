@@ -1,9 +1,11 @@
+import {UserModel} from '../../shared/model/user-model';
+
 export interface IJobJson {
     Id: string;
     HRID: string;
     Name: string;
     Order: Object; // INFO: Would come from #36
-    User: Object; // INFO: Not sure, is this written somewhere, only expand if need be
+    User: UserModel;
     JobServedBy: Object; // Same as the previous one
     Tasks: Array<Object>;
     State: string; // INFO: Potential place for a string literal
@@ -22,7 +24,7 @@ export class Job {
     HRID: string;
     Name: string;
     Order: Object; // INFO: Would come from #36
-    User: Object; // INFO: Not sure, is this written somewhere, only expand if need be
+    User: UserModel;
     JobServedBy: Object; // Same as the previous one
     Tasks: Array<Object>;
     State: string; // INFO: Potential place for a string literal
