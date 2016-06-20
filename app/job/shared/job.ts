@@ -1,10 +1,11 @@
 import {UserModel} from '../../shared/model/user-model';
+import {OrderModel} from '../../shared/model/order-model';
 
 export interface IJobJson {
     Id: string;
     HRID: string;
     Name: string;
-    Order: Object; // INFO: Would come from #36
+    Order: OrderModel; // INFO: Would come from #36
     User: UserModel;
     JobServedBy: Object; // Same as the previous one
     Tasks: Array<Object>;
@@ -23,7 +24,7 @@ export class Job {
     Id: string;
     HRID: string;
     Name: string;
-    Order: Object; // INFO: Would come from #36
+    Order: OrderModel; // INFO: Would come from #36
     User: UserModel;
     JobServedBy: Object; // Same as the previous one
     Tasks: Array<Object>;
