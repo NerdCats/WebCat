@@ -142,7 +142,7 @@
       <label class="col-md-4 control-label" for="submit"></label>
       <div class="col-md-4">
         <button id="submit" name="submit" class="btn btn-primary" [disabled]="!orderForm.valid || orderCreationStatus=='IN_PROGRESS'" (click)="onSubmit()">
-           <span *ngIf="orderCreationStatus=='IN_PROGRESS'" class="glyphicon glyphicon-repeat fast-right-spinner"></span>
+           <span *ngIf="orderCreationStatus=='IN_PROGRESS'" class="fa fa-refresh fa-spin"></span>
             Create Order
         </button>
       </div>
