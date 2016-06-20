@@ -80,6 +80,10 @@ export class NavbarComponent {
         this.loginComponent.open();
     }
 
+    navigateToDashboard() {
+        this.router.navigate(["Job"]);
+    }
+
     private _initiatePublicNavElements() {
         this._publicNavElements = new Array<NavbarElement>();
         this._publicNavElements.push({
@@ -98,7 +102,7 @@ export class NavbarComponent {
         this._secureNavElements = new Array<NavbarElement>();
         this._secureNavElements.push({
             Title: "Dashboard",
-            Event: () => { console.log("Not Implemented Yet"); }
+            Event: () => { this.navigateToDashboard(); }
         });
 
         this._secureNavElements.push({

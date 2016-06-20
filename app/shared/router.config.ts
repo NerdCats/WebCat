@@ -11,15 +11,14 @@ export const Routes = [
         path: '/',
         name: 'Home',
         component: WrapHeaderComponent,
+        useAsDefault: true
     },
     {
         path: '/confirmEmail',
         name: 'ConfirmEmail',
-        component: ConfirmEmailComponent,
-        useAsDefault: true
+        component: ConfirmEmailComponent
     },
     {
-
         path: '/order',
         name: 'Order',
         component: OrderComponent,
@@ -28,7 +27,6 @@ export const Routes = [
         path: '/job',
         name: 'Job',
         component: JobHistoryComponent
-
     }
 ]
 

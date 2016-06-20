@@ -1,16 +1,26 @@
-<div class="table-responsive">
-    <table class="table">
-        <tbody>
-        <tr *ngFor="let job of jobs">
-            <td>{{job.HRID}}</td>
-            <td>{{job.Name}}</td>
-            <td>
-                <span class="text-success">
-                    <i class="fa fa-check" title="done"></i>
-                </span>
-            </td>
-        </tr>
-
-        </tbody>
-    </table>
+<div class="widget">
+    <div class="widget-header">
+        <i class="fa fa-tasks"></i>
+        Job History
+        <div class="pull-right">
+            <a href="#">Manage</a>
+        </div>
+    </div>
+    <div *ngIf="status=='IN_PROGRESS'">
+        <div class="loading">
+            <div class="double-bounce1"></div>
+        </div>
+    </div>
+    <div class="widget-body medium no-padding" *ngIf="status=='SUCCESSFUL'">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr *ngFor="let job of jobs">
+                        <td>{{job.HRID}}</td>
+                        <td>{{job.Name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
