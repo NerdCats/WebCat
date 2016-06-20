@@ -11,6 +11,7 @@ export class DefaultAddress {
     public Point: GeoPoint;
     constructor(){
         this.Point = new GeoPoint();
+        // INFO: This is a blatant hack
         this.City = "Dhaka";
     }
 }
