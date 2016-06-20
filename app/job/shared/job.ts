@@ -8,7 +8,7 @@ export interface IJobJson {
     User: UserModel;
     JobServedBy: Object; // Same as the previous one
     Tasks: Array<Object>;
-    State: string; // INFO: Potential place for a string literal
+    State: JobState; // INFO: Potential place for a string literal
     CreateTime: string;
     ModifiedTime: string;
     PreferredDeliveryTime: string;
@@ -27,7 +27,7 @@ export class Job {
     User: UserModel;
     JobServedBy: Object; // Same as the previous one
     Tasks: Array<Object>;
-    State: string; // INFO: Potential place for a string literal
+    State: JobState; // INFO: Potential place for a string literal
     CreateTime: Date;
     ModifiedTime: Date;
     PreferredDeliveryTime: Date;
@@ -55,3 +55,4 @@ export class Job {
     }
 }
 
+export type JobState = "ENQUEUED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";

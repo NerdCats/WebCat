@@ -5,7 +5,7 @@ import {HTTP_PROVIDERS } from '@angular/http';
 import {JobService} from '../shared/job.service';
 import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {PageEnvelope} from '../../shared/pagination';
-import {Job} from '../shared/job';
+import {Job, JobState} from '../shared/job';
 
 import {ComponentServiceStatus} from '../../shared/component-service-status';
 
@@ -31,8 +31,23 @@ export class JobHistoryComponent implements OnInit {
             .subscribe((pagedJob) => {
                 this.status = "SUCCESSFUL";
                 this.jobs = pagedJob.data;
-            }, (error)=>{
+            }, (error) => {
                 this.status = "FAILED";
             });
+    }
+
+    setJobStatusLabelClass(state: string) {
+        switch (state) {
+            case "COMPLETED":
+                return "label label-success";
+            case "ENQUEUED":
+                return "label label-primary";
+            case "IN_PROGRESS":
+                return "label label-info";
+            case "CANCELLED":
+                return "label label-danger";
+            default:
+                break;
+        }
     }
 }
