@@ -20,7 +20,6 @@ import { OrderService } from './order.service';
 })
 
 export class OrderComponent{
-    public orderForm: ControlGroup;
     public orderModel: OrderModel;
     public packageListItem: PackageListModel;
     public isUpdating: boolean;
@@ -28,13 +27,14 @@ export class OrderComponent{
 
     public orderResponseMessage: string = "";
     public areas: Array<string>;
+    public itemAddOrUpdateText: string = "Add";
 
     constructor(private formBuilder: FormBuilder,
         private orderService: OrderService,
         private router: Router,
         private _localStorage: LocalStorage,
         private localityService: LocalityService) {
-        this.initiateForm();
+
         this.orderModel = new OrderModel();
         this.orderModel.Type = "Delivery";
         this.orderModel.PayloadType = "default";
@@ -46,20 +46,6 @@ export class OrderComponent{
         this.areas = this.localityService.getLocalities();
     }
 
-    initiateForm(){
-        let orderControls = {
-            "pickupAddress": ['', Validators.required],
-            "pickupArea": [''],
-            "deliveryAddress": ['', Validators.required],
-            "deliveryArea": [''],
-            "packageDescription": [''],
-            "noteToDeliveryMan": [''],
-            "paymentMethod": ['CashOnDelivery', Validators.required],
-            "item": [""],
-            "quantity": [0]
-        };
-        this.orderForm = this.formBuilder.group(orderControls);
-    }
 
     onSubmit(){
         this.orderCreationStatus = 'IN_PROGRESS';
@@ -76,7 +62,7 @@ export class OrderComponent{
 
     }
 
-    addMoreItem(){
+    addOrUpdateItem(){
         if (this.isUpdating) {
             this.isUpdating = !this.isUpdating;
         } else {
@@ -92,8 +78,14 @@ export class OrderComponent{
     }
 
     editItem(item: PackageListModel){
+        this.itemAddOrUpdateText = "Update";
         this.isUpdating = true;
         this.packageListItem = item;
+        this.modal.open();
+    }
+
+    addItem(){
+        this.itemAddOrUpdateText = "Add";
         this.open();
     }
 
