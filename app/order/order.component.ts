@@ -89,6 +89,11 @@ export class OrderComponent{
         this.open();
     }
 
+    cancelModal(){
+        this.packageListItem = new PackageListModel();
+        this.close();
+    }
+
     @ViewChild('itemModal')
     modal: ModalComponent;
 
