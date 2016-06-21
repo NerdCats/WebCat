@@ -34,14 +34,7 @@ export class OrderComponent{
         private router: Router,
         private _localStorage: LocalStorage,
         private localityService: LocalityService) {
-
-        this.orderModel = new OrderModel();
-        this.orderModel.Type = "Delivery";
-        this.orderModel.PayloadType = "default";
-
-        this.orderModel.OrderCart.PackageList = [];
-        this.orderModel.UserId = JSON.parse(this._localStorage.get('auth_token')).userId;
-        this.packageListItem = new PackageListModel();
+        this.initiateOrderModel();
         this.isUpdating = false;
         this.areas = this.localityService.getLocalities();
     }
@@ -52,6 +45,7 @@ export class OrderComponent{
         this.orderService.createOrder(this.orderModel)
             .subscribe((result)=>{
                 this.orderCreationStatus = 'SUCCESS';
+                this.orderModel = new OrderModel();
                 this.resetForm();
             },
             (error) => {
@@ -70,6 +64,16 @@ export class OrderComponent{
         }
         this.packageListItem = new PackageListModel();
         this.close();
+    }
+
+    initiateOrderModel(){
+        this.orderModel = new OrderModel();
+        this.orderModel.Type = "Delivery";
+        this.orderModel.PayloadType = "default";
+
+        this.orderModel.OrderCart.PackageList = [];
+        this.orderModel.UserId = JSON.parse(this._localStorage.get('auth_token')).userId;
+        this.packageListItem = new PackageListModel();
     }
 
     removeItem(index: number){
@@ -114,6 +118,7 @@ export class OrderComponent{
     }
 
     resetForm(){
-        this.orderModel = new OrderModel();
+        this.initiateOrderModel();
+        // this.router.navigate(["Job"])
     }
 }
