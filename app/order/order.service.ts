@@ -37,9 +37,8 @@ export class OrderService {
     private _extractOrderCreationError(res: Response){
         let error = res.json();
         console.log(error);
-        console.log(error.ModelState["model.From.AddressLine1"]);
         let errorMsg = error.Message || "Server error";
-        if (error.ModelState) {
+        if (typeof(error.ModelState)!=undefined) {
             errorMsg += "<ul>";
             if (error.ModelState["model.From.AddressLine1"]) {
                 var err = error.ModelState["model.From.AddressLine1"][0];
@@ -61,13 +60,9 @@ export class OrderService {
                 var err = error.ModelState["model.PaymentMethod"][0];
                 errorMsg += "<li>" + err + "</li>";
             }
-
-
-
-
-
             errorMsg += "</ul>";
         }
+        console.log(errorMsg);
         return Observable.throw(errorMsg)
     }
 }
