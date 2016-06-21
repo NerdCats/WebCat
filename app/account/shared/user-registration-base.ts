@@ -1,4 +1,4 @@
-import {DefaultAddress} from '../../shared/geocoding.defaultAddress';
+import {DefaultAddress} from '../../shared/model/geocoding.defaultAddress';
 
 export class UserRegistrationBase {
     public UserName: string;

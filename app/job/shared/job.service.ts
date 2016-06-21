@@ -6,7 +6,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import {PageEnvelope} from '../../shared/pagination';
+import {PageEnvelope, Pagination} from '../../shared/pagination';
 
 import {AppSettings} from '../../shared/app.settings';
 import {Job} from '../shared/job';
@@ -23,8 +23,24 @@ export class JobService {
                 if (res.status < 200 || res.status >= 300) {
                     throw new Error('Response status: ' + res.status);
                 }
-                var json = res ? res.json() || {} : {};
-                return Job.fromJSON(json);
+
+                let json = res ? res.json() : null;
+                let castedJobs = new Array<Job>();
+                if (json) {
+                    let jobs = json.data;
+                    for (let index = 0; index < jobs.length; index++) {
+                        let job = Job.fromJSON(jobs[index]);
+                        castedJobs.push(job);
+                    }
+
+                    let pagedData = new PageEnvelope<Job>();
+                    pagedData.data = castedJobs;
+                    pagedData.pagination = json.pagination;
+
+                    return pagedData;
+                }
+
+                return json;
             })
             .catch(error => {
                 let errMsg = error.message || 'Exception when fetching job history';

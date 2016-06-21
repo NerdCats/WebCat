@@ -7,7 +7,7 @@ import { LocalStorage } from '../shared/local-storage'
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import { LocalityService } from '../shared/app-locality.service';
-import { OrderModel, OrderCartModel, PackageListModel } from '../shared/order-model';
+import { OrderModel, OrderCartModel, PackageListModel } from '../shared/model/order-model';
 import { OrderService } from './order.service';
 
 

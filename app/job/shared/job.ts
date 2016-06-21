@@ -1,12 +1,15 @@
+import {UserModel} from '../../shared/model/user-model';
+import {OrderModel} from '../../shared/model/order-model';
+
 export interface IJobJson {
     Id: string;
     HRID: string;
     Name: string;
-    Order: Object; // INFO: Would come from #36
-    User: Object; // INFO: Not sure, is this written somewhere, only expand if need be
+    Order: OrderModel; // INFO: Would come from #36
+    User: UserModel;
     JobServedBy: Object; // Same as the previous one
     Tasks: Array<Object>;
-    State: string; // INFO: Potential place for a string literal
+    State: JobState; // INFO: Potential place for a string literal
     CreateTime: string;
     ModifiedTime: string;
     PreferredDeliveryTime: string;
@@ -21,11 +24,11 @@ export class Job {
     Id: string;
     HRID: string;
     Name: string;
-    Order: Object; // INFO: Would come from #36
-    User: Object; // INFO: Not sure, is this written somewhere, only expand if need be
+    Order: OrderModel; // INFO: Would come from #36
+    User: UserModel;
     JobServedBy: Object; // Same as the previous one
     Tasks: Array<Object>;
-    State: string; // INFO: Potential place for a string literal
+    State: JobState; // INFO: Potential place for a string literal
     CreateTime: Date;
     ModifiedTime: Date;
     PreferredDeliveryTime: Date;
@@ -43,13 +46,15 @@ export class Job {
         });
     }
 
-    static fromJSON(json: IJobJson) {
+    static fromJSON(json: IJobJson) : Job {
         let job = Object.create(Job.prototype);
-        return Object.assign(job, json, {
+        var assignedJob =  Object.assign(job, json, {
             CreateTime: new Date(json.CreateTime),
             ModifiedTime: new Date(json.ModifiedTime),
             PreferredDeliveryTime: new Date(json.PreferredDeliveryTime)
         });
+        return assignedJob as Job;
     }
 }
 
+export type JobState = "ENQUEUED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";

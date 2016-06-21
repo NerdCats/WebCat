@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <base href="/">
+    <base href=".">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,16 +11,14 @@
     <link rel="shortcut icon" href="assets/img/favicon.png">
     <title>Loading ..</title>
 
-
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,900' rel='stylesheet' type='text/css'>
-
-    <!-- Jquery for Bootstrap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
-    <!-- Bootstrap js for bootstrap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+    <!-- RDash CSS -->
+    <link rel="stylesheet" href="lib/rdash-ui/dist/css/rdash.css">
 
     <!--The css files right now we are using -->
     <link rel="stylesheet" href="styles.css">
@@ -29,10 +27,19 @@
     <!--Loading pace -->
     <script src="assets/pace/pace.js"></script>
     <link href="assets/pace/pace.css" rel="stylesheet" />
+  </head>
+
+  <!--Display the application -->
+  <body>
+    <webcat>Loading...</webcat>
+  </body>
+    <!-- Jquery for Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+    <!-- Bootstrap js for bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
 
     <!-- 1. Load libraries -->
-     <!-- Polyfill(s) for older browsers -->
-
+    <!-- Polyfill(s) for older browsers -->
 
     <script src="lib/es6-shim/es6-shim.min.js"></script>
     <script src="lib/zone.js/dist/zone.js"></script>
@@ -40,16 +47,10 @@
     <script src="lib/systemjs/dist/system.src.js"></script>
     <script src="lib/systemjs/dist/system-polyfills.js"></script>
 
-    <!-- 2. Configure SystemJS -->
+    <!-- Configure SystemJS -->
     <script src="systemjs.config.js"></script>
     <script>
       System.import('app').catch(function(err){ console.error(err);  });
     </script>
-  </head>
-
-  <!-- 3. Display the application -->
-  <body>
-    <webcat>Loading...</webcat>
-  </body>
 </html>
 

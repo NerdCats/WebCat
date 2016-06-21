@@ -18,13 +18,11 @@ export type LoginStatus =
     | "SUCCESS"
     | "FAILED";
 
-
 @Component({
     selector: 'login',
     templateUrl: 'app/account/login/login.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, NcShowPassword],
-    providers: [ValidationService, LoginService],
-    styleUrls: ['app/account/login/login.component.css']
+    providers: [ValidationService, LoginService]
 })
 export class LoginComponent {
     @Output() onLoginCompleted = new EventEmitter<LoginStatus>();
