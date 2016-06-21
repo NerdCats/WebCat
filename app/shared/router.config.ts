@@ -1,7 +1,7 @@
-import {WrapHeaderComponent} from '../wrapHeader/wrapHeader.component';
-import {ConfirmEmailComponent} from '../account/confirm-email/confirm-email.component';
-
+import { WrapHeaderComponent } from '../wrapHeader/wrapHeader.component';
+import { ConfirmEmailComponent } from '../account/confirm-email/confirm-email.component';
 import { OrderComponent } from '../order/order.component';
+import { JobTrackComponent } from '../job/job-track/job-track.component';
 
 import {JobHistoryComponent} from '../job/job-history/job-history.component';
 
@@ -29,6 +29,11 @@ export const Routes = [
         name: 'Job',
         component: JobHistoryComponent
 
+    },
+    {
+        path: '/track',
+        name: 'Track',
+        component: JobTrackComponent
     }
 ]
 

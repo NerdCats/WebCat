@@ -7,6 +7,7 @@ import { WrapHeaderComponent } from './wrapHeader/WrapHeader.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.component';
 import { OrderComponent } from './order/order.component';
+import { JobTrackComponent } from './job/job-track/job-track.component';
 import { LoginService } from './account/login/login.service'
 import { Routes } from './shared/router.config';
 import { SecureRouterOutlet } from './shared/secure-router-outlet.directive';
@@ -15,7 +16,7 @@ import { SecureRouterOutlet } from './shared/secure-router-outlet.directive';
   selector: 'webcat',
   templateUrl: 'app/app.component.html',
 
-  directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent, SecureRouterOutlet, OrderComponent],
+  directives: [ROUTER_DIRECTIVES, NavbarComponent, WrapHeaderComponent, SecureRouterOutlet, OrderComponent, JobTrackComponent],
 
   providers: [ROUTER_PROVIDERS, Title, LoginService]
 
