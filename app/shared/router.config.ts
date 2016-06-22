@@ -24,11 +24,6 @@ export const Routes = [
         component: OrderComponent,
     },
     {
-        path: '/job',
-        name: 'Job',
-        component: JobHistoryComponent
-    },
-    {
         path: '/dashboard',
         name: 'Dashboard',
         component: DashboardComponent
