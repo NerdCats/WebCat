@@ -1,13 +1,11 @@
-<div class="navbar navbar-default"></div>
+<div class="navbar-blank"></div>
 <div class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
+  <div>
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span id="navbar-toggle-menu" class="fa fa-bars" aria-hidden="true"></span>
       </button>
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" [routerLink]="['Home']">
         <b>{{AppTitle}}</b>
       </a>
     </div>
