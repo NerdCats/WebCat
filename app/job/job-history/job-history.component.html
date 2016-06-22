@@ -1,11 +1,7 @@
 <div [ngClass]="{widget: componentMode=='WIDGET'}">
-    <div class="widget-header">
-        <i class="fa fa-tasks"></i>
-        Job History
-        <div class="pull-right">
-            <a href="#" *ngIf="mode=='ADMIN'">Manage</a>
-        </div>
-    </div>
+    <widget-header title="Job History" icon="fa-tasks">
+        <a href="#" *ngIf="mode=='ADMIN'">Manage</a>
+    </widget-header>
     <div *ngIf="status=='IN_PROGRESS'">
         <progress-bubble></progress-bubble>
     </div>
