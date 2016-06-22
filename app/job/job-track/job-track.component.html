@@ -6,6 +6,9 @@
 			</div>
 		</div>
 	</div>
+	<div *ngIf="status=='IN_PROGRESS'">
+        <progress-bubble></progress-bubble>
+    </div>
 	<div class="row" *ngIf="status=='SUCCESSFUL'">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
@@ -30,9 +33,9 @@
 							<strong>Note To Delivery Man</strong>
 							<p>{{job.Order.NoteToDeliveryMan}}</p>
 							<strong>Payment Method</strong>
-							<p>{{job.Order.PaymentMethod}}</p>
+							<p>{{job.PaymentMethod}}</p>
 							<strong>Payment Status</strong>
-							<p>{{job.Order.PaymentStatus}}</p>
+							<p>{{job.PaymentStatus}}</p>
 						</div>
 					</div>
 				</div>
@@ -67,7 +70,8 @@
 				</div>
 				<div class="panel-body">
 					<p><strong>{{ orderInfo.orderInfoHeading }}</strong></p>
-					<p>{{ orderInfo.orderInfoDesc }}</p>
+					<!--injected html here because I wanted to highlight the email address substring! in the orderInfoDesc-->
+					<p [innerHtml]="orderInfo.orderInfoDesc"></p>
 				</div>
 			</div>
 			<div class="panel panel-primary">
@@ -89,38 +93,24 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr *ngFor="let item of job.Order.OrderCart.PackageList">
 									<th scope="row">1</th>
-									<td>Horlicks</td>
-									<td>1</td>
-									<td>600</td>
-									<td>600</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>Ovaltin</td>
-									<td>1</td>
-									<td>300</td>
-									<td>300</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td>Multova</td>
-									<td>2</td>
-									<td>900</td>
-									<td>1800</td>
+									<td>{{ item.Item }}</td>
+									<td>{{ item.Quantity }}</td>
+									<td>{{ item.Price }}</td>
+									<td>{{ item.Total }}</td>
 								</tr>
 								<tr>
 									<td colspan="4" class="text-right">Subtotal</td>
-									<td>3000</td>
+									<td>{{ job.Order.OrderCart.SubTotal }}</td>
 								</tr>
 								<tr>
 									<td colspan="4" class="text-right">Delivery Charge</td>
-									<td>50</td>
+									<td>{{ job.Order.OrderCart.ServiceCharge }}</td>
 								</tr>
 								<tr>
 									<td colspan="4" class="text-right">Total</td>
-									<td>3500</td>
+									<td>{{ job.Order.OrderCart.TotalToPay }}</td>
 								</tr>
 							</tbody>
 						</table>

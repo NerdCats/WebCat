@@ -8,11 +8,14 @@ import { Job, JobState } from '../shared/job';
 import { OrderInfo } from '../shared/orderInfo';
 import { ComponentServiceStatus } from '../../shared/component-service-status';
 
+import {ProgressBubbleComponent} from '../../common/progress-bubble/progress-bubble.component';
+
 
 @Component({
     selector: 'job-track',
     templateUrl: 'app/job/job-track/job-track.component.html',
     styleUrls: ['app/job/job-track/job-track.component.css'],
+    directives: [ProgressBubbleComponent],
     providers: [ HTTP_PROVIDERS, JobService ]
 })
 
