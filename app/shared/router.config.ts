@@ -8,7 +8,7 @@ import {DashboardComponent} from '../dashboard/dashboard.component';
 
 export const Routes = [
     {
-        path: '/',
+        path: '/home',
         name: 'Home',
         component: WrapHeaderComponent,
         useAsDefault: true

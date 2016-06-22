@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 import { AppSettings } from './shared/app.settings';
 import { WrapHeaderComponent } from './wrapHeader/WrapHeader.component';
