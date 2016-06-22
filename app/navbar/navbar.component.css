@@ -13,3 +13,15 @@
 {
     color: white;
 }
+
+.navbar-blank {
+    height: 50px;
+}
+
+.fa-bars {
+    color: white
+}
+
+.navbar-right {
+    margin-right: 10px;
+}

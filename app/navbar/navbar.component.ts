@@ -7,7 +7,7 @@ import { LoginComponent, LoginStatus } from '../account/login/login.component';
 import { LoginService } from '../account/login/login.service';
 
 import { LocalStorage } from '../shared/local-storage';
-import { Router } from '@angular/router-deprecated';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 type NavbarState = "PUBLIC" | "SECURED";
 
@@ -19,7 +19,7 @@ interface NavbarElement {
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
-    directives: [CollapseDirective, SignupComponent, LoginComponent],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, SignupComponent, LoginComponent],
     providers: [LocalStorage],
     styleUrls: ['app/navbar/navbar.component.css']
 })
@@ -81,7 +81,7 @@ export class NavbarComponent {
     }
 
     navigateToDashboard() {
-        this.router.navigate(["Job"]);
+        this.router.navigate(["Dashboard"]);
     }
 
     private _initiatePublicNavElements() {

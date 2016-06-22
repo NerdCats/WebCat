@@ -4,7 +4,7 @@ import {ConfirmEmailComponent} from '../account/confirm-email/confirm-email.comp
 import { OrderComponent } from '../order/order.component';
 
 import {JobHistoryComponent} from '../job/job-history/job-history.component';
-
+import {DashboardComponent} from '../dashboard/dashboard.component';
 
 export const Routes = [
     {
@@ -24,9 +24,9 @@ export const Routes = [
         component: OrderComponent,
     },
     {
-        path: '/job',
-        name: 'Job',
-        component: JobHistoryComponent
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: DashboardComponent
     }
 ]
 

@@ -52,6 +52,11 @@ gulp.task('tslint', function () {
 // we are just mimicking the dev environment now, but for production a lot more has to be done
 gulp.task('copy:libs', function () {
     return gulp.src([
+        'bootstrap/dist/css/bootstrap.min.css',
+        'bootstrap/dist/css/bootstrap.min.css.map',
+        'bootstrap/dist/js/bootstrap.js',
+        'jquery/dist/jquery.min.js',
+        'jquery/dist/jquery.min.map',
         'es6-shim/es6-shim.min.js',
         'es6-shim/es6-shim.map',
         'systemjs/dist/system-polyfills.js',
