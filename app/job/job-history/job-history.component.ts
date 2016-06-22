@@ -3,7 +3,6 @@ import {Observable} from 'rxjs/Observable';
 import {HTTP_PROVIDERS } from '@angular/http';
 
 import {JobService} from '../shared/job.service';
-import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {PageEnvelope, Pagination} from '../../shared/pagination';
 import {Job, JobState} from '../shared/job';
 
@@ -15,7 +14,7 @@ export type ComponentMode = "WIDGET" | "FULL";
 @Component({
     selector: 'job-history',
     templateUrl: 'app/job/job-history/job-history.component.html',
-    providers: [JobService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
+    providers: [JobService, HTTP_PROVIDERS]
 })
 export class JobHistoryComponent implements OnInit {
     @Input()
