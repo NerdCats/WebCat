@@ -31,7 +31,7 @@ export const Routes = [
 
     },
     {
-        path: '/track',
+        path: '/track/:jobId',
         name: 'Track',
         component: JobTrackComponent
     },

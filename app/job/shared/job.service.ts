@@ -48,4 +48,17 @@ export class JobService {
                 return Observable.throw(errMsg);
             });
     }
+
+    getJob(jobId): Observable<Job>{
+        return this.shttp.secureGet(this.jobUrl + "/" + jobId)
+            .map((res: Response) => {
+                let job = new Job();
+                let jobJson = res.json();
+                job = Job.fromJSON(jobJson);
+                return  job;
+            })
+            .catch(error => {
+                return  Observable.throw(error);
+            })
+    }
 }

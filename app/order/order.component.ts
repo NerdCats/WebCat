@@ -28,6 +28,7 @@ export class OrderComponent{
     public orderResponseMessage: string = "";
     public areas: Array<string>;
     public itemAddOrUpdateText: string = "Add";
+    public formTitle:string = "Create your Delivery Order";
 
     constructor(private formBuilder: FormBuilder,
         private orderService: OrderService,
