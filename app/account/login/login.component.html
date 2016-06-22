@@ -28,7 +28,7 @@
     </modal-body>
     <modal-footer>
         <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!loginForm.valid || (loginStatus=='IN_PROGRESS')" >
-            <span *ngIf="loginStatus=='IN_PROGRESS'" class="glyphicon glyphicon-repeat fast-right-spinner"></span>
+            <span *ngIf="loginStatus=='IN_PROGRESS'" class="fa fa-refresh fa-spin"></span>
             Login
         </button>
     </modal-footer>

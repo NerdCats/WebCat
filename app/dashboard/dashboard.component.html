@@ -1,0 +1,59 @@
+<div>
+    <div id="page-wrapper" [ngClass]="{open: isSideBarOpen}" class="open">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar">
+                <li class="sidebar-main">
+                    <a (click)="toggleSidebar()">
+                        <span class="menu-icon fa fa-bars" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li class="sidebar-list">
+                    <a [routerLink]="['Dashboard']">Glimpse<span class="menu-icon fa fa-tachometer"></span></a>
+                </li>
+                <!--<li class="sidebar-list">
+          <a href="#/tables">Tables <span class="menu-icon fa fa-table"></span></a>
+        </li>-->
+            </ul>
+        </div>
+        <!-- End Sidebar -->
+
+        <div id="content-wrapper">
+            <div class="page-content">
+
+                <!-- Header Bar -->
+                <div class="row header">
+                    <div class="col-xs-12">
+                        <div class="user pull-right">
+                            <div class="item dropdown">
+                                <a class="dropdown-toggle">
+                                    <i class="fa fa-bell-o"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="meta">
+                            <div class="page">
+                                Glimpse
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Header Bar -->
+
+                <!-- Main Content -->
+                <!-- uiView:  -->
+                <div>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <job-history></job-history>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Page Content -->
+        </div>
+        <!-- End Content Wrapper -->
+    </div>
+    <!-- End Page Wrapper -->
+</div>

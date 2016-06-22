@@ -10,4 +10,4 @@ bootstrap(AppComponent, [
     LOCAL_STORAGE_PROVIDERS,
     HTTP_PROVIDERS,
     SECURE_HTTP_PROVIDERS])
-    .catch(err => console.log("Bootstrapping Failed " + err));
+    .catch(err => console.error("Bootstrapping Failed " + err));
