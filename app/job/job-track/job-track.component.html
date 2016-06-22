@@ -6,7 +6,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" *ngIf="status=='SUCCESSFUL'">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <strong>Pickup Address</strong>
-                            <p>House 28, Road 20 Block - K, Banani, Dhaka - 1213</p>
+                            <p>{{job.Order.From.Address}}</p>
                         </div>
                         <div class="col-md-6">
                             <strong>Delivery Address</strong>

@@ -18,18 +18,15 @@ import {ComponentServiceStatus} from '../../shared/component-service-status';
 export class JobTrackComponent implements OnInit{
 
     public jobId = "asdasdasd";
-    public job = new Job();
+    public job: Job;
     status: ComponentServiceStatus = "IN_PROGRESS";
     public errorMessage = "";
     constructor(private params: RouteParams,
                 private jobService: JobService){
         this.jobId = params.get('jobId');
-        console.log(this.jobId);
-        this.getJob();
     }
     ngOnInit(){
-
-        console.log("asdasdasd")
+        this.getJob();
     }
 
     getJob(){
@@ -37,12 +34,13 @@ export class JobTrackComponent implements OnInit{
             .subscribe((job) => {
                 this.status = "SUCCESSFUL";
                 this.job = job;
+                console.log(this.job);
             },
             (error) => {
-                this.errorMessage = error;
+                this.errorMessage = error.Message;
                 this.status = "FAILED";
-                console.log(error);
-            })
+                console.log(this.errorMessage);
+            });
     }
 
 }
