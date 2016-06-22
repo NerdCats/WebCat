@@ -11,6 +11,16 @@
     <link rel="shortcut icon" href="assets/img/favicon.png">
     <title>Loading ..</title>
 
+    <!-- 1. Load libraries -->
+    <!-- Polyfill(s) for older browsers -->
+
+    <script src="lib/es6-shim/es6-shim.min.js"></script>
+    <script src="lib/systemjs/dist/system-polyfills.js"></script>
+    <script src="lib/zone.js/dist/zone.js"></script>
+    <script src="lib/reflect-metadata/Reflect.js"></script>
+    <script src="lib/systemjs/dist/system.src.js"></script>
+
+
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,900' rel='stylesheet' type='text/css'>
     <!-- Bootstrap core CSS -->
@@ -42,15 +52,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
     <!-- Bootstrap js for bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
-
-    <!-- 1. Load libraries -->
-    <!-- Polyfill(s) for older browsers -->
-
-    <script src="lib/es6-shim/es6-shim.min.js"></script>
-    <script src="lib/zone.js/dist/zone.js"></script>
-    <script src="lib/reflect-metadata/Reflect.js"></script>
-    <script src="lib/systemjs/dist/system.src.js"></script>
-    <script src="lib/systemjs/dist/system-polyfills.js"></script>
 
     <!-- Configure SystemJS -->
     <script src="systemjs.config.js"></script>

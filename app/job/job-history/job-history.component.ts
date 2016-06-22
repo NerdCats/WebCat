@@ -3,11 +3,12 @@ import {Observable} from 'rxjs/Observable';
 import {HTTP_PROVIDERS } from '@angular/http';
 
 import {JobService} from '../shared/job.service';
-import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {PageEnvelope, Pagination} from '../../shared/pagination';
 import {Job, JobState} from '../shared/job';
 
 import {ComponentServiceStatus} from '../../shared/component-service-status';
+
+import {ProgressBubbleComponent} from '../../common/progress-bubble/progress-bubble.component';
 
 export type AccessMode = "DEFAULT" | "ADMIN";
 export type ComponentMode = "WIDGET" | "FULL";
@@ -15,7 +16,8 @@ export type ComponentMode = "WIDGET" | "FULL";
 @Component({
     selector: 'job-history',
     templateUrl: 'app/job/job-history/job-history.component.html',
-    providers: [JobService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
+    directives: [ProgressBubbleComponent],
+    providers: [JobService, HTTP_PROVIDERS]
 })
 export class JobHistoryComponent implements OnInit {
     @Input()

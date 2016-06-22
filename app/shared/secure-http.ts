@@ -3,7 +3,7 @@ import {Http, Request, XHRBackend, RequestOptionsArgs, Response, RequestOptions,
 import {Observable} from 'rxjs/Observable';
 import {LocalStorage, LOCAL_STORAGE_PROVIDERS} from '../shared/local-storage';
 import { provide } from '@angular/core';
-import { Router, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { Router } from '@angular/router-deprecated';
 
 @Injectable()
 export class SecureHttp extends Http {
@@ -70,7 +70,6 @@ export class SecureHttp extends Http {
 }
 
 export const SECURE_HTTP_PROVIDERS: any[] = [
-    ROUTER_PROVIDERS,
     provide(SecureHttp, {
         useFactory: (connBackend: XHRBackend, requestOptions: RequestOptions, router: Router, localStorage: LocalStorage) => new SecureHttp(connBackend, requestOptions, router, localStorage),
         deps: [XHRBackend, RequestOptions, Router, LocalStorage]
