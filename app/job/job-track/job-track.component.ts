@@ -5,7 +5,9 @@ import { Router, RouteParams } from '@angular/router-deprecated';
 
 import { JobService } from '../shared/job.service';
 import { Job, JobState } from '../shared/job';
-import {ComponentServiceStatus} from '../../shared/component-service-status';
+import { OrderInfo } from '../shared/orderInfo';
+import { ComponentServiceStatus } from '../../shared/component-service-status';
+
 
 @Component({
     selector: 'job-track',
@@ -15,12 +17,16 @@ import {ComponentServiceStatus} from '../../shared/component-service-status';
 })
 
 
+
 export class JobTrackComponent implements OnInit{
 
-    public jobId = "asdasdasd";
+    public jobId: string;
     public job: Job;
-    status: ComponentServiceStatus = "IN_PROGRESS";
-    public errorMessage = "";
+    public orderInfo: OrderInfo;
+    public status: ComponentServiceStatus = "IN_PROGRESS";
+    public errorMessage: string;
+    public orderStatusNumber: number;
+
     constructor(private params: RouteParams,
                 private jobService: JobService){
         this.jobId = params.get('jobId');
@@ -34,7 +40,9 @@ export class JobTrackComponent implements OnInit{
             .subscribe((job) => {
                 this.status = "SUCCESSFUL";
                 this.job = job;
-                console.log(this.job);
+                this.fixingServerText(this.job);
+                this.orderStatusNumber  = this.findOrderStatus(this.job);
+                this.orderInfo = new OrderInfo(this.orderStatusNumber);
             },
             (error) => {
                 this.errorMessage = error.Message;
@@ -43,4 +51,30 @@ export class JobTrackComponent implements OnInit{
             });
     }
 
+    fixingServerText(job: Job){
+        // this weird function is to streamline server responses
+        // like, CashOnDelivery to Cash On Deliver ||
+        // IN_PROGRESS to IN PROGRESS
+        // Not sure whether it will stay here finally
+        this.job.Order.PaymentMethod = "Cash On Delivery";
+    }
+
+    findOrderStatus(job: Job){
+        if (job.State == "ENQUEUED") {
+            return 1;
+        }
+        else if (job.State == "IN_PROGRESS") {
+            if (job.Tasks[1]["Type"] == "PackagePickUp"
+            && job.Tasks[1]["State"] == "IN_PROGRESS") {
+                return 2;
+            }
+            else if (job.Tasks[2]["Type"] == "Delivery"
+            && job.Tasks[2]["State"] == "IN_PROGRESS") {
+                return 3;
+            }
+        }
+        else if (job.State == "COMPLETED") {
+            return 4;
+        }
+    }
 }

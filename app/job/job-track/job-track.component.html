@@ -22,15 +22,17 @@
                         </div>
                         <div class="col-md-6">
                             <strong>Delivery Address</strong>
-                            <p>8, Sher E Bangla Road, Mid Arichpur, Tongi, Gazipur - 1710</p>
+                            <p>{{job.Order.To.Address}}</p>
                         </div>
                     </div>
 					<div class="row">
 						<div class="col-md-6">
 							<strong>Note To Delivery Man</strong>
-							<p>Deliver it to Muhammed Tareq Aziz, phonenumber - 01911725897</p>
+							<p>{{job.Order.NoteToDeliveryMan}}</p>
 							<strong>Payment Method</strong>
-							<p>Cash On Delivery</p>
+							<p>{{job.Order.PaymentMethod}}</p>
+							<strong>Payment Status</strong>
+							<p>{{job.Order.PaymentStatus}}</p>
 						</div>
 					</div>
 				</div>
@@ -64,14 +66,8 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<p><strong>Your Order is created, we will start processing it shortly!</strong></p>
-                    <p>We've got your order, we are getting it ready, a confirmation of your order will be sent to <b>user@email.com.</b></p>
-                    <!--<p><strong>Your Order is confirmed, Pickup is in progress!</strong></p>
-                    <p>We've accepted your Order, A confirmation email has been sent to <b>user@email.com</b>. Come back to this page for updates on your Order status.</p>
-                    <p><strong>Your Pickup has been completed, Delivery is in progress!</strong></p>
-                    <p>Your Pickup is completed, Delivery is in progress. Come back to this page for updates on your Order status.</p>
-                    <p><strong>You Delivery has been completed!</strong></p>
-					<p>Thank you for using our system</p>-->
+					<p><strong>{{ orderInfo.orderInfoHeading }}</strong></p>
+					<p>{{ orderInfo.orderInfoDesc }}</p>
 				</div>
 			</div>
 			<div class="panel panel-primary">
