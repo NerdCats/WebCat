@@ -2,6 +2,7 @@
   // map tells the System loader where to look for things
   var map = {
     'app':                        'app', // 'dist',
+    'tests':                      'tests',
     'rxjs':                       'lib/rxjs',
     'angular2-in-memory-web-api': 'lib/angular2-in-memory-web-api',
     '@angular':                   'lib/@angular',
@@ -13,6 +14,7 @@
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
+    'tests':                      { defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'web-api.js', defaultExtension: 'js' },
     'ng2-bootstrap':              { main: 'ng2-bootstrap.js', defaultExtension: 'js'},

@@ -32,11 +32,11 @@ gulp.task('clean', function (cb) {
 gulp.task('compile', function () {
     var tsProject = typescript.createProject('tsconfig.json');
     return tsProject
-        .src('app/**/*.ts')
+        .src(['app/**/*.ts', 'tests/**/*.ts'])
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('dist/app'));
+        .pipe(gulp.dest('dist'));
 });
 
 /**
@@ -49,7 +49,8 @@ gulp.task('tslint', function () {
 });
 
 // copy dependencies from node_modules
-// we are just mimicking the dev environment now, but for production a lot more has to be done
+// we are just mimicking the dev environment now, but for production a
+// lot more has to be done
 gulp.task('copy:libs', function () {
     return gulp.src([
         'bootstrap/dist/css/bootstrap.min.css',
@@ -76,6 +77,18 @@ gulp.task('copy:libs', function () {
         .pipe(gulp.dest("dist/lib"));
 });
 
+// copy dependencies from node_modules
+// we are just mimicking the dev environment now, but for production a lot more has to be done
+gulp.task('copy:test-libs', function () {
+    return gulp.src([
+        'jasmine-core/lib/jasmine-core/jasmine.css',
+        'jasmine-core/lib/jasmine-core/jasmine.js',
+        'jasmine-core/lib/jasmine-core/jasmine-html.js',
+        'jasmine-core/lib/jasmine-core/boot.js'
+    ], { cwd: "node_modules/**" }) /* Glob required here. */
+        .pipe(gulp.dest("dist/lib"));
+});
+
 /**
  * copy static assets - i.e. non TypeScript compiled source
  */
@@ -84,12 +97,17 @@ gulp.task('copy:assets', function () {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('copy:test-assets', function () {
+    return gulp.src(['test/**/*', 'test.html', '!test/**/*.ts'], { base: './' })
+        .pipe(gulp.dest('dist'));
+});
+
 /**
  * Watch for changes in HTML and CSS files.
  */
 gulp.task('watch', function () {
     return gulp.src('', { base: "./" })
-        .pipe(watch(["app/**/*.html", "app/**/*.css", "assets/**/*", "styles.css", "index.html", "systemjs.config.js"], { base: "./" }))
+        .pipe(watch(["app/**/*.html", "app/**/*.css", "assets/**/*", "styles.css", "index.html", "test.html", "systemjs.config.js"], { base: "./" }))
         .pipe(gulp.dest("./dist"));
 });
 
@@ -97,7 +115,7 @@ gulp.task('watch', function () {
  * Watch for changes in TypeScript files.
  */
 gulp.task('watch-ts', function () {
-    gulp.watch('app/**/*.ts', ['compile']);
+    gulp.watch(['app/**/*.ts', 'tests/**/*.ts'], ['compile']);
 });
 
 
@@ -108,7 +126,7 @@ gulp.task('watch-ts', function () {
 gulp.task('build', function (callback) {
     runSequence('clean',
         'compile',
-        ['copy:assets', 'copy:libs'],
+        ['copy:assets', 'copy:test-assets', 'copy:libs', 'copy:test-libs'],
         callback);
 });
 

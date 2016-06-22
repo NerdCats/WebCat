@@ -4,6 +4,8 @@
      "files.exclude": {
         "app/**/*.js": true,
         "app/**/*.map": true,
+        "tests/**/*.js": true,
+        "tests/**/*.map": true,
         "dist/**/*": true
     }
 }
