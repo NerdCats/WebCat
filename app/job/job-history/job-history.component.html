@@ -2,17 +2,17 @@
     <widget-header title="Job History" icon="fa-tasks">
         <a href="#" *ngIf="mode=='ADMIN'">Manage</a>
     </widget-header>
-    <div *ngIf="status=='IN_PROGRESS'">
-        <progress-bubble></progress-bubble>
-    </div>
-    <div class="message" *ngIf="status=='EMPTY'">
-        {{statusMessage}}
-    </div>
-    <div class="error" *ngIf="status=='FAILED'">
-       {{statusMessage}}
-    </div>
-    <div class="widget-body medium no-padding" *ngIf="status=='SUCCESSFUL'">
-        <div class="table-responsive">
+    <widget-body classes="medium no-padding">
+        <div *ngIf="status=='IN_PROGRESS'">
+            <progress-bubble></progress-bubble>
+        </div>
+        <div class="message" *ngIf="status=='EMPTY'">
+            {{statusMessage}}
+        </div>
+        <div class="error" *ngIf="status=='FAILED'">
+            {{statusMessage}}
+        </div>
+        <div class="table-responsive" *ngIf="status=='SUCCESSFUL'">
             <table class="table">
                 <tbody>
                     <tr>
@@ -50,5 +50,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </widget-body>
 </div>

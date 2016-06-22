@@ -10,6 +10,7 @@ import {ComponentServiceStatus} from '../../shared/component-service-status';
 
 import {ProgressBubbleComponent} from '../../common/progress-bubble/progress-bubble.component';
 import {WidgetHeaderComponent} from '../../common/widget-header/widget-header.component';
+import {WidgetBodyComponent} from '../../common/widget-body/widget-body.component';
 
 export type AccessMode = "DEFAULT" | "ADMIN";
 export type ComponentMode = "WIDGET" | "FULL";
@@ -17,7 +18,7 @@ export type ComponentMode = "WIDGET" | "FULL";
 @Component({
     selector: 'job-history',
     templateUrl: 'app/job/job-history/job-history.component.html',
-    directives: [ProgressBubbleComponent, WidgetHeaderComponent],
+    directives: [ProgressBubbleComponent, WidgetHeaderComponent, WidgetBodyComponent],
     providers: [JobService, HTTP_PROVIDERS]
 })
 export class JobHistoryComponent implements OnInit {
