@@ -8,12 +8,15 @@ import {Job, JobState} from '../shared/job';
 
 import {ComponentServiceStatus} from '../../shared/component-service-status';
 
+import {ProgressBubbleComponent} from '../../common/progress-bubble/progress-bubble.component';
+
 export type AccessMode = "DEFAULT" | "ADMIN";
 export type ComponentMode = "WIDGET" | "FULL";
 
 @Component({
     selector: 'job-history',
     templateUrl: 'app/job/job-history/job-history.component.html',
+    directives: [ProgressBubbleComponent],
     providers: [JobService, HTTP_PROVIDERS]
 })
 export class JobHistoryComponent implements OnInit {
