@@ -11,6 +11,8 @@
     <link rel="shortcut icon" href="assets/img/favicon.png">
     <title>Loading ..</title>
 
+    <!-- build:js assets/lib.js -->
+
     <!-- 1. Load libraries -->
     <!-- Polyfill(s) for older browsers -->
     <script src="lib/systemjs/dist/system-polyfills.js"></script>
@@ -19,7 +21,15 @@
     <script src="lib/reflect-metadata/Reflect.js"></script>
     <script src="lib/systemjs/dist/system.src.js"></script>
 
+    <!-- Jquery for bootstrap js -->
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 
+    <script src="assets/pace/pace.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:css assets/bundle.css -->
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,900' rel='stylesheet' type='text/css'>
     <!-- Bootstrap core CSS -->
@@ -29,33 +39,31 @@
     <!-- RDash CSS -->
     <link rel="stylesheet" href="lib/rdash-ui/dist/css/rdash.css">
 
-    <!-- Jquery for bootstrap js -->
-    <script src="lib/jquery/dist/jquery.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
-
     <!--The css files right now we are using -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="app/shared/forms.css">
 
-    <!--Loading pace -->
-    <script src="assets/pace/pace.js"></script>
     <link href="assets/pace/pace.css" rel="stylesheet" />
+
+    <!-- endbuild -->
+
+    <!-- inject:js -->
+    <!-- endinject -->
+
+    <!-- build:remove -->
+    <!-- Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err);  });
+    </script>
+     <!-- endbuild -->
+
   </head>
 
   <!--Display the application -->
   <body>
     <webcat>Loading...</webcat>
   </body>
-    <!-- Jquery for Bootstrap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
-    <!-- Bootstrap js for bootstrap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
 
-    <!-- Configure SystemJS -->
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('app').catch(function(err){ console.error(err);  });
-    </script>
 </html>
 
