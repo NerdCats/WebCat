@@ -8,7 +8,7 @@
     'ng2-bootstrap':              'lib/ng2-bootstrap',
     'moment':                     'lib/moment',
     'ng2-bs3-modal':              'lib/ng2-bs3-modal',
-    'angular2-google-maps':       'https://npmcdn.com/angular2-google-maps@0.12.0'
+    'angular2-google-maps':       'lib/angular2-google-maps'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
