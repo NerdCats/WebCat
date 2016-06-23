@@ -9,6 +9,11 @@
 	<div *ngIf="status=='IN_PROGRESS'">
         <progress-bubble></progress-bubble>
     </div>
+	<div *ngIf="status=='FAILED'">
+        <div class="alert alert-danger" role="alert">
+			{{ errorMessage }}
+		</div>
+    </div>
 	<div class="row" *ngIf="status=='SUCCESSFUL'">
 		<div class="col-md-12">
 			<div class="panel panel-primary">

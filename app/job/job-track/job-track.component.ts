@@ -48,8 +48,17 @@ export class JobTrackComponent implements OnInit{
                 this.orderInfo = new OrderInfo(this.orderStatusNumber);
             },
             (error) => {
-                this.errorMessage = error.Message;
                 this.status = "FAILED";
+                console.log(error);
+                if (error.status == 404) {
+                    this.errorMessage = "Order not found!";
+                }
+                else if (error.status == 500) {
+                    this.errorMessage = "Failed to load the status of your Order, kindly refresh!";
+                }
+                else if (error.response.Message != undefined) {
+                    this.errorMessage = error.Message;
+                }
                 console.log(this.errorMessage);
             });
     }
