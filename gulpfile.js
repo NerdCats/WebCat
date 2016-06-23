@@ -9,6 +9,8 @@ var systemBuilder = require('systemjs-builder');
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
 var cssnano = require('gulp-cssnano');
+var rev = require('gulp-rev');
+var revReplace = require('gulp-rev-replace');
 
 // Loading typescript requirements
 const typescript = require('gulp-typescript');
@@ -151,7 +153,7 @@ gulp.task('build', function(callback) {
 gulp.task('build-systemjs', function(done) {
     var builder = new systemBuilder("./dist", "systemjs.config.js");
 
-    builder.buildStatic('app/main.js', 'tmp/bundle.js', {
+    builder.buildStatic('app/main.js', 'prod/app/bundle.js', {
         normalize: true,
         minify: true,
         mangle: true,
@@ -172,31 +174,24 @@ gulp.task('build-systemjs', function(done) {
 /**
  * The production asset move script
  */
-gulp.task('build:prod-asset', function(callback) {
-    gulp.src('app/**/*.html', {
-        base: 'app/'
-    })
+gulp.task('build:prod-asset', function(done) {
+
+    gulp.src(['app/**/*.html'], { base: './' })
         .pipe(gulp.dest('prod/'));
 
-    gulp.src('*.css', {
-        base: ''
-    })
+    gulp.src(['*.css'], { base: './' })
         .pipe(cssnano())
         .pipe(gulp.dest('prod/'));
 
-    gulp.src('app/' + '**/*.css', {
-        base: 'app/'
-    })
+    gulp.src('app/**/*.css', { base: './' })
         .pipe(cssnano())
         .pipe(gulp.dest('prod/'));
 
-    gulp.src('assets/' + '**/*.*', {
-        base: 'assets/'
-    })
-        .pipe(gulp.dest('prod/assets/'));
+    gulp.src('assets/' + '**/*.*', { base: './' })
+        .pipe(gulp.dest('prod/'));
 
     gulp.src('index.html')
-        .pipe(userref())
+        .pipe(useref())
         .pipe(gulpif('*.css', cssnano()))
         .pipe(gulpif('!*.html', rev()))
         .pipe(revReplace())
