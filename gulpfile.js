@@ -5,7 +5,10 @@ const del = require('del');
 const runSequence = require('run-sequence');
 const minimist = require('minimist');
 var args = minimist(process.argv.slice(2));
-var Builder = require('systemjs-builder');
+var systemBuilder = require('systemjs-builder');
+var useref = require('gulp-useref');
+var gulpif = require('gulp-if');
+var cssnano = require('gulp-cssnano');
 
 // Loading typescript requirements
 const typescript = require('gulp-typescript');
@@ -22,6 +25,16 @@ var install = require("gulp-install");
  */
 gulp.task('clean', function(cb) {
     del(["dist"]).then(function(paths) {
+        console.log('Deleted files and folders:\n', paths.join('\n'));
+        cb();
+    });
+});
+
+/**
+ * Remove prod directory.
+ */
+gulp.task('clean:prod', function(cb) {
+    del(["prod"]).then(function(paths) {
         console.log('Deleted files and folders:\n', paths.join('\n'));
         cb();
     });
@@ -136,17 +149,61 @@ gulp.task('build', function(callback) {
  */
 
 gulp.task('build-systemjs', function(done) {
-    var builder = new Builder("./dist", "systemjs.config.js");
+    var builder = new systemBuilder("./dist", "systemjs.config.js");
 
-    builder.bundle('./dist/app/main.js', 'outfile.js')
+    builder.buildStatic('app/main.js', 'tmp/bundle.js', {
+        normalize: true,
+        minify: true,
+        mangle: true,
+        runtime: false,
+        globalDefs: { DEBUG: false, ENV: 'production' }
+    }
+    )
         .then(function() {
             console.log('Build complete');
+            done();
         })
-        .catch(function(err) {
-            console.log('Build error');
-            console.log(err);
+        .catch(function(ex) {
+            console.log('error', ex);
+            done('Build failed.');
         });
 });
+
+/**
+ * The production asset move script
+ */
+gulp.task('build:prod-asset', function(callback) {
+    gulp.src('app/**/*.html', {
+        base: 'app/'
+    })
+        .pipe(gulp.dest('prod/'));
+
+    gulp.src('*.css', {
+        base: ''
+    })
+        .pipe(cssnano())
+        .pipe(gulp.dest('prod/'));
+
+    gulp.src('app/' + '**/*.css', {
+        base: 'app/'
+    })
+        .pipe(cssnano())
+        .pipe(gulp.dest('prod/'));
+
+    gulp.src('assets/' + '**/*.*', {
+        base: 'assets/'
+    })
+        .pipe(gulp.dest('prod/assets/'));
+
+    gulp.src('index.html')
+        .pipe(userref())
+        .pipe(gulpif('*.css', cssnano()))
+        .pipe(gulpif('!*.html', rev()))
+        .pipe(revReplace())
+        .pipe(gulp.dest('prod/'))
+        .on('finish', done);
+
+})
 
 
 /**
@@ -155,8 +212,11 @@ gulp.task('build-systemjs', function(done) {
 
 gulp.task('build:prod', function(callback) {
     runSequence('clean',
+        'clean:prod',
         'compile',
-        ['copy:assets', 'copy:test-assets', 'copy:libs', 'copy:test-libs'],
+        'copy:libs',
+        'build-systemjs',
+        'build:prod-asset',
         callback);
 });
 

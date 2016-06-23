@@ -9,3 +9,4 @@ npm-debug.log
 typings/
 tmp/
 outfile.js
+prod
