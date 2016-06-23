@@ -5,13 +5,16 @@
         <div *ngIf="status=='IN_PROGRESS'">
             <progress-bubble></progress-bubble>
         </div>
-        <div class="row">
+        <div class="error" *ngIf="status=='FAILED'">
+            {{statusMessage}}
+        </div>
+        <div class="row" *ngIf="status=='SUCCESSFUL'">
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="widget-content">
                     <div class="widget-icon green pull-left">
                         <i class="fa fa-check" aria-hidden="true"></i>
                     </div>
-                    <div class="title">16</div>
+                    <div class="title">{{jobCount.COMPLETED}}</div>
                     <div class="comment">Completed</div>
                 </div>
             </div>
@@ -20,7 +23,7 @@
                     <div class="widget-icon blue pull-left">
                         <i class="fa fa-play" aria-hidden="true"></i>
                     </div>
-                    <div class="title">16</div>
+                    <div class="title">{{jobCount.IN_PROGRESS}}</div>
                     <div class="comment">In Progress</div>
                 </div>
             </div>
@@ -29,8 +32,8 @@
                     <div class="widget-icon orange pull-left">
                         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                     </div>
-                    <div class="title">16</div>
-                    <div class="comment">Pending</div>
+                    <div class="title">{{jobCount.ENQUEUED}}</div>
+                    <div class="comment">Enqueued</div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -38,7 +41,7 @@
                     <div class="widget-icon red pull-left">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </div>
-                    <div class="title">16</div>
+                    <div class="title">{{jobCount.CANCELLED}}</div>
                     <div class="comment">Cancelled</div>
                 </div>
             </div>
