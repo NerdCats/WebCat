@@ -190,7 +190,7 @@ gulp.task('build:prod-asset', function(done) {
     gulp.src('assets/' + '**/*.*', { base: './' })
         .pipe(gulp.dest('prod/'));
 
-    gulp.src('index.html')
+    gulp.src('dist/index.html')
         .pipe(useref())
         .pipe(gulpif('*.css', cssnano()))
         .pipe(gulpif('!*.html', rev()))
@@ -210,6 +210,7 @@ gulp.task('build:prod', function(callback) {
         'clean:prod',
         'compile',
         'copy:libs',
+        'copy:assets',
         'build-systemjs',
         'build:prod-asset',
         callback);
