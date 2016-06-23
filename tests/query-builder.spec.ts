@@ -24,4 +24,3 @@ describe('QueryBuilder Service Tests', () => {
         expect(qstring).toBe("?$orderby=test_prop1 asc,test_prop2 desc,test_prop3 asc");
     });
 });
-
