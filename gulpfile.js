@@ -5,6 +5,7 @@ const del = require('del');
 const runSequence = require('run-sequence');
 const minimist = require('minimist');
 var args = minimist(process.argv.slice(2));
+var Builder = require('systemjs-builder');
 
 // Loading typescript requirements
 const typescript = require('gulp-typescript');
@@ -19,8 +20,8 @@ var install = require("gulp-install");
 /**
  * Remove dist directory.
  */
-gulp.task('clean', function (cb) {
-    del(["dist"]).then(function (paths) {
+gulp.task('clean', function(cb) {
+    del(["dist"]).then(function(paths) {
         console.log('Deleted files and folders:\n', paths.join('\n'));
         cb();
     });
@@ -29,7 +30,7 @@ gulp.task('clean', function (cb) {
 /**
  * Compile TypeScript sources and create sourcemaps in build directory.
  */
-gulp.task('compile', function () {
+gulp.task('compile', function() {
     var tsProject = typescript.createProject('tsconfig.json');
     return tsProject
         .src(['app/**/*.ts', 'tests/**/*.ts'])
@@ -42,7 +43,7 @@ gulp.task('compile', function () {
 /**
  * Lint all custom TypeScript files.
  */
-gulp.task('tslint', function () {
+gulp.task('tslint', function() {
     return gulp.src('app/**/*.ts')
         .pipe(tslint())
         .pipe(tslint.report('verbose'));
@@ -51,7 +52,7 @@ gulp.task('tslint', function () {
 // copy dependencies from node_modules
 // we are just mimicking the dev environment now, but for production a
 // lot more has to be done
-gulp.task('copy:libs', function () {
+gulp.task('copy:libs', function() {
     return gulp.src([
         'bootstrap/dist/css/bootstrap.min.css',
         'bootstrap/dist/css/bootstrap.min.css.map',
@@ -79,7 +80,7 @@ gulp.task('copy:libs', function () {
 
 // copy dependencies from node_modules
 // we are just mimicking the dev environment now, but for production a lot more has to be done
-gulp.task('copy:test-libs', function () {
+gulp.task('copy:test-libs', function() {
     return gulp.src([
         'jasmine-core/lib/jasmine-core/jasmine.css',
         'jasmine-core/lib/jasmine-core/jasmine.js',
@@ -92,12 +93,12 @@ gulp.task('copy:test-libs', function () {
 /**
  * copy static assets - i.e. non TypeScript compiled source
  */
-gulp.task('copy:assets', function () {
+gulp.task('copy:assets', function() {
     return gulp.src(['app/**/*', 'assets/**/*', 'systemjs.config.js', 'config.js', 'package.json', 'index.html', 'styles.css', '!app/**/*.ts'], { base: './' })
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('copy:test-assets', function () {
+gulp.task('copy:test-assets', function() {
     return gulp.src(['test/**/*', 'test.html', '!test/**/*.ts'], { base: './' })
         .pipe(gulp.dest('dist'));
 });
@@ -105,7 +106,7 @@ gulp.task('copy:test-assets', function () {
 /**
  * Watch for changes in HTML and CSS files.
  */
-gulp.task('watch', function () {
+gulp.task('watch', function() {
     return gulp.src('', { base: "./" })
         .pipe(watch(["app/**/*.html", "app/**/*.css", "assets/**/*", "styles.css", "index.html", "test.html", "systemjs.config.js"], { base: "./" }))
         .pipe(gulp.dest("./dist"));
@@ -114,16 +115,16 @@ gulp.task('watch', function () {
 /**
  * Watch for changes in TypeScript files.
  */
-gulp.task('watch-ts', function () {
+gulp.task('watch-ts', function() {
     gulp.watch(['app/**/*.ts', 'tests/**/*.ts'], ['compile']);
 });
 
 
 /**
- * The build script
+ * The development build script
  */
 
-gulp.task('build', function (callback) {
+gulp.task('build', function(callback) {
     runSequence('clean',
         'compile',
         ['copy:assets', 'copy:test-assets', 'copy:libs', 'copy:test-libs'],
@@ -131,10 +132,40 @@ gulp.task('build', function (callback) {
 });
 
 /**
+ * The system-js builder build script
+ */
+
+gulp.task('build-systemjs', function(done) {
+    var builder = new Builder("./dist", "systemjs.config.js");
+
+    builder.bundle('./dist/app/main.js', 'outfile.js')
+        .then(function() {
+            console.log('Build complete');
+        })
+        .catch(function(err) {
+            console.log('Build error');
+            console.log(err);
+        });
+});
+
+
+/**
+ * The production build script
+ */
+
+gulp.task('build:prod', function(callback) {
+    runSequence('clean',
+        'compile',
+        ['copy:assets', 'copy:test-assets', 'copy:libs', 'copy:test-libs'],
+        callback);
+});
+
+
+/**
  * The deploy script
  */
 
-gulp.task('deploy', function () {
+gulp.task('deploy', function() {
     var conn = ftp.create({
         host: args.host,
         user: args.user,
@@ -148,7 +179,7 @@ gulp.task('deploy', function () {
         .pipe(conn.dest('site/wwwroot'));
 });
 
-gulp.task('default', ['build'], function () {
+gulp.task('default', ['build'], function() {
     console.log("Building WebCat ...");
 });
 

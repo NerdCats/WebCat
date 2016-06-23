@@ -56,6 +56,7 @@
     "lite-server": "^2.2.0",
     "minimist": "^1.2.0",
     "run-sequence": "^1.2.1",
+    "systemjs-builder": "^0.15.23",
     "tslint": "^3.10.2",
     "typescript": "^1.8.10",
     "typings": "^0.8.1",
