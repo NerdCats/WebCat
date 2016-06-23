@@ -40,7 +40,7 @@ export class SecureRouterOutlet extends RouterOutlet {
             return super.activate(instruction);
         }
 
-        this.parentRouter.navigate(['Home'])
+        this.parentRouter.navigate(['/Home'])
     }
 
     private _canActivate(url) {
