@@ -25,7 +25,6 @@ export class LoginService {
         this.loggedIn = false;
     }
 
-
     login(loginModel: Login) {
         let headers = new Headers();
         let urlEncodedParam =

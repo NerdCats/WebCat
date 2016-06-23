@@ -2,6 +2,8 @@ node_modules/
 build/
 app/**/*.js
 app/**/*.js.map
+tests/**/*.js
+tests/**/*.js.map
 dist/
 npm-debug.log
 typings/

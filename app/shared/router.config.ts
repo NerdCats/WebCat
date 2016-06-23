@@ -43,6 +43,6 @@ export const Routes = [
 ]
 
 export const PublicRoutes = [
-    '',
+    'home',
     'confirmEmail'
 ]

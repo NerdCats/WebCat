@@ -59,7 +59,7 @@ export class LoginComponent {
                 this.loginStatus = "SUCCESS";
                 this.close();
                 this.onLoginCompleted.emit(this.loginStatus);
-                this.router.navigate(["Home"]);
+                this.router.navigate(["/Home"]);
             },
             (error) => {
                 this.loginStatus = "FAILED";

@@ -11,14 +11,27 @@ import {PageEnvelope, Pagination} from '../../shared/pagination';
 import {AppSettings} from '../../shared/app.settings';
 import {Job} from '../shared/job';
 
+import {QueryBuilder} from '../../shared/query-builder/query-builder';
+
 @Injectable()
 export class JobService {
-    constructor(private shttp: SecureHttp) { }
+    private _queryBuilder: QueryBuilder;
+
+    constructor(private shttp: SecureHttp) {
+        // INFO: Should be injected here
+        this._queryBuilder = new QueryBuilder();
+    }
 
     private jobUrl = AppSettings.TASKCAT_API_BASE + 'job';
 
     getHistory(): Observable<PageEnvelope<Job>> {
-        return this.shttp.secureGet(this.jobUrl + '/odata')
+        let queryString : string = this._queryBuilder.orderBy([
+            {
+                propName: "CreateTime",
+                orderDirection: "desc"
+            }]).toQueryString();
+
+        return this.shttp.secureGet(this.jobUrl + '/odata' + queryString)
             .map((res: Response) => {
                 if (res.status < 200 || res.status >= 300) {
                     throw new Error('Response status: ' + res.status);
