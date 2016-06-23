@@ -1,21 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, provide, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { Router, RouteParams } from '@angular/router-deprecated';
+
+import {
+  MapsAPILoader,
+  NoOpMapsAPILoader,
+  MouseEvent,
+  GOOGLE_MAPS_PROVIDERS,
+  GOOGLE_MAPS_DIRECTIVES
+} from 'angular2-google-maps/core';
 
 import { JobService } from '../shared/job.service';
 import { Job, JobState } from '../shared/job';
 import { OrderInfo } from '../shared/orderInfo';
 import { ComponentServiceStatus } from '../../shared/component-service-status';
-
-import {ProgressBubbleComponent} from '../../common/progress-bubble/progress-bubble.component';
+import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-bubble.component';
 
 
 @Component({
     selector: 'job-track',
     templateUrl: 'app/job/job-track/job-track.component.html',
     styleUrls: ['app/job/job-track/job-track.component.css'],
-    directives: [ProgressBubbleComponent],
+    directives: [ProgressBubbleComponent, GOOGLE_MAPS_DIRECTIVES],
     providers: [ HTTP_PROVIDERS, JobService ]
 })
 
