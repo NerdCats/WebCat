@@ -13,6 +13,7 @@ import {
 
 import { JobService } from '../shared/job.service';
 import { Job, JobState } from '../shared/job';
+import { CoordinateInfo } from '../shared/coordinateInfo';
 import { OrderInfo } from '../shared/orderInfo';
 import { ComponentServiceStatus } from '../../shared/component-service-status';
 import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-bubble.component';
@@ -34,8 +35,10 @@ export class JobTrackComponent implements OnInit{
     public job: Job;
     public orderInfo: OrderInfo;
     public status: ComponentServiceStatus = "IN_PROGRESS";
+    public coordinateInfo: CoordinateInfo;
     public errorMessage: string;
     public orderStatusNumber: number;
+
 
     constructor(private params: RouteParams,
                 private jobService: JobService){
@@ -53,6 +56,7 @@ export class JobTrackComponent implements OnInit{
                 this.fixingServerText(this.job);
                 this.orderStatusNumber  = this.findOrderStatus(this.job);
                 this.orderInfo = new OrderInfo(this.orderStatusNumber);
+                this.coordinateInfo = new CoordinateInfo(this.job);
             },
             (error) => {
                 this.status = "FAILED";
