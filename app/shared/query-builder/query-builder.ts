@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 export type OrderDirection = "asc" | "desc";
 
 @Injectable()
-export class QueryBuilderService {
+export class QueryBuilder {
     private _querySegments: Array<string> = new Array<string>();
 
     constructor() {
     }
 
-    public orderBy(props: Array<{ propName: string, orderDirection?: OrderDirection }>): QueryBuilderService {
+    public orderBy(props: Array<{ propName: string, orderDirection?: OrderDirection }>): QueryBuilder {
         if (props && props.length > 0) {
             let querySegment: string = "$orderby";
             let orderbySegment = props.map(
@@ -20,7 +20,7 @@ export class QueryBuilderService {
         return this;
     }
 
-    public ToQueryString(): string {
+    public toQueryString(): string {
         return "?".concat(this._querySegments.join("&"));
     }
 }
