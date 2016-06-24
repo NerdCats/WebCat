@@ -22,7 +22,7 @@ export type LoginStatus =
     selector: 'login',
     templateUrl: 'app/account/login/login.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, NcShowPassword],
-    providers: [ValidationService, LoginService]
+    providers: [ValidationService]
 })
 export class LoginComponent {
     @Output() onLoginCompleted = new EventEmitter<LoginStatus>();

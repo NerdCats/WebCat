@@ -3,23 +3,24 @@ import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES
 
 import { Router } from '@angular/router-deprecated';
 import { Observable } from 'rxjs/Observable';
-import { LocalStorage } from '../shared/local-storage'
+import { LocalStorage } from '../../shared/local-storage'
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
-import { LocalityService } from '../shared/app-locality.service';
-import { OrderModel, OrderCartModel, PackageListModel } from '../shared/model/order-model';
+import { LocalityService } from '../../shared/app-locality.service';
+import { OrderModel, OrderCartModel, PackageListModel } from '../../shared/model/order-model';
 import { OrderService } from './order.service';
+import { DashboardBusService } from  '../dashboard-bus.service';
 
 
 @Component({
     selector: 'order',
-    templateUrl: 'app/order/order.component.html',
+    templateUrl: 'app/dashboard/order/order.component.html',
     directives: [MODAL_DIRECTIVES, ModalComponent, FORM_DIRECTIVES, CORE_DIRECTIVES],
     providers: [OrderService, LocalStorage, LocalityService],
-    styleUrls: ['app/order/order.component.css']
+    styleUrls: ['app/dashboard/order/order.component.css']
 })
 
-export class OrderComponent{
+export class OrderComponent {
     public orderModel: OrderModel;
     public packageListItem: PackageListModel;
     public isUpdating: boolean;
@@ -33,17 +34,19 @@ export class OrderComponent{
         private orderService: OrderService,
         private router: Router,
         private _localStorage: LocalStorage,
+        private busService: DashboardBusService,
         private localityService: LocalityService) {
+        this.busService.annouceSectionChange("New Order");
         this.initiateOrderModel();
         this.isUpdating = false;
         this.areas = this.localityService.getLocalities();
     }
 
 
-    onSubmit(){
+    onSubmit() {
         this.orderCreationStatus = 'IN_PROGRESS';
         this.orderService.createOrder(this.orderModel)
-            .subscribe((result)=>{
+            .subscribe((result) => {
                 this.orderCreationStatus = 'SUCCESS';
                 this.orderModel = new OrderModel();
                 this.resetForm();
@@ -56,7 +59,7 @@ export class OrderComponent{
 
     }
 
-    addOrUpdateItem(){
+    addOrUpdateItem() {
         if (this.isUpdating) {
             this.isUpdating = !this.isUpdating;
         } else {
@@ -66,7 +69,7 @@ export class OrderComponent{
         this.close();
     }
 
-    initiateOrderModel(){
+    initiateOrderModel() {
         this.orderModel = new OrderModel();
         this.orderModel.Type = "Delivery";
         this.orderModel.PayloadType = "default";
@@ -76,24 +79,23 @@ export class OrderComponent{
         this.packageListItem = new PackageListModel();
     }
 
-    removeItem(index: number){
+    removeItem(index: number) {
         this.orderModel.OrderCart.PackageList.splice(index);
-        console.log(index);
     }
 
-    editItem(item: PackageListModel){
+    editItem(item: PackageListModel) {
         this.itemAddOrUpdateText = "Update";
         this.isUpdating = true;
         this.packageListItem = item;
         this.modal.open();
     }
 
-    addItem(){
+    addItem() {
         this.itemAddOrUpdateText = "Add";
         this.open();
     }
 
-    cancelModal(){
+    cancelModal() {
         this.packageListItem = new PackageListModel();
         this.close();
     }
@@ -117,7 +119,7 @@ export class OrderComponent{
 
     }
 
-    resetForm(){
+    resetForm() {
         this.initiateOrderModel();
         // this.router.navigate(["Job"])
     }
