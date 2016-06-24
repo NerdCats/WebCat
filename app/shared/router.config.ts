@@ -19,12 +19,7 @@ export const Routes = [
         component: ConfirmEmailComponent
     },
     {
-        path: '/order',
-        name: 'Order',
-        component: OrderComponent,
-    },
-    {
-        path: '/dashboard',
+        path: '/dashboard/...',
         name: 'Dashboard',
         component: DashboardComponent
     }

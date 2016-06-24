@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, RouteConfig } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES, RouterOutlet, RouteConfig } from '@angular/router-deprecated';
 
-import { JobHistoryComponent } from '../job/job-history/job-history.component';
-import { JobSummaryComponent } from '../job/job-summary/job-summary.component';
+import { GlimpseComponent } from './glimpse/glimpse.component';
 import { OrderComponent } from '../order/order.component';
 
 @Component({
     selector: 'dashboard',
     templateUrl: 'app/dashboard/dashboard.component.html',
-    directives: [RouterOutlet, JobHistoryComponent, JobSummaryComponent]
+    directives: [ROUTER_DIRECTIVES, RouterOutlet, GlimpseComponent]
 })
 @RouteConfig([
-    { path: '/', name: 'order', component: OrderComponent, useAsDefault: true }
+    { path: '/glimpse', name: 'Glimpse', component: GlimpseComponent, useAsDefault: true },
+    { path: '/order', name: 'Order', component: OrderComponent}
 ])
 export class DashboardComponent implements OnInit {
     isSideBarOpen: boolean = true;
