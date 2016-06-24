@@ -11,16 +11,12 @@
                 <li class="sidebar-list">
                     <a [routerLink]="['Dashboard']">Glimpse<span class="menu-icon fa fa-tachometer"></span></a>
                 </li>
-                <!--<li class="sidebar-list">
-          <a href="#/tables">Tables <span class="menu-icon fa fa-table"></span></a>
-        </li>-->
             </ul>
         </div>
         <!-- End Sidebar -->
 
         <div id="content-wrapper">
             <div class="page-content">
-
                 <!-- Header Bar -->
                 <div class="row header">
                     <div class="col-xs-12">
@@ -39,7 +35,6 @@
                     </div>
                 </div>
                 <!-- End Header Bar -->
-
                 <!-- Main Content -->
                 <!-- uiView:  -->
                 <div>
@@ -52,6 +47,8 @@
                         <job-history></job-history>
                     </div>
                 </div>
+
+                <router-outlet></router-outlet>
             </div>
             <!-- End Page Content -->
         </div>
