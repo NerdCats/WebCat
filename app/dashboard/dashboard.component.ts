@@ -1,17 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { JobHistoryComponent } from '../job/job-history/job-history.component';
-import { JobSummaryComponent } from '../job/job-summary/job-summary.component';
+import { ROUTER_DIRECTIVES, RouterOutlet, RouteConfig } from '@angular/router-deprecated';
+
+import { GlimpseComponent } from './glimpse/glimpse.component';
+import { OrderComponent } from './order/order.component';
+
+import { DashboardBusService } from './dashboard-bus.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'dashboard',
     templateUrl: 'app/dashboard/dashboard.component.html',
-    directives: [ROUTER_DIRECTIVES, JobHistoryComponent, JobSummaryComponent]
+    directives: [ROUTER_DIRECTIVES, RouterOutlet, GlimpseComponent],
+    providers: [DashboardBusService]
 })
+@RouteConfig([
+    { path: '/glimpse', name: 'Glimpse', component: GlimpseComponent, useAsDefault: true },
+    { path: '/order', name: 'Order', component: OrderComponent }
+])
 export class DashboardComponent implements OnInit {
     isSideBarOpen: boolean = true;
+    sectionName: string;
 
-    constructor() { }
+    constructor(private busService: DashboardBusService) {
+        this.busService.sectionChangeAnnounced$.subscribe(newSectionName => {
+            this.sectionName = newSectionName;
+        })
+    }
 
     ngOnInit() { }
 

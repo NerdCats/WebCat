@@ -10,17 +10,14 @@
                 </li>
                 <li class="sidebar-list">
                     <a [routerLink]="['Dashboard']">Glimpse<span class="menu-icon fa fa-tachometer"></span></a>
+                    <a [routerLink]="['Order']">New Order<span class="menu-icon fa fa-plus"></span></a>
                 </li>
-                <!--<li class="sidebar-list">
-          <a href="#/tables">Tables <span class="menu-icon fa fa-table"></span></a>
-        </li>-->
             </ul>
         </div>
         <!-- End Sidebar -->
 
         <div id="content-wrapper">
             <div class="page-content">
-
                 <!-- Header Bar -->
                 <div class="row header">
                     <div class="col-xs-12">
@@ -33,25 +30,16 @@
                         </div>
                         <div class="meta">
                             <div class="page">
-                                Glimpse
+                                {{sectionName}}
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- End Header Bar -->
-
                 <!-- Main Content -->
                 <!-- uiView:  -->
-                <div>
-                    <div>
-                        <div class="row">
-                            <job-summary></job-summary>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <job-history></job-history>
-                    </div>
-                </div>
+                <router-outlet>
+                </router-outlet>
             </div>
             <!-- End Page Content -->
         </div>
