@@ -1,4 +1,6 @@
 language: node_js
+env:
+  - AZURE_REPO_URL="https://webcatdeveldeploy@webcatdevel.scm.azurewebsites.net:443/webcatdevel.git"
 node_js:
   - "4"
 branches:
@@ -8,3 +10,5 @@ before_script:
   - npm install -g gulp
 script:
   - npm run build
+after_success:
+  - ./scripts/deploy.sh
