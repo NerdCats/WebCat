@@ -1,10 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {HTTP_PROVIDERS } from '@angular/http';
 
 import {JobService} from '../shared/job.service';
-import {PageEnvelope, Pagination} from '../../shared/pagination';
-import {Job, JobState} from '../shared/job';
+import {Job} from '../shared/job';
 
 import {ComponentServiceStatus} from '../../shared/component-service-status';
 
@@ -19,7 +17,7 @@ export type ComponentMode = "WIDGET" | "FULL";
     selector: 'job-history',
     templateUrl: 'app/job/job-history/job-history.component.html',
     directives: [ProgressBubbleComponent, WidgetHeaderComponent, WidgetBodyComponent],
-    providers: [JobService, HTTP_PROVIDERS]
+    providers: [JobService]
 })
 export class JobHistoryComponent implements OnInit {
     @Input()

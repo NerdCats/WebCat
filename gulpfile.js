@@ -5,6 +5,12 @@ const del = require('del');
 const runSequence = require('run-sequence');
 const minimist = require('minimist');
 var args = minimist(process.argv.slice(2));
+var systemBuilder = require('systemjs-builder');
+var useref = require('gulp-useref');
+var gulpif = require('gulp-if');
+var cssnano = require('gulp-cssnano');
+var rev = require('gulp-rev');
+var revReplace = require('gulp-rev-replace');
 
 // Loading typescript requirements
 const typescript = require('gulp-typescript');
@@ -12,7 +18,7 @@ const tscConfig = require('./tsconfig.json');
 const sourcemaps = require('gulp-sourcemaps');
 const tslint = require('gulp-tslint');
 var watch = require('gulp-watch');
-
+var inject = require('gulp-inject');
 // npm
 var install = require("gulp-install");
 
@@ -21,6 +27,16 @@ var install = require("gulp-install");
  */
 gulp.task('clean', function (cb) {
     del(["dist"]).then(function (paths) {
+        console.log('Deleted files and folders:\n', paths.join('\n'));
+        cb();
+    });
+});
+
+/**
+ * Remove prod directory.
+ */
+gulp.task('clean:prod', function (cb) {
+    del(["prod"]).then(function (paths) {
         console.log('Deleted files and folders:\n', paths.join('\n'));
         cb();
     });
@@ -120,7 +136,7 @@ gulp.task('watch-ts', function () {
 
 
 /**
- * The build script
+ * The development build script
  */
 
 gulp.task('build', function (callback) {
@@ -129,6 +145,87 @@ gulp.task('build', function (callback) {
         ['copy:assets', 'copy:test-assets', 'copy:libs', 'copy:test-libs'],
         callback);
 });
+
+/**
+ * The system-js builder build script
+ */
+
+gulp.task('build-systemjs', function (done) {
+    var builder = new systemBuilder("./dist", "systemjs.config.js");
+
+    builder.buildStatic('app/main.js', 'prod/app/bundle.js', {
+        normalize: true,
+        minify: true,
+        mangle: true,
+        runtime: false,
+        globalDefs: { DEBUG: false, ENV: 'production' }
+    }
+    )
+        .then(function () {
+            console.log('Build complete');
+            done();
+        })
+        .catch(function (ex) {
+            console.log('error', ex);
+            done('Build failed.');
+        });
+});
+
+/**
+ * The production asset move script
+ */
+gulp.task('build:prod-asset', function (done) {
+
+    gulp.src(['app/**/*.html'], { base: './' })
+        .pipe(gulp.dest('prod/'));
+
+    gulp.src(['*.css'], { base: './' })
+        .pipe(cssnano())
+        .pipe(gulp.dest('prod/'));
+
+    gulp.src('app/**/*.css', { base: './' })
+        .pipe(cssnano())
+        .pipe(gulp.dest('prod/'));
+
+    gulp.src('assets/' + '**/*.*', { base: './' })
+        .pipe(gulp.dest('prod/'));
+
+    gulp.src(['dist/lib/font-awesome/fonts/*.*'])
+        .pipe(gulp.dest('prod/fonts'));
+
+    gulp.src('dist/index.html')
+        .pipe(useref())
+        .pipe(gulpif('*.css', cssnano()))
+        .pipe(gulpif('!*.html', rev()))
+        .pipe(revReplace())
+        .pipe(gulp.dest('prod/'))
+        .on('finish', done);
+});
+
+gulp.task('build:inject-index', function (done) {
+    var bundleSources = gulp.src('./prod/app/bundle.js', { read: false });
+    gulp.src('./prod/index.html')
+        .pipe(inject(bundleSources, {ignorePath: 'prod'}))
+        .pipe(gulp.dest('prod/'))
+        .on('finish', done);
+});
+
+/**
+ * The production build script
+ */
+
+gulp.task('build:prod', function (callback) {
+    runSequence('clean',
+        'clean:prod',
+        'compile',
+        'copy:libs',
+        'copy:assets',
+        'build-systemjs',
+        'build:prod-asset',
+        'build:inject-index',
+        callback);
+});
+
 
 /**
  * The deploy script
