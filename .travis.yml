@@ -10,8 +10,5 @@ before_script:
   - npm install -g gulp
 script:
   - npm run build
-deploy:
-  provider: script
-  script: scripts/deploy.sh
-  on:
-    branch: master
+after_success:
+  - ./scripts/deploy.sh
