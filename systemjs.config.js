@@ -8,7 +8,7 @@
     '@angular':                   'lib/@angular',
     'ng2-bootstrap':              'lib/ng2-bootstrap',
     'moment':                     'lib/moment',
-    'ng2-bs3-modal':              'lib/ng2-bs3-modal'
+    'ng2-bs3-modal':              'lib/ng2-bs3-modal',
   };
 
   // packages tells the System loader how to load when no filename and/or no extension

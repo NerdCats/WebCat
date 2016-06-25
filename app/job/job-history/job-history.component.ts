@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 import {JobService} from '../shared/job.service';
 import {Job} from '../shared/job';
@@ -31,12 +32,18 @@ export class JobHistoryComponent implements OnInit {
     componentMode: ComponentMode = "WIDGET";
     statusMessage: string;
 
-    constructor(private jobService: JobService) {
+    constructor(private jobService: JobService, private router: Router) {
     }
 
     ngOnInit() {
         this.getJobs();
     }
+
+
+    goToTrackingPage(jobId: string){
+        this.router.navigateByUrl("/track/" + jobId);
+    }
+
 
     getJobs() {
         this.jobs = new Array<Job>();

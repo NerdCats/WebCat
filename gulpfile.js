@@ -89,7 +89,7 @@ gulp.task('copy:libs', function() {
         'ng2-bs3-modal/**',
         'rdash-ui/dist/css/rdash.css',
         'font-awesome/css/font-awesome.css',
-        'font-awesome/fonts/**'
+        'font-awesome/fonts/**',
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("dist/lib"));
 });

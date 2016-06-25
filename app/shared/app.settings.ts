@@ -14,4 +14,11 @@ export class AppSettings {
    public static get CLIENT_ID(): string {
      return 'GoFetchDevWebApp';
    }
+
+   public static get SHADOWCAT_API_BASE(): string {
+     return this.SHADOWCAT_BASE + "api/"
+   }
+   public static get SHADOWCAT_BASE(): string {
+     return "http://gofetch.cloudapp.net:1337/"
+   }
 }

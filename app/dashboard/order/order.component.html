@@ -13,7 +13,7 @@
           <div *ngIf="orderCreationStatus=='SUCCESS'" class="form-group">
             <label class="col-md-8 control-label" for="success"></label>
             <div class="col-md-4 alert alert-success alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> Order created Successfully, click <strong><a href="#" class="alert-link">here</a></strong> to track!
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> Order created Successfully, click <a (click)="goToTrackingPage()">here</a> to track!
             </div>
           </div>
         </div>
@@ -24,9 +24,6 @@
         <label class="col-md-4 control-label" for="pickup-address">Pickup Address</label>
         <div class="col-md-4">
           <textarea required ngControl="pickupAddress" #pickupAddress="ngForm" class="form-control" id="pickup-address" name="pickup-address" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.From.AddressLine1"></textarea>
-          <div [hidden]="pickupAddress.valid || pickupAddress.pristine" class="alert alert-danger">
-            Pickup Address is required
-          </div>
         </div>
       </div>
 
@@ -45,9 +42,6 @@
         <label class="col-md-4 control-label" for="delivery-address">Delivery Address</label>
         <div class="col-md-4">
           <textarea required ngControl="deliveryAddress" #deliveryAddress="ngForm" class="form-control" id="delivery-address" name="delivery-address" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.To.AddressLine1"></textarea>
-          <div [hidden]="deliveryAddress.valid || deliveryAddress.pristine" class="alert alert-danger">
-            Delivery Address is required
-          </div>
         </div>
       </div>
 
@@ -67,11 +61,8 @@
         <label class="col-md-4 control-label" for="payment-method">Payment Method</label>
         <div class="col-md-4">
           <select required ngControl="paymentMethod" #paymentMethod="ngForm" id="payment-method" name="payment-method" class="form-control" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.paymentMethod">
-          <option value="CashOnDelivery" selected>Cash On Delivery</option>
-        </select>
-          <div [hidden]="paymentMethod.valid || paymentMethod.pristine" class="alert alert-danger">
-            A Payment Method is required
-          </div>
+            <option value="CashOnDelivery" selected>Cash On Delivery</option>
+          </select>
         </div>
       </div>
 

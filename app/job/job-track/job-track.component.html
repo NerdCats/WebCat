@@ -1,0 +1,168 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="page-header">
+				<h1>{{jobId}}</h1>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="status=='IN_PROGRESS'">
+        <progress-bubble></progress-bubble>
+    </div>
+	<div *ngIf="status=='FAILED'">
+        <div class="alert alert-danger" role="alert">
+			{{ errorMessage }}
+		</div>
+    </div>
+	<div class="row" *ngIf="status=='SUCCESSFUL'">
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Customer Information
+					</h3>
+				</div>
+				<div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Pickup Address</strong>
+                            <p>{{job.Order.From.Address}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Delivery Address</strong>
+                            <p>{{job.Order.To.Address}}</p>
+                        </div>
+                    </div>
+					<div class="row">
+						<div class="col-md-6">
+							<strong>Note To Delivery Man</strong>
+							<p>{{job.Order.NoteToDeliveryMan}}</p>
+							<strong>Payment Method</strong>
+							<p>{{job.PaymentMethod}}</p>
+							<strong>Payment Status</strong>
+							<p>{{job.PaymentStatus}}</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="panel panel-primary" *ngIf="coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Tracking
+					</h3>
+				</div>
+				<div class="panel-body">
+					<sebm-google-map
+						[latitude] = "23.797337"
+						[longitude] = "90.406987"
+						[zoom] = "10">
+						<sebm-google-map-marker
+							*ngIf="coordinateInfo.pickUpAddressAvailable"
+							[latitude]="job.Order.From.Point.coordinates[1]"
+							[longitude]="job.Order.From.Point.coordinates[0]"
+							[iconUrl] = "mapMarker.greenMarker"
+							[label]="P">
+								<sebm-google-map-info-window>
+								<strong>Pickup Location</strong>
+							</sebm-google-map-info-window>
+						</sebm-google-map-marker>
+						<sebm-google-map-marker
+							*ngIf="coordinateInfo.deliveryAddressAvailable"
+							[latitude]="job.Order.To.Point.coordinates[1]"
+							[longitude]="job.Order.To.Point.coordinates[0]"
+							[iconUrl] = "mapMarker.redMarker"
+							[label]="D">
+								<sebm-google-map-info-window>
+								<strong>Delivery Location</strong>
+							</sebm-google-map-info-window>
+						</sebm-google-map-marker>
+						<sebm-google-map-marker
+							*ngIf="coordinateInfo.assetLocationAvailable"
+							[latitude]="assetLocation.point.coordinates[1]"
+							[longitude]="assetLocation.point.coordinates[0]"
+							[iconUrl] = "mapMarker.blueMarker"
+							[label]="P">
+								<sebm-google-map-info-window>
+								<strong>Delivery Man</strong>
+							</sebm-google-map-info-window>
+						</sebm-google-map-marker>
+					</sebm-google-map>
+				</div>
+				<div class="btn-group btn-group-justified" role="group" aria-label="...">
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default">
+							<img src="{{mapMarker.greenMarker}}" alt="">
+							Pick up</button>
+					</div>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default">
+							<img src="{{mapMarker.redMarker}}" alt="">
+							Delivery</button>
+					</div>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default">
+							<img src="{{mapMarker.blueMarker}}" alt="">
+							Delivery Man</button>
+					</div>
+				</div>
+			</div>
+            <div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Order Information
+					</h3>
+				</div>
+				<div class="panel-body">
+					<p><strong>{{ orderInfo.orderInfoHeading }}</strong></p>
+					<!--injected html here because I wanted to highlight the email address substring! in the orderInfoDesc-->
+					<p [innerHtml]="orderInfo.orderInfoDesc"></p>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Item List
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-sm table-hover table-bordered">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Item</th>
+									<th>Qty</th>
+									<th>Unit Price</th>
+									<th>Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let item of job.Order.OrderCart.PackageList">
+									<th scope="row">1</th>
+									<td>{{ item.Item }}</td>
+									<td>{{ item.Quantity }}</td>
+									<td>{{ item.Price }}</td>
+									<td>{{ item.Total }}</td>
+								</tr>
+								<tr>
+									<td colspan="4" class="text-right">Subtotal</td>
+									<td>{{ job.Order.OrderCart.SubTotal }}</td>
+								</tr>
+								<tr>
+									<td colspan="4" class="text-right">Delivery Charge</td>
+									<td>{{ job.Order.OrderCart.ServiceCharge }}</td>
+								</tr>
+								<tr>
+									<td colspan="4" class="text-right">Total</td>
+									<td>{{ job.Order.OrderCart.TotalToPay }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
