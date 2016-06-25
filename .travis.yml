@@ -7,6 +7,4 @@ branches:
 before_script:
   - npm install -g gulp
 script:
-  - gulp
-after_success:
-  "gulp deploy --user \"$FTP_USER\" --password $FTP_PASSWORD --host $FTP_SITE"
+  - npm run build
