@@ -40,6 +40,14 @@ export class JobTrackComponent implements OnInit{
     public orderStatusNumber: number;
     public assetLocation: any;
 
+    public mapMarker  = {
+        blueMarker : "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+		redMarker : "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+		purpleMarker : "http://maps.google.com/mapfiles/ms/icons/purple-dot.png",
+		yellowMarker : "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+		greenMarker : "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+    };
+
     constructor(private params: RouteParams,
                 private jobService: JobService){
         this.jobId = params.get('jobId');

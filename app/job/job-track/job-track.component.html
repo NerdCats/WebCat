@@ -61,6 +61,7 @@
 							*ngIf="coordinateInfo.pickUpAddressAvailable"
 							[latitude]="job.Order.From.Point.coordinates[1]"
 							[longitude]="job.Order.From.Point.coordinates[0]"
+							[iconUrl] = "mapMarker.greenMarker"
 							[label]="P">
 								<sebm-google-map-info-window>
 								<strong>Pickup Location</strong>
@@ -70,6 +71,7 @@
 							*ngIf="coordinateInfo.deliveryAddressAvailable"
 							[latitude]="job.Order.To.Point.coordinates[1]"
 							[longitude]="job.Order.To.Point.coordinates[0]"
+							[iconUrl] = "mapMarker.redMarker"
 							[label]="D">
 								<sebm-google-map-info-window>
 								<strong>Delivery Location</strong>
@@ -79,6 +81,7 @@
 							*ngIf="coordinateInfo.assetLocationAvailable"
 							[latitude]="assetLocation.point.coordinates[1]"
 							[longitude]="assetLocation.point.coordinates[0]"
+							[iconUrl] = "mapMarker.blueMarker"
 							[label]="P">
 								<sebm-google-map-info-window>
 								<strong>Delivery Man</strong>
@@ -88,13 +91,19 @@
 				</div>
 				<div class="btn-group btn-group-justified" role="group" aria-label="...">
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">Pick up</button>
+						<button type="button" class="btn btn-default">
+							<img src="{{mapMarker.greenMarker}}" alt="">
+							Pick up</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">Delivery</button>
+						<button type="button" class="btn btn-default">
+							<img src="{{mapMarker.redMarker}}" alt="">
+							Delivery</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">Delivery Man</button>
+						<button type="button" class="btn btn-default">
+							<img src="{{mapMarker.blueMarker}}" alt="">
+							Delivery Man</button>
 					</div>
 				</div>
 			</div>
