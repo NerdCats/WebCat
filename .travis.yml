@@ -11,9 +11,5 @@ before_script:
   - chmod u+x scripts/deploy.sh
 script:
   - npm run build
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: scripts/deploy.sh
-  on:
-    branch: master
+after_success:
+  - scripts/deploy.sh
