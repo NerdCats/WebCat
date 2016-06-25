@@ -10,5 +10,9 @@ before_script:
   - npm install -g gulp
 script:
   - npm run build
-after_success:
-  - ./scripts/deploy.sh
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: scripts/deploy.sh
+  on:
+    branch: develop
