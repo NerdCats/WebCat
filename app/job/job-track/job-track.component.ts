@@ -24,9 +24,6 @@ import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-b
     directives: [ProgressBubbleComponent, GOOGLE_MAPS_DIRECTIVES],
     providers: [JobService]
 })
-
-
-
 export class JobTrackComponent implements OnInit {
 
     public jobId: string;

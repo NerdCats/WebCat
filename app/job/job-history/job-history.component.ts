@@ -44,7 +44,6 @@ export class JobHistoryComponent implements OnInit {
         this.router.navigateByUrl("/track/" + jobId);
     }
 
-
     getJobs() {
         this.jobs = new Array<Job>();
         this.jobService.getHistory()
