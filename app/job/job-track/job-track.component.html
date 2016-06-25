@@ -46,7 +46,7 @@
 				</div>
 
 			</div>
-			<div class="panel panel-primary">
+			<div class="panel panel-primary" *ngIf="coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						Tracking
