@@ -38,7 +38,7 @@ export class JobTrackComponent implements OnInit{
     public coordinateInfo: CoordinateInfo;
     public errorMessage: string;
     public orderStatusNumber: number;
-
+    public assetLocation: any;
 
     constructor(private params: RouteParams,
                 private jobService: JobService){
@@ -57,6 +57,18 @@ export class JobTrackComponent implements OnInit{
                 this.orderStatusNumber  = this.findOrderStatus(this.job);
                 this.orderInfo = new OrderInfo(this.orderStatusNumber);
                 this.coordinateInfo = new CoordinateInfo(this.job);
+
+                for(var key in this.job.Assets){
+                    this.assetLocation = this.jobService.getAssetLocation(key)
+                        .subscribe((location) => {
+                            this.coordinateInfo.assetLocationAvailable = true;
+                            this.assetLocation = location;
+                        })
+                }
+
+
+
+
             },
             (error) => {
                 this.status = "FAILED";

@@ -23,6 +23,7 @@ export class JobService {
     }
 
     private jobUrl = AppSettings.TASKCAT_API_BASE + 'job';
+    private assetLocationUrl = AppSettings.SHADOWCAT_API_BASE + "location/";
 
     getHistory(): Observable<PageEnvelope<Job>> {
         let queryString: string = this._queryBuilder.orderBy([
@@ -51,6 +52,17 @@ export class JobService {
             })
             .catch(error => {
                 return  Observable.throw(error);
+            })
+    }
+
+    getAssetLocation(assetId): Observable<Object>{
+        return this.shttp.secureGet(this.assetLocationUrl + assetId)
+            .map((res: Response) => {
+                let assetLocation = res.json();
+                return assetLocation;
+            })
+            .catch(error => {
+                return Observable.throw(error);
             })
     }
 

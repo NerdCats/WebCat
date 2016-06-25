@@ -77,8 +77,8 @@
 						</sebm-google-map-marker>
 						<sebm-google-map-marker
 							*ngIf="coordinateInfo.assetLocationAvailable"
-							[latitude]="job.Order.From.Point.coordinates[1]"
-							[longitude]="job.Order.From.Point.coordinates[0]"
+							[latitude]="assetLocation.point.coordinates[1]"
+							[longitude]="assetLocation.point.coordinates[0]"
 							[label]="P">
 								<sebm-google-map-info-window>
 								<strong>Delivery Man</strong>
