@@ -29,7 +29,6 @@
     "bootstrap": "^3.3.6",
     "es6-shim": "^0.35.0",
     "font-awesome": "^4.6.3",
-    "gulp-rev-replace": "^0.4.3",
     "jquery": "^2.2.3",
     "moment": "^2.13.0",
     "ng2-bootstrap": "^1.0.16",
@@ -47,11 +46,13 @@
     "gulp": "^3.9.0",
     "gulp-cssnano": "^2.1.2",
     "gulp-debug": "^2.1.2",
+    "gulp-git": "^1.7.2",
     "gulp-if": "^2.0.1",
     "gulp-inject": "^4.1.0",
-    "gulp-install": "^0.6.0",
     "gulp-rev": "^7.1.0",
+    "gulp-rev-replace": "^0.4.3",
     "gulp-rimraf": "^0.2.0",
+    "gulp-run": "^1.7.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^5.0.0",
     "gulp-typescript": "^2.8.0",
@@ -66,6 +67,6 @@
     "tslint": "^3.10.2",
     "typescript": "^1.8.10",
     "typings": "^0.8.1",
-    "vinyl-ftp": "^0.4.5"
+    "yargs": "^4.7.1"
   }
 }
