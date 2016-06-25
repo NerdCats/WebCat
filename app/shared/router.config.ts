@@ -29,7 +29,7 @@ export const Routes = [
         component: JobTrackComponent
     },
     {
-        path: '/dashboard',
+        path: '/dashboard/...',
         name: 'Dashboard',
         component: DashboardComponent
     }
