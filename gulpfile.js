@@ -82,6 +82,7 @@ gulp.task('copy:libs', function() {
         'reflect-metadata/Reflect.js',
         'rxjs/**',
         'zone.js/dist/zone.js',
+        'angular2-google-maps/**',
         'angular2-in-memory-web-api/web-api.js',
         '@angular/**',
         'moment/moment.js',
@@ -252,10 +253,8 @@ gulp.task('deploy-git-push', function(done) {
     console.log("commit to git");
     gulp.src('.')
         .pipe(run("git add --all"))
-        .pipe(git.commit(undefined, {
-            args: '-m "initial commit" -q',
-            disableMessageRequirement: true
-        }))
+        .pipe(run('git commit -m "deploy commit" -q'))
+        .pipe(run('git push origin master'))
         .on('finish', done);
 });
 

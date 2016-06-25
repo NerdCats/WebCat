@@ -8,7 +8,7 @@ import { SECURE_HTTP_PROVIDERS} from './shared/secure-http';
 import { Router, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 
 
-import { GOOGLE_MAPS_PROVIDERS, provideLazyMapsAPILoaderConfig } from './job/shared/google-map/core/index';
+import { GOOGLE_MAPS_PROVIDERS, provideLazyMapsAPILoaderConfig } from 'angular2-google-maps/core/index';
 import 'rxjs/add/operator/catch';
 
 // INFO: Need to use a proper logging module here

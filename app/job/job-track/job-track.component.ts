@@ -1,15 +1,13 @@
 import { Component, provide, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HTTP_PROVIDERS } from '@angular/http';
 import { Router, RouteParams } from '@angular/router-deprecated';
 
 import {
-  MapsAPILoader,
-  NoOpMapsAPILoader,
-  MouseEvent,
-  GOOGLE_MAPS_PROVIDERS,
-  GOOGLE_MAPS_DIRECTIVES
-} from '../shared/google-map/core/index';
+    MapsAPILoader,
+    NoOpMapsAPILoader,
+    MouseEvent,
+    GOOGLE_MAPS_DIRECTIVES
+} from 'angular2-google-maps/core/index';
 
 import { JobService } from '../shared/job.service';
 import { Job, JobState } from '../shared/job';
@@ -24,12 +22,12 @@ import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-b
     templateUrl: 'app/job/job-track/job-track.component.html',
     styleUrls: ['app/job/job-track/job-track.component.css'],
     directives: [ProgressBubbleComponent, GOOGLE_MAPS_DIRECTIVES],
-    providers: [ HTTP_PROVIDERS, JobService ]
+    providers: [JobService]
 })
 
 
 
-export class JobTrackComponent implements OnInit{
+export class JobTrackComponent implements OnInit {
 
     public jobId: string;
     public job: Job;
@@ -40,43 +38,39 @@ export class JobTrackComponent implements OnInit{
     public orderStatusNumber: number;
     public assetLocation: any;
 
-    public mapMarker  = {
-        blueMarker : "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-		redMarker : "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-		purpleMarker : "http://maps.google.com/mapfiles/ms/icons/purple-dot.png",
-		yellowMarker : "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
-		greenMarker : "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+    public mapMarker = {
+        blueMarker: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+        redMarker: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+        purpleMarker: "http://maps.google.com/mapfiles/ms/icons/purple-dot.png",
+        yellowMarker: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+        greenMarker: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
     };
 
     constructor(private params: RouteParams,
-                private jobService: JobService){
+        private jobService: JobService) {
         this.jobId = params.get('jobId');
     }
-    ngOnInit(){
+    ngOnInit() {
         this.getJob();
     }
 
-    getJob(){
+    getJob() {
         this.jobService.getJob(this.jobId)
             .subscribe((job) => {
                 this.status = "SUCCESSFUL";
                 this.job = job;
                 this.fixingServerText(this.job);
-                this.orderStatusNumber  = this.findOrderStatus(this.job);
+                this.orderStatusNumber = this.findOrderStatus(this.job);
                 this.orderInfo = new OrderInfo(this.orderStatusNumber, job.User.Email);
                 this.coordinateInfo = new CoordinateInfo(this.job);
 
-                for(var key in this.job.Assets){
+                for (var key in this.job.Assets) {
                     this.assetLocation = this.jobService.getAssetLocation(key)
                         .subscribe((location) => {
                             this.coordinateInfo.assetLocationAvailable = true;
                             this.assetLocation = location;
                         })
                 }
-
-
-
-
             },
             (error) => {
                 this.status = "FAILED";
@@ -94,7 +88,7 @@ export class JobTrackComponent implements OnInit{
             });
     }
 
-    fixingServerText(job: Job){
+    fixingServerText(job: Job) {
         // this weird function is to streamline server responses
         // like, CashOnDelivery to Cash On Deliver ||
         // IN_PROGRESS to IN PROGRESS
@@ -102,17 +96,19 @@ export class JobTrackComponent implements OnInit{
         this.job.Order.PaymentMethod = "Cash On Delivery";
     }
 
-    findOrderStatus(job: Job){
+
+    // INFO: This is shamefully ugly
+    findOrderStatus(job: Job) {
         if (job.State == "ENQUEUED") {
             return 1;
         }
         else if (job.State == "IN_PROGRESS") {
             if (job.Tasks[1]["Type"] == "PackagePickUp"
-            && job.Tasks[1]["State"] == "IN_PROGRESS") {
+                && job.Tasks[1]["State"] == "IN_PROGRESS") {
                 return 2;
             }
             else if (job.Tasks[2]["Type"] == "Delivery"
-            && job.Tasks[2]["State"] == "IN_PROGRESS") {
+                && job.Tasks[2]["State"] == "IN_PROGRESS") {
                 return 3;
             }
         }
