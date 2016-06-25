@@ -30,7 +30,7 @@ export class OrderComponent {
     public areas: Array<string>;
     public itemAddOrUpdateText: string = "Add";
     public formTitle:string = "Create your Delivery Order";
-
+    public submittedJobId: string;
     constructor(private formBuilder: FormBuilder,
         private orderService: OrderService,
         private router: Router,
@@ -48,6 +48,8 @@ export class OrderComponent {
         this.orderCreationStatus = 'IN_PROGRESS';
         this.orderService.createOrder(this.orderModel)
             .subscribe((result) => {
+                let job = JSON.parse(result._body);
+                this.submittedJobId = job.HRID;
                 this.orderCreationStatus = 'SUCCESS';
                 this.orderModel = new OrderModel();
                 this.resetForm();
@@ -58,6 +60,10 @@ export class OrderComponent {
                 this.orderCreationStatus = 'FAILED';
             });
 
+    }
+
+    goToTrackingPage(){
+        this.router.navigateByUrl("/track/" + this.submittedJobId);
     }
 
     addOrUpdateItem() {

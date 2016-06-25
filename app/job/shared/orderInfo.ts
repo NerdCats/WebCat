@@ -2,15 +2,15 @@ export class OrderInfo {
     public orderInfoHeading: string;
     public orderInfoDesc: string;
 
-    constructor(statusNumber: number){
+    constructor(statusNumber: number, email: string){
         switch (statusNumber) {
             case 1:
                 this.orderInfoHeading = "Your Order is created, we will start processing it shortly!";
-                this.orderInfoDesc = "We've got your order, we are getting it ready, a confirmation of your order will be sent to <b>user@email.com.</b>";
+                this.orderInfoDesc = "We've got your order, we are getting it ready, a confirmation of your order will be sent to <b>"+ email +".</b>";
                 break;
             case 2:
                 this.orderInfoHeading = "Your Order is confirmed, Pickup is in progress!";
-                this.orderInfoDesc = "We've accepted your Order, A confirmation email has been sent to <b>user@email.com</b>. Come back to this page for updates on your Order status.";
+                this.orderInfoDesc = "We've accepted your Order. Come back to this page for updates on your Order status. A confirmation email has been sent to <b>"+ email +"</b>";
                 break;
             case 3:
                 this.orderInfoHeading = "Your Pickup has been completed, Delivery is in progress!";

@@ -12,7 +12,7 @@
     <div class="navbar-collapse collapse" [collapse]="isCollapsed">
       <ul class="nav navbar-nav navbar-right">
         <li *ngFor="let elm of navBarElementDict[State]">
-          <a (click)="elm.Event()">{{elm.Title}}</a>
+          <a class="pointer" (click)="elm.Event()">{{elm.Title}}</a>
         </li>
       </ul>
     </div>

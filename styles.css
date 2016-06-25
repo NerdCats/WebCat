@@ -93,6 +93,10 @@
         margin: 8px;
         color: #3498db;
     }
+
+    .pointer{
+        cursor: pointer;
+    }
     /* Small Devices, Tablets */
 
     @media only screen and (min-width: 768px) {

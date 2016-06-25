@@ -63,7 +63,7 @@ export class JobTrackComponent implements OnInit{
                 this.job = job;
                 this.fixingServerText(this.job);
                 this.orderStatusNumber  = this.findOrderStatus(this.job);
-                this.orderInfo = new OrderInfo(this.orderStatusNumber);
+                this.orderInfo = new OrderInfo(this.orderStatusNumber, job.User.Email);
                 this.coordinateInfo = new CoordinateInfo(this.job);
 
                 for(var key in this.job.Assets){
