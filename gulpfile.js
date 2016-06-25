@@ -19,8 +19,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const tslint = require('gulp-tslint');
 var watch = require('gulp-watch');
 var inject = require('gulp-inject');
-var run = require('gulp-run');
-var git = require('gulp-git');
+var deploy = require('gulp-deploy-git');
 
 
 /**
@@ -233,42 +232,22 @@ gulp.task('build:prod', function (callback) {
  * The deploy script
  */
 
-gulp.task('deploy-git-clone', function (done) {
-    git.clone(args.repo, { args: './azure' }, function (err) {
-        if (err) throw err;
-        console.log("Moving to azure directory");
-        process.chdir('./azure');
-        done();
-    });
+gulp.task('deploy-remote', function () {
+    return gulp.src('dist/**/*', { read: false })
+        .pipe(deploy({
+            prefix: "dist",
+            repository: args.repo,
+            verbose: true
+        }));
 });
 
-gulp.task('deploy-git-copy', function (done) {
-    console.log("copying stuff from dist");
-    gulp.src('../dist/**/*')
-        .pipe(gulp.dest("./"))
-        .on('finish', done);
-});
-
-gulp.task('deploy-git-push', function (done) {
-    console.log("commit to git");
-    gulp.src('.')
-        .pipe(run("git add --all"))
-        .pipe(git.commit('initial commit', {
-            maxBuffer: 200 * 1024 * 1024,
-            quiet: true,
-            disableMessageRequirement: false,
-            disableAppendPaths: true
-        }))
-        .pipe(run('git push origin master'))
-        .on('finish', done);
-});
-
-gulp.task('deploy', function (done) {
-    runSequence(
-        'deploy-git-clone',
-        'deploy-git-copy',
-        'deploy-git-push',
-        done);
+gulp.task('deploy-remote-prod', function () {
+    return gulp.src('prod/**/*', { read: false })
+        .pipe(deploy({
+            prefix: "prod",
+            repository: args.repo,
+            verbose: true
+        }));
 });
 
 gulp.task('default', ['build'], function () {

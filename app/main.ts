@@ -1,6 +1,6 @@
 import { provide } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { LocationStrategy, Location, PathLocationStrategy } from '@angular/common';
+import { LocationStrategy, Location, HashLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { LOCAL_STORAGE_PROVIDERS } from './shared/local-storage';
 import { HTTP_PROVIDERS } from '@angular/http';
@@ -14,7 +14,7 @@ import 'rxjs/add/operator/catch';
 // INFO: Need to use a proper logging module here
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
-    provide(LocationStrategy, { useClass: PathLocationStrategy }),
+    provide(LocationStrategy, { useClass: HashLocationStrategy }),
     LOCAL_STORAGE_PROVIDERS,
     HTTP_PROVIDERS,
     SECURE_HTTP_PROVIDERS,
