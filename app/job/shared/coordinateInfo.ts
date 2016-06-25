@@ -6,13 +6,13 @@ export class CoordinateInfo{
     public assetLocationAvailable: boolean;
 
     constructor(job: Job){
-        if (job.Order.From.Point.coordinates.length == 2) {
+        if (job.Order.From.Point.coordinates != null) {
             this.pickUpAddressAvailable = true;
         } else{
             this.pickUpAddressAvailable = false;
         }
 
-        if (job.Order.To.Point.coordinates.length == 2) {
+        if (job.Order.To.Point.coordinates != null) {
             this.deliveryAddressAvailable = true;
         } else {
             this.deliveryAddressAvailable = false;
@@ -20,7 +20,7 @@ export class CoordinateInfo{
     }
 
     checkIfAssetLocationIsTrue(object: Object){
-        if (object["Point"]["coordinates"].length == 2) {
+        if (object["Point"]["coordinates"] != null) {
             this.assetLocationAvailable = true;
         }
     }

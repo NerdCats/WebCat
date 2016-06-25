@@ -73,7 +73,6 @@ gulp.task('copy:libs', function () {
         'rdash-ui/dist/css/rdash.css',
         'font-awesome/css/font-awesome.css',
         'font-awesome/fonts/**',
-        'angular2-google-maps/core/**'
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("dist/lib"));
 });

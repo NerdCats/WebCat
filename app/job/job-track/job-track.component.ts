@@ -9,7 +9,7 @@ import {
   MouseEvent,
   GOOGLE_MAPS_PROVIDERS,
   GOOGLE_MAPS_DIRECTIVES
-} from 'angular2-google-maps/core';
+} from '../shared/google-map/core/index';
 
 import { JobService } from '../shared/job.service';
 import { Job, JobState } from '../shared/job';
