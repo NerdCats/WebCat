@@ -27,7 +27,7 @@
                         <th>Modified</th>
                     </tr>
                     <tr *ngFor="let job of jobs">
-                        <td>{{job.HRID}}</td>
+                        <td><a href="/track/{{job.HRID}}">{{job.HRID}}</a></td>
                         <td>{{job.Name}}</td>
                         <td>
                             <span [ngClass]="setJobStatusLabelClass(job.State)">{{job.State}}</span>
