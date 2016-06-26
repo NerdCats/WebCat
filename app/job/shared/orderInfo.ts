@@ -18,7 +18,7 @@ export class OrderInfo {
                 break;
             case 4:
                 this.orderInfoHeading = "You Delivery has been completed!";
-                this.orderInfoDesc = "Thank you for using our system";
+                this.orderInfoDesc = "Thank you for using our service";
                 break;
             default:
                 break;
