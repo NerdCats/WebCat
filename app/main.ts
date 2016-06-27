@@ -9,6 +9,7 @@ import { Router, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 
 
 import { GOOGLE_MAPS_PROVIDERS, provideLazyMapsAPILoaderConfig } from 'angular2-google-maps/core/index';
+import { AppSettings } from './shared/app.settings';
 import 'rxjs/add/operator/catch';
 
 // INFO: Need to use a proper logging module here
@@ -19,5 +20,5 @@ bootstrap(AppComponent, [
     HTTP_PROVIDERS,
     SECURE_HTTP_PROVIDERS,
     GOOGLE_MAPS_PROVIDERS,
-    provideLazyMapsAPILoaderConfig({ apiKey: 'AIzaSyCKMIEYdB0YPJkDr89n0WuaG3qQDjE9ndY' })])
+    provideLazyMapsAPILoaderConfig({ apiKey: AppSettings.GOOGLE_MAP_API_KEY })])
     .catch(err => console.error("Bootstrapping Failed " + err));
