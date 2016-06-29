@@ -37,10 +37,6 @@
 						<div class="col-md-6">
 							<strong>Note To Delivery Man</strong>
 							<p>{{job.Order.NoteToDeliveryMan}}</p>
-							<strong>Payment Method</strong>
-							<p>{{job.PaymentMethod}}</p>
-							<strong>Payment Status</strong>
-							<p>{{job.PaymentStatus}}</p>
 						</div>
 					</div>
 				</div>
@@ -114,9 +110,42 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<p><strong>{{ orderInfo.orderInfoHeading }}</strong></p>
-					<!--injected html here because I wanted to highlight the email address substring! in the orderInfoDesc-->
-					<p [innerHtml]="orderInfo.orderInfoDesc"></p>
+					<div class="col-md-12">
+						<p><strong>{{ orderInfoHeading }}</strong></p>
+						<!--injected html here because I wanted to highlight the email address substring! in the orderInfoDesc-->
+						<p [innerHtml]="orderInfoDesc"></p>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<strong>Payment Method</strong>
+							<p>{{job.PaymentMethod}}</p>
+						</div>
+						<div class="col-md-6">
+							<strong>Payment Status</strong>
+							<p>{{job.PaymentStatus}}</p>
+						</div>
+					</div>
+
+					<div class="responsive-table">
+						<table class="table table-sm table-hover table-bordere">
+							<thead>
+								<tr>
+									<th>Pickup Start</th>
+									<th>Pickup End</th>
+									<th>Delivery Start</th>
+									<th>Delivery End</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<!--<td>{{{job.Tasks[1]['CreateTime'] | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{{job.Tasks[1].['ModifiedTime'] | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{{job.Tasks[2].['CreateTime'] | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{{job.Tasks[2].['ModifiedTime'] | date:"EEE d MMM y,h:m TT"}}</td>-->
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 			<div class="panel panel-primary">
@@ -162,7 +191,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>

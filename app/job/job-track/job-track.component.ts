@@ -12,7 +12,7 @@ import {
 import { JobService } from '../shared/job.service';
 import { Job, JobState } from '../shared/job';
 import { CoordinateInfo } from '../shared/coordinateInfo';
-import { OrderInfo } from '../shared/orderInfo';
+import { OrderInfoService } from '../shared/orderInfo';
 import { ComponentServiceStatus } from '../../shared/component-service-status';
 import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-bubble.component';
 
@@ -22,18 +22,20 @@ import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-b
     templateUrl: 'app/job/job-track/job-track.component.html',
     styleUrls: ['app/job/job-track/job-track.component.css'],
     directives: [ProgressBubbleComponent, GOOGLE_MAPS_DIRECTIVES],
-    providers: [JobService]
+    providers: [JobService, OrderInfoService]
 })
 export class JobTrackComponent implements OnInit {
 
     public jobId: string;
     public job: Job;
-    public orderInfo: OrderInfo;
+
     public status: ComponentServiceStatus = "IN_PROGRESS";
     public coordinateInfo: CoordinateInfo;
     public errorMessage: string;
     public orderStatusNumber: number;
     public assetLocation: any;
+    public orderInfoHeading: string;
+    public orderInfoDesc: string;
 
     public mapMarker = {
         blueMarker: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
@@ -44,9 +46,11 @@ export class JobTrackComponent implements OnInit {
     };
 
     constructor(private params: RouteParams,
-        private jobService: JobService) {
+        private jobService: JobService,
+        private orderInfoService: OrderInfoService) {
         this.jobId = params.get('jobId');
     }
+
     ngOnInit() {
         this.getJob();
     }
@@ -57,8 +61,8 @@ export class JobTrackComponent implements OnInit {
                 this.status = "SUCCESSFUL";
                 this.job = job;
                 this.fixingServerText(this.job);
-                this.orderStatusNumber = this.findOrderStatus(this.job);
-                this.orderInfo = new OrderInfo(this.orderStatusNumber, job.User.Email);
+                this.orderInfoHeading = this.orderInfoService.orderInfo(job).orderInfoHeading;
+                this.orderInfoDesc = this.orderInfoService.orderInfo(job).orderInfoDesc;
                 this.coordinateInfo = new CoordinateInfo(this.job);
 
                 for (var key in this.job.Assets) {
@@ -91,26 +95,5 @@ export class JobTrackComponent implements OnInit {
         // IN_PROGRESS to IN PROGRESS
         // Not sure whether it will stay here finally
         this.job.Order.PaymentMethod = "Cash On Delivery";
-    }
-
-
-    // INFO: This is shamefully ugly
-    findOrderStatus(job: Job) {
-        if (job.State == "ENQUEUED") {
-            return 1;
-        }
-        else if (job.State == "IN_PROGRESS") {
-            if (job.Tasks[1]["Type"] == "PackagePickUp"
-                && job.Tasks[1]["State"] == "IN_PROGRESS") {
-                return 2;
-            }
-            else if (job.Tasks[2]["Type"] == "Delivery"
-                && job.Tasks[2]["State"] == "IN_PROGRESS") {
-                return 3;
-            }
-        }
-        else if (job.State == "COMPLETED") {
-            return 4;
-        }
     }
 }
