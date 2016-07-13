@@ -44,8 +44,9 @@ export class SecureRouterOutlet extends RouterOutlet {
     }
 
     private _canActivate(url: string) {
+        let jobTrackPageUrlRegex = "track/Job-[A-Z|0-9]{8}";
         return this.publicRoutes.indexOf(url) !== -1
-            || (url.match("track/Job-[A-Z|0-9]{8}") !== null && url.match("track/Job-[A-Z|0-9]{8}").indexOf(url) !== -1)
+            || (url.match(jobTrackPageUrlRegex) !== null && url.match(jobTrackPageUrlRegex).indexOf(url) !== -1)
             || this.loginService.isLoggedIn;
     }
 }
