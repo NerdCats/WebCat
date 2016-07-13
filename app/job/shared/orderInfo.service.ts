@@ -12,7 +12,7 @@ export class OrderInfoService {
         switch (statusNumber) {
             case 1:
                 _orderInfoHeading = "Your Order is created, we will start processing it shortly!";
-                _orderInfoDesc = "We've got your order, we are getting it ready, a confirmation of your order will be sent to <b>"+ job.User.Email +".</b>";
+                _orderInfoDesc = "We've got your order, we are getting it ready";
                 break;
             case 2:
                 _orderInfoHeading = "Your Order is confirmed, Pickup is in progress!";

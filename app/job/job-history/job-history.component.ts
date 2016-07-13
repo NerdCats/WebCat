@@ -41,7 +41,7 @@ export class JobHistoryComponent implements OnInit {
 
 
     goToTrackingPage(jobId: string){
-        this.router.navigateByUrl("/track?jobId=" + jobId);
+        this.router.navigateByUrl("/track/" + jobId);
     }
 
     getJobs() {

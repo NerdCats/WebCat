@@ -24,7 +24,7 @@ export const Routes = [
         component: ConfirmEmailComponent
     },
     {
-        path: '/track',
+        path: '/track/:jobId',
         name: 'Track',
         component: JobTrackComponent
     },
@@ -37,6 +37,5 @@ export const Routes = [
 
 export const PublicRoutes = [
     'home',
-    'confirmEmail',
-    'track'
+    'confirmEmail'
 ]
