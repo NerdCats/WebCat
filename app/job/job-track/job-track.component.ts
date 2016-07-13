@@ -9,10 +9,10 @@ import {
     GOOGLE_MAPS_DIRECTIVES
 } from 'angular2-google-maps/core/index';
 
-import { JobService } from '../shared/job.service';
+import { JobTrackService } from './job-track.service';
 import { Job, JobState } from '../shared/job';
 import { CoordinateInfo } from '../shared/coordinateInfo';
-import { OrderInfoService } from '../shared/orderInfo';
+import { OrderInfoService } from '../shared/orderInfo.service';
 import { ComponentServiceStatus } from '../../shared/component-service-status';
 import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-bubble.component';
 
@@ -22,7 +22,7 @@ import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-b
     templateUrl: 'app/job/job-track/job-track.component.html',
     styleUrls: ['app/job/job-track/job-track.component.css'],
     directives: [ProgressBubbleComponent, GOOGLE_MAPS_DIRECTIVES],
-    providers: [JobService, OrderInfoService]
+    providers: [JobTrackService, OrderInfoService]
 })
 export class JobTrackComponent implements OnInit {
 
@@ -45,18 +45,19 @@ export class JobTrackComponent implements OnInit {
         greenMarker: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
     };
 
-    constructor(private params: RouteParams,
-        private jobService: JobService,
+    constructor(private routeparams: RouteParams,
+        private jobTrackService: JobTrackService,
         private orderInfoService: OrderInfoService) {
-        this.jobId = params.get('jobId');
+
     }
 
     ngOnInit() {
+        this.jobId = this.routeparams.get('jobId');
         this.getJob();
     }
 
     getJob() {
-        this.jobService.getJob(this.jobId)
+        this.jobTrackService.getJob(this.jobId)
             .subscribe((job) => {
                 this.status = "SUCCESSFUL";
                 this.job = job;
@@ -66,10 +67,13 @@ export class JobTrackComponent implements OnInit {
                 this.coordinateInfo = new CoordinateInfo(this.job);
 
                 for (var key in this.job.Assets) {
-                    this.assetLocation = this.jobService.getAssetLocation(key)
+                    this.assetLocation = this.jobTrackService.getAssetLocation(key)
                         .subscribe((location) => {
                             this.coordinateInfo.assetLocationAvailable = true;
                             this.assetLocation = location;
+                        },
+                        (error) => {
+
                         })
                 }
             },
