@@ -1,5 +1,6 @@
 import {UserModel} from '../../shared/model/user-model';
 import {OrderModel} from '../../shared/model/order-model';
+import {JobTask, FetchDeliveryManJobTask, PackagePickUpJobTask, DeliveryJobTask} from './jobtasks';
 
 export interface IJobJson {
     Id: string;
@@ -8,7 +9,7 @@ export interface IJobJson {
     Order: OrderModel; // INFO: Would come from #36
     User: UserModel;
     JobServedBy: Object; // Same as the previous one
-    Tasks: Array<Object>;
+    Tasks: Array<JobTask>;
     State: JobState; // INFO: Potential place for a string literal
     CreateTime: string;
     ModifiedTime: string;
@@ -20,6 +21,8 @@ export interface IJobJson {
     PaymentStatus: string; // INFO: Potential place for a string literal
 }
 
+
+
 export class Job {
     Id: string;
     HRID: string;
@@ -27,7 +30,7 @@ export class Job {
     Order: OrderModel; // INFO: Would come from #36
     User: UserModel;
     JobServedBy: Object; // Same as the previous one
-    Tasks: Array<Object>;
+    Tasks: Array<JobTask>;
     State: JobState; // INFO: Potential place for a string literal
     CreateTime: Date;
     ModifiedTime: Date;
@@ -51,7 +54,24 @@ export class Job {
         var assignedJob =  Object.assign(job, json, {
             CreateTime: new Date(json.CreateTime),
             ModifiedTime: new Date(json.ModifiedTime),
-            PreferredDeliveryTime: new Date(json.PreferredDeliveryTime)
+            PreferredDeliveryTime: new Date(json.PreferredDeliveryTime),
+            Tasks: []
+        });
+
+        json.Tasks.forEach(task => {
+            switch (task["Type"]){
+                case "FetchDeliveryMan":
+                    job.Tasks.push(new FetchDeliveryManJobTask(task));
+                    break;
+                case "PackagePickUp":
+                    job.Tasks.push(new PackagePickUpJobTask(task));
+                    break;
+                case "Delivery":
+                    job.Tasks.push(new DeliveryJobTask(task));
+                    break;
+                default:
+                    break;
+            }
         });
         return assignedJob as Job;
     }
