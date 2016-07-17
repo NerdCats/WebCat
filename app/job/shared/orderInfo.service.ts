@@ -9,6 +9,8 @@ export class OrderInfoService {
         let _orderInfoDesc: string;
 
         let statusNumber = this.findOrderStatus(job);
+        console.log(statusNumber);
+
         switch (statusNumber) {
             case 1:
                 _orderInfoHeading = "Your Order is created, we will start processing it shortly!";
@@ -37,24 +39,25 @@ export class OrderInfoService {
     }
 
     // INFO: This is shamefully ugly
-    private findOrderStatus(job: Job) {
-        if (job.Order.Type == "Delivery") {
-            if (job.State == "ENQUEUED") {
-                return 1;
+    private findOrderStatus(job: Job): number {
+        let status = 0;
+        job.Tasks.forEach(task => {
+            if (task.Type === "FetchDeliveryMan" && task.State == "PENDING") {
+                status = 1;
             }
-            else if (job.State == "IN_PROGRESS") {
-                if (job.Tasks[1]["Type"] == "PackagePickUp"
-                    && job.Tasks[1]["State"] == "IN_PROGRESS") {
-                    return 2;
+            else if (task.Type === "PackagePickUp" && task.State == "IN_PROGRESS") {
+                status = 2;
+            }
+            else if (task.Type === "Delivery") {
+                if (task.State === "IN_PROGRESS") {
+                    status = 3;
                 }
-                else if (job.Tasks[2]["Type"] == "Delivery"
-                    && job.Tasks[2]["State"] == "IN_PROGRESS") {
-                    return 3;
+                else if (task.State === "COMPLETED") {
+                    status = 4;
                 }
             }
-            else if (job.State == "COMPLETED") {
-                return 4;
-            }
-        }
+            else status = 0;
+        });
+        return status;
     }
 }
