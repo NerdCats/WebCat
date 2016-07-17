@@ -23,7 +23,7 @@ export class JobTask {
         this.AssetRef = task["AssetRef"];
         this.CreateTime = new Date(task["CreateTime"]);
         this.ModifiedTime = new Date(task["ModifiedTime"]);
-        this.CompletionTime = new Date(task["CompletionTime"]);
+        this.CompletionTime = task["CompletionTime"];
         this.IsReadytoMoveToNextTask = task["IsReadytoMoveToNextTask"];
         this.IsDependencySatisfied = task["IsDependencySatisfied"];
         this.IsStartingTask = task["IsStartingTask"];

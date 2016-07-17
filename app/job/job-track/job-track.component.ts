@@ -13,6 +13,7 @@ import { JobTrackService } from './job-track.service';
 import { Job, JobState } from '../shared/job';
 import { CoordinateInfo } from '../shared/coordinateInfo';
 import { OrderInfoService } from '../shared/orderInfo.service';
+import { TimingInfoService, JobTaskTimeInfos } from '../shared/timingInfo.service';
 import { ComponentServiceStatus } from '../../shared/component-service-status';
 import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-bubble.component';
 
@@ -22,7 +23,7 @@ import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-b
     templateUrl: 'app/job/job-track/job-track.component.html',
     styleUrls: ['app/job/job-track/job-track.component.css'],
     directives: [ProgressBubbleComponent, GOOGLE_MAPS_DIRECTIVES],
-    providers: [JobTrackService, OrderInfoService]
+    providers: [JobTrackService, OrderInfoService, TimingInfoService]
 })
 export class JobTrackComponent implements OnInit {
 
@@ -36,6 +37,7 @@ export class JobTrackComponent implements OnInit {
     public assetLocation: any;
     public orderInfoHeading: string;
     public orderInfoDesc: string;
+    public timingInfo: JobTaskTimeInfos;
 
     public mapMarker = {
         blueMarker: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
@@ -47,7 +49,8 @@ export class JobTrackComponent implements OnInit {
 
     constructor(private routeparams: RouteParams,
         private jobTrackService: JobTrackService,
-        private orderInfoService: OrderInfoService) {
+        private orderInfoService: OrderInfoService,
+        private timeInfoService: TimingInfoService) {
 
     }
 
@@ -65,6 +68,9 @@ export class JobTrackComponent implements OnInit {
                 this.orderInfoHeading = this.orderInfoService.orderInfo(job).orderInfoHeading;
                 this.orderInfoDesc = this.orderInfoService.orderInfo(job).orderInfoDesc;
                 this.coordinateInfo = new CoordinateInfo(this.job);
+                this.timingInfo = this.timeInfoService.getTimeInfo(job);
+                console.log(this.timingInfo);
+
 
                 for (var key in this.job.Assets) {
                     this.assetLocation = this.jobTrackService.getAssetLocation(key)

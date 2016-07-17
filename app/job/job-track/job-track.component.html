@@ -130,18 +130,33 @@
 						<table class="table table-sm table-hover table-bordere">
 							<thead>
 								<tr>
-									<th>Pickup Start</th>
-									<th>Pickup End</th>
-									<th>Delivery Start</th>
-									<th>Delivery End</th>
+									<th>{{timingInfo.pickup.startTime.heading}}</th>
+									<th>{{timingInfo.pickup.completedTime.heading}}</th>
+									<th>{{timingInfo.pickup.totalTime.heading}}</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<!--<td>{{{job.Tasks[1]['CreateTime'] | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{{job.Tasks[1].['ModifiedTime'] | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{{job.Tasks[2].['CreateTime'] | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{{job.Tasks[2].['ModifiedTime'] | date:"EEE d MMM y,h:m TT"}}</td>-->
+									<td>{{timingInfo.pickup.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{timingInfo.pickup.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{timingInfo.pickup.totalTime.time}}</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<table class="table table-sm table-hover table-bordere">
+							<thead>
+								<tr>
+									<th>{{timingInfo.delivery.startTime.heading}}</th>
+									<th>{{timingInfo.delivery.completedTime.heading}}</th>
+									<th>{{timingInfo.delivery.totalTime.heading}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{{timingInfo.delivery.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{timingInfo.delivery.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{timingInfo.delivery.totalTime.time}}</td>
 								</tr>
 							</tbody>
 						</table>
