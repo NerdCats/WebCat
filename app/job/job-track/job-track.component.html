@@ -53,22 +53,22 @@
 						<p><strong>Delivery Man Assigned</strong></p>
 						<ul class="list-inline">
 							<li *ngFor="let asset of assetInfo">
-									<div class="row">
-										<div class="col-md-1">
-											<img class="img-circle" src="{{asset.Profile.PicUri || '/assets/img/ppnotfound.png'}}" alt="">
-										</div>
+								<div class="row">
+									<div class="col-md-1">
+										<img class="img-circle" src="{{asset.Profile.PicUri || '/assets/img/ppnotfound.png'}}" alt="">
 									</div>
-									<div class="row">
-										<div class="col-md-1"><span>{{asset.UserName}}</span></div>
+								</div>
+								<div class="row">
+									<div class="col-md-1"><span>{{asset.UserName}}</span></div>
+								</div>
+								<div class="row">
+									<div class="col-md-2">
+										<span class="fa fa-mobile" aria-hidden="true"></span>
 									</div>
-									<div class="row">
-										<div class="col-md-2">
-											<span class="fa fa-mobile" aria-hidden="true"></span>
-										</div>
-										<div class="col-md-1">
-											<span>{{asset.PhoneNumber}}</span>
-										</div>
+									<div class="col-md-1">
+										<span>{{asset.PhoneNumber}}</span>
 									</div>
+								</div>
 							</li>
 						</ul>
 					</div>
@@ -108,48 +108,20 @@
 							</sebm-google-map-info-window>
 						</sebm-google-map-marker>
 					</sebm-google-map>
-				</div>
-				<div class="btn-group btn-group-justified" role="group" aria-label="...">
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">
-							<img src="{{mapMarker.greenMarker}}" alt="">
-							Pick up</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">
-							<img src="{{mapMarker.redMarker}}" alt="">
-							Delivery</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">
-							<img src="{{mapMarker.blueMarker}}" alt="">
-							Delivery Man</button>
-					</div>
-				</div>
-			</div>
-			<!--<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						Delivery Man Information
-					</h3>
-				</div>
-				<div class="panel-body">
-					<ul class="list-inline">
-						<li *ngFor="let asset of assetInfo">
-							<div class="row">
-								<h4>{{asset.UserName}}</h4>
-								<img class="img-circle" src="{{asset.Profile.PicUri}}" alt="">
-								<div class="column">
-									<div class="col-md-2">
-										<span class="fa fa-mobile" aria-hidden="true"></span>
-										<span>{{asset.PhoneNumber}}</span>
-									</div>
-								</div>
-							</div>
+
+					<ul class="list-inline ">
+						<li class="pd-10">
+							<img src="{{mapMarker.greenMarker}}" alt="">Pick up
+						</li>
+						<li class="pd-10">
+							<img src="{{mapMarker.redMarker}}" alt="">Delivery
+						</li>
+						<li class="pd-10">
+							<img src="{{mapMarker.blueMarker}}" alt="">Delivery Man
 						</li>
 					</ul>
 				</div>
-			</div>-->
+			</div>
             <div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -173,7 +145,10 @@
 						</div>
 					</div>
 
-					<div class="responsive-table col-md-12">
+					<!--When the job task start, completed, total time will be available
+					just uncomment the below code!-->
+
+					<!--<div class="responsive-table col-md-12">
 						<table class="table table-sm table-hover table-bordere">
 							<thead>
 								<tr>
@@ -207,7 +182,7 @@
 								</tr>
 							</tbody>
 						</table>
-					</div>
+					</div>-->
 				</div>
 			</div>
 			<div class="panel panel-primary">
@@ -253,6 +228,10 @@
 					</div>
 				</div>
 			</div>
+			<div>
+				<p class="text-center">For any issue or query contact <b>GO! Fetch</b> at <b><a href="tel:">01735829687</a></b></p>
+			</div>
 		</div>
+
 	</div>
 </div>

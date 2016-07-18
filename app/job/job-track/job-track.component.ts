@@ -85,9 +85,6 @@ export class JobTrackComponent implements OnInit {
 
                         })
                 }
-                console.log(this.assetInfo);
-
-                console.log(this.assetInfo.length == 0);
             },
             (error) => {
                 this.status = "FAILED";
