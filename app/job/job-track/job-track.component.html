@@ -45,10 +45,34 @@
 			<div class="panel panel-primary" *ngIf="coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						Tracking
+						Tracking Information
 					</h3>
 				</div>
 				<div class="panel-body">
+					<div *ngIf="assetInfo.length != 0">
+						<p><strong>Delivery Man Assigned</strong></p>
+						<ul class="list-inline">
+							<li *ngFor="let asset of assetInfo">
+									<div class="row">
+										<div class="col-md-1">
+											<img class="img-circle" src="{{asset.Profile.PicUri || '/assets/img/ppnotfound.png'}}" alt="">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1"><span>{{asset.UserName}}</span></div>
+									</div>
+									<div class="row">
+										<div class="col-md-2">
+											<span class="fa fa-mobile" aria-hidden="true"></span>
+										</div>
+										<div class="col-md-1">
+											<span>{{asset.PhoneNumber}}</span>
+										</div>
+									</div>
+							</li>
+						</ul>
+					</div>
+
 					<sebm-google-map
 						[latitude] = "23.797337"
 						[longitude] = "90.406987"
@@ -103,6 +127,29 @@
 					</div>
 				</div>
 			</div>
+			<!--<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Delivery Man Information
+					</h3>
+				</div>
+				<div class="panel-body">
+					<ul class="list-inline">
+						<li *ngFor="let asset of assetInfo">
+							<div class="row">
+								<h4>{{asset.UserName}}</h4>
+								<img class="img-circle" src="{{asset.Profile.PicUri}}" alt="">
+								<div class="column">
+									<div class="col-md-2">
+										<span class="fa fa-mobile" aria-hidden="true"></span>
+										<span>{{asset.PhoneNumber}}</span>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>-->
             <div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">

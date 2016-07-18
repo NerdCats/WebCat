@@ -38,6 +38,8 @@ export class JobTrackComponent implements OnInit {
     public orderInfoHeading: string;
     public orderInfoDesc: string;
     public timingInfo: JobTaskTimeInfos;
+    public assetInfo: Object[] = []; //to get a simplified asset array
+
 
     public mapMarker = {
         blueMarker: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
@@ -69,10 +71,11 @@ export class JobTrackComponent implements OnInit {
                 this.orderInfoDesc = this.orderInfoService.orderInfo(job).orderInfoDesc;
                 this.coordinateInfo = new CoordinateInfo(this.job);
                 this.timingInfo = this.timeInfoService.getTimeInfo(job);
-                console.log(this.timingInfo);
 
 
                 for (var key in this.job.Assets) {
+                    //creating that simplified asset array
+                    this.assetInfo.push(this.job.Assets[key]);
                     this.assetLocation = this.jobTrackService.getAssetLocation(key)
                         .subscribe((location) => {
                             this.coordinateInfo.assetLocationAvailable = true;
@@ -82,6 +85,9 @@ export class JobTrackComponent implements OnInit {
 
                         })
                 }
+                console.log(this.assetInfo);
+
+                console.log(this.assetInfo.length == 0);
             },
             (error) => {
                 this.status = "FAILED";

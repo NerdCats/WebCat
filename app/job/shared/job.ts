@@ -16,7 +16,7 @@ export interface IJobJson {
     PreferredDeliveryTime: string;
     InvoiceId: string;
     PaymentMethod: string;
-    Assets: Object;
+    Assets: { [id: string] : Object; };
     Deleted: boolean;
     PaymentStatus: string; // INFO: Potential place for a string literal
 }
@@ -37,7 +37,7 @@ export class Job {
     PreferredDeliveryTime: Date;
     InvoiceId: string;
     PaymentMethod: string;
-    Assets: Object;
+    Assets: { [id: string] : Object; };;
     Deleted: boolean;
     PaymentStatus: string; // INFO: Potential place for a string literal
 
