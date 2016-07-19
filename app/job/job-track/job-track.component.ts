@@ -30,6 +30,7 @@ export class JobTrackComponent implements OnInit {
     public jobId: string;
     public job: Job;
 
+
     public status: ComponentServiceStatus = "IN_PROGRESS";
     public coordinateInfo: CoordinateInfo;
     public errorMessage: string;
@@ -55,6 +56,7 @@ export class JobTrackComponent implements OnInit {
         private timeInfoService: TimingInfoService) {
 
     }
+
 
     ngOnInit() {
         this.jobId = this.routeparams.get('jobId');

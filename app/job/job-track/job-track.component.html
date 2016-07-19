@@ -18,11 +18,16 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						Order Information
-					</h3>
+					<div class="row">
+						<h3 class="panel-title col-md-11">
+							Order Information
+						</h3>
+						<a class="col-md-1" data-toggle="collapse" href="#orderInfo" aria-expanded="false">
+							<i class="collapse-i fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+						</a>
+					</div>
 				</div>
-				<div class="panel-body">
+				<div id="orderInfo" class="panel-body collapse">
                     <div class="row">
                         <div class="col-md-6">
                             <strong>Pickup Address</strong>
@@ -40,15 +45,89 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<h3 class="panel-title col-md-11">
+							Order Status
+						</h3>
+						<a class="col-md-1" data-toggle="collapse" href="#orderStatusInfo" aria-expanded="true">
+							<i class="collapse-i fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+						</a>
+					</div>
+				</div>
+				<div id="orderStatusInfo" class="panel-body collapse in">
+					<div class="col-md-12">
+						<strong>{{ orderInfoHeading }}</strong>
+						<!--injected html here because I wanted to highlight the email address substring! in the orderInfoDesc-->
+						<p [innerHtml]="orderInfoDesc"></p>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<strong>Payment Method</strong>
+							<p>{{job.PaymentMethod}}</p>
+						</div>
+						<div class="col-md-6">
+							<strong>Payment Status</strong>
+							<p>{{job.PaymentStatus}}</p>
+						</div>
+					</div>
+
+					<!--When the job task start, completed, total time will be available
+					just uncomment the below code!-->
+
+					<!--<div class="responsive-table col-md-12">
+						<table class="table table-sm table-hover table-bordere">
+							<thead>
+								<tr>
+									<th>{{timingInfo.pickup.startTime.heading}}</th>
+									<th>{{timingInfo.pickup.completedTime.heading}}</th>
+									<th>{{timingInfo.pickup.totalTime.heading}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{{timingInfo.pickup.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{timingInfo.pickup.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{timingInfo.pickup.totalTime.time}}</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<table class="table table-sm table-hover table-bordere">
+							<thead>
+								<tr>
+									<th>{{timingInfo.delivery.startTime.heading}}</th>
+									<th>{{timingInfo.delivery.completedTime.heading}}</th>
+									<th>{{timingInfo.delivery.totalTime.heading}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{{timingInfo.delivery.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{timingInfo.delivery.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
+									<td>{{timingInfo.delivery.totalTime.time}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>-->
+				</div>
+			</div>
+
 			<div class="panel panel-primary" *ngIf="coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						Tracking Information
-					</h3>
+					<div class="row">
+						<h3 class="panel-title col-md-11">
+							Tracking Information
+						</h3>
+						<a class="col-md-1" data-toggle="collapse" href="#trackingInfo" aria-expanded="true">
+							<i class="collapse-i fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+						</a>
+					</div>
 				</div>
-				<div class="panel-body">
+				<div id="trackingInfo" class="panel-body collapse in">
 					<div *ngIf="assetInfo.length != 0">
 						<p><strong>Delivery Man Assigned</strong></p>
 						<ul class="list-inline">
@@ -122,76 +201,19 @@
 					</ul>
 				</div>
 			</div>
-            <div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						Order Status
-					</h3>
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<p><strong>{{ orderInfoHeading }}</strong></p>
-						<!--injected html here because I wanted to highlight the email address substring! in the orderInfoDesc-->
-						<p [innerHtml]="orderInfoDesc"></p>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<strong>Payment Method</strong>
-							<p>{{job.PaymentMethod}}</p>
-						</div>
-						<div class="col-md-6">
-							<strong>Payment Status</strong>
-							<p>{{job.PaymentStatus}}</p>
-						</div>
-					</div>
 
-					<!--When the job task start, completed, total time will be available
-					just uncomment the below code!-->
-
-					<!--<div class="responsive-table col-md-12">
-						<table class="table table-sm table-hover table-bordere">
-							<thead>
-								<tr>
-									<th>{{timingInfo.pickup.startTime.heading}}</th>
-									<th>{{timingInfo.pickup.completedTime.heading}}</th>
-									<th>{{timingInfo.pickup.totalTime.heading}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{timingInfo.pickup.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.pickup.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.pickup.totalTime.time}}</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<table class="table table-sm table-hover table-bordere">
-							<thead>
-								<tr>
-									<th>{{timingInfo.delivery.startTime.heading}}</th>
-									<th>{{timingInfo.delivery.completedTime.heading}}</th>
-									<th>{{timingInfo.delivery.totalTime.heading}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{timingInfo.delivery.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.delivery.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.delivery.totalTime.time}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>-->
-				</div>
-			</div>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						Item List
-					</h3>
+					<div class="row">
+						<h3 class="panel-title col-md-11">
+							Item List
+						</h3>
+						<a class="col-md-1" data-toggle="collapse" href="#itemListInfo" aria-expanded="true">
+							<i class="collapse-i fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+						</a>
+					</div>
 				</div>
-				<div class="panel-body">
+				<div id="itemListInfo" class="panel-body collapse">
 					<div class="table-responsive">
 						<table class="table table-sm table-hover table-bordered">
 							<thead>
