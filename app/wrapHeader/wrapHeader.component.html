@@ -4,12 +4,12 @@
       <div class="col-lg-6">
         <h1>Delivery<br/>
           Simplified</h1>
-        <div class="form-inline" role="form">
-          <div class="form-group">
-            <input class="form-control" id="exampleInputEmail1" placeholder="Enter Your Job Id ex. JOB-XXXXXX">
-          </div>
-          <button type="submit" (click)="gotoSearchpage()" class="btn btn-info btn-lg">Track Your Order</button>
-        </div>
+          <form [ngFormModel]="trackJobForm" (submit)="gotoSearchpage($event)" class="form-inline" role="form">
+            <div class="form-group">
+              <input ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Enter Your Job Id ex. JOB-XXXXXX">
+            </div>
+            <button type="submit" class="btn btn-info btn-lg">Track Your Order</button>
+          </form>
       </div>
     </div>
     <!-- /row -->
