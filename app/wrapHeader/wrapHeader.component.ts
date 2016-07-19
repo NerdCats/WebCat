@@ -19,7 +19,6 @@ export class WrapHeaderComponent {
 
     }
     gotoSearchpage(event){
-        console.log(this.trackJobForm.value.jobid);
         this.router.navigate(["Track", {jobId: this.trackJobForm.value.jobid}]);
         event.preventDefault();
     }
