@@ -51,4 +51,18 @@
             </table>
         </div>
     </widget-body>
+    <widget-footer>
+        <ul class="pagination pagination-sm pull-right" *ngIf="status=='SUCCESSFUL'">
+            <li>
+                <a>&laquo;</a>
+            </li>
+            <li *ngFor="let page of paginationArray">
+                <a (click)="getJobsWithPageNumber(page)">{{page}}</a>
+            </li>
+            <li>
+                <a>&raquo;</a>
+            </li>
+        </ul>
+        <div class=clearfix></div>
+    </widget-footer>
 </div>

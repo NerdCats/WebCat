@@ -31,6 +31,7 @@ export class JobHistoryComponent implements OnInit {
     accessMode: AccessMode = "DEFAULT";
     componentMode: ComponentMode = "WIDGET";
     statusMessage: string;
+    paginationArray: number[];
 
     constructor(private jobService: JobService, private router: Router) {
     }
@@ -48,16 +49,40 @@ export class JobHistoryComponent implements OnInit {
         this.jobs = new Array<Job>();
         this.jobService.getHistory()
             .subscribe((pagedJob) => {
-                this.status = "SUCCESSFUL";
-                this.jobs = pagedJob.data;
-                if (!this.jobs.length) {
-                    this.status = "EMPTY";
-                    this.statusMessage = "It looks lonely here. Why don't you put an order?";
-                }
+                this.manageHistory(pagedJob);
             }, (error) => {
                 this.statusMessage = error.Message || "Failed to fetch data from server";
                 this.status = "FAILED";
             });
+    }
+
+
+
+    getJobsWithPageNumber(page: number){
+        this.status = "IN_PROGRESS"
+        this.jobService.getHistoryWithPageNumber(page)
+            .subscribe((pagedJob) => {
+                this.manageHistory(pagedJob)
+            },(error) => {
+                this.statusMessage = error.Message || "Failed to fetch data from server";
+                this.status = "FAILED";
+            })
+    }
+
+    private manageHistory(pagedJob){
+        this.status = "SUCCESSFUL";
+        this.jobs = pagedJob.data;
+
+        // FIXME: This is an ugly code I confess
+        this.paginationArray = new Array();
+        for (var i = 0; i < pagedJob.pagination.TotalPages; i++) {
+            this.paginationArray.push(i + 1);
+        }
+
+        if (!this.jobs.length) {
+            this.status = "EMPTY";
+            this.statusMessage = "It looks lonely here. Why don't you put an order?";
+        }
     }
 
     setJobStatusLabelClass(state: string) {

@@ -25,20 +25,35 @@ export class JobService {
     private jobUrl = AppSettings.TASKCAT_API_BASE + 'job';
     private assetLocationUrl = AppSettings.SHADOWCAT_API_BASE + "location/";
 
-    getHistory(): Observable<PageEnvelope<Job>> {
-        let queryString: string = this._queryBuilder.orderBy([
-            {
-                propName: "CreateTime",
-                orderDirection: "desc"
-            }]).toQueryString();
-
-        return this.shttp.secureGet(this.jobUrl + '/odata' + queryString)
+    getJobs(jobUrl): Observable<PageEnvelope<Job>> {
+        return this.shttp.secureGet(jobUrl)
             .map(this._extractData)
             .catch(error => {
                 let errMsg = error.message || 'Exception when fetching job history';
                 console.error(errMsg); // log to console instead
                 return Observable.throw(errMsg);
             });
+    }
+
+    getHistory(): Observable<PageEnvelope<Job>> {
+        let queryString: string = this._queryBuilder.orderBy([
+            {
+                propName: "CreateTime",
+                orderDirection: "desc"
+            }]).toQueryString();
+        let historyUrl = this.jobUrl + '/odata' + queryString
+
+        return this.getJobs(historyUrl);
+    }
+
+    getHistoryWithPageNumber(page:number): Observable<PageEnvelope<Job>> {
+        let queryString: string = this._queryBuilder.toQueryString();
+        let historyUrl = this.jobUrl + '/odata' + queryString + "&page=" + page;
+        console.log(this.jobUrl);
+        console.log(queryString);
+        console.log(historyUrl);
+
+        return this.getJobs(historyUrl)
     }
 
 
