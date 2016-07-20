@@ -4,6 +4,7 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 import {JobService} from '../shared/job.service';
 import {Job} from '../shared/job';
+import {Pagination} from '../../shared/pagination';
 
 import {ComponentServiceStatus} from '../../shared/component-service-status';
 
@@ -18,7 +19,8 @@ export type ComponentMode = "WIDGET" | "FULL";
     selector: 'job-history',
     templateUrl: 'app/job/job-history/job-history.component.html',
     directives: [ProgressBubbleComponent, WidgetHeaderComponent, WidgetBodyComponent],
-    providers: [JobService]
+    providers: [JobService],
+    styleUrls: ['app/job/job-history/job-history.component.css']
 })
 export class JobHistoryComponent implements OnInit {
     @Input()
@@ -31,7 +33,8 @@ export class JobHistoryComponent implements OnInit {
     accessMode: AccessMode = "DEFAULT";
     componentMode: ComponentMode = "WIDGET";
     statusMessage: string;
-    paginationArray: number[];
+    pagination: Pagination;
+    paginationArray: Object[];
 
     constructor(private jobService: JobService, private router: Router) {
     }
@@ -51,38 +54,56 @@ export class JobHistoryComponent implements OnInit {
             .subscribe((pagedJob) => {
                 this.manageHistory(pagedJob);
             }, (error) => {
-                this.statusMessage = error.Message || "Failed to fetch data from server";
-                this.status = "FAILED";
+                this.manageError(error);
             });
     }
 
 
 
     getJobsWithPageNumber(page: number){
-        this.status = "IN_PROGRESS"
+        this.status = "IN_PROGRESS";
         this.jobService.getHistoryWithPageNumber(page)
             .subscribe((pagedJob) => {
                 this.manageHistory(pagedJob)
             },(error) => {
-                this.statusMessage = error.Message || "Failed to fetch data from server";
-                this.status = "FAILED";
+                this.manageError(error);
+            })
+    }
+
+
+    loadJobWithUrl(url: string){
+        this.status = "IN_PROGRESS";
+        this.jobService.getJobs(url)
+            .subscribe((pagedJob)=> {
+                this.manageHistory(pagedJob)
+            }, (error) => {
+                this.manageError(error);
             })
     }
 
     private manageHistory(pagedJob){
         this.status = "SUCCESSFUL";
         this.jobs = pagedJob.data;
+        this.pagination = pagedJob.pagination;
 
         // FIXME: This is an ugly code I confess
         this.paginationArray = new Array();
         for (var i = 0; i < pagedJob.pagination.TotalPages; i++) {
-            this.paginationArray.push(i + 1);
+            let page = { isSelected: "", pageNo: i }
+            if (pagedJob.pagination.Page == i) {
+                page.isSelected = "selected"
+            }
+            this.paginationArray.push(page);
         }
 
         if (!this.jobs.length) {
             this.status = "EMPTY";
             this.statusMessage = "It looks lonely here. Why don't you put an order?";
         }
+    }
+    private manageError(error){
+        this.statusMessage = error.Message || "Failed to fetch data from server";
+        this.status = "FAILED";
     }
 
     setJobStatusLabelClass(state: string) {

@@ -53,14 +53,14 @@
     </widget-body>
     <widget-footer>
         <ul class="pagination pagination-sm pull-right" *ngIf="status=='SUCCESSFUL'">
-            <li>
-                <a>&laquo;</a>
+            <li *ngIf="pagination.PrevPage">
+                <a class="pointer" (click)="loadJobWithUrl(pagination.PrevPage)">&laquo;</a>
             </li>
-            <li *ngFor="let page of paginationArray">
-                <a (click)="getJobsWithPageNumber(page)">{{page}}</a>
+            <li  *ngFor="let page of paginationArray">
+                <a class="{{page.isSelected}} pointer" (click)="getJobsWithPageNumber(page.pageNo)">{{page.pageNo + 1}}</a>
             </li>
-            <li>
-                <a>&raquo;</a>
+            <li *ngIf="pagination.NextPage">
+                <a class="pointer" (click)="loadJobWithUrl(pagination.NextPage)">&raquo;</a>
             </li>
         </ul>
         <div class=clearfix></div>

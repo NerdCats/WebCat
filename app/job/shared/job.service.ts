@@ -48,11 +48,7 @@ export class JobService {
 
     getHistoryWithPageNumber(page:number): Observable<PageEnvelope<Job>> {
         let queryString: string = this._queryBuilder.toQueryString();
-        let historyUrl = this.jobUrl + '/odata' + queryString + "&page=" + page;
-        console.log(this.jobUrl);
-        console.log(queryString);
-        console.log(historyUrl);
-
+        let historyUrl = this.jobUrl + '/odata' + queryString + "&page=" + page; //FIXME: this url should be constructed by _queryBuilder
         return this.getJobs(historyUrl)
     }
 
