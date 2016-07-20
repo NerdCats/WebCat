@@ -63,13 +63,13 @@ export class JobHistoryComponent implements OnInit {
     setJobStatusLabelClass(state: string) {
         switch (state) {
             case "COMPLETED":
-                return "label label-success";
+                return "label green";
             case "ENQUEUED":
-                return "label label-primary";
+                return "label orange";
             case "IN_PROGRESS":
-                return "label label-info";
+                return "label blue";
             case "CANCELLED":
-                return "label label-danger";
+                return "label red";
             default:
                 break;
         }
