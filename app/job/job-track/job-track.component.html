@@ -116,7 +116,7 @@
 				</div>
 			</div>
 
-			<div class="panel panel-primary" *ngIf="coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
@@ -151,54 +151,55 @@
 							</li>
 						</ul>
 					</div>
+					<div *ngIf="coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable">
+						<sebm-google-map
+							[latitude] = "23.797337"
+							[longitude] = "90.406987"
+							[zoom] = "10">
+							<sebm-google-map-marker
+								*ngIf="coordinateInfo.pickUpAddressAvailable"
+								[latitude]="job.Order.From.Point.coordinates[1]"
+								[longitude]="job.Order.From.Point.coordinates[0]"
+								[iconUrl] = "mapMarker.greenMarker"
+								[label]="P">
+									<sebm-google-map-info-window>
+									<strong>Pickup Location</strong>
+								</sebm-google-map-info-window>
+							</sebm-google-map-marker>
+							<sebm-google-map-marker
+								*ngIf="coordinateInfo.deliveryAddressAvailable"
+								[latitude]="job.Order.To.Point.coordinates[1]"
+								[longitude]="job.Order.To.Point.coordinates[0]"
+								[iconUrl] = "mapMarker.redMarker"
+								[label]="D">
+									<sebm-google-map-info-window>
+									<strong>Delivery Location</strong>
+								</sebm-google-map-info-window>
+							</sebm-google-map-marker>
+							<sebm-google-map-marker
+								*ngIf="coordinateInfo.assetLocationAvailable"
+								[latitude]="assetLocation.point.coordinates[1]"
+								[longitude]="assetLocation.point.coordinates[0]"
+								[iconUrl] = "mapMarker.blueMarker"
+								[label]="P">
+									<sebm-google-map-info-window>
+									<strong>Delivery Man</strong>
+								</sebm-google-map-info-window>
+							</sebm-google-map-marker>
+						</sebm-google-map>
 
-					<sebm-google-map
-						[latitude] = "23.797337"
-						[longitude] = "90.406987"
-						[zoom] = "10">
-						<sebm-google-map-marker
-							*ngIf="coordinateInfo.pickUpAddressAvailable"
-							[latitude]="job.Order.From.Point.coordinates[1]"
-							[longitude]="job.Order.From.Point.coordinates[0]"
-							[iconUrl] = "mapMarker.greenMarker"
-							[label]="P">
-								<sebm-google-map-info-window>
-								<strong>Pickup Location</strong>
-							</sebm-google-map-info-window>
-						</sebm-google-map-marker>
-						<sebm-google-map-marker
-							*ngIf="coordinateInfo.deliveryAddressAvailable"
-							[latitude]="job.Order.To.Point.coordinates[1]"
-							[longitude]="job.Order.To.Point.coordinates[0]"
-							[iconUrl] = "mapMarker.redMarker"
-							[label]="D">
-								<sebm-google-map-info-window>
-								<strong>Delivery Location</strong>
-							</sebm-google-map-info-window>
-						</sebm-google-map-marker>
-						<sebm-google-map-marker
-							*ngIf="coordinateInfo.assetLocationAvailable"
-							[latitude]="assetLocation.point.coordinates[1]"
-							[longitude]="assetLocation.point.coordinates[0]"
-							[iconUrl] = "mapMarker.blueMarker"
-							[label]="P">
-								<sebm-google-map-info-window>
-								<strong>Delivery Man</strong>
-							</sebm-google-map-info-window>
-						</sebm-google-map-marker>
-					</sebm-google-map>
-
-					<ul class="list-inline ">
-						<li class="pd-10">
-							<img src="{{mapMarker.greenMarker}}" alt="">Pick up
-						</li>
-						<li class="pd-10">
-							<img src="{{mapMarker.redMarker}}" alt="">Delivery
-						</li>
-						<li class="pd-10">
-							<img src="{{mapMarker.blueMarker}}" alt="">Delivery Man
-						</li>
-					</ul>
+						<ul class="list-inline ">
+							<li class="pd-10">
+								<img src="{{mapMarker.greenMarker}}" alt="">Pick up
+							</li>
+							<li class="pd-10">
+								<img src="{{mapMarker.redMarker}}" alt="">Delivery
+							</li>
+							<li class="pd-10" *ngIf="coordinateInfo.assetLocationAvailable">
+								<img src="{{mapMarker.blueMarker}}" alt="">Delivery Man
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 
