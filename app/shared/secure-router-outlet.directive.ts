@@ -43,8 +43,10 @@ export class SecureRouterOutlet extends RouterOutlet {
         this.parentRouter.navigate(['/Home'])
     }
 
-    private _canActivate(url) {
+    private _canActivate(url: string) {
+        let jobTrackPageUrlRegex = "track/Job-[A-Z|0-9]{8}";
         return this.publicRoutes.indexOf(url) !== -1
+            || (url.match(jobTrackPageUrlRegex) !== null && url.match(jobTrackPageUrlRegex).indexOf(url) !== -1)
             || this.loginService.isLoggedIn;
     }
 }

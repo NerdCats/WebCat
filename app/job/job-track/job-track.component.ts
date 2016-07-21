@@ -9,10 +9,11 @@ import {
     GOOGLE_MAPS_DIRECTIVES
 } from 'angular2-google-maps/core/index';
 
-import { JobService } from '../shared/job.service';
+import { JobTrackService } from './job-track.service';
 import { Job, JobState } from '../shared/job';
 import { CoordinateInfo } from '../shared/coordinateInfo';
-import { OrderInfo } from '../shared/orderInfo';
+import { OrderInfoService } from '../shared/orderInfo.service';
+import { TimingInfoService, JobTaskTimeInfos } from '../shared/timingInfo.service';
 import { ComponentServiceStatus } from '../../shared/component-service-status';
 import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-bubble.component';
 
@@ -22,18 +23,24 @@ import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-b
     templateUrl: 'app/job/job-track/job-track.component.html',
     styleUrls: ['app/job/job-track/job-track.component.css'],
     directives: [ProgressBubbleComponent, GOOGLE_MAPS_DIRECTIVES],
-    providers: [JobService]
+    providers: [JobTrackService, OrderInfoService, TimingInfoService]
 })
 export class JobTrackComponent implements OnInit {
 
     public jobId: string;
     public job: Job;
-    public orderInfo: OrderInfo;
+
+
     public status: ComponentServiceStatus = "IN_PROGRESS";
     public coordinateInfo: CoordinateInfo;
     public errorMessage: string;
     public orderStatusNumber: number;
     public assetLocation: any;
+    public orderInfoHeading: string;
+    public orderInfoDesc: string;
+    public timingInfo: JobTaskTimeInfos;
+    public assetInfo: Object[] = []; //to get a simplified asset array
+
 
     public mapMarker = {
         blueMarker: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
@@ -43,29 +50,41 @@ export class JobTrackComponent implements OnInit {
         greenMarker: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
     };
 
-    constructor(private params: RouteParams,
-        private jobService: JobService) {
-        this.jobId = params.get('jobId');
+    constructor(private routeparams: RouteParams,
+        private jobTrackService: JobTrackService,
+        private orderInfoService: OrderInfoService,
+        private timeInfoService: TimingInfoService) {
+
     }
+
+
     ngOnInit() {
+        this.jobId = this.routeparams.get('jobId');
         this.getJob();
     }
 
     getJob() {
-        this.jobService.getJob(this.jobId)
+        this.jobTrackService.getJob(this.jobId)
             .subscribe((job) => {
                 this.status = "SUCCESSFUL";
                 this.job = job;
                 this.fixingServerText(this.job);
-                this.orderStatusNumber = this.findOrderStatus(this.job);
-                this.orderInfo = new OrderInfo(this.orderStatusNumber, job.User.Email);
+                this.orderInfoHeading = this.orderInfoService.orderInfo(job).orderInfoHeading;
+                this.orderInfoDesc = this.orderInfoService.orderInfo(job).orderInfoDesc;
                 this.coordinateInfo = new CoordinateInfo(this.job);
+                this.timingInfo = this.timeInfoService.getTimeInfo(job);
+
 
                 for (var key in this.job.Assets) {
-                    this.assetLocation = this.jobService.getAssetLocation(key)
+                    //creating that simplified asset array
+                    this.assetInfo.push(this.job.Assets[key]);
+                    this.assetLocation = this.jobTrackService.getAssetLocation(key)
                         .subscribe((location) => {
                             this.coordinateInfo.assetLocationAvailable = true;
                             this.assetLocation = location;
+                        },
+                        (error) => {
+
                         })
                 }
             },
@@ -91,26 +110,5 @@ export class JobTrackComponent implements OnInit {
         // IN_PROGRESS to IN PROGRESS
         // Not sure whether it will stay here finally
         this.job.Order.PaymentMethod = "Cash On Delivery";
-    }
-
-
-    // INFO: This is shamefully ugly
-    findOrderStatus(job: Job) {
-        if (job.State == "ENQUEUED") {
-            return 1;
-        }
-        else if (job.State == "IN_PROGRESS") {
-            if (job.Tasks[1]["Type"] == "PackagePickUp"
-                && job.Tasks[1]["State"] == "IN_PROGRESS") {
-                return 2;
-            }
-            else if (job.Tasks[2]["Type"] == "Delivery"
-                && job.Tasks[2]["State"] == "IN_PROGRESS") {
-                return 3;
-            }
-        }
-        else if (job.State == "COMPLETED") {
-            return 4;
-        }
     }
 }
