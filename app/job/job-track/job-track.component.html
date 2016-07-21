@@ -116,7 +116,7 @@
 				</div>
 			</div>
 
-			<div class="panel panel-primary">
+			<div class="panel panel-primary" *ngIf="assetInfo.length != 0 || (coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable)">
 				<div class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
