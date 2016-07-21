@@ -1,3 +1,11 @@
 .widget-icon {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.summary-icon {
+    line-height: 50px !important;
+}
+
+.in-progress-icon {
+    margin-left: 16px;
 }

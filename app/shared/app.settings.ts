@@ -18,7 +18,12 @@ export class AppSettings {
    public static get SHADOWCAT_API_BASE(): string {
      return this.SHADOWCAT_BASE + "api/"
    }
+
    public static get SHADOWCAT_BASE(): string {
      return "http://gofetch.cloudapp.net:1337/"
+   }
+
+   public static get GOOGLE_MAP_API_KEY(): string {
+     return 'AIzaSyCKMIEYdB0YPJkDr89n0WuaG3qQDjE9ndY';
    }
 }

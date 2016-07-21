@@ -2,7 +2,7 @@
     <widget-header title="Job History" icon="fa-tasks">
         <a href="#" *ngIf="mode=='ADMIN'">Manage</a>
     </widget-header>
-    <widget-body classes="medium no-padding">
+    <widget-body classes="no-padding">
         <div *ngIf="status=='IN_PROGRESS'">
             <progress-bubble></progress-bubble>
         </div>
@@ -51,4 +51,18 @@
             </table>
         </div>
     </widget-body>
+    <widget-footer>
+        <ul class="pagination pagination-sm pull-right" *ngIf="status=='SUCCESSFUL'">
+            <li *ngIf="pagination.PrevPage">
+                <a class="pointer" (click)="loadJobWithUrl(pagination.PrevPage)">&laquo;</a>
+            </li>
+            <li  *ngFor="let page of paginationArray">
+                <a class="{{page.isSelected}} pointer" (click)="getJobsWithPageNumber(page.pageNo)">{{page.pageNo + 1}}</a>
+            </li>
+            <li *ngIf="pagination.NextPage">
+                <a class="pointer" (click)="loadJobWithUrl(pagination.NextPage)">&raquo;</a>
+            </li>
+        </ul>
+        <div class=clearfix></div>
+    </widget-footer>
 </div>
