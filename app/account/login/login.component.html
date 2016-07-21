@@ -6,12 +6,35 @@
         <form [ngFormModel]="loginForm">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input [disabled]="loginStatus=='IN_PROGRESS'" ngControl="username" type="text" class="form-control" placeholder="Enter your Username" [(ngModel)]="loginModel.UserName" [ngFormControl]="loginForm.controls['username']">
+                <input [disabled]="loginStatus=='IN_PROGRESS'"
+                    ngControl="username"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter your Username"
+                    [(ngModel)]="loginModel.UserName"
+                    [ngFormControl]="loginForm.controls['username']"
+                    (keyup.enter)="onSubmit()">
+                    <!--
+                        Can't do conditionals here.
+                        if I do something like:
+                            (keyup.enter)="(loginModel.UserName.length > 0) ? onSubmit() : 0"
+                        the login button breaks: it remais disabled even if both the
+                        username and password fields are filled.
+                    -->
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="input-group">
-                    <input ngControl="password" [disabled]="loginStatus=='IN_PROGRESS'" type="password" id="login-password" class="form-control" placeholder="Enter your Password" [(ngModel)]="loginModel.Password" [ngFormControl]="loginForm.controls['password']">
+                    <input ngControl="password"
+                        [disabled]="loginStatus=='IN_PROGRESS'"
+                        type="password"
+                        id="login-password"
+                        class="form-control"
+                        placeholder="Enter your Password"
+                        [(ngModel)]="loginModel.Password"
+                        [ngFormControl]="loginForm.controls['password']"
+                        (keyup.enter)="onSubmit()">
+                        <!-- Same as the username field -->
                     <span class="input-group-btn">
                         <button ncShowPassword [ncPasswordControl]="'login-password'" type="button" class="btn btn-default" type="button">
                             <span class="fa fa-eye"></span>
