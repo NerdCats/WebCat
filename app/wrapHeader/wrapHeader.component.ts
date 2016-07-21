@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { FormBuilder, Validators, ControlGroup } from '@angular/common';
 @Component({
     selector: 'wrap-header',
     templateUrl: 'app/wrapHeader/wrapHeader.component.html',
@@ -7,11 +8,18 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
     directives: [ROUTER_DIRECTIVES]
 })
 export class WrapHeaderComponent {
+    public trackJobForm: ControlGroup;
 
-    constructor(private router: Router){
+    constructor(private router: Router,
+    private trackJobFormBuilder: FormBuilder){
+        this.trackJobForm = this.trackJobFormBuilder.group({
+            jobid: [""]
+        })
+
 
     }
-    gotoSearchpage(){
-        this.router.navigate(["Track", {jobId: "Job-U7GPB66G"}])
+    gotoSearchpage(event){
+        this.router.navigate(["Track", {jobId: this.trackJobForm.value.jobid}]);
+        event.preventDefault();
     }
 }
