@@ -89,9 +89,19 @@
         margin-bottom: 40px;
     }
 
+    .pd-10 {
+        padding: 10px;
+    }
+
     i {
         margin: 8px;
         color: #3498db;
+    }
+
+    .collapse-i {
+        margin: 0 0 0 0;
+        float: right;
+        color: whitesmoke;
     }
 
     .pointer{
