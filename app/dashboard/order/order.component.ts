@@ -6,6 +6,11 @@ import { Observable } from 'rxjs/Observable';
 import { LocalStorage } from '../../shared/local-storage'
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
+import { TimepickerComponent } from 'ng2-bootstrap/ng2-bootstrap';
+import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+
+
+
 import { LocalityService } from '../../shared/app-locality.service';
 import { OrderModel, OrderCartModel, PackageListModel } from '../../shared/model/order-model';
 import { OrderService } from './order.service';
@@ -15,7 +20,7 @@ import { DashboardBusService } from  '../dashboard-bus.service';
 @Component({
     selector: 'order',
     templateUrl: 'app/dashboard/order/order.component.html',
-    directives: [MODAL_DIRECTIVES, ModalComponent, FORM_DIRECTIVES, CORE_DIRECTIVES],
+    directives: [MODAL_DIRECTIVES, ModalComponent, FORM_DIRECTIVES, CORE_DIRECTIVES,TimepickerComponent, DATEPICKER_DIRECTIVES],
     providers: [OrderService, LocalStorage, LocalityService],
     styleUrls: ['app/dashboard/order/order.component.css']
 })
@@ -31,6 +36,10 @@ export class OrderComponent {
     public itemAddOrUpdateText: string = "Add";
     public formTitle:string = "Create your Delivery Order";
     public submittedJobId: string;
+
+    public pickupTime: Date = new Date();
+
+
     constructor(private formBuilder: FormBuilder,
         private orderService: OrderService,
         private router: Router,
@@ -106,6 +115,19 @@ export class OrderComponent {
         this.packageListItem = new PackageListModel();
         this.close();
     }
+
+    pickupDateChanged(){
+        console.log(this.pickupTime)
+        console.log("ami ekta modon");
+
+    }
+
+    @ViewChild('pickupTimeModal')
+    pickupTimeModal: ModalComponent;
+    openPickupItemModal(){
+        this.pickupTimeModal.open();
+    }
+
 
     @ViewChild('itemModal')
     modal: ModalComponent;
