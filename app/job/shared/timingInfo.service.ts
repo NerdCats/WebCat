@@ -33,14 +33,15 @@ export class TimingInfoService {
         let jobTaskTimeInfo = new JobTaskTimeInfos();
         job.Tasks.forEach(task => {
             if (task.Type === "PackagePickUp") {
-                jobTaskTimeInfo.pickup.startTime = new TimeInfo("Pickup Started", task.CreateTime);
-                jobTaskTimeInfo.pickup.completedTime = new TimeInfo("Pickup Completed", task.ModifiedTime);
-                jobTaskTimeInfo.pickup.totalTime = new TimeInfo("Total Time", task.CompletionTime);
+                jobTaskTimeInfo.pickup.startTime = new TimeInfo("Pickup Started", task.InitiationTime);
+                jobTaskTimeInfo.pickup.completedTime = new TimeInfo("Pickup Completed", task.CompletionTime);
+                jobTaskTimeInfo.pickup.totalTime = new TimeInfo("Total Time", task.Duration);
+                console.log(task)
             }
             if (task.Type === "Delivery") {
-                jobTaskTimeInfo.delivery.startTime = new TimeInfo("Delivery Started", task.CreateTime);
-                jobTaskTimeInfo.delivery.completedTime = new TimeInfo("Delivery Completed", task.ModifiedTime);
-                jobTaskTimeInfo.delivery.totalTime = new TimeInfo("Total Time", task.CompletionTime);
+                jobTaskTimeInfo.delivery.startTime = new TimeInfo("Delivery Started", task.InitiationTime);
+                jobTaskTimeInfo.delivery.completedTime = new TimeInfo("Delivery Completed", task.CompletionTime);
+                jobTaskTimeInfo.delivery.totalTime = new TimeInfo("Total Time", task.Duration);
             }
         });
         return jobTaskTimeInfo;

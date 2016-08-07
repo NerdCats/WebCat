@@ -72,6 +72,7 @@ gulp.task('copy:libs', function () {
         'bootstrap/dist/css/bootstrap.min.css',
         'bootstrap/dist/css/bootstrap.min.css.map',
         'bootstrap/dist/js/bootstrap.js',
+        'bootstrap/fonts/**',
         'jquery/dist/jquery.min.js',
         'jquery/dist/jquery.min.map',
         'es6-shim/es6-shim.min.js',
