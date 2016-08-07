@@ -22,6 +22,16 @@
       </div>
 
       <div class="form-group">
+        <label class="col-md-4 control-label" for="order-type">Select Order Type</label>
+        <div class="col-md-4">
+          <select required ngControl="orderType" #orderType="ngForm" class="form-control" name="orderType" id="orderType" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.Type">
+            <option value="Delivery">Delivery</option>
+            <option value="ClassifiedDelivery">ClassifiedDelivery</option>
+          </select>
+
+        </div>
+      </div>
+      <div class="form-group">
         <label class="col-md-4 control-label" for="pickup-address">Pickup Address</label>
         <div class="col-md-4">
           <textarea required ngControl="pickupAddress" #pickupAddress="ngForm" class="form-control" id="pickup-address" name="pickup-address" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.From.AddressLine1"></textarea>

@@ -212,6 +212,7 @@
 									<th>Item</th>
 									<th>Qty</th>
 									<th>Unit Price</th>
+									<th>Weight</th>
 									<th>Total</th>
 								</tr>
 							</thead>
@@ -221,18 +222,21 @@
 									<td>{{ item.Item }}</td>
 									<td>{{ item.Quantity }}</td>
 									<td>{{ item.Price }}</td>
+									<td>{{ item.Weight }}</td>
 									<td>{{ item.Total }}</td>
 								</tr>
 								<tr>
-									<td colspan="4" class="text-right">Subtotal</td>
+									<td colspan="2" class="text-right">Total Weight</td>
+									<td>{{ job.Order.OrderCart.TotalWeight }}</td>
+									<td colspan="2" class="text-right">Subtotal</td>
 									<td>{{ job.Order.OrderCart.SubTotal }}</td>
 								</tr>
 								<tr>
-									<td colspan="4" class="text-right">Delivery Charge</td>
+									<td colspan="5" class="text-right">Delivery Charge</td>
 									<td>{{ job.Order.OrderCart.ServiceCharge }}</td>
 								</tr>
 								<tr>
-									<td colspan="4" class="text-right">Total</td>
+									<td colspan="5" class="text-right">Total</td>
 									<td>{{ job.Order.OrderCart.TotalToPay }}</td>
 								</tr>
 							</tbody>
