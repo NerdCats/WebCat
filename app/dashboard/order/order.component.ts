@@ -37,7 +37,8 @@ export class OrderComponent {
     public formTitle:string = "Create your Delivery Order";
     public submittedJobId: string;
 
-    public pickupTime: Date = new Date();
+    public pickupTime: Date; //= new Date();
+    public deliveryTime: Date;
 
 
     constructor(private formBuilder: FormBuilder,
@@ -124,8 +125,27 @@ export class OrderComponent {
 
     @ViewChild('pickupTimeModal')
     pickupTimeModal: ModalComponent;
-    openPickupItemModal(){
+    openPickupTimeModal(){
         this.pickupTimeModal.open();
+    }
+    closePickupTimeModal(){
+        this.pickupTimeModal.close();
+    }
+    clearPickupTime(){
+        this.pickupTime = null;
+        this.closePickupTimeModal();
+    }
+
+    @ViewChild('deliveryTimeModal')
+    deliveryTimeModal: ModalComponent;
+    openDeliveryTimeModal(){
+        this.deliveryTimeModal.open();
+    }
+    closeDeliveryTimeModal(){
+        this.deliveryTimeModal.close();
+    }
+    clearDeliveryTime(){
+        this.deliveryTime = null;
     }
 
 

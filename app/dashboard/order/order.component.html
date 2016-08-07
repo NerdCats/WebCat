@@ -40,27 +40,27 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="select-pick-up-time">Pickup Time</label>
         <div class="col-md-4">
-          <input type="text" class="form-control" [(ngModel)]="pickupTime" (click)="openPickupItemModal()">
+          <input type="text" class="form-control" [(ngModel)]="pickupTime" value="{{pickupTime | date:'EEE d MMM y,h:m a'}}" (click)="openPickupTimeModal()">
         </div>
       </div>
 
 
-      <modal #pickupTimeModal class="modal_vcenter" [size]="sm" (onClose)="onModalClosed()" (onDismiss)="onModalDismissed()">
+      <modal #pickupTimeModal class="modal_vcenter" [size]="sm">
         <modal-header>Select Pickup Time</modal-header>
         <modal-body>
           <div>
             <div class="form-group">
-              <label class="control-label" for="pickup-address">Pickup Address</label>
-              <div class="">
-                <datepicker (change)="pickupDateChanged()" [(ngModel)]="pickupTime" [showWeeks]="true"></datepicker>
-                <timepicker  (change)="pickupDateChanged()" [(ngModel)]="pickupTime"  ></timepicker>
-                <span>{{pickupTime}}</span>
+              <div class="" >
+                <datepicker [(ngModel)]="pickupTime" [showWeeks]="true"></datepicker>
+                <timepicker [(ngModel)]="pickupTime"></timepicker>
+                <span>{{pickupTime | date:'EEE d MMM y,h:m a'}}</span>
               </div>
             </div>
           </div>
         </modal-body>
         <modal-footer>
-
+          <button class="btn btn-primary" (click)="closePickupTimeModal()">Ok</button>
+          <button class="btn btn-danger" (click)="clearPickupTime()">Clear</button>
         </modal-footer>
 
       </modal>
@@ -86,6 +86,35 @@
         </select>
         </div>
       </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="select-pick-up-time">Delivery Time</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" [(ngModel)]="deliveryTime" value="{{deliveryTime | date:'EEE d MMM y,h:m a'}}" (click)="openDeliveryTimeModal()">
+        </div>
+      </div>
+
+
+      <modal #deliveryTimeModal class="modal_vcenter" [size]="sm">
+        <modal-header>Select Delivery Time</modal-header>
+        <modal-body>
+          <div>
+            <div class="form-group">
+              <div class="" >
+                <datepicker [(ngModel)]="deliveryTime" [showWeeks]="true"></datepicker>
+                <timepicker [(ngModel)]="deliveryTime"  ></timepicker>
+                <span>{{deliveryTime | date:'EEE d MMM y,h:m a' }}</span>
+              </div>
+            </div>
+          </div>
+        </modal-body>
+        <modal-footer>
+          <button class="btn btn-primary" (click)="closeDeliveryTimeModal()">Ok</button>
+          <button class="btn btn-danger" (click)="clearDeliveryTime()">Clear</button>
+        </modal-footer>
+
+      </modal>
+
       <br>
 
       <!-- Select Basic -->
