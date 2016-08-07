@@ -11,9 +11,10 @@
             <div class="col-md-4 alert alert-danger" [innerHtml]="orderResponseMessage"></div>
           </div>
           <div *ngIf="orderCreationStatus=='SUCCESS'" class="form-group">
-            <label class="col-md-8 control-label" for="success"></label>
-            <div class="col-md-4 alert alert-success alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> Order created Successfully, click <a (click)="goToTrackingPage()">here</a> to track!
+            <label class="col-md-6 control-label" for="success"></label>
+            <div class="col-md-6 alert alert-success alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Order created Successfully, Your job id <h3>{{submittedJobId}}</h3> <br>click <a (click)="goToTrackingPage()">here</a> to track!
             </div>
           </div>
         </div>
@@ -40,7 +41,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="select-pick-up-time">Pickup Time</label>
         <div class="col-md-4">
-          <input type="text" class="form-control" [(ngModel)]="pickupTime" value="{{pickupTime | date:'EEE d MMM y,h:m a'}}" (click)="openPickupTimeModal()">
+          <input type="text" class="form-control" [(ngModel)]="pickupTime"  value="{{pickupTime | date:'EEE d MMM y,h:m a'}}" (click)="openPickupTimeModal()">
         </div>
       </div>
 
@@ -212,8 +213,8 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="submit"></label>
         <div class="col-md-4">
-          <button id="submit" name="submit" class="btn btn-primary" [disabled]="!deliveryAddress.valid || !paymentMethod.valid || !pickupAddress.valid || orderCreationStatus=='IN_PROGRESS'" (click)="onSubmit()">
-           <span *ngIf="orderCreationStatus=='IN_PROGRESS'" lass="fa fa-refresh fa-spin"></span>
+          <button id="submit" name="submit" class="btn btn-primary pull-right" [disabled]="!deliveryAddress.valid || !paymentMethod.valid || !pickupAddress.valid || orderCreationStatus=='IN_PROGRESS'" (click)="onSubmit()">
+           <span *ngIf="orderCreationStatus=='IN_PROGRESS'" class="fa fa-refresh fa-spin"></span>
             Create Order
         </button>
         </div>

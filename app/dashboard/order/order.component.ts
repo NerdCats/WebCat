@@ -12,7 +12,7 @@ import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 
 import { LocalityService } from '../../shared/app-locality.service';
-import { OrderModel, OrderCartModel, PackageListModel } from '../../shared/model/order-model';
+import { OrderModel, OrderCartModel, PackageListModel, JobTaskETAPreferenceModel } from '../../shared/model/order-model';
 import { OrderService } from './order.service';
 import { DashboardBusService } from  '../dashboard-bus.service';
 
@@ -56,6 +56,7 @@ export class OrderComponent {
 
     onSubmit() {
         this.orderCreationStatus = 'IN_PROGRESS';
+        this.processJobTaskPreferrenceETA();
         this.orderService.createOrder(this.orderModel)
             .subscribe((result) => {
                 let job = JSON.parse(result._body);
@@ -69,7 +70,23 @@ export class OrderComponent {
                 console.log(error);
                 this.orderCreationStatus = 'FAILED';
             });
+    }
 
+    processJobTaskPreferrenceETA(){
+        if(this.orderModel.JobTaskETAPreference != [] && this.processJobTaskPreferrenceETA.length != 0){
+            this.orderModel.JobTaskETAPreference = null;
+        }
+        if(this.pickupTime!=null || this.deliveryTime!= null){
+            this.orderModel.JobTaskETAPreference = [];
+            if(this.pickupTime!= null) {
+                let pickupETA = new JobTaskETAPreferenceModel("PackagePickUp", this.pickupTime);
+                this.orderModel.JobTaskETAPreference.push(pickupETA);
+            }
+            if(this.deliveryTime!= null) {
+                let deliveryETA = new JobTaskETAPreferenceModel("Delivery", this.deliveryTime);
+                this.orderModel.JobTaskETAPreference.push(deliveryETA);
+            }
+        }
     }
 
     goToTrackingPage(){
@@ -146,6 +163,7 @@ export class OrderComponent {
     }
     clearDeliveryTime(){
         this.deliveryTime = null;
+        this.closeDeliveryTimeModal();
     }
 
 

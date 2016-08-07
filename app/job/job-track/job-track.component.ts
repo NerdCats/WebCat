@@ -33,7 +33,7 @@ export class JobTrackComponent implements OnInit {
 
     public status: ComponentServiceStatus = "IN_PROGRESS";
     public coordinateInfo: CoordinateInfo;
-    public errorMessage: string;
+    public errorMessage: any;
     public orderStatusNumber: number;
     public assetLocation: any;
     public orderInfoHeading: string;
@@ -97,7 +97,7 @@ export class JobTrackComponent implements OnInit {
                 else if (error.status == 500) {
                     this.errorMessage = "Failed to load the status of your Order, kindly refresh!";
                 }
-                else if (error.response.Message != undefined) {
+                else {
                     this.errorMessage = error.Message;
                 }
                 console.log(this.errorMessage);

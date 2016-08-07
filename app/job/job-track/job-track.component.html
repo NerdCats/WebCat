@@ -78,7 +78,31 @@
 							<p>{{job.PaymentStatus}}</p>
 						</div>
 					</div>
-
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-4">
+								<strong>Pickup ETA</strong>
+								<p>{{job.Tasks[1].ETA | date:"EEE d MMM y,h:m TT"}}</p>
+								<strong>Pickup Started</strong>
+								<p>{{job.Tasks[1].InitiationTime | date:"EEE d MMM y,h:m TT"}}</p>
+								<strong>Pickup Completed</strong>
+								<p>{{job.Tasks[1].CompletionTime | date:"EEE d MMM y,h:m TT"}}</p>
+								<strong>Pickup Duration</strong>
+								<p>{{job.Tasks[1].Duration | date:"EEE d MMM y,h:m TT"}}</p>
+							</div>
+							<div class="col-md-4">
+								<strong>Delivery ETA</strong>
+								<p>{{job.Tasks[2].ETA | date:"EEE d MMM y,h:m TT"}}</p>
+								<strong>Delivery Started</strong>
+								<p>{{job.Tasks[2].InitiationTime | date:"EEE d MMM y,h:m TT"}}</p>
+								<strong>Delivery Completed</strong>
+								<p>{{job.Tasks[2].CompletionTime | date:"EEE d MMM y,h:m TT"}}</p>
+								<strong>Delivery Duration</strong>
+								<p>{{job.Tasks[2].Duration | date:"EEE d MMM y,h:m TT"}}</p>
+							</div>
+							<div class="col-md-4"></div>
+						</div>
+					</div>
 					<!--When the job task start, completed, total time will be available
 					just uncomment the below code!-->
 

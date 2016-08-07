@@ -6,9 +6,12 @@ export class JobTask {
     JobTaskStateString: string;
     State: string;
     AssetRef: string;
+    ETA: Date;
     CreateTime: Date;
+    InitiationTime: Date;
     ModifiedTime: Date;
     CompletionTime: Date;
+    Duration: any;
     IsReadytoMoveToNextTask: boolean;
     IsDependencySatisfied: boolean;
     IsStartingTask: boolean;
@@ -21,9 +24,21 @@ export class JobTask {
         this.JobTaskStateString = task["JobTaskStateString"];
         this.State = task["State"];
         this.AssetRef = task["AssetRef"];
-        this.CreateTime = new Date(task["CreateTime"]);
-        this.ModifiedTime = new Date(task["ModifiedTime"]);
-        this.CompletionTime = task["CompletionTime"];
+
+        if(task["ETA"]!=null)
+            this.ETA = new Date(task["ETA"]);
+        if(task["CreateTime"]!=null)
+            this.CreateTime = new Date(task["CreateTime"]);
+        if(task["InitiationTime"]!=null)
+            this.InitiationTime = new Date(task["InitiationTime"]);
+        if(task["ModifiedTime"]!=null)
+            this.ModifiedTime = new Date(task["ModifiedTime"]);
+        if(task["CompletionTime"]!=null)
+            this.CompletionTime = new Date(task["CompletionTime"]);
+
+
+
+        this.Duration = task["Duration"];
         this.IsReadytoMoveToNextTask = task["IsReadytoMoveToNextTask"];
         this.IsDependencySatisfied = task["IsDependencySatisfied"];
         this.IsStartingTask = task["IsStartingTask"];
