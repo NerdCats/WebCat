@@ -11,9 +11,11 @@ import {
 
 import { JobTrackService } from './job-track.service';
 import { Job, JobState } from '../shared/job';
+import { JobTask } from '../shared/jobtasks';
+
 import { CoordinateInfo } from '../shared/coordinateInfo';
 import { OrderInfoService } from '../shared/orderInfo.service';
-import { TimingInfoService, JobTaskTimeInfos } from '../shared/timingInfo.service';
+
 import { ComponentServiceStatus } from '../../shared/component-service-status';
 import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-bubble.component';
 
@@ -23,7 +25,7 @@ import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-b
     templateUrl: 'app/job/job-track/job-track.component.html',
     styleUrls: ['app/job/job-track/job-track.component.css'],
     directives: [ProgressBubbleComponent, GOOGLE_MAPS_DIRECTIVES],
-    providers: [JobTrackService, OrderInfoService, TimingInfoService]
+    providers: [JobTrackService, OrderInfoService]
 })
 export class JobTrackComponent implements OnInit {
 
@@ -34,12 +36,11 @@ export class JobTrackComponent implements OnInit {
     public status: ComponentServiceStatus = "IN_PROGRESS";
     public coordinateInfo: CoordinateInfo;
     public errorMessage: any;
-    public orderStatusNumber: number;
     public assetLocation: any;
-    public orderInfoHeading: string;
-    public orderInfoDesc: string;
-    public timingInfo: JobTaskTimeInfos;
+    public orderStatusHeading: string;
+    public orderStatusDesc: string;
     public assetInfo: Object[] = []; //to get a simplified asset array
+    public tasksTiming: JobTask[] = [];
 
 
     public mapMarker = {
@@ -52,8 +53,7 @@ export class JobTrackComponent implements OnInit {
 
     constructor(private routeparams: RouteParams,
         private jobTrackService: JobTrackService,
-        private orderInfoService: OrderInfoService,
-        private timeInfoService: TimingInfoService) {
+        private orderInfoService: OrderInfoService) {
 
     }
 
@@ -69,12 +69,15 @@ export class JobTrackComponent implements OnInit {
                 this.status = "SUCCESSFUL";
                 this.job = job;
                 this.fixingServerText(this.job);
-                this.orderInfoHeading = this.orderInfoService.orderInfo(job).orderInfoHeading;
-                this.orderInfoDesc = this.orderInfoService.orderInfo(job).orderInfoDesc;
+                this.orderStatusHeading = this.orderInfoService.orderInfo(job).orderStatusHeading;
+                this.orderStatusDesc = this.orderInfoService.orderInfo(job).orderStatusDesc;
                 this.coordinateInfo = new CoordinateInfo(this.job);
-                this.timingInfo = this.timeInfoService.getTimeInfo(job);
 
-                console.log(this.job);
+                this.job.Tasks.forEach(element => {
+                    if(element.Type !== "FetchDeliveryMan"){
+                        this.tasksTiming.push(element);
+                    }
+                });
 
                 for (var key in this.job.Assets) {
                     //creating that simplified asset array
@@ -111,5 +114,11 @@ export class JobTrackComponent implements OnInit {
         // IN_PROGRESS to IN PROGRESS
         // Not sure whether it will stay here finally
         this.job.Order.PaymentMethod = "Cash On Delivery";
+
+        this.job.Tasks.forEach(task => {
+            if(task.Type === "PackagePickUp") task.Type = "Pickup";
+            if(task.Type === "SecureDelivery") task.Type = "Secured Delivery";
+
+        })
     }
 }

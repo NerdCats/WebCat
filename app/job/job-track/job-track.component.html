@@ -64,7 +64,7 @@
 				</div>
 				<div id="orderStatusInfo" class="panel-body collapse in">
 					<div class="col-md-12">
-						<strong>{{ orderInfoHeading }}</strong>
+						<strong>{{ orderStatusHeading }}</strong>
 						<!--injected html here because I wanted to highlight the email address substring! in the orderInfoDesc-->
 						<p [innerHtml]="orderInfoDesc"></p>
 					</div>
@@ -79,77 +79,29 @@
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-4">
-								<strong>Pickup ETA</strong>
-								<p>{{job.Tasks[1].ETA | date:"EEE d MMM y,h:m TT"}}</p>
-								<strong>Pickup Started</strong>
-								<p>{{job.Tasks[1].InitiationTime | date:"EEE d MMM y,h:m TT"}}</p>
-								<strong>Pickup Completed</strong>
-								<p>{{job.Tasks[1].CompletionTime | date:"EEE d MMM y,h:m TT"}}</p>
-								<strong>Pickup Duration</strong>
-								<p>{{job.Tasks[1].Duration | date:"EEE d MMM y,h:m TT"}}</p>
-							</div>
-							<div class="col-md-4">
-								<strong>Delivery ETA</strong>
-								<p>{{job.Tasks[2].ETA | date:"EEE d MMM y,h:m TT"}}</p>
-								<strong>Delivery Started</strong>
-								<p>{{job.Tasks[2].InitiationTime | date:"EEE d MMM y,h:m TT"}}</p>
-								<strong>Delivery Completed</strong>
-								<p>{{job.Tasks[2].CompletionTime | date:"EEE d MMM y,h:m TT"}}</p>
-								<strong>Delivery Duration</strong>
-								<p>{{job.Tasks[2].Duration | date:"EEE d MMM y,h:m TT"}}</p>
-							</div>
-							<div class="col-md-4" *ngIf="job.Tasks[3]">
-								<strong>Secure Delivery ETA</strong>
-								<p>{{job.Tasks[3].ETA | date:"EEE d MMM y,h:m TT"}}</p>
-								<strong>Secure Delivery Started</strong>
-								<p>{{job.Tasks[3].InitiationTime | date:"EEE d MMM y,h:m TT"}}</p>
-								<strong>Secure Delivery Completed</strong>
-								<p>{{job.Tasks[3].CompletionTime | date:"EEE d MMM y,h:m TT"}}</p>
-								<strong>Secure Delivery Duration</strong>
-								<p>{{job.Tasks[3].Duration | date:"EEE d MMM y,h:m TT"}}</p>
-							</div>
-						</div>
+						<table class="table table-sm table-hover table-bordere table-responsive">
+							<thead>
+								<tr>
+									<th>Task</th>
+									<th>Mentioned ETA</th>
+									<th>Started</th>
+									<th>Completed</th>
+									<th>Duration</th>
+									<th>ETA Failed?</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let task of tasksTiming">
+									<td class="col-md-2"> {{task.Type}} </td>
+									<td class="col-md-2"> {{(task.ETA | date:"EEE d MMM y,h:m TT") || "Not Mentioned"}} </td>
+									<td class="col-md-2"> {{(task.InitiationTime | date:"EEE d MMM y,h:m TT") || "Not Started"}} </td>
+									<td class="col-md-2"> {{(task.CompletionTime | date:"EEE d MMM y,h:m TT") || "Not Finished"}} </td>
+									<td class="col-md-2"> {{task.Duration || "Not Finished"}} </td>
+									<td class="col-md-2"> {{task.ETAFailed}} </td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-					<!--When the job task start, completed, total time will be available
-					just uncomment the below code!-->
-
-					<!--<div class="responsive-table col-md-12">
-						<table class="table table-sm table-hover table-bordere">
-							<thead>
-								<tr>
-									<th>{{timingInfo.pickup.startTime.heading}}</th>
-									<th>{{timingInfo.pickup.completedTime.heading}}</th>
-									<th>{{timingInfo.pickup.totalTime.heading}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{timingInfo.pickup.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.pickup.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.pickup.totalTime.time}}</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<table class="table table-sm table-hover table-bordere">
-							<thead>
-								<tr>
-									<th>{{timingInfo.delivery.startTime.heading}}</th>
-									<th>{{timingInfo.delivery.completedTime.heading}}</th>
-									<th>{{timingInfo.delivery.totalTime.heading}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{timingInfo.delivery.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.delivery.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.delivery.totalTime.time}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>-->
 				</div>
 			</div>
 
