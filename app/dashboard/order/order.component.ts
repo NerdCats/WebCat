@@ -105,7 +105,6 @@ export class OrderComponent {
 
     initiateOrderModel() {
         this.orderModel = new OrderModel();
-        this.orderModel.Type = "Delivery";
         this.orderModel.PayloadType = "default";
 
         this.orderModel.OrderCart.PackageList = [];

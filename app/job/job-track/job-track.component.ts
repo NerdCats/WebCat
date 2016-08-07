@@ -118,7 +118,6 @@ export class JobTrackComponent implements OnInit {
         this.job.Tasks.forEach(task => {
             if(task.Type === "PackagePickUp") task.Type = "Pickup";
             if(task.Type === "SecureDelivery") task.Type = "Secured Delivery";
-
         })
     }
 }
