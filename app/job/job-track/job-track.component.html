@@ -100,7 +100,16 @@
 								<strong>Delivery Duration</strong>
 								<p>{{job.Tasks[2].Duration | date:"EEE d MMM y,h:m TT"}}</p>
 							</div>
-							<div class="col-md-4"></div>
+							<div class="col-md-4" *ngIf="job.Tasks[3]">
+								<strong>Secure Delivery ETA</strong>
+								<p>{{job.Tasks[3].ETA | date:"EEE d MMM y,h:m TT"}}</p>
+								<strong>Secure Delivery Started</strong>
+								<p>{{job.Tasks[3].InitiationTime | date:"EEE d MMM y,h:m TT"}}</p>
+								<strong>Secure Delivery Completed</strong>
+								<p>{{job.Tasks[3].CompletionTime | date:"EEE d MMM y,h:m TT"}}</p>
+								<strong>Secure Delivery Duration</strong>
+								<p>{{job.Tasks[3].Duration | date:"EEE d MMM y,h:m TT"}}</p>
+							</div>
 						</div>
 					</div>
 					<!--When the job task start, completed, total time will be available

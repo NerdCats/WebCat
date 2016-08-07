@@ -74,3 +74,13 @@ export class DeliveryJobTask extends JobTask {
         this.To = task["To"];
     }
 }
+
+export class SecureDeliveryJobTask extends JobTask {
+    From: DefaultAddress;
+    To: DefaultAddress;
+    constructor(task: any) {
+        super(task);
+        this.From = task["From"];
+        this.To = task["To"];
+    }
+}

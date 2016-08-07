@@ -74,6 +74,7 @@ export class JobTrackComponent implements OnInit {
                 this.coordinateInfo = new CoordinateInfo(this.job);
                 this.timingInfo = this.timeInfoService.getTimeInfo(job);
 
+                console.log(this.job);
 
                 for (var key in this.job.Assets) {
                     //creating that simplified asset array
