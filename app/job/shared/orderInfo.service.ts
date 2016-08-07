@@ -55,7 +55,6 @@ export class OrderInfoService {
                     status = 4;
                 }
             }
-            else status = 0;
         });
         return status;
     }

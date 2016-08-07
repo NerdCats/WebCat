@@ -38,10 +38,14 @@
                             <p>{{job.Order.To.Address}}</p>
                         </div>
                     </div>
-					<div class="row">
+					<div class="row" *ngIf="job.Order.NoteToDeliveryMan">
 						<div class="col-md-6">
 							<strong>Note To Delivery Man</strong>
 							<p>{{job.Order.NoteToDeliveryMan}}</p>
+						</div>
+						<div class="col-md-6" *ngIf="job.Order.Description">
+							<strong>Package Description</strong>
+							<p>{{job.Order.Description}}</p>
 						</div>
 					</div>
 				</div>
@@ -116,7 +120,7 @@
 				</div>
 			</div>
 
-			<div class="panel panel-primary">
+			<div class="panel panel-primary" *ngIf="assetInfo.length != 0 || (coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable)">
 				<div class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
