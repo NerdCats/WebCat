@@ -68,11 +68,9 @@ export class JobTrackComponent implements OnInit {
             .subscribe((job) => {
                 this.status = "SUCCESSFUL";
                 this.job = job;
-                this.fixingServerText(this.job);
                 this.orderStatusHeading = this.orderInfoService.orderInfo(job).orderStatusHeading;
                 this.orderStatusDesc = this.orderInfoService.orderInfo(job).orderStatusDesc;
                 this.coordinateInfo = new CoordinateInfo(this.job);
-
                 this.job.Tasks.forEach(element => {
                     if(element.Type !== "FetchDeliveryMan"){
                         this.tasksTiming.push(element);
@@ -91,6 +89,7 @@ export class JobTrackComponent implements OnInit {
 
                         })
                 }
+                this.fixingServerText(); // this should be called at the end
             },
             (error) => {
                 this.status = "FAILED";
@@ -108,16 +107,21 @@ export class JobTrackComponent implements OnInit {
             });
     }
 
-    fixingServerText(job: Job) {
+    fixingServerText() {
         // this weird function is to streamline server responses
         // like, CashOnDelivery to Cash On Deliver ||
         // IN_PROGRESS to IN PROGRESS
         // Not sure whether it will stay here finally
         this.job.Order.PaymentMethod = "Cash On Delivery";
 
-        this.job.Tasks.forEach(task => {
+        this.tasksTiming.forEach(task => {
             if(task.Type === "PackagePickUp") task.Type = "Pickup";
             if(task.Type === "SecureDelivery") task.Type = "Secured Delivery";
+
+            if(task.Duration){
+                task.Duration = task.Duration.substr(0,8)
+            }
+
         })
     }
 }

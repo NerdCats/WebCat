@@ -24,7 +24,15 @@ export class OrderInfoService {
                 _orderStatusDesc = "Your Pickup is completed, Delivery is in progress. Come back to this page for updates on your Order status.";
                 break;
             case 4:
-                _orderStatusHeading = "You Delivery has been completed!";
+                _orderStatusHeading = "Your Delivery has been completed!";
+                _orderStatusDesc = "Thank you for using our service";
+                break;
+            case 5:
+                _orderStatusHeading = "Your Delivery has been completed, Secured Delivery is in progress!";
+                _orderStatusDesc = "Your Delivery is completed, Secured Delivery is in progress. Come back to this page for updates on your Order status.";
+                break;
+            case 6:
+                _orderStatusHeading = "Your Secured Delivery has been completed!";
                 _orderStatusDesc = "Thank you for using our service";
                 break;
             default:
@@ -37,7 +45,6 @@ export class OrderInfoService {
         }
     }
 
-    // INFO: This is shamefully ugly
     private findOrderStatus(job: Job): number {
         let status = 0;
         job.Tasks.forEach(task => {
@@ -53,6 +60,14 @@ export class OrderInfoService {
                 }
                 else if (task.State === "COMPLETED") {
                     status = 4;
+                }
+            }
+            else if (task.Type === "SecureDelivery"){
+                if (task.State === "IN_PROGRESS") {
+                    status = 5;
+                }
+                else if (task.State === "COMPLETED") {
+                    status = 6;
                 }
             }
         });

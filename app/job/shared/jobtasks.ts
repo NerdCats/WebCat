@@ -11,7 +11,7 @@ export class JobTask {
     InitiationTime: Date;
     ModifiedTime: Date;
     CompletionTime: Date;
-    Duration: any;
+    Duration: string;
     IsReadytoMoveToNextTask: boolean;
     IsDependencySatisfied: boolean;
     IsStartingTask: boolean;
