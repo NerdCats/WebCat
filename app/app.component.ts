@@ -10,12 +10,13 @@ import { JobTrackComponent } from './job/job-track/job-track.component';
 import { LoginService } from './account/login/login.service'
 import { Routes } from './shared/router.config';
 import { SecureRouterOutlet } from './shared/secure-router-outlet.directive';
+import { VendorService } from './vendors-list/vendor.service';
 
 @Component({
   selector: 'webcat',
   templateUrl: 'app/app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, SecureRouterOutlet, JobTrackComponent],
-  providers: [Title, LoginService]
+  providers: [Title, LoginService, VendorService]
 })
 @RouteConfig(Routes)
 export class AppComponent {
