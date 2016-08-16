@@ -3,3 +3,8 @@
     height: 333px;
     background-size: cover;
 }
+
+.vendor-item-list {
+    display: inline-block;
+    width: 50%;
+}
