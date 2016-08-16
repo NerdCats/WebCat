@@ -1,10 +1,20 @@
 <div class="container center-block">
     <div class="row">
         <ul class="list-inline center-block">
-            <li *ngFor="let item of vendor.catagories">{{item.catagory}}</li>
+            <li *ngFor="let cat of vendor.catagories">{{cat.catagory}}</li>
         </ul>
     </div>
     <div class="row vendor-name">
         <h1>{{vendor.name}}</h1>
+    </div>
+
+    <div class="row" *ngFor="let cat of vendor.catagories">
+        <h3>{{cat.catagory}}</h3>
+        <hr>
+        <div class="row">
+            <ul>
+                <li *ngFor="let item of cat.itemlist">{{item.item}}</li>
+            </ul>
+        </div>
     </div>
 </div>
