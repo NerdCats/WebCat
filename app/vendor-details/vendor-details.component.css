@@ -1,7 +1,26 @@
-.vendor-name {
-    background: url('/assets/img/pop-up-pizza.jpg') no-repeat center center fixed;
-    height: 333px;
-    background-size: cover;
+.vendor-name-div {
+    position: relative;
+    overflow: hidden;
+}
+.vendor-name-div h1 {
+    padding: 200px 200px 0 200px;
+    position: relative;
+    z-index: 2;
+}
+.vendor-name-div p {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 200px;
+    font-size: 16px;
+    font-weight: 400;
+}
+.vendor-name-div img {
+    opacity: 0.4;
+    background-color: black;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
 }
 .catagories {
     height: 50px;
@@ -55,7 +74,7 @@ li {
 }
 
 li > a:hover {
-  border-bottom: 2px solid #7fdbd4;
+  border-bottom: 2px solid #3498db;
   background-color: #d9d7d7;
 }
 

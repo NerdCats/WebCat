@@ -1,24 +1,28 @@
 <div class="container center-block">
     <div class="row">
         <ul class="list-inline center-block catagories">
-            <li class="catagories-list" *ngFor="let cat of vendor.catagories">{{cat.catagory}}</li>
+            <li class="catagories-list" *ngFor="let cat of vendor.catagories">
+                <!--http://stackoverflow.com/questions/14712223/how-to-handle-anchor-hash-linking-in-angularjs-->
+                <a href="/#{{cat.catagory}}" target="_self">{{cat.catagory}}</a></li>
         </ul>
     </div>
-    <div class="row vendor-name">
-        <h1>{{vendor.name}}</h1>
+    <div class="vendor-name-div">
+        <h1 class="text-center">{{vendor.name}}</h1>
+        <p class="text-center">107 E Charleston Blvd #150, Las Vegas, NV</p>
+        <img src="/assets/img/pop-up-pizza.jpg" alt="">
     </div>
 
     <div class="" *ngFor="let cat of vendor.catagories">
-        <h3>{{cat.catagory}}</h3>
+        <a name="{{cat.catagory}}"><h3>{{cat.catagory}}</h3></a>
         <hr>
         <div>
             <ul class="vendor-items">
                 <li class="vendor-item-list" *ngFor="let item of cat.itemlist">
                     <a>
-                        <div>
-                            <div class="name">{{item.item}}</div>
-                            <div>{{item.price}}</div>
-                        </div>
+                       <div>
+                           <div class="name">{{item.item}}</div>
+                           <div>{{item.price}}</div>
+                       </div>
                     </a>
                 </li>
             </ul>

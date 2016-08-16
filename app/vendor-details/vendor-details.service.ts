@@ -52,7 +52,7 @@ export class VendorDetailsService {
             ]
             },
             {
-                catagory: "SIGNATURE PIZZAS",
+                catagory: "BIG PIZZAS",
                 itemlist: [
                 {
                     item: "The 18 lb.",
@@ -97,7 +97,7 @@ export class VendorDetailsService {
             ]
             },
             {
-                catagory: "SIGNATURE PIZZAS",
+                catagory: "SMALL PIZZAS",
                 itemlist: [
                 {
                     item: "The 18 lb.",
