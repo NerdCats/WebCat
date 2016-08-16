@@ -10,6 +10,8 @@ import { OrderComponent } from '../dashboard/order/order.component';
 
 import {JobHistoryComponent} from '../job/job-history/job-history.component';
 import {DashboardComponent} from '../dashboard/dashboard.component';
+import {VendorDetailsComponent} from '../vendor-details/vendor-details.component';
+
 
 export const Routes = [
     {
@@ -32,6 +34,11 @@ export const Routes = [
         path: '/dashboard/...',
         name: 'Dashboard',
         component: DashboardComponent
+    },
+    {
+        path: '/vendors/:vendorId',
+        name: 'VendorDetails',
+        component: VendorDetailsComponent
     }
 ]
 
