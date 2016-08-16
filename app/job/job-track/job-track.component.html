@@ -64,9 +64,9 @@
 				</div>
 				<div id="orderStatusInfo" class="panel-body collapse in">
 					<div class="col-md-12">
-						<strong>{{ orderInfoHeading }}</strong>
+						<strong>{{ orderStatusHeading }}</strong>
 						<!--injected html here because I wanted to highlight the email address substring! in the orderInfoDesc-->
-						<p [innerHtml]="orderInfoDesc"></p>
+						<p [innerHtml]="orderStatusDesc"></p>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
@@ -78,45 +78,30 @@
 							<p>{{job.PaymentStatus}}</p>
 						</div>
 					</div>
-
-					<!--When the job task start, completed, total time will be available
-					just uncomment the below code!-->
-
-					<!--<div class="responsive-table col-md-12">
-						<table class="table table-sm table-hover table-bordere">
+					<div class="col-md-12">
+						<table class="table table-sm table-hover table-bordere table-responsive">
 							<thead>
 								<tr>
-									<th>{{timingInfo.pickup.startTime.heading}}</th>
-									<th>{{timingInfo.pickup.completedTime.heading}}</th>
-									<th>{{timingInfo.pickup.totalTime.heading}}</th>
+									<th>Task</th>
+									<th>Mentioned ETA</th>
+									<th>Started</th>
+									<th>Completed</th>
+									<th>Duration</th>
+									<th>ETA Failed?</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>{{timingInfo.pickup.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.pickup.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.pickup.totalTime.time}}</td>
+								<tr *ngFor="let task of tasksTiming">
+									<td class="col-md-2"> {{task.Type}} </td>
+									<td class="col-md-2"> {{(task.ETA | date:"EEE d MMM y,h:m TT") || "Not Mentioned"}} </td>
+									<td class="col-md-2"> {{(task.InitiationTime | date:"EEE d MMM y,h:m TT") || "Not Started"}} </td>
+									<td class="col-md-2"> {{(task.CompletionTime | date:"EEE d MMM y,h:m TT") || "Not Finished"}} </td>
+									<td class="col-md-2"> {{task.Duration || "Not Finished"}} </td>
+									<td class="col-md-2"> {{task.ETAFailed}} </td>
 								</tr>
 							</tbody>
 						</table>
-
-						<table class="table table-sm table-hover table-bordere">
-							<thead>
-								<tr>
-									<th>{{timingInfo.delivery.startTime.heading}}</th>
-									<th>{{timingInfo.delivery.completedTime.heading}}</th>
-									<th>{{timingInfo.delivery.totalTime.heading}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{timingInfo.delivery.startTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.delivery.completedTime.time  | date:"EEE d MMM y,h:m TT"}}</td>
-									<td>{{timingInfo.delivery.totalTime.time}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>-->
+					</div>
 				</div>
 			</div>
 
@@ -227,6 +212,7 @@
 									<th>Item</th>
 									<th>Qty</th>
 									<th>Unit Price</th>
+									<th>Weight</th>
 									<th>Total</th>
 								</tr>
 							</thead>
@@ -236,18 +222,21 @@
 									<td>{{ item.Item }}</td>
 									<td>{{ item.Quantity }}</td>
 									<td>{{ item.Price }}</td>
+									<td>{{ item.Weight }}</td>
 									<td>{{ item.Total }}</td>
 								</tr>
 								<tr>
-									<td colspan="4" class="text-right">Subtotal</td>
+									<td colspan="2" class="text-right">Total Weight</td>
+									<td>{{ job.Order.OrderCart.TotalWeight }}</td>
+									<td colspan="2" class="text-right">Subtotal</td>
 									<td>{{ job.Order.OrderCart.SubTotal }}</td>
 								</tr>
 								<tr>
-									<td colspan="4" class="text-right">Delivery Charge</td>
+									<td colspan="5" class="text-right">Delivery Charge</td>
 									<td>{{ job.Order.OrderCart.ServiceCharge }}</td>
 								</tr>
 								<tr>
-									<td colspan="4" class="text-right">Total</td>
+									<td colspan="5" class="text-right">Total</td>
 									<td>{{ job.Order.OrderCart.TotalToPay }}</td>
 								</tr>
 							</tbody>

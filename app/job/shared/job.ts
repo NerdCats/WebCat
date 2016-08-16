@@ -1,6 +1,6 @@
 import {UserModel} from '../../shared/model/user-model';
 import {OrderModel} from '../../shared/model/order-model';
-import {JobTask, FetchDeliveryManJobTask, PackagePickUpJobTask, DeliveryJobTask} from './jobtasks';
+import {JobTask, FetchDeliveryManJobTask, PackagePickUpJobTask, DeliveryJobTask, SecureDeliveryJobTask} from './jobtasks';
 
 export interface IJobJson {
     Id: string;
@@ -68,6 +68,9 @@ export class Job {
                     break;
                 case "Delivery":
                     job.Tasks.push(new DeliveryJobTask(task));
+                    break;
+                case "SecureDelivery":
+                    job.Tasks.push(new SecureDeliveryJobTask(task));
                     break;
                 default:
                     break;

@@ -15,6 +15,7 @@ export class OrderModel {
     public PaymentMethod: string;
     public Description: string;
     public OrderCart: OrderCartModel;
+    public JobTaskETAPreference: JobTaskETAPreferenceModel[];
     constructor() {
         this.From = new DefaultAddress();
         this.To = new DefaultAddress();
@@ -47,5 +48,15 @@ export class PackageListModel {
     public Weight: number;
     constructor() {
 
+    }
+}
+
+
+export class JobTaskETAPreferenceModel {
+    public Type: string;
+    public ETA: Date;
+    constructor(type, eta){
+        this.Type = type;
+        this.ETA = eta;
     }
 }

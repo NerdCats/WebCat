@@ -11,15 +11,26 @@
             <div class="col-md-4 alert alert-danger" [innerHtml]="orderResponseMessage"></div>
           </div>
           <div *ngIf="orderCreationStatus=='SUCCESS'" class="form-group">
-            <label class="col-md-8 control-label" for="success"></label>
-            <div class="col-md-4 alert alert-success alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> Order created Successfully, click <a (click)="goToTrackingPage()">here</a> to track!
+            <label class="col-md-6 control-label" for="success"></label>
+            <div class="col-md-6 alert alert-success alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Order created Successfully, Your job id <h3>{{submittedJobId}}</h3> <br>click <a (click)="goToTrackingPage()">here</a> to track!
             </div>
           </div>
         </div>
 
       </div>
-      <!-- Textarea -->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="order-type">Select Order Type</label>
+        <div class="col-md-4">
+          <select required ngControl="orderType" #orderType="ngForm" class="form-control" name="orderType" id="orderType" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.Type">
+            <option value="Delivery">Delivery</option>
+            <option value="ClassifiedDelivery">ClassifiedDelivery</option>
+          </select>
+
+        </div>
+      </div>
       <div class="form-group">
         <label class="col-md-4 control-label" for="pickup-address">Pickup Address</label>
         <div class="col-md-4">
@@ -27,7 +38,7 @@
         </div>
       </div>
 
-      <!-- Select Basic -->
+
       <div class="form-group">
         <label class="col-md-4 control-label" for="select-pick-up-area">Pickup Area</label>
         <div class="col-md-4">
@@ -36,6 +47,38 @@
         </select>
         </div>
       </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="select-pick-up-time">Pickup Time</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" [(ngModel)]="pickupTime"  value="{{pickupTime | date:'EEE d MMM y,h:m a'}}" (click)="openPickupTimeModal()">
+        </div>
+      </div>
+
+
+      <modal #pickupTimeModal class="modal_vcenter" [size]="sm">
+        <modal-header>Select Pickup Time</modal-header>
+        <modal-body>
+          <div>
+            <div class="form-group">
+              <div class="" >
+                <datepicker [(ngModel)]="pickupTime" [showWeeks]="true"></datepicker>
+                <timepicker [(ngModel)]="pickupTime"></timepicker>
+                <span>{{pickupTime | date:'EEE d MMM y,h:m a'}}</span>
+              </div>
+            </div>
+          </div>
+        </modal-body>
+        <modal-footer>
+          <button class="btn btn-primary" (click)="closePickupTimeModal()">Ok</button>
+          <button class="btn btn-danger" (click)="clearPickupTime()">Clear</button>
+        </modal-footer>
+
+      </modal>
+
+
+
+
       <br>
       <!-- Textarea -->
       <div class="form-group">
@@ -54,6 +97,35 @@
         </select>
         </div>
       </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="select-pick-up-time">Delivery Time</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" [(ngModel)]="deliveryTime" value="{{deliveryTime | date:'EEE d MMM y,h:m a'}}" (click)="openDeliveryTimeModal()">
+        </div>
+      </div>
+
+
+      <modal #deliveryTimeModal class="modal_vcenter" [size]="sm">
+        <modal-header>Select Delivery Time</modal-header>
+        <modal-body>
+          <div>
+            <div class="form-group">
+              <div class="" >
+                <datepicker [(ngModel)]="deliveryTime" [showWeeks]="true"></datepicker>
+                <timepicker [(ngModel)]="deliveryTime"  ></timepicker>
+                <span>{{deliveryTime | date:'EEE d MMM y,h:m a' }}</span>
+              </div>
+            </div>
+          </div>
+        </modal-body>
+        <modal-footer>
+          <button class="btn btn-primary" (click)="closeDeliveryTimeModal()">Ok</button>
+          <button class="btn btn-danger" (click)="clearDeliveryTime()">Clear</button>
+        </modal-footer>
+
+      </modal>
+
       <br>
 
       <!-- Select Basic -->
@@ -151,8 +223,8 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="submit"></label>
         <div class="col-md-4">
-          <button id="submit" name="submit" class="btn btn-primary" [disabled]="!deliveryAddress.valid || !paymentMethod.valid || !pickupAddress.valid || orderCreationStatus=='IN_PROGRESS'" (click)="onSubmit()">
-           <span *ngIf="orderCreationStatus=='IN_PROGRESS'" lass="fa fa-refresh fa-spin"></span>
+          <button id="submit" name="submit" class="btn btn-primary pull-right" [disabled]="!deliveryAddress.valid || !paymentMethod.valid || !pickupAddress.valid || orderCreationStatus=='IN_PROGRESS'" (click)="onSubmit()">
+           <span *ngIf="orderCreationStatus=='IN_PROGRESS'" class="fa fa-refresh fa-spin"></span>
             Create Order
         </button>
         </div>
