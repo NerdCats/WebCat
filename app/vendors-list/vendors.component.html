@@ -1,0 +1,9 @@
+<h2>Vendors</h2>
+<div class="grid grid-pad">
+    <div *ngFor="let vendor of vendors">
+        <div class="module vendor">
+            <h3>{{vendor.name}}</h3>
+            <h5>House# {{vendor.address.HouseNumber}}, {{vendor.address.AddressLine1}}</h5>
+        </div>
+    </div>
+</div>
