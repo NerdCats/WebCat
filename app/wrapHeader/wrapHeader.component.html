@@ -1,9 +1,9 @@
 <div id="headerwrap">
   <div class="container">
     <div class="row">
-      <div class="col-lg-6">
-        <h1>Delivery<br/>
-          Simplified</h1>
+      <div class="col-lg-6 col-lg-offset-3">
+        <h1>GO! Fetch<br/>
+          Delivery Simplified</h1>
           <form [ngFormModel]="trackJobForm" (submit)="gotoSearchpage($event)" class="form-inline" role="form">
             <div class="form-group">
               <input ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Enter Your Job Id ex. JOB-XXXXXX">
@@ -15,5 +15,25 @@
     <!-- /row -->
   </div>
   <!-- /container -->
+</div>
+
+<div id="body">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-4">
+      <h1>Find us in the following areas</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5 col-md-offset-4">
+      <ul class="areas">
+        <li>Banani</li>
+        <li>Baridhara</li>
+        <li>Dhanmondi</li>
+        <li>Gulshan 1</li>
+        <li>Gulshan 2</li>
+        <li>Uttara</li>
+      </ul>
+    </div>
+  </div>
 </div>
 <!-- /headerwrap -->

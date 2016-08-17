@@ -13,11 +13,12 @@
     min-height: 650px;
     margin-top: -20px;
     padding-top: 200px;
-    background: url(../assets/img/gofetch.jpg) no-repeat center top;
+    background: url(../assets/img/gofetch.jpg) no-repeat center top ;
 
-    /*background-color: #3498db;
+    /*background-color: #3498db;*/
     background-attachment: relative;
     background-position: center center;
+    /*color: rgb(54, 69, 79);*/
     -webkit-background-size: 100%;
     -webkit-background-size: cover;
        -moz-background-size: 100%;
@@ -25,7 +26,7 @@
          -o-background-size: 100%;
          -o-background-size: cover;
             background-size: 100%;
-            background-size: cover;*/
+            background-size: cover;
 }
 
 #headerwrap h1
@@ -39,4 +40,10 @@
     letter-spacing: 1px;
 
     color: white;
+}
+
+ul li{
+    display: inline;
+    padding: 5px;
+    font-size: 15px;
 }
