@@ -11,7 +11,7 @@ export class VendorDetailsService {
                 itemlist: [
                 {
                     item: "The 18 lb.",
-                    price: 14.99
+                    price: 14
                 },
                 {
                     item: "The Main St",

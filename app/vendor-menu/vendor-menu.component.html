@@ -17,11 +17,11 @@
         <hr>
         <div>
             <ul class="vendor-items">
-                <li class="vendor-item-list" *ngFor="let item of cat.itemlist">
-                    <a (click)="openCartModal()">
+                <li class="vendor-item-list pointer" *ngFor="let item of cat.itemlist">
+                    <a (click)="openCartModal(item)">
                        <div>
-                           <div class="name">{{item.item}}</div>
-                           <div>{{item.price}}</div>
+                           <div class="price">{{item.price}}</div>
+                           <div>{{item.item}}</div>
                        </div>
                     </a>
                 </li>
@@ -30,13 +30,30 @@
     </div>
 </div>
 
-<modal #cartModal class="modal_vcenter" [size]="sm">
-    <modal-header></modal-header>
+<modal #cartModal class="modal_vcenter">
+    <modal-header [show-close]="true">
+        <h1> {{selectedItem.Item}} </h1>
+        <h3> {{selectedItem.Price}} </h3>
+    </modal-header>
     <modal-body>
-        <div>
-        </div>
+        <img class="selected-item-img" src="/assets/img/pop-up-pizza.jpg" alt="{{selectedItem.Item}}">
+        <span>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero fuga nesciunt aliquam dolorum optio ducimus, facilis aliquid similique delectus quis sunt suscipit quos, dolorem, officiis, cupiditate officia enim tenetur ad.
+        </span>
     </modal-body>
     <modal-footer>
+        <form class="navbar-form navbar-left">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default" (click)="addLess()">-</button>
+                </span>
+                <input type="number" class="form-control text-center" min="1" max="1000" value="{{selectedItem.Quantity}}">
+                <span class="input-group-btn">
+                    <button class="btn btn-default"  (click)="addMore()">+</button>
+                </span>
+            </div>
+        </form>
+        <button class="btn btn-primary" (click)="addToCart()">ADD TO CART</button>
     </modal-footer>
 
 </modal>

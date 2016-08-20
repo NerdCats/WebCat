@@ -49,7 +49,7 @@
         padding-right: 0px !important;
     }
 
-    .name {
+    .price {
         float: none;
     }
 }
@@ -63,7 +63,7 @@
     padding-right: 50px;
 }
 
-.name {
+.price {
     float: right;
 }
 
@@ -86,4 +86,9 @@ li a {
     transition: border .15s,background .15s;
     text-decoration: none;
     color: black;
+}
+
+.selected-item-img {
+    width: 100%;
+    margin-bottom: 20px;
 }
