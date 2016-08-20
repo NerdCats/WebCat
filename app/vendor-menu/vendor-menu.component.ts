@@ -1,19 +1,19 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
-import { VendorDetailsService } from "./vendor-details.service";
+import { VendorDetailsService } from "./vendor-menu.service";
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 
 @Component({
-    selector: 'vendor-details',
-    templateUrl: 'app/vendor-details/vendor-details.component.html',
-    styleUrls: ['app/vendor-details/vendor-details.component.css'],
+    selector: 'vendor-menu',
+    templateUrl: 'app/vendor-menu/vendor-menu.component.html',
+    styleUrls: ['app/vendor-menu/vendor-menu.component.css'],
     directives: [MODAL_DIRECTIVES, ModalComponent],
     providers: [VendorDetailsService]
 })
 
 
 
-export class VendorDetailsComponent implements OnInit {
+export class VendorMenuComponent implements OnInit {
     vendor: any;
 
     ngOnInit(){
