@@ -6,6 +6,7 @@ import { VendorDetailsService } from "./vendor-menu.service";
 import { OrderModel, PackageListModel } from ".././shared/model/order-model";
 import { OrderCart } from '.././shared/model/order-cart';
 
+
 @Component({
     selector: 'vendor-menu',
     templateUrl: 'app/vendor-menu/vendor-menu.component.html',
@@ -61,6 +62,9 @@ export class VendorMenuComponent implements OnInit {
         this.selectedItem.Item = item.item;
         this.selectedItem.Price = item.price;
         this.selectedItem.Quantity = 1;
+
+        console.log(OrderCart.getOrderCart().OrderCart.PackageList);
+
     }
 
     addMore(){

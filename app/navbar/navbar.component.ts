@@ -3,6 +3,7 @@ import { CollapseDirective } from 'ng2-bootstrap/components/collapse/collapse.di
 
 import { AppSettings } from '../shared/app.settings';
 import { SignupComponent } from '../account/signup/signup.component';
+import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { LoginComponent, LoginStatus } from '../account/login/login.component';
 import { LoginService } from '../account/login/login.service';
 
@@ -19,7 +20,7 @@ interface NavbarElement {
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, SignupComponent, LoginComponent],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, SignupComponent, LoginComponent, CartIconComponent],
     providers: [LocalStorage],
     styleUrls: ['app/navbar/navbar.component.css']
 })

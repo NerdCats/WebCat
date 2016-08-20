@@ -1,0 +1,13 @@
+i {
+    color: white;
+    margin: 0;
+}
+
+.quantity-background {
+    border-radius: 50%;
+    background-color: red;
+    float: right;
+    margin-left: 5px;
+    width: 20px;
+    text-align: center;
+}

@@ -43,6 +43,9 @@
         position: relative;
         z-index: 2;
     }
+    .vendor-name-div p {
+        padding-bottom: 100px;
+    }
     .vendor-item-list {
         display: block;
         width: 100%;
