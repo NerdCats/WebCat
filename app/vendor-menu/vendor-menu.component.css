@@ -37,6 +37,12 @@
 }
 
 @media only screen and (max-width: 780px){
+
+    .vendor-name-div h1 {
+        padding: 0;
+        position: relative;
+        z-index: 2;
+    }
     .vendor-item-list {
         display: block;
         width: 100%;
@@ -91,4 +97,8 @@ li a {
 .selected-item-img {
     width: 100%;
     margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
 }

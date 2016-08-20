@@ -19,6 +19,7 @@ import { OrderCart } from '.././shared/model/order-cart';
 export class VendorMenuComponent implements OnInit {
     vendor: any;
     selectedItem : PackageListModel;
+    customeOrder: string = "";
 
     orderCart: OrderModel;
 
@@ -35,6 +36,15 @@ export class VendorMenuComponent implements OnInit {
     }
 
 
+    addCustomOrder(){
+        if(this.customeOrder){
+            this.orderCart.Description = this.customeOrder;
+        }
+    }
+
+    clear(){
+        this.customeOrder = "";
+    }
 
     @ViewChild('cartModal')
     cartModal: ModalComponent;
@@ -51,9 +61,6 @@ export class VendorMenuComponent implements OnInit {
         this.selectedItem.Item = item.item;
         this.selectedItem.Price = item.price;
         this.selectedItem.Quantity = 1;
-
-        console.log(this.orderCart.OrderCart.PackageList);
-
     }
 
     addMore(){
@@ -78,12 +85,9 @@ export class VendorMenuComponent implements OnInit {
 
     addToCart(){
         this.orderCart.OrderCart.PackageList.push(this.selectedItem);
-        this.closeCartModal();
         this.selectedItem = new PackageListModel();
+        this.closeCartModal();
     }
-
-
-
 
 
 }
