@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 export class CartIconComponent implements OnInit{
     numberOfItems: number = 0;
     orderCart: OrderModel;
+    cartNumberCss: string = "no-item";
     ngOnInit(){
         this.orderCart = OrderCart.getOrderCart();
         this.update();
@@ -24,6 +25,9 @@ export class CartIconComponent implements OnInit{
    public update(){
         OrderCart.update();
         this.numberOfItems = OrderCart.totalQuantity();
+        if(this.numberOfItems > 0)
+            this.cartNumberCss = "has-item";
+        else this.cartNumberCss = "";
     }
 
     itemChanged(value){

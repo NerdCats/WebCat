@@ -7,6 +7,7 @@ import { OrderModel, PackageListModel } from ".././shared/model/order-model";
 import { OrderCart } from '.././shared/model/order-cart';
 
 
+
 @Component({
     selector: 'vendor-menu',
     templateUrl: 'app/vendor-menu/vendor-menu.component.html',
