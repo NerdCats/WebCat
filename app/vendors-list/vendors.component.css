@@ -1,8 +1,10 @@
-.module {
-  padding: 20px;
-  text-align: center;
-  height: 544px;
+ul {
   width: 960px;
+}
+.module {
+  text-align: center;
+  height: 200px;
+  width: 320px;
   background: no-repeat;
   background-size: cover;
   border: 1px dotted grey;
@@ -15,7 +17,7 @@ h2 {
   text-align: center;
 }
 h3 {
-  color: #ffd633;
+  color: #bfbfbf;
   position: relative;
   font-weight: bold;
   -webkit-text-stroke: 0.5px #303030;
