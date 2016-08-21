@@ -61,6 +61,7 @@ export class VendorMenuComponent implements OnInit {
     addItem(item) {
         this.selectedItem.Item = item.item;
         this.selectedItem.Price = item.price;
+        this.selectedItem.Total = item.price;
         this.selectedItem.Quantity = 1;
 
         console.log(OrderCart.getOrderCart().OrderCart.PackageList);
@@ -68,20 +69,14 @@ export class VendorMenuComponent implements OnInit {
     }
 
     addMore(){
-        if(this.selectedItem.Quantity === 1)
-        {
-            this.selectedItem.Price += this.selectedItem.Price;
-        }
-        else {
-            this.selectedItem.Price += (this.selectedItem.Price/this.selectedItem.Quantity);
-        }
+        this.selectedItem.Total += this.selectedItem.Price;
         this.selectedItem.Quantity += 1;
     }
 
     addLess(){
         if(this.selectedItem.Quantity != 1)
         {
-            this.selectedItem.Price -= (this.selectedItem.Price/this.selectedItem.Quantity);
+            this.selectedItem.Total -= this.selectedItem.Price;
             this.selectedItem.Quantity -= 1;
         }
 

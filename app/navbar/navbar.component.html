@@ -11,13 +11,13 @@
     </div>
     <div class="navbar-collapse collapse" [collapse]="isCollapsed">
       <ul class="nav navbar-nav navbar-right">
-        <li *ngFor="let elm of navBarElementDict[State]">
-          <a class="pointer" (click)="elm.Event()">{{elm.Title}}</a>
-        </li>
         <li>
           <a class="pointer">
             <cart-icon></cart-icon>
           </a>
+        </li>
+        <li *ngFor="let elm of navBarElementDict[State]">
+          <a class="pointer" (click)="elm.Event()">{{elm.Title}}</a>
         </li>
       </ul>
     </div>

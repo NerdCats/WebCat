@@ -11,3 +11,14 @@ i {
     width: 20px;
     text-align: center;
 }
+
+
+textarea {
+    width: 100%;
+    padding: 10px;
+}
+
+
+#item-quanity {
+    width: 15%;
+}

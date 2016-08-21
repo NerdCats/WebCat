@@ -26,11 +26,11 @@ export class OrderModel {
 
 export class OrderCartModel {
     public PackageList: PackageListModel[];
-    public TotalVATAmount: number;
-    public SubTotal: number;
-    public ServiceCharge: number;
-    public TotalWeight: number;
-    public TotalToPay: number;
+    public TotalVATAmount: number = 0;
+    public SubTotal: number = 0;
+    public ServiceCharge: number = 0;
+    public TotalWeight: number = 0;
+    public TotalToPay: number = 0;
     constructor() {
 
     }
@@ -39,13 +39,13 @@ export class OrderCartModel {
 export class PackageListModel {
     public Item: string;
     public PicUrl: string;
-    public Quantity: number;
-    public Price: number;
-    public VAT: number;
-    public Total: number;
-    public VATAmount: number;
-    public TotalPlusVAT: number;
-    public Weight: number;
+    public Quantity: number = 0;
+    public Price: number = 0;
+    public VAT: number = 0;
+    public Total: number = 0;
+    public VATAmount: number = 0;
+    public TotalPlusVAT: number = 0;
+    public Weight: number = 0;
     constructor() {
 
     }
