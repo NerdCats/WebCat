@@ -9,6 +9,19 @@
         <b>{{AppTitle}}</b>
       </a>
     </div>
+    <div class=col-md-7></div>
+    <div class="">
+    <form name="jobSearchForm" class="navbar-form navbar-left">
+          <div class="input-group">
+              <input type="text" [(ngModel)]="jobId" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="ex: Job-SDHA54SD">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" (click)="saerchJob(jobId)">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+              </span>
+          </div>
+      </form>
+    </div>
     <div class="navbar-collapse collapse" [collapse]="isCollapsed">
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -26,3 +39,4 @@
 </div>
 <signup #signup></signup>
 <login #login (onLoginCompleted)="onLoginCompleted($event)"></login>
+

@@ -13,11 +13,12 @@
     min-height: 650px;
     margin-top: -20px;
     padding-top: 200px;
-    /* background: url(../img/bg01.jpg) no-repeat center top; */
+    background: url(../assets/img/gofetch.jpg) no-repeat center top ;
 
-    background-color: #3498db;
+    /*background-color: #3498db;*/
     background-attachment: relative;
     background-position: center center;
+    /*color: rgb(54, 69, 79);*/
     -webkit-background-size: 100%;
     -webkit-background-size: cover;
        -moz-background-size: 100%;
@@ -39,4 +40,26 @@
     letter-spacing: 1px;
 
     color: white;
+}
+
+#body h2{
+    font-size: 30px;
+    font-weight: 300;
+
+    margin-top: 60px;
+    margin-bottom: 15px;
+    margin-left: 65px;
+
+    letter-spacing: 1px;
+}
+
+ul li{
+    display: inline;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'myriad-pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-style: normal;
+    color: #00afab;
+    /*color: #3498db;*/
 }
