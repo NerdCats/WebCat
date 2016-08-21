@@ -1,0 +1,37 @@
+ul {
+  width: 960px;
+}
+.module {
+  text-align: center;
+  height: 200px;
+  width: 320px;
+  background: no-repeat;
+  background-size: cover;
+  border: 1px dotted grey;
+  border-radius: 2px;
+}
+.module:hover {
+  cursor: pointer;
+}
+h2 {
+  text-align: center;
+}
+h3 {
+  color: #bfbfbf;
+  position: relative;
+  font-weight: bold;
+  -webkit-text-stroke: 0.5px #303030;
+}
+h5 {
+  color: black;
+  position: relative;
+  font-weight: bold;
+  text-shadow: 0px 1px 0px rgba(192, 192, 192, .5);
+}
+.center {
+  margin: auto;
+}
+.title {
+  padding: 25px;
+  color: #404040;
+}

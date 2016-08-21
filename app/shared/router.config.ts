@@ -10,8 +10,12 @@ import { OrderComponent } from '../dashboard/order/order.component';
 
 import {JobHistoryComponent} from '../job/job-history/job-history.component';
 import {DashboardComponent} from '../dashboard/dashboard.component';
+
 import {VendorMenuComponent} from '../vendor-menu/vendor-menu.component';
 import {CheckOutComponent} from '../cart/check-out/check-out.component';
+
+
+import { VendorsComponent } from '../vendors-list/vendors.component';
 
 
 export const Routes = [
@@ -37,6 +41,11 @@ export const Routes = [
         component: DashboardComponent
     },
     {
+        path: '/vendors',
+        name: 'Vendors',
+        component: VendorsComponent
+    },
+    {
         path: '/vendors/:vendorId',
         name: 'VendorMenu',
         component: VendorMenuComponent
@@ -46,7 +55,6 @@ export const Routes = [
         name: 'Checkout',
         component: CheckOutComponent
     }
-
 ]
 
 export const PublicRoutes = [
