@@ -7,4 +7,5 @@ export class Vendor {
     phone_number: string;
     isOpen: boolean;
     products: any[];
+    image: string;
 }

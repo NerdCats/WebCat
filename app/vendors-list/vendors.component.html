@@ -1,7 +1,8 @@
-<h2>Vendors</h2>
-<div class="grid grid-pad">
+<h2 class="title">Vendors</h2>
+<div>
     <div *ngFor="let vendor of vendors">
-        <div class="module vendor">
+        <div class="module center"
+            [ngStyle]="{'background-image': 'url(' + vendor.image + ')'}">
             <h3>{{vendor.name}}</h3>
             <h5>House# {{vendor.address.HouseNumber}}, {{vendor.address.AddressLine1}}</h5>
         </div>
