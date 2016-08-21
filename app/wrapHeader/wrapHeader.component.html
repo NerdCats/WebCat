@@ -6,9 +6,9 @@
           Delivery Simplified</h1>
           <form [ngFormModel]="trackJobForm" (submit)="gotoSearchpage($event)" class="form-inline" role="form">
             <div class="form-group">
-              <input ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Enter Your Job Id ex. JOB-XXXXXX">
+              <input ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Search Anything!">
             </div>
-            <button type="submit" class="btn btn-info btn-lg">Track Your Order</button>
+            <button type="submit" class="btn btn-info btn-lg">Search</button>
           </form>
       </div>
     </div>
@@ -35,28 +35,15 @@
       </ul>
     </div>
   </div>
-  <div class="container center-block">
-    <div class="row">
-      <div id="partners" class="col-md-3">
-
-      </div>
-      <div id="join" class="col-md-6">
-
-      </div>
-      <div id="careers" class="col-md-3">
-
-      </div>
+  <div class="row">
+    <div class="col-md-5 col-md-offset-4">
+      <h2>GO! Fetch at your finger tips</h2>
     </div>
-    <div class="row">
-      <div id="aboutus" class="col-md-3">
-
-      </div>
-      <div id="api" class="col-md-6">
-
-      </div>
-      <div id="blog" class="col-md-3">
-
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-5">
+      <img src="/assets/img/ios.png" width="148" height="51">
+      <img src="/assets/img/droid.png" width="148" height="51">
     </div>
   </div>
 </div>

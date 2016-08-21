@@ -42,6 +42,17 @@
     color: white;
 }
 
+#body h2{
+    font-size: 30px;
+    font-weight: 300;
+
+    margin-top: 60px;
+    margin-bottom: 15px;
+    margin-left: 65px;
+
+    letter-spacing: 1px;
+}
+
 ul li{
     display: inline;
     padding: 5px;
@@ -51,34 +62,4 @@ ul li{
     font-style: normal;
     color: #00afab;
     /*color: #3498db;*/
-}
-
-.sections{
-    display: block;
-    margin: 0 auto;
-
-}
-.page-div {
-    flex-flow: row;
-}
-.page {
-    float: right;
-}
-
-#partners {
-    background: url(../assets/img/partners.jpg) no-repeat;
-    height: 280px;
-    width: 280px;
-}
-
-#join {
-    background: url(../assets/img/apply.jpg) no-repeat;
-    height: 280px;
-    width: 400px;
-}
-
-#careers {
-    background: url(../assets/img/careers.jpg) no-repeat;
-    height: 280px;
-    width: 280px;
 }
