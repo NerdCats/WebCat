@@ -10,6 +10,9 @@ import { OrderComponent } from '../dashboard/order/order.component';
 
 import {JobHistoryComponent} from '../job/job-history/job-history.component';
 import {DashboardComponent} from '../dashboard/dashboard.component';
+import {VendorMenuComponent} from '../vendor-menu/vendor-menu.component';
+import {CheckOutComponent} from '../cart/check-out/check-out.component';
+
 
 export const Routes = [
     {
@@ -32,7 +35,18 @@ export const Routes = [
         path: '/dashboard/...',
         name: 'Dashboard',
         component: DashboardComponent
+    },
+    {
+        path: '/vendors/:vendorId',
+        name: 'VendorMenu',
+        component: VendorMenuComponent
+    },
+    {
+        path: '/checkout',
+        name: 'Checkout',
+        component: CheckOutComponent
     }
+
 ]
 
 export const PublicRoutes = [

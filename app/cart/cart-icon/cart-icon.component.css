@@ -1,0 +1,26 @@
+i {
+    color: white;
+    margin: 0;
+}
+
+.quantity-background {
+    border-radius: 50%;
+    float: right;
+    margin-left: 5px;
+    width: 20px;
+    text-align: center;
+}
+
+.has-item {
+    background-color: red;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+}
+
+
+#item-quanity {
+    width: 15%;
+}
