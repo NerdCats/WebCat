@@ -3,6 +3,8 @@ import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 
 import { VendorDetailsService } from "./vendor-menu.service";
+import { CartBusService } from '../cart/cart-bus.service';
+
 import { OrderModel, PackageListModel } from ".././shared/model/order-model";
 import { OrderCart } from '.././shared/model/order-cart';
 
@@ -13,7 +15,7 @@ import { OrderCart } from '.././shared/model/order-cart';
     templateUrl: 'app/vendor-menu/vendor-menu.component.html',
     styleUrls: ['app/vendor-menu/vendor-menu.component.css'],
     directives: [MODAL_DIRECTIVES, ModalComponent],
-    providers: [VendorDetailsService]
+    providers: [VendorDetailsService, CartBusService]
 })
 
 
@@ -33,7 +35,8 @@ export class VendorMenuComponent implements OnInit {
         this.selectedItem = new PackageListModel();
     }
 
-    constructor(private vendorDetailsService: VendorDetailsService){
+    constructor(private vendorDetailsService: VendorDetailsService,
+                private cartBuseService: CartBusService){
 
     }
 
@@ -85,6 +88,7 @@ export class VendorMenuComponent implements OnInit {
 
     addToCart(){
         this.orderCart.OrderCart.PackageList.push(this.selectedItem);
+        this.cartBuseService.announceCartNumberChange("cart number updated");
         this.selectedItem = new PackageListModel();
         this.closeCartModal();
     }

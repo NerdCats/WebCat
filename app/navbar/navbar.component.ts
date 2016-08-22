@@ -6,6 +6,7 @@ import { SignupComponent } from '../account/signup/signup.component';
 import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { LoginComponent, LoginStatus } from '../account/login/login.component';
 import { LoginService } from '../account/login/login.service';
+import { CartBusService } from '../cart/cart-bus.service';
 
 import { LocalStorage } from '../shared/local-storage';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
@@ -21,7 +22,7 @@ interface NavbarElement {
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, SignupComponent, LoginComponent, CartIconComponent],
-    providers: [LocalStorage],
+    providers: [LocalStorage, CartBusService],
     styleUrls: ['app/navbar/navbar.component.css']
 })
 export class NavbarComponent {
