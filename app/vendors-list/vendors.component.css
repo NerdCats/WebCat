@@ -1,5 +1,12 @@
 ul {
   width: 720px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+li {
+  float: left;
 }
 .module {
   text-align: center;
@@ -7,7 +14,6 @@ ul {
   width: 360px;
   background: no-repeat;
   background-size: cover;
-  border: 1px dotted grey;
   border-radius: 2px;
 }
 .module:hover {
@@ -19,7 +25,6 @@ ul {
   width: 720px;
   background: no-repeat;
   background-size: cover;
-  border: 1px dotted grey;
   border-radius: 2px;
 }
 h2 {
