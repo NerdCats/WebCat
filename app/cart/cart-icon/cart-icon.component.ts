@@ -31,19 +31,24 @@ export class CartIconComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.orderCart = this.orderCartService.getOrderCart();
         this.update();
+        this.orderCart = this.orderCartService.getOrderCart();
+        console.log(this.orderCart);
+
+
     }
 
     public update(){
-        this.orderCartService.update();
         this.numberOfItems = this.orderCartService.totalQuantity();
         if(this.numberOfItems > 0)
             this.cartNumberCss = "has-item";
         else this.cartNumberCss = "";
+        this.orderCart = this.orderCartService.getOrderCart();
+        console.log(this.orderCart);
     }
 
     itemChanged(value){
+        this.orderCartService.save(this.orderCart);
         this.update();
     }
 

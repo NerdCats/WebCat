@@ -9,17 +9,21 @@ export class OrderCartService {
     constructor(private localStorage: LocalStorage){}
 
     public save(orderCart: OrderModel){
-        this.localStorage.setObject(this.ORDER_CART_KEY,orderCart);
+        if(orderCart!== undefined){
+            orderCart = this.update(orderCart);
+            this.localStorage.setObject(this.ORDER_CART_KEY,orderCart);
+        }
     }
 
     public getOrderCart(){
-        if(this.localStorage.getObject(this.ORDER_CART_KEY))
+        let orderCart = this.localStorage.getObject(this.ORDER_CART_KEY);
+        if(orderCart)
         {
-            return this.localStorage.getObject(this.ORDER_CART_KEY)
+            return orderCart;
         }
         else
         {
-            let orderCart = new OrderModel();
+            orderCart = new OrderModel();
             this.save(orderCart)
             return orderCart;
         }
@@ -31,10 +35,8 @@ export class OrderCartService {
         this.save(orderCart);
     }
 
-    public update(){
-        let orderCart = this.getOrderCart();
+    private update(orderCart: OrderModel){
         if(orderCart.OrderCart.PackageList){
-
             orderCart.OrderCart.SubTotal = 0;
             orderCart.OrderCart.TotalToPay = 0;
             orderCart.OrderCart.ServiceCharge = 150;
@@ -47,6 +49,7 @@ export class OrderCartService {
                 item.Total = (item.Price * item.Quantity);
             })
         }
+        return orderCart;
     }
 
     public totalQuantity(){
