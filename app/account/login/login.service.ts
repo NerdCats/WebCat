@@ -15,7 +15,7 @@ export class LoginService {
 
     private loggedIn = false;
     private tokenUrl = AppSettings.TASKCAT_BASE + "token";
-    private AUTH_TOKEN_KEY = "auth_token";
+    private AUTH_TOKEN_KEY = AppSettings.AUTH_TOKEN_KEY;
 
     private isLoggedInSource = new Subject<boolean>();
 
@@ -50,6 +50,7 @@ export class LoginService {
 
     logout() {
         this._localStorage.remove(this.AUTH_TOKEN_KEY);
+        this._localStorage.remove(AppSettings.ORDER_CART_KEY);
         this.loggedIn = false;
     }
 

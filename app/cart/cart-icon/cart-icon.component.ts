@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 import { OrderModel, PackageListModel } from '../../shared/model/order-model'
-import { OrderCart } from '../../shared/model/order-cart'
+import { OrderCartService } from '../../shared/order-cart.service'
 import { CartBusService } from '../cart-bus.service';
 
 
@@ -11,7 +12,7 @@ import { CartBusService } from '../cart-bus.service';
     templateUrl: 'app/cart/cart-icon/cart-icon.component.html',
     styleUrls: ['app/cart/cart-icon/cart-icon.component.css'],
     directives: [MODAL_DIRECTIVES, ModalComponent],
-    providers: [CartBusService]
+    providers: [CartBusService, OrderCartService]
 })
 
 export class CartIconComponent implements OnInit{
@@ -20,7 +21,9 @@ export class CartIconComponent implements OnInit{
     cartNumberCss: string = "no-item";
 
 
-    constructor(private cartBusService: CartBusService){
+    constructor(private cartBusService: CartBusService,
+                private router: Router,
+                private orderCartService: OrderCartService){
         this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
             this.update();
             console.log("cart icon updated " + newCartNumber);
@@ -28,13 +31,13 @@ export class CartIconComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.orderCart = OrderCart.getOrderCart();
+        this.orderCart = this.orderCartService.getOrderCart();
         this.update();
     }
 
     public update(){
-        OrderCart.update();
-        this.numberOfItems = OrderCart.totalQuantity();
+        this.orderCartService.update();
+        this.numberOfItems = this.orderCartService.totalQuantity();
         if(this.numberOfItems > 0)
             this.cartNumberCss = "has-item";
         else this.cartNumberCss = "";
@@ -51,8 +54,9 @@ export class CartIconComponent implements OnInit{
 
 
     checkOut(){
-        console.log(this.orderCart);
-
+        this.orderCartService.save(this.orderCart);
+        this.closeShoppingCartModal();
+        this.router.navigateByUrl("/checkout");
     }
 
     @ViewChild('shoppingCart')

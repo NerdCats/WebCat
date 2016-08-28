@@ -22,7 +22,7 @@ export const VENDORS: Vendor[] = [
         phone_number: '01678123456',
         isOpen: true,
         products: ['any', 'thing', 'you', 'want'],
-        image: 'http://imgur.com/9Cfolu9.jpg'
+        image: 'http://imgur.com/9Cfolu9.jpg',
     },
     {
         id: 2,

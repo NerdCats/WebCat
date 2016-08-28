@@ -6,7 +6,7 @@ import { VendorDetailsService } from "./vendor-menu.service";
 import { CartBusService } from '../cart/cart-bus.service';
 
 import { OrderModel, PackageListModel } from ".././shared/model/order-model";
-import { OrderCart } from '.././shared/model/order-cart';
+import { OrderCartService } from '.././shared/order-cart.service';
 
 
 
@@ -15,7 +15,7 @@ import { OrderCart } from '.././shared/model/order-cart';
     templateUrl: 'app/vendor-menu/vendor-menu.component.html',
     styleUrls: ['app/vendor-menu/vendor-menu.component.css'],
     directives: [MODAL_DIRECTIVES, ModalComponent],
-    providers: [VendorDetailsService, CartBusService]
+    providers: [VendorDetailsService, CartBusService, OrderCartService]
 })
 
 
@@ -24,19 +24,19 @@ export class VendorMenuComponent implements OnInit {
     vendor: any;
     selectedItem : PackageListModel;
     customeOrder: string = "";
-
     orderCart: OrderModel;
 
 
     ngOnInit(){
         this.vendor = this.vendorDetailsService.vendorDetails;
-        this.orderCart = OrderCart.getOrderCart();
+        this.orderCart = this.orderCartService.getOrderCart();
         this.orderCart.OrderCart.PackageList = [];
         this.selectedItem = new PackageListModel();
     }
 
     constructor(private vendorDetailsService: VendorDetailsService,
-                private cartBuseService: CartBusService){
+                private cartBuseService: CartBusService,
+                private orderCartService: OrderCartService){
 
     }
 
@@ -68,7 +68,7 @@ export class VendorMenuComponent implements OnInit {
         this.selectedItem.Total = item.price;
         this.selectedItem.Quantity = 1;
 
-        console.log(OrderCart.getOrderCart().OrderCart.PackageList);
+        console.log(this.orderCartService.getOrderCart().OrderCart.PackageList);
 
     }
 
@@ -88,10 +88,11 @@ export class VendorMenuComponent implements OnInit {
 
     addToCart(){
         this.orderCart.OrderCart.PackageList.push(this.selectedItem);
+        this.orderCartService.save(this.orderCart);
+        console.log(this.orderCartService.getOrderCart());
+
         this.cartBuseService.announceCartNumberChange("cart number updated");
         this.selectedItem = new PackageListModel();
         this.closeCartModal();
     }
-
-
 }

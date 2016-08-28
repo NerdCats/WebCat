@@ -26,4 +26,12 @@ export class AppSettings {
    public static get GOOGLE_MAP_API_KEY(): string {
      return 'AIzaSyCKMIEYdB0YPJkDr89n0WuaG3qQDjE9ndY';
    }
+
+   public static get AUTH_TOKEN_KEY(): string {
+     return 'auth_token';
+   }
+
+   public static get ORDER_CART_KEY(): string {
+     return 'ordercart';
+   }
 }

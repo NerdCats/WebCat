@@ -1,1 +1,72 @@
-<h1>Check out</h1>
+<div class="container center-block">
+    <form class="form-horizontal center-block">
+        <fieldset>
+            <div class="form-group">
+                <h3>1. Enter delivery address</h3>
+                <div class="col-md-4">
+                    <textarea name="" class="form-control" rows="5" cols="10" placeholder="ex: name, phone, address etc" required></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <h3>2. Select Payment Method</h3>
+                <div class="col-md-4">
+                    <select required ngControl="orderType" #orderType="ngForm" class="form-control" name="orderType" id="orderType">
+                        <option value="CashOnDelivery">CashOnDelivery</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group order-summary">
+                <h3>3. Order Summary</h3>
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Item</th>
+                            <th>Qty</th>
+                            <th>Unit Price</th>
+                            <th>Weight</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>
+                                {{ item.Item }}
+                                <ul class="list-inline">
+                                    <li><a class="pointer" (click)="removeItem(i)">Remove</a></li>
+                                </ul>
+                            </td>
+                            <td id="item-quanity">
+                                <input type="number" class="form-control" [(ngModel)]="item.Quantity" (ngModelChange)="itemChanged($event)">
+                            </td>
+                            <td>{{ item.Price }}</td>
+                            <td>{{ item.Weight }}</td>
+                            <td>{{ item.Total | number:'1.2-2' }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-right">Total Weight</td>
+                            <td>{{ orderCart.OrderCart.TotalWeight }}</td>
+                            <td colspan="2" class="text-right">Subtotal</td>
+                            <td>{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-right">Delivery Charge</td>
+                            <td>{{ orderCart.OrderCart.ServiceCharge }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-right">Total</td>
+                            <td>{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div *ngIf="orderCart.Description">
+                    <h3>CUSTOM ORDER</h3>
+                    <textarea [(ngModel)]="orderCart.Description"></textarea>
+                </div>
+            </div>
+        </fieldset>
+
+    </form>
+</div>
