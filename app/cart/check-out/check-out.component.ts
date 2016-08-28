@@ -17,6 +17,10 @@ export class CheckOutComponent {
         this.orderCart = orderCartService.getOrderCart();
     }
 
+    confirmOrder(){
+        console.log("confirm order");
+
+    }
 
 
 
