@@ -56,7 +56,7 @@ export class CheckOutComponent {
             },
             (error)=> {
                 this.orderSubmission = 'FAILED';
-                this.errorMessage = error.Message;
+                this.errorMessage = error;
             });
     }
 }

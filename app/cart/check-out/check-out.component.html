@@ -1,7 +1,7 @@
 <div class="container center-block">
      <div *ngIf="orderSubmission =='FAILED'" class="form-group">
-        <label class="col-md-8 control-label" for="error"></label>
-        <div class="col-md-4 alert alert-danger">{{errorMessage}}</div>
+        <label class="control-label" for="error"></label>
+        <div class="alert alert-danger">{{errorMessage}}</div>
     </div>
     <form class="form-horizontal center-block" [ngFormModel]="checkOutForm">
         <fieldset>
