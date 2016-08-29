@@ -82,7 +82,10 @@ export class LoginService {
             this.loggedIn = true;
         }
         else {
-            throw new Error("Invalid/blank auth data, Fatal Error");
+            // FIXME: Since users will be able to browse vendors without logging in
+            // Lets not throw this error now!
+            // throw new Error("Invalid/blank auth data, Fatal Error");
+            this.loggedIn = false;
         }
 
         this._localStorage.setObject(this.AUTH_TOKEN_KEY, data);

@@ -5,14 +5,14 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { OrderModel, PackageListModel } from '../../shared/model/order-model'
 import { OrderCartService } from '../../shared/order-cart.service'
 import { CartBusService } from '../cart-bus.service';
-
+import { LoginService } from '../../account/login/login.service';
 
 @Component({
     selector: 'cart-icon',
     templateUrl: 'app/cart/cart-icon/cart-icon.component.html',
     styleUrls: ['app/cart/cart-icon/cart-icon.component.css'],
     directives: [MODAL_DIRECTIVES, ModalComponent],
-    providers: [CartBusService, OrderCartService]
+    providers: [CartBusService, OrderCartService, LoginService]
 })
 
 export class CartIconComponent implements OnInit{
@@ -23,7 +23,8 @@ export class CartIconComponent implements OnInit{
 
     constructor(private cartBusService: CartBusService,
                 private router: Router,
-                private orderCartService: OrderCartService){
+                private orderCartService: OrderCartService,
+                private _loginService: LoginService){
         this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
             this.update();
             console.log("cart icon updated " + newCartNumber);
@@ -54,14 +55,19 @@ export class CartIconComponent implements OnInit{
 
     removeItem(index: number) {
         this.orderCart.OrderCart.PackageList.splice(index);
+        this.orderCartService.save(this.orderCart);
         this.update();
     }
 
 
     checkOut(){
         this.orderCartService.save(this.orderCart);
+        if(this._loginService.isLoggedIn) {
+            this.router.navigateByUrl("/checkout");
+        } else {
+            alert("Please log in first!");
+        }
         this.closeShoppingCartModal();
-        this.router.navigateByUrl("/checkout");
     }
 
     @ViewChild('shoppingCart')

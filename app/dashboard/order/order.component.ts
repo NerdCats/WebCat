@@ -59,6 +59,8 @@ export class OrderComponent {
         this.processJobTaskPreferrenceETA();
         this.orderService.createOrder(this.orderModel)
             .subscribe((result) => {
+                console.log(result);
+
                 let job = JSON.parse(result._body);
                 this.submittedJobId = job.HRID;
                 this.orderCreationStatus = 'SUCCESS';

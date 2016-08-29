@@ -17,7 +17,10 @@ export class SecureHttp extends Http {
         this.localStorage = _localStorage;
         this._authToken = this.localStorage.getObject('auth_token');
         if (!this._authToken) {
-            throw new Error("Auth token is empty");
+            // FIXME: Since users will be able to browse vendors without logging in
+            // Lets not throw this error now!
+            // throw new Error("Invalid/blank auth data, Fatal Error");
+            // throw new Error("Auth token is empty");
         }
     }
 
