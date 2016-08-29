@@ -41,7 +41,7 @@ export class WrapHeaderComponent {
     }
 
     gotoSearchResultPage(e: any) {
-        console.log(this.selectedItem);
+        console.log("Area: " + this.selectedArea + ", Item: " + this.selectedItem);
     }
 
     public typeaheadOnSelect(e: any) {

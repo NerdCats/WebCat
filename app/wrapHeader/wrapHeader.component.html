@@ -6,7 +6,9 @@
           <form [ngFormModel]="trackJobForm" (submit)="gotoSearchResultPage($event)" class="form-inline" role="form">
             <div class="form-group">
               <!--<input ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Search Anything!">-->
-
+              <select class="dropdown img-rounded" [(ngModel)]="selectedArea">
+                <option *ngFor="let area of areas">{{area}}</option>
+              </select>
               <input [(ngModel)]="selectedItem"
                 [typeahead]="items"
                 (typeaheadOnSelect)="typeaheadOnSelect($event)"
