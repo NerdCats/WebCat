@@ -22,7 +22,7 @@ export const VENDORS: Vendor[] = [
         phone_number: '01678123456',
         isOpen: true,
         products: ['any', 'thing', 'you', 'want'],
-        image: 'http://imgur.com/9Cfolu9.jpg',
+        image: 'http://i.imgur.com/9Cfolu9.jpg'
     },
     {
         id: 2,
@@ -45,7 +45,7 @@ export const VENDORS: Vendor[] = [
         phone_number: '01678123456',
         isOpen: true,
         products: ['any', 'thing', 'you', 'want'],
-        image: 'http://imgur.com/AV6GYVk.jpg'
+        image: 'http://i.imgur.com/AV6GYVk.jpg'
     },
     {
         id: 4,
@@ -206,7 +206,7 @@ export const VENDORS: Vendor[] = [
         phone_number: '01715-780379',
         isOpen: true,
         products: ['any', 'thing', 'you', 'want'],
-        image: 'http://imgur.com/DvmzsbV.jpg'
+        image: 'http://i.imgur.com/DvmzsbV.jpg'
     },
     {
         id: 11,
@@ -229,7 +229,7 @@ export const VENDORS: Vendor[] = [
         phone_number: 'N/A',
         isOpen: true,
         products: ['any', 'thing', 'you', 'want'],
-        image: 'http://imgur.com/DvmzsbV.jpg'
+        image: 'http://i.imgur.com/DvmzsbV.jpg'
     },
     {
         id: 12,
@@ -252,7 +252,7 @@ export const VENDORS: Vendor[] = [
         phone_number: '8801979996565',
         isOpen: true,
         products: ['any', 'thing', 'you', 'want'],
-        image: 'http://imgur.com/DvmzsbV.jpg'
+        image: 'http://i.imgur.com/DvmzsbV.jpg'
     },
     {
         id: 13,
@@ -275,6 +275,6 @@ export const VENDORS: Vendor[] = [
         phone_number: 'N/A',
         isOpen: true,
         products: ['any', 'thing', 'you', 'want'],
-        image: 'http://imgur.com/DvmzsbV.jpg'
+        image: 'http://i.imgur.com/DvmzsbV.jpg'
     }
 ];
