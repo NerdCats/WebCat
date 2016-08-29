@@ -20,6 +20,7 @@ export class OrderModel {
         this.From = new DefaultAddress();
         this.To = new DefaultAddress();
         this.OrderCart = new OrderCartModel();
+        this.PayloadType = "default";
     }
 }
 

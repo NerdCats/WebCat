@@ -132,6 +132,7 @@
         <label class="col-md-4 control-label" for="payment-method">Payment Method</label>
         <div class="col-md-4">
           <select required ngControl="paymentMethod" #paymentMethod="ngForm" id="payment-method" name="payment-method" class="form-control" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.paymentMethod">
+            <option value="" selected></option>
             <option value="CashOnDelivery" selected>Cash On Delivery</option>
           </select>
         </div>

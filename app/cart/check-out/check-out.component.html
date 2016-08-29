@@ -1,16 +1,20 @@
 <div class="container center-block">
-    <form class="form-horizontal center-block">
+     <div *ngIf="orderSubmission =='FAILED'" class="form-group">
+        <label class="col-md-8 control-label" for="error"></label>
+        <div class="col-md-4 alert alert-danger">{{errorMessage}}</div>
+    </div>
+    <form class="form-horizontal center-block" [ngFormModel]="checkOutForm">
         <fieldset>
             <div class="form-group">
                 <h3>1. Enter delivery address</h3>
                 <div class="col-md-4">
-                    <textarea name="" class="form-control" rows="5" cols="10" placeholder="ex: name, phone, address etc" required></textarea>
+                    <textarea ngControl="deliveryAddress"  class="form-control" rows="5" cols="10" placeholder="ex: name, phone, address etc" [(ngModel)]="orderCart.To.AddressLine1" required></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <h3>2. Select Payment Method</h3>
                 <div class="col-md-4">
-                    <select required ngControl="orderType" #orderType="ngForm" class="form-control" name="orderType" id="orderType">
+                    <select required ngControl="orderType" #orderType="ngForm" class="form-control" name="orderType" [(ngModel)]="orderCart.PaymentMethod">
                         <option value="CashOnDelivery">CashOnDelivery</option>
                     </select>
                 </div>
@@ -67,7 +71,10 @@
                 </div>
             </div>
             <div class="form-group col-md-6">
-                <button class="btn btn-primary pull-right" (click)="confirmOrder()">CONFIRM ORDER</button>
+                <button class="btn btn-primary pull-right" [disabled]="!checkOutForm.valid" (click)="confirmOrder()">
+                     <span *ngIf="orderSubmission=='IN_PROGRESS'" class="fa fa-refresh fa-spin"></span>
+                        CONFIRM ORDER
+                </button>
             </div>
         </fieldset>
 

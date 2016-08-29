@@ -7,7 +7,7 @@ import { LocalStorage } from '../../shared/local-storage'
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import { TimepickerComponent } from 'ng2-bootstrap/ng2-bootstrap';
-import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import { DATEPICKER_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 
 
