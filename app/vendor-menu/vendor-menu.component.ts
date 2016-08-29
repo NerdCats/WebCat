@@ -6,8 +6,9 @@ import { VendorDetailsService } from "./vendor-menu.service";
 import { CartBusService } from '../cart/cart-bus.service';
 
 import { OrderModel, PackageListModel } from ".././shared/model/order-model";
+import { Vendor } from ".././shared/model/vendor";
 import { OrderCartService } from '.././shared/order-cart.service';
-
+import { Router, RouteParams } from '@angular/router-deprecated';
 
 
 @Component({
@@ -21,20 +22,25 @@ import { OrderCartService } from '.././shared/order-cart.service';
 
 
 export class VendorMenuComponent implements OnInit {
-    vendor: any;
+    vendor: Vendor;
+    vendorName: string;
     selectedItem : PackageListModel;
     customeOrder: string = "";
     orderCart: OrderModel;
 
 
     ngOnInit(){
-        this.vendor = this.vendorDetailsService.vendorDetails;
+        this.vendorName = this.routeparams.get('vendorId');
+        this.vendor = this.vendorDetailsService.getVendorDetails(this.vendorName);
+        console.log(this.vendor);
+
         this.orderCart = this.orderCartService.getOrderCart();
         this.orderCart.OrderCart.PackageList = [];
         this.selectedItem = new PackageListModel();
     }
 
-    constructor(private vendorDetailsService: VendorDetailsService,
+    constructor(private routeparams: RouteParams,
+                private vendorDetailsService: VendorDetailsService,
                 private cartBuseService: CartBusService,
                 private orderCartService: OrderCartService){
 

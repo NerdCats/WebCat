@@ -8,4 +8,15 @@ export class Vendor {
     isOpen: boolean;
     products: any[];
     image: string;
+    catagories: Catagory[];
+}
+
+export class Catagory {
+    catagory: string;
+    itemlist: Item[];
+}
+
+export class Item {
+    item: string;
+    price: number;
 }

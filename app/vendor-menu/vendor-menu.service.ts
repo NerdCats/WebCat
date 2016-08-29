@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Vendor } from '.././shared/model/vendor';
+import { MockVendors } from '.././shared/mock-vendors';
 
 @Injectable()
 export class VendorDetailsService {
+    selectedVendor:Vendor;
+
     vendorDetails = {
         name: "Pop up Pizza",
         address: "1 S Main St, Las Vegas, NV",
@@ -144,7 +148,14 @@ export class VendorDetailsService {
         ]
     }
 
-    getVendorDetails(){
-        return this.vendorDetails;
+    getVendorDetails(vendorName: string){
+
+        MockVendors.VENDORS.forEach(vendor => {
+            if(vendor.name == vendorName)
+            {
+                this.selectedVendor = vendor;
+            }
+        })
+        return this.selectedVendor;
     }
 }
