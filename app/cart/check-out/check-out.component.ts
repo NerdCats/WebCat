@@ -48,7 +48,13 @@ export class CheckOutComponent {
         this.orderCart.From.AddressLine1 = "GObd";
         this.orderCart.Type = "Delivery";
         this.orderSubmission = 'IN_PROGRESS';
+        this.orderCart.OrderCart.SubTotal = 0;
+        this.orderCart.OrderCart.TotalToPay = 0;
+        this.orderCart.OrderCart.PackageList.forEach(item => {
+            item.Total = 0;
+        })
         this._orderService.createOrder(this.orderCart)
+
             .subscribe((result)=> {
                 let job = JSON.parse(result._body);
                 this.orderSubmission = 'COMPLETED';
