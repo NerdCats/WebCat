@@ -1,13 +1,4 @@
-.form-control
-{
-    font-size: 18px;
-
-    width: 280px;
-    height: 42px;
-}
-
-.dropdown {
-    font-size: 18px;
+.large-control {
     height: 42px;
 }
 
