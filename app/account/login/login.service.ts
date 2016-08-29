@@ -49,9 +49,9 @@ export class LoginService {
     }
 
     logout() {
-        this._localStorage.remove(this.AUTH_TOKEN_KEY);
-        this._localStorage.remove(AppSettings.ORDER_CART_KEY);
+        this._removeSessionData()
         this.loggedIn = false;
+        window.location.reload();
     }
 
     announceLoggedIn(isLoggedIn: boolean) {
@@ -62,6 +62,11 @@ export class LoginService {
         this._checkAlreadyLoggedIn();
         this.announceLoggedIn(this.loggedIn);
         return this.loggedIn;
+    }
+
+    private _removeSessionData(){
+        this._localStorage.remove(this.AUTH_TOKEN_KEY);
+        this._localStorage.remove(AppSettings.ORDER_CART_KEY);
     }
 
     private _extractAuthError(res: Response) {
