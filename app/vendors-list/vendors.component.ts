@@ -7,7 +7,8 @@ import { VendorService }    from './vendor.service';
 @Component({
     selector: 'vendors-dashboard',
     templateUrl: 'app/vendors-list/vendors.component.html',
-    styleUrls: ['app/vendors-list/vendors.component.css']
+    styleUrls: ['app/vendors-list/vendors.component.css'],
+    providers: [VendorService]
 })
 
 export class VendorsComponent implements OnInit {
@@ -18,8 +19,7 @@ export class VendorsComponent implements OnInit {
                 private router: Router) {  }
 
     ngOnInit() {
-        this.vendorService.getVendors()
-            .then(vendors => this.vendors = vendors);
+        this.vendors = this.vendorService.getVendors();
     }
 
     goToVendorMenuPage(vendorName: string){

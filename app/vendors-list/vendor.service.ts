@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-
-import { VENDORS } from './mock-vendors';
+import { Inject } from '@angular/core';
+import { MockVendors } from '../shared/mock-vendors';
 
 @Injectable()
 export class VendorService {
-    getVendors() {
-        return Promise.resolve(VENDORS);
+
+    public getVendors() {
+        return MockVendors.VENDORS;
     }
 }
