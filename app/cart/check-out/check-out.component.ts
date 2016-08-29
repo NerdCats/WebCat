@@ -52,6 +52,7 @@ export class CheckOutComponent {
             .subscribe((result)=> {
                 let job = JSON.parse(result._body);
                 this.orderSubmission = 'COMPLETED';
+                this._orderCartService.resetOrderCart();
                 this._router.navigateByUrl("/track/" + job.HRID);
             },
             (error)=> {
