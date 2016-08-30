@@ -11,12 +11,12 @@ import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/components/typeahead';
 })
 
 export class WrapHeaderComponent {
-    public selectedArea: string = '';
-    public selectedItem: string = '';
+    public selectedArea: string;
+    public selectedItem: string;
 
-    public areas:string [] = ['Banani', 'Baridhara', 'Dhanmondi', 'Gulshan 1', 'Gulshan 2', 'Uttara'];
+    public areas:string [] = ['','Banani', 'Baridhara', 'Dhanmondi', 'Gulshan 1', 'Gulshan 2', 'Uttara'];
 
-    public items:Array<string> = [
+    public items:string[] = [
         'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
         'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
         'Chocolates', 'Flowers',
@@ -31,8 +31,11 @@ export class WrapHeaderComponent {
 
 
 
-    gotoSearchResultPage(e: any) {
+    gotoSearchResultPage(e) {
         console.log("Area: " + this.selectedArea + ", Item: " + this.selectedItem);
+        console.log("/search/" + this.selectedArea + "/" + this.selectedItem);
+
+        this.router.navigateByUrl("/search/" + this.selectedArea + "/" + this.selectedItem);
     }
 
     public typeaheadOnSelect(e: any) {

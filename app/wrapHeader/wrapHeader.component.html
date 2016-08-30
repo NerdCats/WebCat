@@ -5,15 +5,15 @@
         <h1>Delivery Simplified</h1>
           <form (submit)="gotoSearchResultPage($event)" class="form-inline" role="form">
             <div class="form-group">
-              <select class="dropdown form-control large-control" [(ngModel)]="selectedArea">
+              <select class="dropdown form-control large-control" [(ngModel)]="selectedArea" required>
                 <option *ngFor="let area of areas">{{area}}</option>
               </select>
               <input [(ngModel)]="selectedItem"
                 [typeahead]="items"
                 (typeaheadOnSelect)="typeaheadOnSelect($event)"
-                class="form-control large-control" placeholder="Search Anything!">
+                class="form-control large-control" placeholder="Search Anything!" required>
             </div>
-            <button type="submit" class="btn btn-info btn-lg">Search</button>
+            <button [disabled]="(!selectedArea && !selectedItem)" type="submit" class="btn btn-info btn-lg">Search</button>
           </form>
       </div>
     </div>
