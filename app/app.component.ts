@@ -4,6 +4,7 @@ import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 import { AppSettings } from './shared/app.settings';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.component';
 import { JobTrackComponent } from './job/job-track/job-track.component';
@@ -15,7 +16,13 @@ import { VendorService } from './vendors-list/vendor.service';
 @Component({
   selector: 'webcat',
   templateUrl: 'app/app.component.html',
-  directives: [ROUTER_DIRECTIVES, NavbarComponent, SecureRouterOutlet, JobTrackComponent],
+  directives: [
+    ROUTER_DIRECTIVES,
+    NavbarComponent,
+    SecureRouterOutlet,
+    JobTrackComponent,
+    FooterComponent
+  ],
   providers: [Title, LoginService, VendorService]
 })
 @RouteConfig(Routes)
