@@ -9,6 +9,7 @@ import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/components/typeahead';
     styleUrls: ['app/wrapHeader/wrapHeader.component.css'],
     directives: [ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES]
 })
+
 export class WrapHeaderComponent {
     public selectedArea: string = '';
     public selectedItem: string = '';
