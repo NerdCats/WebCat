@@ -17,7 +17,7 @@
 	<div class="row" *ngIf="status=='SUCCESSFUL'">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Order Information
@@ -52,7 +52,7 @@
 			</div>
 
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Order Status
@@ -108,7 +108,7 @@
 			</div>
 
 			<div class="panel panel-primary" *ngIf="assetInfo.length != 0 || (coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable)">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Tracking Information
@@ -195,7 +195,7 @@
 			</div>
 
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Item List
