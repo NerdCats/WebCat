@@ -85,6 +85,7 @@ export class CartIconComponent implements OnInit{
         this.closeShoppingCartModal();
     }
 
+
     @ViewChild('shoppingCart')
     shoppingCart: ModalComponent;
     openShoppingCartModal(){
