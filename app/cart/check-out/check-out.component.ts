@@ -42,6 +42,11 @@ export class CheckOutComponent {
         this.checkOutForm = this.formBuilder.group(checkOutControls);
     }
 
+    itemChanged(value){
+        this._orderCartService.save(this.orderCart);
+        this.orderCart = this._orderCartService.getOrderCart();
+    }
+
     confirmOrder(){
         console.log(this.orderCart);
         // FIXME: for now

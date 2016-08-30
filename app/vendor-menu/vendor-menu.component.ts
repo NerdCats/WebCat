@@ -50,6 +50,9 @@ export class VendorMenuComponent implements OnInit {
     addCustomOrder(){
         if(this.customeOrder){
             this.orderCart.Description = this.customeOrder;
+            this.orderCartService.save(this.orderCart);
+            console.log(this.orderCartService.getOrderCart());
+            this.cartModal.open();
         }
     }
 
