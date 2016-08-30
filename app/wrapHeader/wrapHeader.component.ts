@@ -13,7 +13,7 @@ import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/components/typeahead';
 export class WrapHeaderComponent {
     public selectedArea: string = '';
     public selectedItem: string = '';
-    public trackJobForm: ControlGroup;
+
     public areas:string [] = ['Banani', 'Baridhara', 'Dhanmondi', 'Gulshan 1', 'Gulshan 2', 'Uttara'];
 
     public items:Array<string> = [
@@ -23,23 +23,13 @@ export class WrapHeaderComponent {
         'Electronics', 'TV'
     ];
 
-    constructor(private router: Router,
-    private trackJobFormBuilder: FormBuilder){
-        this.trackJobForm = this.trackJobFormBuilder.group({
-            jobid: [""]
-        })
-
-
-    }
+    constructor(private router: Router){}
 
     goToVendorList(area:string){
         this.router.navigateByUrl("/vendors");
     }
 
-    gotoSearchpage(event){
-        this.router.navigate(["Track", {jobId: this.trackJobForm.value.jobid}]);
-        event.preventDefault();
-    }
+
 
     gotoSearchResultPage(e: any) {
         console.log("Area: " + this.selectedArea + ", Item: " + this.selectedItem);
