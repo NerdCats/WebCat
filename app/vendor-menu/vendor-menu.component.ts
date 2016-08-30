@@ -27,16 +27,21 @@ export class VendorMenuComponent implements OnInit {
     selectedItem : PackageListModel;
     customeOrder: string = "";
     orderCart: OrderModel;
+    openOrClosed: string;
 
 
     ngOnInit(){
         this.vendorName = this.routeparams.get('vendorId');
         this.vendor = this.vendorDetailsService.getVendorDetails(this.vendorName);
         console.log(this.vendor);
+        if(this.vendor.isOpen) this.openOrClosed = "Open";
+        else this.openOrClosed = "Closed";
 
         this.orderCart = this.orderCartService.getOrderCart();
-        this.orderCart.OrderCart.PackageList = [];
         this.selectedItem = new PackageListModel();
+        if(!this.orderCart.OrderCart.PackageList){
+            this.orderCart.OrderCart.PackageList = [];
+        }
     }
 
     constructor(private routeparams: RouteParams,
@@ -49,10 +54,13 @@ export class VendorMenuComponent implements OnInit {
 
     addCustomOrder(){
         if(this.customeOrder){
-            this.orderCart.Description = this.customeOrder;
+            if(this.orderCart.Description === ''){
+                this.orderCart.Description += this.vendorName + " : " + this.customeOrder;
+            } else {
+                this.orderCart.Description += "\n" + this.vendorName + " : " + this.customeOrder;
+            }
             this.orderCartService.save(this.orderCart);
             console.log(this.orderCartService.getOrderCart());
-            this.cartModal.open();
         }
     }
 
@@ -72,13 +80,10 @@ export class VendorMenuComponent implements OnInit {
     }
 
     addItem(item) {
-        this.selectedItem.Item = item.item;
+        this.selectedItem.Item = item.item + " (" + this.vendorName + ")";
         this.selectedItem.Price = item.price;
         this.selectedItem.Total = item.price;
         this.selectedItem.Quantity = 1;
-
-        console.log(this.orderCartService.getOrderCart().OrderCart.PackageList);
-
     }
 
     addMore(){
@@ -96,9 +101,11 @@ export class VendorMenuComponent implements OnInit {
     }
 
     addToCart(){
+        console.log(this.orderCart.OrderCart.PackageList);
         this.orderCart.OrderCart.PackageList.push(this.selectedItem);
+        console.log(this.orderCart.OrderCart.PackageList);
         this.orderCartService.save(this.orderCart);
-        console.log(this.orderCartService.getOrderCart());
+        // console.log(this.orderCartService.getOrderCart());
 
         this.cartBuseService.announceCartNumberChange("cart number updated");
         this.selectedItem = new PackageListModel();

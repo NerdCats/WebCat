@@ -6,10 +6,13 @@
                 <!--<a href="/#{{cat.catagory}}" target="_self">{{cat.catagory}}</a></li>
         </ul>-->
     </div>
-    <div class="vendor-name-div">
-        <h1 class="text-center">{{vendor.name}}</h1>
-        <p class="text-center">107 E Charleston Blvd #150, Las Vegas, NV</p>
-        <img src="/assets/img/pop-up-pizza.jpg" alt="">
+    <div class="vendor-name-div" [ngStyle]="{'background-image':'url('+vendor.image+')'}">
+       <div class="gradient">
+            <h1 class="text-center">{{vendor.name}}</h1>
+            <p class="text-center">{{vendor.address.AddressLine1}}</p>
+            <p class="text-center">{{openOrClosed}}</p>
+       </div>
+        <!--<img class="gradient" src="{{vendor.image}}" alt="">-->
     </div>
 
     <div class="" *ngFor="let cat of vendor.catagories">

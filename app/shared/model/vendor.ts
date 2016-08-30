@@ -19,4 +19,5 @@ export class Catagory {
 export class Item {
     item: string;
     price: number;
+    description: string;
 }

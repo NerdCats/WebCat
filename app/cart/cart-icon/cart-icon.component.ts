@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { Router, ROUTER_DIRECTIVES, RouteParams } from '@angular/router-deprecated';
 
 import { OrderModel, PackageListModel } from '../../shared/model/order-model'
 import { OrderCartService } from '../../shared/order-cart.service'
@@ -17,15 +17,16 @@ import { LoginService } from '../../account/login/login.service';
 
 export class CartIconComponent implements OnInit{
     numberOfItems: number = 0;
+    packageListHasItem = false;
     orderCart: OrderModel;
     cartNumberCss: string = "no-item";
 
 
-    constructor(private cartBusService: CartBusService,
-                private router: Router,
-                private orderCartService: OrderCartService,
+    constructor(private _cartBusService: CartBusService,
+                private _router: Router,
+                private _orderCartService: OrderCartService,
                 private _loginService: LoginService){
-        this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
+        this._cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
             this.update();
             console.log("cart icon updated " + newCartNumber);
         });
@@ -33,37 +34,41 @@ export class CartIconComponent implements OnInit{
 
     ngOnInit(){
         this.update();
-        this.orderCart = this.orderCartService.getOrderCart();
-        console.log(this.orderCart);
-
-
+        this.orderCart = this._orderCartService.getOrderCart();
     }
 
     public update(){
-        this.numberOfItems = this.orderCartService.totalQuantity();
+        this.numberOfItems = this._orderCartService.totalQuantity();
+        this.packageListHasItem = this._orderCartService.hasPackageListItem();
         if(this.numberOfItems > 0)
             this.cartNumberCss = "has-item";
         else this.cartNumberCss = "";
-        this.orderCart = this.orderCartService.getOrderCart();
+        this.orderCart = this._orderCartService.getOrderCart();
         console.log(this.orderCart);
     }
 
     itemChanged(value){
-        this.orderCartService.save(this.orderCart);
+        this._orderCartService.save(this.orderCart);
         this.update();
     }
 
     removeItem(index: number) {
         this.orderCart.OrderCart.PackageList.splice(index);
-        this.orderCartService.save(this.orderCart);
+        this._orderCartService.save(this.orderCart);
+        this.update();
+    }
+
+    clearCustomOrder(){
+        this.orderCart.Description = '';
+        this._orderCartService.save(this.orderCart);
         this.update();
     }
 
 
     checkOut(){
-        this.orderCartService.save(this.orderCart);
+        this._orderCartService.save(this.orderCart);
         if(this._loginService.isLoggedIn) {
-            this.router.navigateByUrl("/checkout");
+            this._router.navigateByUrl("/checkout");
         } else {
             alert("Please log in first!");
         }

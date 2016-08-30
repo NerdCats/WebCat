@@ -11,7 +11,7 @@
         <h1>SHOPPING CART</h1>
     </modal-header>
     <modal-body>
-        <table class="table table-sm table-hover">
+        <table class="table table-sm table-hover" *ngIf="packageListHasItem">
             <thead>
                 <tr>
                     <th>#</th>
@@ -55,10 +55,14 @@
             </tbody>
         </table>
 
-        <div *ngIf="orderCart.Description">
-            <h3>CUSTOM ORDER</h3>
-            <textarea class="form-control" [(ngModel)]="orderCart.Description"></textarea>
-        </div>
+
+        <form id="custom-order" *ngIf="orderCart.Description" >
+            <div class="form-group">
+                <h3>CUSTOM ORDER</h3>
+                <textarea class="form-control" rows="5" [(ngModel)]="orderCart.Description"></textarea>
+            </div>
+            <button class="btn btn-danger pull-right" (click)="clearCustomOrder()">CLEAR</button>
+        </form>
 
     </modal-body>
     <modal-footer>
