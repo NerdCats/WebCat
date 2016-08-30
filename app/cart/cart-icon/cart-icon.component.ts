@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { Router, ROUTER_DIRECTIVES, RouteParams } from '@angular/router-deprecated';
 
-import { OrderModel, PackageListModel } from '../../shared/model/order-model'
+import { OrderModel, OrderCartModel, PackageListModel } from '../../shared/model/order-model'
 import { OrderCartService } from '../../shared/order-cart.service'
 import { CartBusService } from '../cart-bus.service';
 import { LoginService } from '../../account/login/login.service';
@@ -53,7 +53,17 @@ export class CartIconComponent implements OnInit{
     }
 
     removeItem(index: number) {
-        this.orderCart.OrderCart.PackageList.splice(index);
+        let _orderCart: OrderCartModel = new OrderCartModel();
+        _orderCart.PackageList = [];
+        for(let i = 0; i < this.orderCart.OrderCart.PackageList.length; i++){
+            if(i !== index){
+                _orderCart.PackageList.push(this.orderCart.OrderCart.PackageList[i]);
+                console.log("added");
+
+            }
+        }
+
+        this.orderCart.OrderCart = _orderCart;
         this._orderCartService.save(this.orderCart);
         this.update();
     }
