@@ -1,9 +1,6 @@
-.form-control
-{
-    font-size: 18px;
-
-    width: 280px;
+.large-control {
     height: 42px;
+    font-size: 18px;
 }
 
 /* HeaderWrap */
