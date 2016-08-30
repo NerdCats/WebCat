@@ -26,19 +26,12 @@ export class VendorsComponent implements OnInit {
          this.router.navigateByUrl("/vendors/" + vendorName);
     }
 
-    getTileClass() {
-        if (this.flag == 1 || this.flag == 2) {
-            this.setFlag();
-            return 'module';
-        }
-        else {
-            this.setFlag();
+    getTileClass(i) {
+        if (i % 3 == 0) {
             return 'big-module';
         }
+        else {
+            return 'module';
+        }
     }
-
-    setFlag() {
-        this.flag++;
-        this.flag %= 3;
-    }
- }
+}
