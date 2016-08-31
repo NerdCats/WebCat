@@ -34,3 +34,7 @@
 i {
     margin: 0;
 }
+
+#job-search-form {
+    min-width: 270px !important;
+}

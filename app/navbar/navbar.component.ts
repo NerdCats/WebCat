@@ -91,7 +91,7 @@ export class NavbarComponent {
         this.router.navigate(["Dashboard"]);
     }
 
-    gotoSearchpage(event){
+    searchJob(event){
         this.router.navigateByUrl("/track/" + this.trackJobForm.value.jobid);
     }
 
