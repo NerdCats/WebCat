@@ -1,60 +1,40 @@
 <div id="headerwrap">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-lg-offset-4">
-        <h1>Delivery Simplified</h1>
-          <form (submit)="gotoSearchResultPage($event)" class="form-inline" role="form">
-            <div class="form-group">
-              <select class="dropdown form-control large-control" [(ngModel)]="selectedArea" required>
-                <option value="" selected disabled>Select Area</option>
-                <option value="Banani">Banani</option>
-                <option value="Baridhara">Baridhara</option>
-                <option value="Dhanmondi">Dhanmondi</option>
-                <option value="Gulshan 1">Gulshan 1</option>
-                <option value="Gulshan 2">Gulshan 2</option>
-                <option value="Uttara">Uttara</option>
-              </select>
-              <input [(ngModel)]="selectedItem"
-                [typeahead]="items"
-                (typeaheadOnSelect)="typeaheadOnSelect($event)"
-                class="form-control large-control" placeholder="Search Anything!" required>
-            </div>
-            <button [disabled]="(!selectedArea && !selectedItem)" type="submit" class="btn btn-info btn-lg">Search</button>
-          </form>
-      </div>
-    </div>
-    <!-- /row -->
-  </div>
-  <!-- /container -->
+	<div class="container">
+		<div class="center-block text-center">
+			<h1>ANYTHING ON DEMAND</h1>
+			<h3>lightning fast deliveries at your fingertips</h3>
+			<form (submit)="gotoSearchResultPage($event)" class="form-inline" role="form">
+				<div class="form-group">
+					<select class="dropdown form-control large-control" [(ngModel)]="selectedArea" required>
+						<option value="" selected disabled>Select Area</option>
+						<option value="Banani">Banani</option>
+						<option value="Baridhara">Baridhara</option>
+						<option value="Dhanmondi">Dhanmondi</option>
+						<option value="Gulshan 1">Gulshan 1</option>
+						<option value="Gulshan 2">Gulshan 2</option>
+						<option value="Uttara">Uttara</option>
+					</select>
+					<input [(ngModel)]="selectedItem" [typeahead]="items" (typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control large-control"
+						placeholder="Search Anything!" required>
+				</div>
+				<button [disabled]="(!selectedArea && !selectedItem)" type="submit" class="btn btn-info btn-lg">Search</button>
+			</form>
+		</div>
+	</div>
 </div>
 
-<div id="body">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-4">
-      <h1>Find us in the following areas</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-5 col-md-offset-4">
-      <ul class="areas">
-        <li *ngFor="let area of areas">
-          <a class="pointer" href="#/vendors/{{area}}">{{area}}</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-5 col-md-offset-4">
-      <h2>GO! Fetch at your finger tips</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6 col-lg-offset-5">
-      <img src="/assets/img/ios.png" width="148" height="51">
-      <img src="/assets/img/droid.png" width="148" height="51">
-    </div>
-  </div>
-  <div class="row">
-  </div>
+
+<div class="center-block text-center">
+	<h1>Find us in the following areas</h1>
+	<ul class="list-inline">
+		<li *ngFor="let area of areas">
+			<a class="pointer" href="#/vendors/{{area}}">{{area}}</a>
+		</li>
+	</ul>
 </div>
-<!-- /headerwrap -->
+
+<div class="center-block text-center">
+	<h2>GO! Fetch at your finger tips</h2>
+	<img src="/assets/img/ios.png" width="148" height="51">
+	<img src="/assets/img/droid.png" width="148" height="51">
+</div>
