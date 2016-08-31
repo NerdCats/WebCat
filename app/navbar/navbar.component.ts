@@ -45,7 +45,7 @@ export class NavbarComponent {
 
     navBarElementDict = {};
 
-    isCollapsed: boolean;
+    isCollapsed: boolean = true;
 
     constructor(private localStorage: LocalStorage,
         private loginService: LoginService,
