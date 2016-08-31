@@ -16,10 +16,9 @@ export class SearchResultComponent implements OnInit {
     area: string;
     keyword: string;
     ngOnInit(){
-        this.vendors = this._searchResultService.getVendors();
         this.area = this._routeParams.get('area');
         this.keyword = this._routeParams.get('keyword');
-        console.log(this.area + "  " + this.keyword);
+        this.vendors = this._searchResultService.search(this.area, this.keyword);
     }
 
     constructor(private _router: Router,

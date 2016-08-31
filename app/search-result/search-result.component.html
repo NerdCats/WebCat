@@ -1,1 +1,13 @@
-<h1>Search Result</h1>
+<div class="container">
+    <h1>Search Result</h1>
+    <div class="row">
+        <ul>
+            <li *ngFor="let vendor of vendors">
+                <a href="#/vendors/{{vendor.name}}">
+                    <h3>{{vendor.name}}</h3>
+                    <img src="{{vendor.image}}" alt="">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

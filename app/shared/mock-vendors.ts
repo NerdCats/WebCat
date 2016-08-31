@@ -14,7 +14,7 @@ export class MockVendors {
                 Country: 'Bangladesh',
                 City: 'Dhaka',
                 State: 'NoWhere',
-                Locality: 'O.o',
+                Locality: 'Banani',
                 Point: {
                     type: 'Point',
                     coordinates: [1.23, 4.56]
@@ -22,7 +22,11 @@ export class MockVendors {
             },
             phone_number: '01678123456',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates'
+            ],
             image: 'http://i.imgur.com/9Cfolu9.jpg',
             catagories: []
         },
@@ -38,7 +42,7 @@ export class MockVendors {
             Country: 'Bangladesh',
             City: 'Dhaka',
             State: 'NoWhere',
-            Locality: 'O.o',
+            Locality: 'Banani',
             Point: {
                 type: 'Point',
                 coordinates: [1.23, 4.56]
@@ -528,7 +532,7 @@ export class MockVendors {
                 Country: 'Bangladesh',
                 City: 'Dhaka',
                 State: 'NoWhere',
-                Locality: 'O.o',
+                Locality: 'Banani',
                 Point: {
                     type: 'Point',
                     coordinates: [1.23, 4.56]
@@ -689,7 +693,7 @@ export class MockVendors {
                 Country: 'Bangladesh',
                 City: 'Dhaka',
                 State: 'NoWhere',
-                Locality: 'O.o',
+                Locality: 'Banani',
                 Point: {
                     type: 'Point',
                     coordinates: [1.23, 4.56]
@@ -713,7 +717,7 @@ export class MockVendors {
                 Country: 'Bangladesh',
                 City: 'Dhaka',
                 State: 'NoWhere',
-                Locality: 'O.o',
+                Locality: 'Baridhara',
                 Point: {
                     type: 'Point',
                     coordinates: [1.23, 4.56]
@@ -721,7 +725,12 @@ export class MockVendors {
             },
             phone_number: '01819211525',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/C1fbSZc.jpg',
             catagories: []
         },
@@ -745,7 +754,12 @@ export class MockVendors {
             },
             phone_number: 'N/A',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/I1aOrmi.jpg',
             catagories: []
         },
@@ -769,7 +783,12 @@ export class MockVendors {
             },
             phone_number: 'N/A',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/1LGNGv8.jpg',
             catagories: []
         },
@@ -793,7 +812,12 @@ export class MockVendors {
             },
             phone_number: '02-9880777',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/OrYcw8i.jpg',
             catagories: []
         },
@@ -817,7 +841,12 @@ export class MockVendors {
             },
             phone_number: '01717-132380',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/5ex18sL.jpg',
             catagories: []
         },
@@ -841,7 +870,12 @@ export class MockVendors {
             },
             phone_number: '01715-780379',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/DvmzsbV.jpg',
             catagories: []
         },
@@ -865,7 +899,12 @@ export class MockVendors {
             },
             phone_number: 'N/A',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/DvmzsbV.jpg',
             catagories: []
         },
@@ -889,7 +928,12 @@ export class MockVendors {
             },
             phone_number: '8801979996565',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/DvmzsbV.jpg',
             catagories: []
         },
@@ -913,7 +957,12 @@ export class MockVendors {
             },
             phone_number: 'N/A',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/DvmzsbV.jpg',
             catagories: []
         }
