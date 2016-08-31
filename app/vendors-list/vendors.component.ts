@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { Router, ROUTER_DIRECTIVES, RouteParams } from '@angular/router-deprecated';
 import { Vendor }           from '../shared/model/vendor';
 import { VendorService }    from './vendor.service';
 
@@ -14,16 +14,18 @@ import { VendorService }    from './vendor.service';
 export class VendorsComponent implements OnInit {
     flag = 0;
     vendors: Vendor[] = [];
-
+    area:string = "";
     constructor(private vendorService: VendorService,
-                private router: Router) {  }
+                private router: Router,
+                private routeParams: RouteParams) {  }
 
     ngOnInit() {
         this.vendors = this.vendorService.getVendors();
+        this.area = this.routeParams.get("area");
     }
 
     goToVendorMenuPage(vendorName: string){
-         this.router.navigateByUrl("/vendors/" + vendorName);
+        this.router.navigateByUrl("/vendors/" + this.area + "/" + vendorName);
     }
 
     getTileClass(i) {
