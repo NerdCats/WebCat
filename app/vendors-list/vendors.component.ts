@@ -28,10 +28,12 @@ export class VendorsComponent implements OnInit {
 
     getTileClass(i) {
         if (i % 3 == 0) {
-            return 'big-module';
+            // return 'big-module';
+            return "col-md-12 big-module";
         }
         else {
-            return 'module';
+            // return 'module';
+            return "col-md-6 module";
         }
     }
 }

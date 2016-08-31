@@ -1,17 +1,7 @@
-ul {
-  width: 720px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-li {
-  float: left;
-}
 .module {
   text-align: center;
   height: 240px;
-  width: 360px;
+  /*width: 360px;*/
   background: no-repeat;
   background-size: cover;
   border-radius: 2px;
@@ -23,7 +13,7 @@ li {
 .big-module {
   text-align: center;
   height: 480px;
-  width: 720px;
+  /*width: 720px;*/
   background: no-repeat;
   background-size: cover;
   border-radius: 2px;
@@ -33,20 +23,21 @@ h2 {
   text-align: center;
 }
 h3 {
-  color: #bfbfbf;
+  color: white;
   position: relative;
   font-weight: bold;
   -webkit-text-stroke: 0.5px #303030;
+  margin-top: 15%;
 }
 h5 {
-  color: black;
+  color: white;
   position: relative;
-  font-weight: bold;
   text-shadow: 0px 1px 0px rgba(192, 192, 192, .5);
 }
 .center {
-  float: none;
+  padding: 0 !important;
   margin: 0 auto;
+  border: 1px solid #fff;
 
 }
 .title {
@@ -58,8 +49,20 @@ h5 {
     display: block;
     width: 100%;
     height: 100%;
+    float: left;
 
     background-image: -webkit-gradient(linear,left top,left bottom,color-stop(50%,rgba(0,0,0,.3)),to(rgba(0,0,0,.4)));
     background-image: -webkit-linear-gradient(top,rgba(0,0,0,.3) 50%,rgba(0,0,0,.4));
     background-image: linear-gradient(180deg,rgba(0,0,0,.3) 50%,rgba(0,0,0,.4));
+}
+
+.gradient:hover {
+    display: block;
+    width: 100%;
+    height: 100%;
+    float: left;
+
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(50%,rgba(0,0,0,.5)),to(rgba(0,0,0,.7)));
+    background-image: -webkit-linear-gradient(top,rgba(0,0,0,.5) 50%,rgba(0,0,0,.7));
+    background-image: linear-gradient(180deg,rgba(0,0,0,.5) 50%,rgba(0,0,0,.7));
 }

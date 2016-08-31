@@ -1,7 +1,7 @@
 <h2 class="title">Vendors</h2>
-<div>
-    <ul class="center">
-        <li class="center {{getTileClass(i)}}"
+<div class="container">
+    <div class="row">
+        <div class="center {{getTileClass(i)}}"
             (click)="goToVendorMenuPage(vendor.username)"
             *ngFor="let vendor of vendors; let i = index"
             [ngStyle]="{'background-image': 'url(' + vendor.image + ')'}">
@@ -9,6 +9,6 @@
                 <h3>{{vendor.name}}</h3>
                 <h5>House# {{vendor.address.HouseNumber}}, {{vendor.address.AddressLine1}}</h5>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
