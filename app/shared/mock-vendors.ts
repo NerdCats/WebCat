@@ -50,7 +50,10 @@ export class MockVendors {
         },
         phone_number: '01762-635083',
         isOpen: true,
-        products: ['any', 'food', 'you', 'want'],
+        products: ['Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates'
+        ],
         image: 'http://imgur.com/DvmzsbV.jpg',
         catagories: [
                 {

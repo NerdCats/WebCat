@@ -1,12 +1,25 @@
 <div class="container">
-    <h1>Search Result</h1>
+    <h1 id="header">Search Result for "{{keyword}}" in {{area}}</h1>
     <div class="row">
         <ul>
             <li *ngFor="let vendor of vendors">
                 <a href="#/vendors/{{vendor.name}}">
-                    <h3>{{vendor.name}}</h3>
-                    <img src="{{vendor.image}}" alt="">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="img-rounded img-responsive" src="{{vendor.image}}" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            <h2>{{vendor.name + " "}}
+                                <span class="open" *ngIf="vendor.isOpen">(Open)</span>
+                                <span class="close" *ngIf="!vendor.isOpen">(Close)</span>
+                            </h2>
+
+                            <h3>{{vendor.address.AddressLine1}}</h3>
+                            <ul class="list-inline"><li *ngFor="let product of vendor.products"> {{product + " "}} </li></ul>
+                        </div>
+                    </div>
                 </a>
+                <hr>
             </li>
         </ul>
     </div>
