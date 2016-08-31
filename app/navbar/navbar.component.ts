@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { CollapseDirective } from 'ng2-bootstrap/components/collapse/collapse.directive';
-
+import { FormBuilder, Validators, ControlGroup } from '@angular/common';
 import { AppSettings } from '../shared/app.settings';
 import { SignupComponent } from '../account/signup/signup.component';
 import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
@@ -34,6 +34,8 @@ export class NavbarComponent {
 
     AppTitle: string;
     State: NavbarState = "PUBLIC";
+    public trackJobForm: ControlGroup;
+
 
     profileNavElement: NavbarElement;
     userNameString: string;
@@ -45,18 +47,21 @@ export class NavbarComponent {
 
     isCollapsed: boolean;
 
-    constructor(
-        private localStorage: LocalStorage,
+    constructor(private localStorage: LocalStorage,
         private loginService: LoginService,
-        private router: Router) {
-        this.AppTitle = AppSettings.APP_NAME;
+        private router: Router,
+        private trackJobFormBuilder: FormBuilder) {
+            this.AppTitle = AppSettings.APP_NAME;
 
-        if (this.loginService.isLoggedIn) {
-            this._setToSecuredState();
-        }
+            if (this.loginService.isLoggedIn) {
+                this._setToSecuredState();
+            }
+            this.trackJobForm = this.trackJobFormBuilder.group({
+                jobid: [""]
+            });
 
-        this._initiatePublicNavElements();
-        this._initiateSecureNavElements();
+            this._initiatePublicNavElements();
+            this._initiateSecureNavElements();
     }
 
     onLoginCompleted(loginStatus: LoginStatus) {
@@ -84,6 +89,10 @@ export class NavbarComponent {
 
     navigateToDashboard() {
         this.router.navigate(["Dashboard"]);
+    }
+
+    gotoSearchpage(event){
+        this.router.navigateByUrl("/track/" + this.trackJobForm.value.jobid);
     }
 
     private _initiatePublicNavElements() {

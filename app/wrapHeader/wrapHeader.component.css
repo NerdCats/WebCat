@@ -60,3 +60,16 @@ ul li{
     color: #00afab;
     /*color: #3498db;*/
 }
+
+select option {
+	/*color: black;*/
+}
+select option:first-child {
+	color: #999999;
+}
+select.empty {
+	color: #999999;
+}
+select option[disabled]:first-child {
+	display: none;
+}

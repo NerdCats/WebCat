@@ -6,7 +6,7 @@ import { VendorDetailsService } from "./vendor-menu.service";
 import { CartBusService } from '../cart/cart-bus.service';
 
 import { OrderModel, PackageListModel } from ".././shared/model/order-model";
-import { Vendor } from ".././shared/model/vendor";
+import { Vendor, Item } from ".././shared/model/vendor";
 import { OrderCartService } from '.././shared/order-cart.service';
 import { Router, RouteParams } from '@angular/router-deprecated';
 
@@ -25,6 +25,7 @@ export class VendorMenuComponent implements OnInit {
     vendor: Vendor;
     vendorName: string;
     selectedItem : PackageListModel;
+    clickedItem : Item;
     customeOrder: string = "";
     orderCart: OrderModel;
     openOrClosed: string;
@@ -33,12 +34,12 @@ export class VendorMenuComponent implements OnInit {
     ngOnInit(){
         this.vendorName = this.routeparams.get('vendorId');
         this.vendor = this.vendorDetailsService.getVendorDetails(this.vendorName);
-        console.log(this.vendor);
         if(this.vendor.isOpen) this.openOrClosed = "Open";
         else this.openOrClosed = "Closed";
 
         this.orderCart = this.orderCartService.getOrderCart();
         this.selectedItem = new PackageListModel();
+        this.clickedItem = new Item();
         if(!this.orderCart.OrderCart.PackageList){
             this.orderCart.OrderCart.PackageList = [];
         }
@@ -80,6 +81,10 @@ export class VendorMenuComponent implements OnInit {
     }
 
     addItem(item) {
+        console.log(item);
+
+        this.clickedItem.item = item.item;
+        this.clickedItem.description = item.description;
         this.selectedItem.Item = item.item + " (" + this.vendorName + ")";
         this.selectedItem.Price = item.price;
         this.selectedItem.Total = item.price;

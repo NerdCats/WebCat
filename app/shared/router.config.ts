@@ -16,7 +16,7 @@ import {CheckOutComponent} from '../cart/check-out/check-out.component';
 
 
 import { VendorsComponent } from '../vendors-list/vendors.component';
-
+import { SearchResultComponent } from '../search-result/search-result.component';
 
 export const Routes = [
     {
@@ -39,6 +39,11 @@ export const Routes = [
         path: '/dashboard/...',
         name: 'Dashboard',
         component: DashboardComponent
+    },
+    {
+        path: '/search/:area/:keyword',
+        name: 'SearchResult',
+        component: SearchResultComponent
     },
     {
         path: '/vendors',

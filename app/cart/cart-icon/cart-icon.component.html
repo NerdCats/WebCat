@@ -11,6 +11,9 @@
         <h1>SHOPPING CART</h1>
     </modal-header>
     <modal-body>
+        <div class="alert alert-danger" role="alert" *ngIf="!packageListHasItem && !orderCart.Description">
+            Currently You have no Item in the Cart!
+        </div>
         <table class="table table-sm table-hover" *ngIf="packageListHasItem">
             <thead>
                 <tr>
@@ -56,7 +59,7 @@
         </table>
 
 
-        <form id="custom-order" *ngIf="orderCart.Description" >
+        <form id="custom-order" *ngIf="orderCart.Description">
             <div class="form-group">
                 <h3>CUSTOM ORDER</h3>
                 <textarea class="form-control" rows="5" [(ngModel)]="orderCart.Description"></textarea>
@@ -68,7 +71,8 @@
     <modal-footer>
         <form>
             <div class="form-group">
-                <button class="btn btn-primary pull-right" (click)="checkOut()">CHECKOUT</button>
+                <button class="btn btn-primary pull-right" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
+                <button class="btn btn-primary pull-right" (click)="checkOut()" *ngIf="packageListHasItem || orderCart.Description">CHECKOUT</button>
             </div>
         </form>
     </modal-footer>

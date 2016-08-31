@@ -7,6 +7,11 @@
 .navbar-default .navbar-brand
 {
     color: white;
+    padding: 0px;
+}
+
+.navbar-default .navbar-brand > img {
+    width: 115px;
 }
 
 .navbar-default .navbar-nav > li > a

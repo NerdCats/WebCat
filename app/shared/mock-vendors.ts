@@ -5,6 +5,7 @@ export class MockVendors {
         {
             id: 1,
             name: 'Northend Coffee',
+            username: 'NorthendCoffee',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -14,7 +15,7 @@ export class MockVendors {
                 Country: 'Bangladesh',
                 City: 'Dhaka',
                 State: 'NoWhere',
-                Locality: 'O.o',
+                Locality: 'Banani',
                 Point: {
                     type: 'Point',
                     coordinates: [1.23, 4.56]
@@ -22,13 +23,18 @@ export class MockVendors {
             },
             phone_number: '01678123456',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates'
+            ],
             image: 'http://i.imgur.com/9Cfolu9.jpg',
             catagories: []
         },
         {
         id: 2,
         name: 'Izumi',
+        username: 'Izumi',
         address: {
             PostalCode: '1200',
             Floor: '0',
@@ -38,7 +44,7 @@ export class MockVendors {
             Country: 'Bangladesh',
             City: 'Dhaka',
             State: 'NoWhere',
-            Locality: 'O.o',
+            Locality: 'Banani',
             Point: {
                 type: 'Point',
                 coordinates: [1.23, 4.56]
@@ -46,7 +52,10 @@ export class MockVendors {
         },
         phone_number: '01762-635083',
         isOpen: true,
-        products: ['any', 'food', 'you', 'want'],
+        products: ['Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates'
+        ],
         image: 'http://imgur.com/DvmzsbV.jpg',
         catagories: [
                 {
@@ -519,6 +528,7 @@ export class MockVendors {
         {
             id: 3,
             name: 'Döner and Gyros',
+            username: 'DönerandGyros',
             address: {
                 PostalCode: '1200',
                 Floor: '0',
@@ -528,7 +538,7 @@ export class MockVendors {
                 Country: 'Bangladesh',
                 City: 'Dhaka',
                 State: 'NoWhere',
-                Locality: 'O.o',
+                Locality: 'Banani',
                 Point: {
                     type: 'Point',
                     coordinates: [1.23, 4.56]
@@ -680,6 +690,7 @@ export class MockVendors {
         {
             id: 4,
             name: 'Hakka Dhaka',
+            username: 'HakkaDhaka',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -689,7 +700,7 @@ export class MockVendors {
                 Country: 'Bangladesh',
                 City: 'Dhaka',
                 State: 'NoWhere',
-                Locality: 'O.o',
+                Locality: 'Banani',
                 Point: {
                     type: 'Point',
                     coordinates: [1.23, 4.56]
@@ -704,6 +715,7 @@ export class MockVendors {
         {
             id: 5,
             name: 'Farm Fresh',
+            username: 'FarmFresh',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -713,7 +725,7 @@ export class MockVendors {
                 Country: 'Bangladesh',
                 City: 'Dhaka',
                 State: 'NoWhere',
-                Locality: 'O.o',
+                Locality: 'Baridhara',
                 Point: {
                     type: 'Point',
                     coordinates: [1.23, 4.56]
@@ -721,13 +733,19 @@ export class MockVendors {
             },
             phone_number: '01819211525',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/C1fbSZc.jpg',
             catagories: []
         },
         {
             id: 6,
             name: 'Oh Kitchen Pizza',
+            username: 'OhKitchenPizza',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -745,13 +763,19 @@ export class MockVendors {
             },
             phone_number: 'N/A',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/I1aOrmi.jpg',
             catagories: []
         },
         {
             id: 7,
             name: 'Family World',
+            username: 'FamilyWorld',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -769,13 +793,19 @@ export class MockVendors {
             },
             phone_number: 'N/A',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/1LGNGv8.jpg',
             catagories: []
         },
         {
             id: 8,
             name: 'FFC',
+            username: 'FFC',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -793,13 +823,19 @@ export class MockVendors {
             },
             phone_number: '02-9880777',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/OrYcw8i.jpg',
             catagories: []
         },
         {
             id: 9,
             name: 'The Jar',
+            username: 'TheJar',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -817,13 +853,19 @@ export class MockVendors {
             },
             phone_number: '01717-132380',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/5ex18sL.jpg',
             catagories: []
         },
         {
             id: 10,
             name: 'Mad Chef',
+            username: 'MadChef',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -841,13 +883,19 @@ export class MockVendors {
             },
             phone_number: '01715-780379',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/DvmzsbV.jpg',
             catagories: []
         },
         {
             id: 11,
             name: 'ZuumZuum',
+            username: 'ZuumZuum',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -865,13 +913,19 @@ export class MockVendors {
             },
             phone_number: 'N/A',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/DvmzsbV.jpg',
             catagories: []
         },
         {
             id: 12,
             name: 'Styline',
+            username: 'Styline',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -889,13 +943,19 @@ export class MockVendors {
             },
             phone_number: '8801979996565',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/DvmzsbV.jpg',
             catagories: []
         },
         {
             id: 13,
             name: 'My Beats',
+            username: 'MyBeats',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -913,7 +973,12 @@ export class MockVendors {
             },
             phone_number: 'N/A',
             isOpen: true,
-            products: ['any', 'thing', 'you', 'want'],
+            products: [
+                'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
+                'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
+                'Chocolates', 'Flowers',
+                'Electronics', 'TV'
+            ],
             image: 'http://i.imgur.com/DvmzsbV.jpg',
             catagories: []
         }

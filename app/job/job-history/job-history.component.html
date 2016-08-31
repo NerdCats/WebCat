@@ -27,7 +27,7 @@
                         <th>Modified</th>
                     </tr>
                     <tr *ngFor="let job of jobs" (click)="goToTrackingPage(job.HRID)">
-                        <td class="pointer">{{job.HRID}}</td>
+                        <td class="pointer"><a href="#/track/{{job.HRID}}">{{job.HRID}}</a></td>
                         <td>{{job.Name}}</td>
                         <td>
                             <span [ngClass]="setJobStatusLabelClass(job.State)">{{job.State}}</span>

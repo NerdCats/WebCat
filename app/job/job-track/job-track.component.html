@@ -17,7 +17,7 @@
 	<div class="row" *ngIf="status=='SUCCESSFUL'">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Order Information
@@ -52,7 +52,7 @@
 			</div>
 
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Order Status
@@ -83,6 +83,7 @@
 							<thead>
 								<tr>
 									<th>Task</th>
+									<th>Status</th>
 									<th>Mentioned ETA</th>
 									<th>Started</th>
 									<th>Completed</th>
@@ -92,7 +93,8 @@
 							</thead>
 							<tbody>
 								<tr *ngFor="let task of tasksTiming">
-									<td class="col-md-2"> {{task.Type}} </td>
+									<td class="col-md-1"> {{task.Type}} </td>
+									<td class="col-md-1"> {{task.State}} </td>
 									<td class="col-md-2"> {{(task.ETA | date:"EEE d MMM y,h:m TT") || "Not Mentioned"}} </td>
 									<td class="col-md-2"> {{(task.InitiationTime | date:"EEE d MMM y,h:m TT") || "Not Started"}} </td>
 									<td class="col-md-2"> {{(task.CompletionTime | date:"EEE d MMM y,h:m TT") || "Not Finished"}} </td>
@@ -106,7 +108,7 @@
 			</div>
 
 			<div class="panel panel-primary" *ngIf="assetInfo.length != 0 || (coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable)">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Tracking Information
@@ -193,7 +195,7 @@
 			</div>
 
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Item List

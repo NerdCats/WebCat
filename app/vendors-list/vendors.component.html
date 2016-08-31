@@ -2,7 +2,7 @@
 <div>
     <ul class="center">
         <li class="center {{getTileClass(i)}}"
-            (click)="goToVendorMenuPage(vendor.name)"
+            (click)="goToVendorMenuPage(vendor.username)"
             *ngFor="let vendor of vendors; let i = index"
             [ngStyle]="{'background-image': 'url(' + vendor.image + ')'}">
             <div class="gradient">

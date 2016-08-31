@@ -9,39 +9,33 @@ import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/components/typeahead';
     styleUrls: ['app/wrapHeader/wrapHeader.component.css'],
     directives: [ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES]
 })
+
 export class WrapHeaderComponent {
-    public selectedArea: string = '';
-    public selectedItem: string = '';
-    public trackJobForm: ControlGroup;
+    public selectedArea: string = "";
+    public selectedItem: string;
+
     public areas:string [] = ['Banani', 'Baridhara', 'Dhanmondi', 'Gulshan 1', 'Gulshan 2', 'Uttara'];
 
-    public items:Array<string> = [
+    public items:string[] = [
         'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
         'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
         'Chocolates', 'Flowers',
         'Electronics', 'TV'
     ];
 
-    constructor(private router: Router,
-    private trackJobFormBuilder: FormBuilder){
-        this.trackJobForm = this.trackJobFormBuilder.group({
-            jobid: [""]
-        })
-
-
-    }
+    constructor(private router: Router){}
 
     goToVendorList(area:string){
         this.router.navigateByUrl("/vendors");
     }
 
-    gotoSearchpage(event){
-        this.router.navigate(["Track", {jobId: this.trackJobForm.value.jobid}]);
-        event.preventDefault();
-    }
 
-    gotoSearchResultPage(e: any) {
+
+    gotoSearchResultPage(e) {
         console.log("Area: " + this.selectedArea + ", Item: " + this.selectedItem);
+        console.log("/search/" + this.selectedArea + "/" + this.selectedItem);
+
+        this.router.navigateByUrl("/search/" + this.selectedArea + "/" + this.selectedItem);
     }
 
     public typeaheadOnSelect(e: any) {

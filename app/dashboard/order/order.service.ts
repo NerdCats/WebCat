@@ -19,6 +19,8 @@ export class OrderService {
 
     createOrder(order: OrderModel) {
         let orderPostUrl = this.url + "Order/";
+        console.log(order.OrderCart.ServiceCharge);
+
         let orderJson = JSON.stringify(order);
 
         return this.http.securePost(orderPostUrl, orderJson)

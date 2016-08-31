@@ -52,11 +52,11 @@
 @media only screen and (max-width: 780px){
 
     .vendor-name-div h1 {
-        padding: 0;
+        padding: 100px 0 0 0;
         position: relative;
         z-index: 2;
     }
-    .vendor-name-div p {
+    .vendor-name-div p:last-child {
         padding-bottom: 100px;
     }
     .vendor-item-list {

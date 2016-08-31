@@ -3,18 +3,23 @@
     <div class="row">
       <div class="col-lg-6 col-lg-offset-4">
         <h1>Delivery Simplified</h1>
-          <form [ngFormModel]="trackJobForm" (submit)="gotoSearchResultPage($event)" class="form-inline" role="form">
+          <form (submit)="gotoSearchResultPage($event)" class="form-inline" role="form">
             <div class="form-group">
-              <!--<input ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Search Anything!">-->
-              <select class="dropdown form-control large-control" [(ngModel)]="selectedArea">
-                <option *ngFor="let area of areas">{{area}}</option>
+              <select class="dropdown form-control large-control" [(ngModel)]="selectedArea" required>
+                <option value="" selected disabled>Select Area</option>
+                <option value="Banani">Banani</option>
+                <option value="Baridhara">Baridhara</option>
+                <option value="Dhanmondi">Dhanmondi</option>
+                <option value="Gulshan 1">Gulshan 1</option>
+                <option value="Gulshan 2">Gulshan 2</option>
+                <option value="Uttara">Uttara</option>
               </select>
               <input [(ngModel)]="selectedItem"
                 [typeahead]="items"
                 (typeaheadOnSelect)="typeaheadOnSelect($event)"
-                class="form-control large-control" placeholder="Search Anything!">
+                class="form-control large-control" placeholder="Search Anything!" required>
             </div>
-            <button type="submit" class="btn btn-info btn-lg">Search</button>
+            <button [disabled]="(!selectedArea && !selectedItem)" type="submit" class="btn btn-info btn-lg">Search</button>
           </form>
       </div>
     </div>

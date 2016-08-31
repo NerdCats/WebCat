@@ -6,16 +6,16 @@
         <span id="navbar-toggle-menu" class="fa fa-bars" aria-hidden="true"></span>
       </button>
       <a class="navbar-brand" [routerLink]="['Home']">
-        <b>{{AppTitle}}</b>
+        <img src="/assets/img/logo.png" alt="logo">
       </a>
     </div>
     <div class=col-md-2>
     <div class="">
-    <form name="jobSearchForm" class="navbar-form">
+    <form [ngFormModel]="trackJobForm" (submit)="gotoSearchpage($event)" role="form" class="navbar-form">
           <div class="input-group">
-              <input type="text" [(ngModel)]="jobId" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="ex: Job-SDHA54SD">
+              <input type="text" ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Track Order">
               <span class="input-group-btn">
-                  <button class="btn btn-default" (click)="saerchJob(jobId)">
+                  <button class="btn btn-default" type="submit">
                       <i class="fa fa-search" aria-hidden="true"></i>
                   </button>
               </span>
