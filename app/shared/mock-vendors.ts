@@ -5,6 +5,7 @@ export class MockVendors {
         {
             id: 1,
             name: 'Northend Coffee',
+            username: 'NorthendCoffee',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -33,6 +34,7 @@ export class MockVendors {
         {
         id: 2,
         name: 'Izumi',
+        username: 'Izumi',
         address: {
             PostalCode: '1200',
             Floor: '0',
@@ -526,6 +528,7 @@ export class MockVendors {
         {
             id: 3,
             name: 'Döner and Gyros',
+            username: 'DönerandGyros',
             address: {
                 PostalCode: '1200',
                 Floor: '0',
@@ -687,6 +690,7 @@ export class MockVendors {
         {
             id: 4,
             name: 'Hakka Dhaka',
+            username: 'HakkaDhaka',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -711,6 +715,7 @@ export class MockVendors {
         {
             id: 5,
             name: 'Farm Fresh',
+            username: 'FarmFresh',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -740,6 +745,7 @@ export class MockVendors {
         {
             id: 6,
             name: 'Oh Kitchen Pizza',
+            username: 'OhKitchenPizza',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -769,6 +775,7 @@ export class MockVendors {
         {
             id: 7,
             name: 'Family World',
+            username: 'FamilyWorld',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -798,6 +805,7 @@ export class MockVendors {
         {
             id: 8,
             name: 'FFC',
+            username: 'FFC',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -827,6 +835,7 @@ export class MockVendors {
         {
             id: 9,
             name: 'The Jar',
+            username: 'TheJar',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -856,6 +865,7 @@ export class MockVendors {
         {
             id: 10,
             name: 'Mad Chef',
+            username: 'MadChef',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -885,6 +895,7 @@ export class MockVendors {
         {
             id: 11,
             name: 'ZuumZuum',
+            username: 'ZuumZuum',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -914,6 +925,7 @@ export class MockVendors {
         {
             id: 12,
             name: 'Styline',
+            username: 'Styline',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
@@ -943,6 +955,7 @@ export class MockVendors {
         {
             id: 13,
             name: 'My Beats',
+            username: 'MyBeats',
             address: {
                 PostalCode: '1230',
                 Floor: '5',
