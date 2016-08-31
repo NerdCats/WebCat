@@ -11,10 +11,10 @@ import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/components/typeahead';
 })
 
 export class WrapHeaderComponent {
-    public selectedArea: string;
+    public selectedArea: string = "";
     public selectedItem: string;
 
-    public areas:string [] = ['','Banani', 'Baridhara', 'Dhanmondi', 'Gulshan 1', 'Gulshan 2', 'Uttara'];
+    public areas:string [] = ['Banani', 'Baridhara', 'Dhanmondi', 'Gulshan 1', 'Gulshan 2', 'Uttara'];
 
     public items:string[] = [
         'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',

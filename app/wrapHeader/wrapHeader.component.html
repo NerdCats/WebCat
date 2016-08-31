@@ -6,7 +6,13 @@
           <form (submit)="gotoSearchResultPage($event)" class="form-inline" role="form">
             <div class="form-group">
               <select class="dropdown form-control large-control" [(ngModel)]="selectedArea" required>
-                <option *ngFor="let area of areas">{{area}}</option>
+                <option value="" selected disabled>Select Area</option>
+                <option value="Banani">Banani</option>
+                <option value="Baridhara">Baridhara</option>
+                <option value="Dhanmondi">Dhanmondi</option>
+                <option value="Gulshan 1">Gulshan 1</option>
+                <option value="Gulshan 2">Gulshan 2</option>
+                <option value="Uttara">Uttara</option>
               </select>
               <input [(ngModel)]="selectedItem"
                 [typeahead]="items"

@@ -11,7 +11,6 @@ export class SearchResultService {
     public search(area:string, keyword:string){
 
         this.Vendors = [];
-        this.Vendors = this.getVendors();
 
         this.getVendors().forEach(vendor=>{
             if(vendor.address.Locality===area){
