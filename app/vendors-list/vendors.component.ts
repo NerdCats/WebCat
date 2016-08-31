@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { Router, ROUTER_DIRECTIVES, RouteParams } from '@angular/router-deprecated';
 import { Vendor }           from '../shared/model/vendor';
 import { VendorService }    from './vendor.service';
 
@@ -14,31 +14,28 @@ import { VendorService }    from './vendor.service';
 export class VendorsComponent implements OnInit {
     flag = 0;
     vendors: Vendor[] = [];
-
+    area:string = "";
     constructor(private vendorService: VendorService,
-                private router: Router) {  }
+                private router: Router,
+                private routeParams: RouteParams) {  }
 
     ngOnInit() {
         this.vendors = this.vendorService.getVendors();
+        this.area = this.routeParams.get("area");
     }
 
     goToVendorMenuPage(vendorName: string){
-         this.router.navigateByUrl("/vendors/" + vendorName);
+        this.router.navigateByUrl("/vendors/" + this.area + "/" + vendorName);
     }
 
-    getTileClass() {
-        if (this.flag == 1 || this.flag == 2) {
-            this.setFlag();
-            return 'module';
+    getTileClass(i) {
+        if (i % 3 == 0) {
+            // return 'big-module';
+            return "col-xs-12 col-md-12 col-sm-12 col-lg-12 big-module";
         }
         else {
-            this.setFlag();
-            return 'big-module';
+            // return 'module';
+            return "col-xs-6 col-md-6 col-sm-6 col-lg-6 module";
         }
     }
-
-    setFlag() {
-        this.flag++;
-        this.flag %= 3;
-    }
- }
+}

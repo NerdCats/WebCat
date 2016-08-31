@@ -3,25 +3,26 @@
     <div class="row">
         <ul>
             <li *ngFor="let vendor of vendors">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="#/vendors/{{vendor.name}}">
-                                <img class="img-rounded img-responsive" src="{{vendor.image}}" alt="">
-                            </a>
-                        </div>
-                        <div class="col-md-8">
-                            <a href="#/vendors/{{vendor.name}}">
-                                <h2>{{vendor.name + " "}}
-                                    <span class="open" *ngIf="vendor.isOpen">(Open)</span>
-                                    <span class="close" *ngIf="!vendor.isOpen">(Close)</span>
-                                </h2>
-                            </a>
-
-                            <h3>{{vendor.address.AddressLine1}}</h3>
-                            <ul class="list-inline"><li *ngFor="let product of vendor.products"> {{product + " "}} </li></ul>
-                        </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="#/vendors/{{vendor.address.Locality}}/{{vendor.username}}">
+                            <img class="img-rounded img-responsive" src="{{vendor.image}}" alt="">
+                        </a>
                     </div>
+                    <div class="col-md-8">
+                        <a href="#/vendors/{{vendor.address.Locality}}/{{vendor.username}}">
+                            <h2>{{vendor.name + " "}}
+                                <span class="open" *ngIf="vendor.isOpen">(Open)</span>
+                                <span class="close" *ngIf="!vendor.isOpen">(Close)</span>
+                            </h2>
+                        </a>
 
+                        <h3>{{vendor.address.AddressLine1}}</h3>
+                        <ul class="list-inline">
+                            <li *ngFor="let product of vendor.products"> {{product + " "}} </li>
+                        </ul>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>

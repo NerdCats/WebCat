@@ -1,43 +1,40 @@
 <div class="navbar-blank"></div>
 <div class="navbar navbar-default navbar-fixed-top">
-  <div>
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
+    <div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
         <span id="navbar-toggle-menu" class="fa fa-bars" aria-hidden="true"></span>
       </button>
-      <a class="navbar-brand" [routerLink]="['Home']">
-        <img src="/assets/img/logo.png" alt="logo">
-      </a>
+            <a class="navbar-brand" [routerLink]="['Home']">
+                <img src="/assets/img/logo.png" alt="logo">
+            </a>
+        </div>
+        <div class=col-md-2>
+            <form [ngFormModel]="trackJobForm" (submit)="searchJob($event)" role="form" class="navbar-form" id="job-search-form">
+                <div class="input-group">
+                    <input type="text" ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Track Order">
+                    <span class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</button>
+					</span>
+                </div>
+            </form>
+        </div>
+        <div class="navbar-collapse collapse" [collapse]="isCollapsed">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="pointer">
+                        <cart-icon></cart-icon>
+                    </a>
+                </li>
+                <li *ngFor="let elm of navBarElementDict[State]">
+                    <a class="pointer" (click)="elm.Event()">{{elm.Title}}</a>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
     </div>
-    <div class=col-md-2>
-    <div class="">
-    <form [ngFormModel]="trackJobForm" (submit)="gotoSearchpage($event)" role="form" class="navbar-form">
-          <div class="input-group">
-              <input type="text" ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="ex: Job-SDHA54SD">
-              <span class="input-group-btn">
-                  <button class="btn btn-default" type="submit">
-                      <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-              </span>
-          </div>
-      </form>
-    </div>
-    </div>
-    <div class="navbar-collapse collapse" [collapse]="isCollapsed">
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a class="pointer">
-            <cart-icon></cart-icon>
-          </a>
-        </li>
-        <li *ngFor="let elm of navBarElementDict[State]">
-          <a class="pointer" (click)="elm.Event()">{{elm.Title}}</a>
-        </li>
-      </ul>
-    </div>
-    <!--/.nav-collapse -->
-  </div>
 </div>
 <signup #signup></signup>
 <login #login (onLoginCompleted)="onLoginCompleted($event)"></login>
-

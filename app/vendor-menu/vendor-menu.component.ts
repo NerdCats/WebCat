@@ -34,7 +34,6 @@ export class VendorMenuComponent implements OnInit {
     ngOnInit(){
         this.vendorName = this.routeparams.get('vendorId');
         this.vendor = this.vendorDetailsService.getVendorDetails(this.vendorName);
-        console.log(this.vendor);
         if(this.vendor.isOpen) this.openOrClosed = "Open";
         else this.openOrClosed = "Closed";
 

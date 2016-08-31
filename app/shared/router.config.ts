@@ -46,12 +46,12 @@ export const Routes = [
         component: SearchResultComponent
     },
     {
-        path: '/vendors',
+        path: '/vendors/:area',
         name: 'Vendors',
         component: VendorsComponent
     },
     {
-        path: '/vendors/:vendorId',
+        path: '/vendors/:area/:vendorId',
         name: 'VendorMenu',
         component: VendorMenuComponent
     },
@@ -64,6 +64,5 @@ export const Routes = [
 
 export const PublicRoutes = [
     'home',
-    'confirmEmail',
-    'vendors'
+    'confirmEmail'
 ]
