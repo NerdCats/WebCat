@@ -1001,35 +1001,6 @@ export class MockVendors {
         image: 'http://i.imgur.com/C1fbSZc.jpg',
         catagories: []
     }, {
-        id: 6,
-        name: 'Oh Kitchen Pizza',
-        username: 'OhKitchenPizza',
-        address: {
-            PostalCode: '1230',
-            Floor: '5',
-            HouseNumber: '45/6',
-            AddressLine1: 'Road 79, House 5, Gulshan 2',
-            AddressLine2: 'Gulshan 2',
-            Country: 'Bangladesh',
-            City: 'Dhaka',
-            State: 'NoWhere',
-            Locality: 'Banani',
-            Point: {
-                type: 'Point',
-                coordinates: [1.23, 4.56]
-            }
-        },
-        phone_number: 'N/A',
-        isOpen: true,
-        products: [
-            'Coffee', 'Tea', 'Coca Cola', 'Pepsi', 'Fanta',
-            'Cake', 'Pastry', 'Almond', 'Rice', 'Flour',
-            'Chocolates', 'Flowers',
-            'Electronics', 'TV'
-        ],
-        image: 'http://i.imgur.com/I1aOrmi.jpg',
-        catagories: []
-    }, {
         id: 7,
         name: 'Family World',
         username: 'FamilyWorld',
