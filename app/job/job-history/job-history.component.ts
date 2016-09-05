@@ -5,6 +5,7 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import {JobService} from '../shared/job.service';
 import {Job} from '../shared/job';
 import {Pagination} from '../../shared/pagination';
+import {CssHelper} from '../../shared/css-helper';
 
 import {ComponentServiceStatus} from '../../shared/component-service-status';
 
@@ -107,36 +108,10 @@ export class JobHistoryComponent implements OnInit {
     }
 
     setJobStatusLabelClass(state: string) {
-        switch (state) {
-            case "COMPLETED":
-                return "label green";
-            case "ENQUEUED":
-                return "label orange";
-            case "IN_PROGRESS":
-                return "label blue";
-            case "CANCELLED":
-                return "label red";
-            default:
-                break;
-        }
+        return CssHelper.getCssLabel(state);
     }
 
     setPaymentStatusLabelClass(state: string) {
-        switch (state) {
-            case "Pending":
-                return "label label-primary";
-            case "Authorized":
-                return "label label-info";
-            case "Paid":
-                return "label label-success";
-            case "PartiallyRefunded":
-                return "label label-warning";
-            case "Refunded":
-                return "label label-danger";
-            case "Voided":
-                return "label label-default";
-            default:
-                break;
-        }
+        return CssHelper.getCssLabel(state);
     }
 }

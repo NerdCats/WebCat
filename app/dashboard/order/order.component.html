@@ -152,7 +152,7 @@
             </div>
             <div class="form-group">
               <label class="control-label" for="item">Quantity</label>
-              <input required ngControl="qty" #qty="ngForm" type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="packageListItem.Quantity">
+              <input required ngControl="qty" #qty="ngForm" type="number" min="1" class="form-control" id="quantity" name="quantity" [(ngModel)]="packageListItem.Quantity">
             </div>
             <div class="form-group">
               <label class="control-label" for="item">Price</label>
@@ -197,7 +197,7 @@
       <br>
       <div class="form-group">
         <div class="col-md-8 control-label">
-          <button id="add-more" name="add-more" class="btn btn-important" [disabled]="!deliveryAddress.valid || !paymentMethod.valid || !pickupAddress.valid || orderCreationStatus=='IN_PROGRESS'" (click)="addItem()">Add Item</button>
+          <button id="add-more" name="add-more" class="btn btn-primary" [disabled]="!deliveryAddress.valid || !paymentMethod.valid || !pickupAddress.valid || orderCreationStatus=='IN_PROGRESS'" (click)="addItem()">Add Item</button>
         </div>
       </div>
       <br>

@@ -26,16 +26,16 @@
                         <th>Created</th>
                         <th>Modified</th>
                     </tr>
-                    <tr *ngFor="let job of jobs" (click)="goToTrackingPage(job.HRID)">
-                        <td class="pointer">{{job.HRID}}</td>
+                    <tr *ngFor="let job of jobs">
+                        <td class="pointer"><a href="#/track/{{job.HRID}}">{{job.HRID}}</a></td>
                         <td>{{job.Name}}</td>
                         <td>
-                            <span [ngClass]="setJobStatusLabelClass(job.State)">{{job.State}}</span>
+                            <span [ngClass]="setJobStatusLabelClass(job.State).class">{{setJobStatusLabelClass(job.State).value}}</span>
                         </td>
                         <td *ngIf="accessMode=='ADMIN'">{{job.User.UserName}}</td>
                         <td>{{job.PaymentMethod}}</td>
                         <td>
-                            <span [ngClass]="setPaymentStatusLabelClass(job.PaymentStatus)">{{job.PaymentStatus | uppercase}}</span>
+                            <span [ngClass]="setPaymentStatusLabelClass(job.PaymentStatus).class">{{setPaymentStatusLabelClass(job.PaymentStatus).value | uppercase}}</span>
                         </td>
                         <td>
                             {{job.Order.OrderCart.TotalToPay}}

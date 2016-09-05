@@ -107,6 +107,33 @@
     .pointer{
         cursor: pointer;
     }
+
+    .pending {
+        background-color: #FF5722 !important;
+    }
+    .in-progress {
+        background-color: #FFEB3B !important;
+        color: black;
+    }
+    .completed {
+        background-color: #4CAF50 !important;
+    }
+    .cancelled {
+        background-color: #b71c1c !important;
+    }
+
+    .not-applicable {
+        background-color: #9E9E9E !important;
+    }
+
+    .b2b {
+        background-color: #2196F3 !important;
+    }
+
+    .b2c {
+        background-color: #3F51B5 !important;
+    }
+
     /* Small Devices, Tablets */
 
     @media only screen and (min-width: 768px) {

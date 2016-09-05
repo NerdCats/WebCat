@@ -32,7 +32,7 @@ export class OrderCartModel {
     public TotalWeight: number;
     public TotalToPay: number;
     constructor() {
-
+        this.ServiceCharge = 0;
     }
 }
 
@@ -47,7 +47,7 @@ export class PackageListModel {
     public TotalPlusVAT: number;
     public Weight: number;
     constructor() {
-
+        this.Quantity = 1;
     }
 }
 

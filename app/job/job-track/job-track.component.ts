@@ -1,6 +1,7 @@
 import { Component, provide, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, RouteParams } from '@angular/router-deprecated';
+import { CssHelper } from '../../shared/css-helper'
 
 import {
     MapsAPILoader,
@@ -107,6 +108,10 @@ export class JobTrackComponent implements OnInit {
             });
     }
 
+    getCssClass(word){
+        return CssHelper.getCssLabel(word);
+    }
+
     fixingServerText() {
         // this weird function is to streamline server responses
         // like, CashOnDelivery to Cash On Deliver ||
@@ -119,6 +124,8 @@ export class JobTrackComponent implements OnInit {
             if(task.Type === "SecureDelivery") task.Type = "Secured Delivery";
 
             if(task.Duration){
+                console.log(task.Duration);
+
                 task.Duration = task.Duration.substr(0,8)
             }
 

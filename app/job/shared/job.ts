@@ -19,6 +19,8 @@ export interface IJobJson {
     Assets: { [id: string] : Object; };
     Deleted: boolean;
     PaymentStatus: string; // INFO: Potential place for a string literal
+    CancellationReason: string;
+    CompletionTime: string;
 }
 
 
@@ -40,7 +42,8 @@ export class Job {
     Assets: { [id: string] : Object; };;
     Deleted: boolean;
     PaymentStatus: string; // INFO: Potential place for a string literal
-
+    CancellationReason: string;
+    CompletionTime: string;
     toJSON(): IJobJson {
         return Object.assign({}, this, {
             CreateTime: this.CreateTime.toString(),

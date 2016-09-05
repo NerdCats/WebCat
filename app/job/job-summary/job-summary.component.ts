@@ -7,7 +7,9 @@ import {WidgetHeaderComponent} from '../../common/widget-header/widget-header.co
 import {WidgetBodyComponent} from '../../common/widget-body/widget-body.component';
 
 import {JobService} from '../shared/job.service';
+import {CssHelper} from '../../shared/css-helper';
 import {Job, JobState} from '../shared/job';
+
 
 @Component({
     selector: 'job-summary',
@@ -64,5 +66,9 @@ export class JobSummaryComponent implements OnInit {
                 this.jobCountProcessState[state] = "FAILED";
                 this.statusMessage = error.Message || "Failed to fetch data from server";
             });
+    }
+
+    getStateCssClass(word: string):any {
+        return CssHelper.getCssLabel(word);
     }
 }
