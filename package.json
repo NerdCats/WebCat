@@ -32,7 +32,7 @@
     "font-awesome": "^4.6.3",
     "jquery": "^2.2.3",
     "moment": "^2.13.0",
-    "ng2-bootstrap": "^1.0.16",
+    "ng2-bootstrap": "1.0.16",
     "ng2-bs3-modal": "^0.6.0",
     "rdash-ui": "^1.0.1",
     "reflect-metadata": "^0.1.3",
@@ -68,5 +68,8 @@
     "typescript": "^1.8.10",
     "typings": "^0.8.1",
     "yargs": "^4.7.1"
+  },
+  "peerDependency": {
+    "@angular/common": "2.0.0-rc.1"
   }
 }
