@@ -12,7 +12,8 @@ import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 
 import { LocalityService } from '../../shared/app-locality.service';
-import { OrderModel, OrderCartModel, PackageListModel, JobTaskETAPreferenceModel } from '../../shared/model/order-model';
+import { OrderModel, OrderCartModel, PackageListModel, JobTaskETAPreferenceModel, DeliveryOrder, ClassifiedDeliveryOrder } from '../../shared/model/order-model';
+import { OrderType } from '../../shared/model/order-type';
 import { OrderService } from './order.service';
 import { DashboardBusService } from  '../dashboard-bus.service';
 
@@ -48,7 +49,7 @@ export class OrderComponent {
         private busService: DashboardBusService,
         private localityService: LocalityService) {
         this.busService.annouceSectionChange("New Order");
-        this.initiateOrderModel();
+        this.initiateOrderModel(OrderType.DeliveryOrderType);
         this.isUpdating = false;
         this.areas = this.localityService.getLocalities();
     }
@@ -70,6 +71,10 @@ export class OrderComponent {
                 console.log(error);
                 this.orderCreationStatus = 'FAILED';
             });
+    }
+
+    onTypeChange(newValue){
+        console.log(newValue);
     }
 
     processJobTaskPreferrenceETA(){
@@ -103,8 +108,21 @@ export class OrderComponent {
         this.close();
     }
 
-    initiateOrderModel() {
-        this.orderModel = new OrderModel();
+    initiateOrderModel(orderType: string) {
+        switch(orderType){
+            case OrderType.DeliveryOrderType:
+                this.orderModel = new DeliveryOrder();
+                this.orderModel.Type = OrderType.DeliveryOrderType;
+                break;
+            case OrderType.ClassifiedDeliveryOrderType:
+                this.orderModel = new ClassifiedDeliveryOrder();
+                break;
+            default:
+                this.orderModel = new OrderModel();
+        }
+
+
+
         this.orderModel.PayloadType = "default";
 
         this.orderModel.OrderCart.PackageList = [];

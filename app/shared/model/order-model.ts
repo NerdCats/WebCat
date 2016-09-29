@@ -1,8 +1,6 @@
 import { DefaultAddress } from './geocoding.defaultAddress'
 
 export class OrderModel {
-    public NoteToDeliveryMan: string;
-    public RequiredChangeFor: string;
     public Name: string;
     public From: DefaultAddress;
     public To: DefaultAddress;
@@ -58,5 +56,34 @@ export class JobTaskETAPreferenceModel {
     constructor(type, eta){
         this.Type = type;
         this.ETA = eta;
+    }
+}
+
+export class PersonInfo {
+    public UserRef : string;
+    public Name : string;
+    public Address : DefaultAddress;
+    public PhoneNumber : string;
+    constructor(){
+        this.Address = new DefaultAddress();
+    }
+}
+
+
+export class DeliveryOrder extends OrderModel{
+    public NoteToDeliveryMan: string;
+    public RequiredChangeFor: string;
+
+    constructor() {
+        super()
+    }
+}
+
+export class ClassifiedDeliveryOrder extends OrderModel{
+    public SellerInfo: PersonInfo;
+    public BuyerInfo: PersonInfo;
+
+    constructor() {
+        super()
     }
 }
