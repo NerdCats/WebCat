@@ -1,4 +1,5 @@
 import { DefaultAddress } from './geocoding.defaultAddress'
+import { OrderType } from './order-type';
 
 export class OrderModel {
     public Name: string;
@@ -75,7 +76,8 @@ export class DeliveryOrder extends OrderModel{
     public RequiredChangeFor: string;
 
     constructor() {
-        super()
+        super();
+        this.Type = OrderType.DeliveryOrderType;
     }
 }
 
@@ -84,6 +86,7 @@ export class ClassifiedDeliveryOrder extends OrderModel{
     public BuyerInfo: PersonInfo;
 
     constructor() {
-        super()
+        super();
+        this.Type = OrderType.ClassifiedDeliveryOrderType;
     }
 }

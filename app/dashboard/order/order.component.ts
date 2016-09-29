@@ -73,8 +73,8 @@ export class OrderComponent {
             });
     }
 
-    onTypeChange(newValue){
-        console.log(newValue);
+    onOrderTypeChange(newOrderType){
+        this.initiateOrderModel(newOrderType);
     }
 
     processJobTaskPreferrenceETA(){
@@ -112,7 +112,6 @@ export class OrderComponent {
         switch(orderType){
             case OrderType.DeliveryOrderType:
                 this.orderModel = new DeliveryOrder();
-                this.orderModel.Type = OrderType.DeliveryOrderType;
                 break;
             case OrderType.ClassifiedDeliveryOrderType:
                 this.orderModel = new ClassifiedDeliveryOrder();
