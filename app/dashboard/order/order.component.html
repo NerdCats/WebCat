@@ -1,20 +1,30 @@
 <div class="container">
-  <form class="form-horizontal center-block">
+  <form class="form-horizontal center-block" #orderForm="ngForm">
     <fieldset>
 
       <div class="form-group">
-        <div class="col-md-7 col-sm-7">
-          <h1 class="control-label">{{formTitle}}</h1>
+        <div>
+          <!--<h1 class="control-label">{{formTitle}}</h1>-->
           <br>
           <div *ngIf="orderCreationStatus =='FAILED'" class="form-group">
             <label class="col-md-8 control-label" for="error"></label>
             <div class="col-md-4 alert alert-danger" [innerHtml]="orderResponseMessage"></div>
           </div>
-          <div *ngIf="orderCreationStatus=='SUCCESS'" class="form-group">
+          <!--<div *ngIf="orderCreationStatus=='SUCCESS'" class="form-group">
             <label class="col-md-6 control-label" for="success"></label>
             <div class="col-md-6 alert alert-success alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Order created Successfully, Your job id <h3>{{submittedJobId}}</h3> <br>click <a (click)="goToTrackingPage()">here</a> to track!
+                Order created Successfully, Your job id <h3>{{submittedJobId}}</h3> <br>click <a href="#/track/{{submittedJobId}}">here</a> to track!
+            </div>
+          </div>-->
+          <div  *ngIf="orderCreationStatus=='SUCCESS'" class="form-group">
+            <label class="control-label" for="success"></label>
+            <div class="center-block alert alert-success alert-dismissable">
+              <button aria-label="Close" class="close" data-dismiss="alert" type="button"><span aria-hidden="true">×</span></button>
+              <div class="text-center">
+                Order created Successfully, Your job id <span style="font-size: 20px; font-weight: 600">{{submittedJobId}}</span>, click
+                <a href="#/track/{{submittedJobId}}">here</a> to track!
+              </div>
             </div>
           </div>
         </div>
@@ -24,17 +34,43 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="order-type">Select Order Type</label>
         <div class="col-md-4">
-          <select required ngControl="orderType" #orderType="ngForm" class="form-control" name="orderType" id="orderType" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.Type">
+          <select required ngControl="orderType" #orderType="ngForm" class="form-control" name="orderType" id="orderType" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.Type" (ngModelChange)="onOrderTypeChange($event)">
             <option value="Delivery">Delivery</option>
             <option value="ClassifiedDelivery">ClassifiedDelivery</option>
           </select>
-
         </div>
       </div>
-      <div class="form-group">
+
+      <br>
+      <hr>
+      <br>
+
+      <div class="form-group" [hidden]="orderModel.Type == 'ClassifiedDelivery'">
         <label class="col-md-4 control-label" for="pickup-address">Pickup Address</label>
         <div class="col-md-4">
           <textarea required ngControl="pickupAddress" #pickupAddress="ngForm" class="form-control" id="pickup-address" name="pickup-address" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.From.AddressLine1"></textarea>
+        </div>
+      </div>
+
+
+      <div class="form-group" [hidden]="orderModel.Type == 'Delivery'">
+        <label class="col-md-4 control-label" for="seller-name">Seller's Name</label>
+        <div class="col-md-4">
+          <input type="text" required ngControl="sellerName" #sellerName="ngForm" class="form-control" id="seller-name" name="seller-name" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.SellerInfo.Name" (ngModelChange)="onSellerAddressChange($event)">
+        </div>
+      </div>
+
+      <div class="form-group" [hidden]="orderModel.Type == 'Delivery'">
+        <label class="col-md-4 control-label" for="seller-phone">Seller's Phone Number</label>
+        <div class="col-md-4">
+          <input type="tel" required ngControl="sellerPhone" #sellerPhone="ngForm" class="form-control" id="seller-phone" name="seller-phone" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.SellerInfo.PhoneNumber" (ngModelChange)="onSellerAddressChange($event)">
+        </div>
+      </div>
+
+      <div class="form-group" [hidden]="orderModel.Type == 'Delivery'">
+        <label class="col-md-4 control-label" for="seller-address">Seller's Address</label>
+        <div class="col-md-4">
+          <textarea required ngControl="sellerAddress" #sellerAddress="ngForm" class="form-control" id="seller-address" name="seller-address" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.SellerInfo.Address.AddressLine1" (ngModelChange)="onSellerAddressChange($event)"></textarea>
         </div>
       </div>
 
@@ -77,18 +113,40 @@
       </modal>
 
 
-
-
       <br>
-      <!-- Textarea -->
-      <div class="form-group">
+      <hr>
+      <br>
+
+
+      <div class="form-group" [hidden]="orderModel.Type == 'ClassifiedDelivery'">
         <label class="col-md-4 control-label" for="delivery-address">Delivery Address</label>
         <div class="col-md-4">
           <textarea required ngControl="deliveryAddress" #deliveryAddress="ngForm" class="form-control" id="delivery-address" name="delivery-address" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.To.AddressLine1"></textarea>
         </div>
       </div>
 
-      <!-- Select Basic -->
+       <div class="form-group" [hidden]="orderModel.Type == 'Delivery'">
+        <label class="col-md-4 control-label" for="buyer-name">Buyer's Name</label>
+        <div class="col-md-4">
+          <input type="text" required ngControl="buyerName" #buyerName="ngForm" class="form-control" id="buyer-name" name="buyer-name" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.BuyerInfo.Name" (ngModelChange)="onBuyerAddressChange($event)">
+        </div>
+      </div>
+
+      <div class="form-group" [hidden]="orderModel.Type == 'Delivery'">
+        <label class="col-md-4 control-label" for="buyer-phone">Buyer's Phone Number</label>
+        <div class="col-md-4">
+          <input type="tel" required ngControl="buyerPhone" #buyerPhone="ngForm" class="form-control" id="buyer-phone" name="buyer-phone" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.BuyerInfo.PhoneNumber"  (ngModelChange)="onBuyerAddressChange($event)">
+        </div>
+      </div>
+
+      <div class="form-group" [hidden]="orderModel.Type == 'Delivery'">
+        <label class="col-md-4 control-label" for="buyer-address">Buyer's Address</label>
+        <div class="col-md-4">
+          <textarea required ngControl="buyerAddress" #buyerAddress="ngForm" class="form-control" id="buyer-address" name="buyer-address" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.BuyerInfo.Address.AddressLine1" (ngModelChange)="onBuyerAddressChange($event)"></textarea>
+        </div>
+      </div>
+
+
       <div class="form-group">
         <label class="col-md-4 control-label" for="delivery-area">Delivery Area</label>
         <div class="col-md-4">
@@ -127,8 +185,9 @@
       </modal>
 
       <br>
+      <hr>
+      <br>
 
-      <!-- Select Basic -->
       <div class="form-group">
         <label class="col-md-4 control-label" for="payment-method">Payment Method</label>
         <div class="col-md-4">
@@ -137,8 +196,6 @@
           </select>
         </div>
       </div>
-
-      <br>
 
       <modal #itemModal class="modal_vcenter" [size]="sm" (onClose)="onModalClosed()" (onDismiss)="onModalDismissed()">
         <modal-header [show-close]="true">
@@ -167,6 +224,9 @@
       </modal>
 
       <br>
+      <hr>
+      <br>
+
       <div class="form-group">
         <label for="" class="col-md-4 control-label">Package List</label>
         <div class="col-md-4 table-responsive">
@@ -200,8 +260,11 @@
           <button id="add-more" name="add-more" class="btn btn-primary" [disabled]="!deliveryAddress.valid || !paymentMethod.valid || !pickupAddress.valid || orderCreationStatus=='IN_PROGRESS'" (click)="addItem()">Add Item</button>
         </div>
       </div>
+
       <br>
-      <!-- Textarea -->
+      <hr>
+      <br>
+
       <div class="form-group">
         <label class="col-md-4 control-label" for="description">Package Description</label>
         <div class="col-md-4">

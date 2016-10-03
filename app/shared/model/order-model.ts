@@ -1,8 +1,7 @@
 import { DefaultAddress } from './geocoding.defaultAddress'
+import { OrderType } from './order-type';
 
 export class OrderModel {
-    public NoteToDeliveryMan: string;
-    public RequiredChangeFor: string;
     public Name: string;
     public From: DefaultAddress;
     public To: DefaultAddress;
@@ -16,10 +15,21 @@ export class OrderModel {
     public Description: string;
     public OrderCart: OrderCartModel;
     public JobTaskETAPreference: JobTaskETAPreferenceModel[];
+
+
+    public NoteToDeliveryMan: string;
+    public RequiredChangeFor: string;
+
+    public SellerInfo: PersonInfo;
+    public BuyerInfo: PersonInfo;
+
     constructor() {
         this.From = new DefaultAddress();
         this.To = new DefaultAddress();
         this.OrderCart = new OrderCartModel();
+
+        this.SellerInfo = new PersonInfo();
+        this.BuyerInfo = new PersonInfo();
     }
 }
 
@@ -58,5 +68,15 @@ export class JobTaskETAPreferenceModel {
     constructor(type, eta){
         this.Type = type;
         this.ETA = eta;
+    }
+}
+
+export class PersonInfo {
+    public UserRef : string;
+    public Name : string;
+    public Address : DefaultAddress;
+    public PhoneNumber : string;
+    constructor(){
+        this.Address = new DefaultAddress();
     }
 }

@@ -48,7 +48,8 @@ export class OrderComponent {
         private busService: DashboardBusService,
         private localityService: LocalityService) {
         this.busService.annouceSectionChange("New Order");
-        this.initiateOrderModel();
+
+        this.initiateOrderModel("Delivery");
         this.isUpdating = false;
         this.areas = this.localityService.getLocalities();
     }
@@ -56,6 +57,8 @@ export class OrderComponent {
 
     onSubmit() {
         this.orderCreationStatus = 'IN_PROGRESS';
+        console.log(this.orderModel);
+
         this.processJobTaskPreferrenceETA();
         this.orderService.createOrder(this.orderModel)
             .subscribe((result) => {
@@ -70,6 +73,28 @@ export class OrderComponent {
                 console.log(error);
                 this.orderCreationStatus = 'FAILED';
             });
+    }
+
+    onOrderTypeChange(newOrderType){
+        this.initiateOrderModel(newOrderType);
+        console.log(newOrderType);
+    }
+
+    onBuyerAddressChange(newAddress){
+        this.orderModel.To.AddressLine1 = "";
+        this.orderModel.To.AddressLine1 += this.orderModel.BuyerInfo.Name + ", ";
+        this.orderModel.To.AddressLine1 += this.orderModel.BuyerInfo.PhoneNumber + ", ";
+        this.orderModel.To.AddressLine1 += this.orderModel.BuyerInfo.Address.AddressLine1;
+
+        console.log(this.orderModel.To.AddressLine1);
+    }
+    onSellerAddressChange(newAddress){
+        this.orderModel.From.AddressLine1 = "";
+        this.orderModel.From.AddressLine1 += this.orderModel.SellerInfo.Name + ", ";
+        this.orderModel.From.AddressLine1 += this.orderModel.SellerInfo.PhoneNumber + ", ";
+        this.orderModel.From.AddressLine1 += this.orderModel.SellerInfo.Address.AddressLine1;
+
+        console.log(this.orderModel.From.AddressLine1);
     }
 
     processJobTaskPreferrenceETA(){
@@ -103,10 +128,10 @@ export class OrderComponent {
         this.close();
     }
 
-    initiateOrderModel() {
+    initiateOrderModel(orderType: string) {
         this.orderModel = new OrderModel();
+        this.orderModel.Type = orderType;
         this.orderModel.PayloadType = "default";
-
         this.orderModel.OrderCart.PackageList = [];
         this.orderModel.UserId = JSON.parse(this._localStorage.get('auth_token')).userId;
         this.packageListItem = new PackageListModel();
@@ -186,7 +211,6 @@ export class OrderComponent {
     }
 
     resetForm() {
-        this.initiateOrderModel();
-        // this.router.navigate(["Job"])
+        this.initiateOrderModel("Delivery");
     }
 }
