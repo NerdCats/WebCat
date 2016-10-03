@@ -8,8 +8,8 @@ export class AppSettings {
    }
 
    public static get TASKCAT_BASE(): string{
-    //  return 'http://gofetch.cloudapp.net/'
-     return 'http://taskcatdev.azurewebsites.net/';
+     return 'http://gofetch.cloudapp.net/'
+    //  return 'http://taskcatdev.azurewebsites.net/';
    }
 
    public static get CLIENT_ID(): string {
