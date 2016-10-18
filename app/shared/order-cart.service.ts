@@ -43,13 +43,14 @@ export class OrderCartService {
             orderCart.OrderCart.TotalToPay = 0;
             orderCart.OrderCart.ServiceCharge = 150;
 
-            orderCart.OrderCart.PackageList.forEach(item => {
+            orderCart.OrderCart.PackageList.forEach(item =>
+            {
                 orderCart.OrderCart.SubTotal += (item.Price * item.Quantity);
-                orderCart.OrderCart.TotalToPay += orderCart.OrderCart.SubTotal +
-                                                    orderCart.OrderCart.ServiceCharge;
                 item.Total = 0;
                 item.Total = (item.Price * item.Quantity);
             })
+            orderCart.OrderCart.TotalToPay += (orderCart.OrderCart.SubTotal +
+                                                    orderCart.OrderCart.ServiceCharge);
         }
         return orderCart;
     }
