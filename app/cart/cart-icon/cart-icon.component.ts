@@ -66,6 +66,11 @@ export class CartIconComponent implements OnInit{
         this.orderCart.OrderCart = _orderCart;
         this._orderCartService.save(this.orderCart);
         this.update();
+
+        // REMOVE
+        this.orderCart.OrderCart.PackageList.forEach(element => {
+            console.log("Item: " + element.Item);
+        });
     }
 
     clearCustomOrder(){

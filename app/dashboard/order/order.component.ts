@@ -100,6 +100,10 @@ export class OrderComponent {
             this.isUpdating = !this.isUpdating;
         } else {
             this.orderModel.OrderCart.PackageList.push(this.packageListItem);
+
+            // REMOVE
+            console.log("OrderComponent.addOrUpdateItem():");
+            console.log(this.orderModel.OrderCart.PackageList);
         }
         this.packageListItem = new PackageListModel();
         this.close();
@@ -116,6 +120,10 @@ export class OrderComponent {
 
     removeItem(index: number) {
         this.orderModel.OrderCart.PackageList.splice(index);
+
+        // REMOVE
+        console.log("OrderComponent.removeItem()");
+        console.log(this.orderModel.OrderCart.PackageList);
     }
 
     editItem(item: PackageListModel) {

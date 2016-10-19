@@ -38,6 +38,11 @@ export class VendorMenuComponent implements OnInit {
         else this.openOrClosed = "Closed";
 
         this.orderCart = this.orderCartService.getOrderCart();
+
+        // REMOVE
+        console.log("VendorMenuComponent.ngOnInit()");
+        console.log(this.orderCart.OrderCart.PackageList);
+
         this.selectedItem = new PackageListModel();
         this.clickedItem = new Item();
         if(!this.orderCart.OrderCart.PackageList){
@@ -62,6 +67,10 @@ export class VendorMenuComponent implements OnInit {
             }
             this.orderCartService.save(this.orderCart);
             console.log(this.orderCartService.getOrderCart());
+
+            // REMOVE
+            console.log("VendorMenuComponent.addCustomOrder()");
+            console.log(this.orderCart.OrderCart.PackageList);
         }
     }
 
@@ -106,9 +115,22 @@ export class VendorMenuComponent implements OnInit {
     }
 
     addToCart(){
-        console.log(this.orderCart.OrderCart.PackageList);
+
+        // REMOVE
+        console.log("VendorMenuComponent.addToCart()");
+        console.log("PackageList_b4: ");
+        this.orderCart.OrderCart.PackageList.forEach(element => {
+            console.log(element.Item);
+        });
+
         this.orderCart.OrderCart.PackageList.push(this.selectedItem);
-        console.log(this.orderCart.OrderCart.PackageList);
+
+
+        console.log("PackageList_Ftr: ");
+        this.orderCart.OrderCart.PackageList.forEach(element => {
+            console.log(element.Item);
+        });
+
         this.orderCartService.save(this.orderCart);
         // console.log(this.orderCartService.getOrderCart());
 
