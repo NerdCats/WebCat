@@ -22,7 +22,8 @@ import { Router, RouteParams } from '@angular/router-deprecated';
 
 
 export class VendorMenuComponent implements OnInit {
-    vendor: Vendor;
+    public vendor: any = {};
+    public categories: {[category: string] : any[]} = {}
     vendorName: string;
     selectedItem : PackageListModel;
     clickedItem : Item;
@@ -33,9 +34,28 @@ export class VendorMenuComponent implements OnInit {
 
     ngOnInit(){
         this.vendorName = this.routeparams.get('vendorId');
-        this.vendor = this.vendorDetailsService.getVendorDetails(this.vendorName);
-        if(this.vendor.isOpen) this.openOrClosed = "Open";
-        else this.openOrClosed = "Closed";
+        this.vendorDetailsService.getVendorDetails(this.vendorName)
+            .subscribe(store=>{
+                this.vendor = store;
+
+
+                this.vendor.Products.forEach(element => {
+                    let prodCat = element.ProductCategories[0];
+                    if(this.categories[prodCat]){
+                        this.categories[prodCat].push({Name: element.Name, Price: element.Price});
+                    } else {
+                        this.categories[prodCat] = [];
+                        this.categories[prodCat].push({Name: element.Name, Price: element.Price});
+                    }
+                });
+                console.log("categories: ");
+                console.log(this.categories);
+
+            }, error=>{
+
+            });
+        // if(this.vendor.isOpen) this.openOrClosed = "Open";
+        // else this.openOrClosed = "Closed";
 
         this.orderCart = this.orderCartService.getOrderCart();
         this.selectedItem = new PackageListModel();
@@ -65,6 +85,9 @@ export class VendorMenuComponent implements OnInit {
         }
     }
 
+    keys(){
+        return Object.keys(this.categories);
+    }
     clear(){
         this.customeOrder = "";
     }
@@ -83,11 +106,11 @@ export class VendorMenuComponent implements OnInit {
     addItem(item) {
         console.log(item);
 
-        this.clickedItem.item = item.item;
-        this.clickedItem.description = item.description;
-        this.selectedItem.Item = item.item + " (" + this.vendorName + ")";
-        this.selectedItem.Price = item.price;
-        this.selectedItem.Total = item.price;
+        this.clickedItem.item = item.Name;
+        // this.clickedItem.description = item.description;
+        this.selectedItem.Item = item.Name + " (" + this.vendorName + ")";
+        this.selectedItem.Price = item.Price;
+        this.selectedItem.Total = item.Price;
         this.selectedItem.Quantity = 1;
     }
 

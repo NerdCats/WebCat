@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouteParams, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { Vendor } from '../shared/model/vendor';
+// import { Vendor } from '../shared/model/vendor';
 import { SearchResultService } from './search-result.service';
 
 @Component({
@@ -12,22 +12,24 @@ import { SearchResultService } from './search-result.service';
 
 
 export class SearchResultComponent implements OnInit {
-    vendors: Vendor[] = [];
+    vendors: any = [];
     area: string;
     keyword: string;
     ngOnInit(){
         this.area = this._routeParams.get('area');
         this.keyword = this._routeParams.get('keyword');
-        this.vendors = this._searchResultService.search(this.area, this.keyword);
+        this._searchResultService.search(this.area, this.keyword)
+            .subscribe(stores=>{
+                this.vendors = stores.data;
+                console.log(this.vendors)
+            }, error => {
+
+            })
     }
 
     constructor(private _router: Router,
                 private _routeParams: RouteParams,
                 private _searchResultService: SearchResultService){
 
-    }
-
-    goToVendorMenu(vendorName){
-        this._router.navigateByUrl("/vendors/" + vendorName);
     }
 }

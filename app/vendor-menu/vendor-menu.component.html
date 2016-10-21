@@ -6,25 +6,25 @@
                 <!--<a href="/#{{cat.catagory}}" target="_self">{{cat.catagory}}</a></li>
         </ul>-->
     </div>
-    <div class="vendor-name-div" [ngStyle]="{'background-image':'url('+vendor.image+')'}">
+    <div class="vendor-name-div" [ngStyle]="{'background-image':'url('+(vendor.Image || '/assets/img/default-logo.png')+')'}">
        <div class="gradient">
-            <h1 class="text-center">{{vendor.name}}</h1>
-            <p class="text-center">{{vendor.address.AddressLine1}}</p>
-            <p class="text-center">{{openOrClosed}}</p>
+            <h1 class="text-center">{{vendor.StoreName}}</h1>
+            <p class="text-center">{{vendor.Address}}</p>
+            <!--<p class="text-center">{{openOrClosed}}</p>-->
        </div>
         <!--<img class="gradient" src="{{vendor.image}}" alt="">-->
     </div>
 
-    <div class="" *ngFor="let cat of vendor.catagories">
-        <a name="{{cat.catagory}}"><h3>{{cat.catagory}}</h3></a>
+    <div class="" *ngFor="let cat of keys()">
+        <a name="{{cat}}"><h3>{{cat}}</h3></a>
         <hr>
         <div>
             <ul class="vendor-items">
-                <li class="vendor-item-list pointer" *ngFor="let item of cat.itemlist">
+                <li class="vendor-item-list pointer" *ngFor="let item of categories[cat]">
                     <a (click)="openCartModal(item)">
                        <div>
-                           <div class="price">{{item.price}}</div>
-                           <div>{{item.item}}</div>
+                           <div class="price">{{item.Price}}</div>
+                           <div>{{item.Name}}</div>
                        </div>
                     </a>
                 </li>
@@ -51,7 +51,7 @@
         <h3> {{selectedItem.Total | number:'1.2-2'}} </h3>
     </modal-header>
     <modal-body>
-        <img class="selected-item-img" src="/assets/img/pop-up-pizza.jpg" alt="{{selectedItem.Item}}">
+        <!--<img class="selected-item-img" src="/assets/img/pop-up-pizza.jpg" alt="{{selectedItem.Item}}">-->
         <span>
             {{clickedItem.description}}
         </span>
