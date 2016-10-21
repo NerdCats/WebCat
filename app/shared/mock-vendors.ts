@@ -3,7 +3,7 @@ import {
 } from '../shared/model/vendor';
 
 export class MockVendors {
-    public static VENDORS: Vendor[] = [{
+    public static VENDORS: any = [{
         id: 1,
         name: 'Northend Coffee',
         username: 'NorthendCoffee',

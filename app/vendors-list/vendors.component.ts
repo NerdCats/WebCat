@@ -20,8 +20,13 @@ export class VendorsComponent implements OnInit {
                 private routeParams: RouteParams) {  }
 
     ngOnInit() {
-        this.vendors = this.vendorService.getVendors();
         this.area = this.routeParams.get("area");
+        this.vendorService.getVendors(this.area)
+            .subscribe(res => {
+                this.vendors = res;
+            }, error => {
+
+            })
     }
 
     goToVendorMenuPage(vendorName: string){
@@ -37,5 +42,33 @@ export class VendorsComponent implements OnInit {
             // return 'module';
             return "col-xs-6 col-md-6 col-sm-6 col-lg-6 module";
         }
+    }
+
+    getImage(index: number){
+        let images = ['http://i.imgur.com/9Cfolu9.jpg',
+                        'http://imgur.com/DvmzsbV.jpg',
+                        'http://imgur.com/DvmzsbV.jpg',
+                        'http://i.imgur.com/iW1euxZ.jpg',
+                        'http://i.imgur.com/C1fbSZc.jpg',
+                        'http://i.imgur.com/1LGNGv8.jpg',
+                        'http://i.imgur.com/OrYcw8i.jpg',
+                        'http://i.imgur.com/5ex18sL.jpg',
+                        'http://i.imgur.com/DvmzsbV.jpg',
+                        'http://i.imgur.com/DvmzsbV.jpg',
+                        'http://i.imgur.com/DvmzsbV.jpg',
+                        'http://i.imgur.com/DvmzsbV.jpg'
+                    ]
+        if(index%2 === 0) return images[0];
+        if(index%3 === 0) return images[1];
+        if(index%5 === 0) return images[2];
+        if(index%7 === 0) return images[3];
+        if(index%11 === 0) return images[4];
+        if(index%13 === 0) return images[5];
+        if(index%17 === 0) return images[6];
+        if(index%23 === 0) return images[7];
+        if(index%29 === 0) return images[8];
+        if(index%31 === 0) return images[9];
+        if(index%37 === 0) return images[10];
+
     }
 }
