@@ -26,7 +26,7 @@ export class VendorMenuComponent implements OnInit {
     public categories: {[category: string] : any[]} = {}
     vendorName: string;
     selectedItem : PackageListModel;
-    clickedItem : Item;
+    clickedItem : Vendor;
     customeOrder: string = "";
     orderCart: OrderModel;
     openOrClosed: string;

@@ -13,7 +13,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class VendorDetailsService {
 
-    selectedVendor:Vendor;
+    selectedVendor:Vendor = new Vendor();
     constructor(private shttp: SecureHttp) {}
     getVendorDetails(vendorName: string){
         console.log(vendorName);
@@ -30,7 +30,11 @@ export class VendorDetailsService {
 
         return this.shttp.secureGet("http://gobdsif.cloudapp.net/api/store?storename=" + vendorName)
             .map((res: Response)=> {
-                return res.json().store;
+                console.log(this.selectedVendor);
+                if(res.json().store){
+                    this.selectedVendor = res.json().store;
+                }
+                return this.selectedVendor;
             })
             .catch(error=>{
                 return Observable.throw(error);

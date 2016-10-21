@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router, ROUTER_DIRECTIVES, RouteParams } from '@angular/router-deprecated';
-import { Vendor }           from '../shared/model/vendor';
+import { Vendor, Item }           from '../shared/model/vendor';
 import { VendorService }    from './vendor.service';
 
 @Component({
