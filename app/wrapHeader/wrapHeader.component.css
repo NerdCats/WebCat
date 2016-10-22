@@ -85,6 +85,7 @@ select option[disabled]:first-child {
 }
 
 a.area:hover {
+    color: white;
     font-size: 3em;
     font-weight: 600;
     padding: 0px 0px 0px 0px;
@@ -94,6 +95,66 @@ div.area-box:hover{
     background-color: black;
 }
 
+#about-us-detail {
+    font-size: 2em;
+}
+
+#about-us{
+    margin: 100px;
+}
+#header {
+    font-size: 3em;
+}
+
+.featured{
+    margin-top: 20px;
+}
+
+.center {
+  padding: 0 !important;
+  margin: 0 auto;
+  border: 1px solid #fff;
+}
+.module {
+  text-align: center;
+  height: 240px;
+  /*width: 360px;*/
+  background: no-repeat;
+  background-size: cover;
+  border-radius: 2px;
+  display: inline-block;
+}
+.big-module, .module:hover {
+  cursor: pointer;
+}
+
+.gradient {
+    padding-top: 10%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    float: left;
+
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(50%,rgba(0,0,0,.3)),to(rgba(0,0,0,.4)));
+    background-image: -webkit-linear-gradient(top,rgba(0,0,0,.3) 50%,rgba(0,0,0,.4));
+    background-image: linear-gradient(180deg,rgba(0,0,0,.3) 50%,rgba(0,0,0,.4));
+}
+
+.gradient:hover {
+    display: block;
+    padding-top: 10%;
+    width: 100%;
+    height: 100%;
+    float: left;
+
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(50%,rgba(0,0,0,.5)),to(rgba(0,0,0,.7)));
+    background-image: -webkit-linear-gradient(top,rgba(0,0,0,.5) 50%,rgba(0,0,0,.7));
+    background-image: linear-gradient(180deg,rgba(0,0,0,.5) 50%,rgba(0,0,0,.7));
+}
+
+.gradient h1, h2, h3 {
+    color: white
+}
 
 @media only screen and (max-width: 780px){
     .area {
@@ -101,7 +162,7 @@ div.area-box:hover{
         padding: 10px 0px;
     }
     .area-box {
-        background-color: #3498db;
+        /*background-color: #3498db;*/
         padding: 10px 0px;
     }
     .area-container{

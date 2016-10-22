@@ -16,6 +16,7 @@ export class WrapHeaderComponent {
     public selectedArea: string = "";
     public selectedItem: string;
 
+    public vendors: any[] = this.wrapHeaderService.WrapHeaderDetails.featuredVendors;
     public areas:string [] = this.wrapHeaderService.WrapHeaderDetails.areas;
 
     public items:string[] = this.wrapHeaderService.WrapHeaderDetails.items;
@@ -26,6 +27,9 @@ export class WrapHeaderComponent {
         this.router.navigateByUrl("/vendors");
     }
 
+    goToVendorMenuPage(area: string, name: string){
+        this.router.navigateByUrl("/vendors/"+area+"/"+name);
+    }
 
 
     gotoSearchResultPage(e) {

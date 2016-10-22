@@ -3,6 +3,50 @@ import { Injectable } from '@angular/core'
 @Injectable()
 export class WrapHeaderService {
     WrapHeaderDetails = {
+        featuredVendors: [
+            {
+                "Name": "North End",
+                "Address": "Notun Bazar",
+                "Image": "http://i.imgur.com/9Cfolu9.jpg",
+                "Area": "Banani",
+                "Category": "Coffee"
+            },
+            {
+                "Name": "Dhaka Dough",
+                "Address": "Rampura",
+                "Image": "http://i.imgur.com/lzBNSsW.png",
+                "Area": "Banani",
+                "Category": "Premium grocery"
+            },
+            {
+                "Name": "The Jar",
+                "Address": "Gulshan",
+                "Image": "http://i.imgur.com/vwhkzyk.jpg",
+                "Area": "Gulshan",
+                "Category": "Breakfast, Lunch"
+            },
+            {
+                "Name": "Al-Falah Pharmacy",
+                "Address": "Gulshan 2",
+                "Image": "http://i.imgur.com/vwhkzyk.jpg",
+                "Area": "Gulshan 2",
+                "Category": "Medicine"
+            },
+            {
+                "Name": "Unimart",
+                "Address": "Gulshan 2",
+                "Image": "http://i.imgur.com/FFlqY6p.jpg",
+                "Area": "Gulshan 2",
+                "Category": "Daily Needs"
+            },
+            {
+                "Name": "Farm Fresh",
+                "Address": "Banani",
+                "Image": "http://i.imgur.com/58PCC4d.jpg",
+                "Area": "Banani",
+                "Category": "Fresh fruits, vegetables"
+            }
+        ],
         areas: [
             "Banani",
             "Baridhara",
