@@ -27,7 +27,9 @@ export class VendorsComponent implements OnInit {
         this.vendorService.getVendors(this.area)
             .subscribe(res => {
                 this.vendors = res;
+
                 this.status = "SUCCESSFUL";
+
             }, error => {
 
             })
