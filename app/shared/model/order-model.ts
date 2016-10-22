@@ -34,7 +34,7 @@ export class OrderCartModel {
     public TotalWeight: number = 0;
     public TotalToPay: number = 0;
     constructor() {
-
+        this.PackageList = [];
     }
 }
 

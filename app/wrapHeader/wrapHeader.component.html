@@ -26,11 +26,18 @@
 
 <div class="center-block text-center">
 	<h1>Find us in the following areas</h1>
-	<ul class="list-inline">
+	<!--<ul class="list-inline area-list">
 		<li *ngFor="let area of areas">
-			<a class="pointer" href="#/vendors/{{area}}">{{area}}</a>
+			<a class="pointer area-box" href="#/vendors/{{area}}">{{area}}</a>
 		</li>
-	</ul>
+	</ul>-->
+	<div class="row">
+		<div class="col-md-2 area-box" *ngFor="let area of areas">
+			<div class="area-container">
+				<a class="pointer area" href="#/vendors/{{area}}">{{area}}</a>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="center-block text-center">

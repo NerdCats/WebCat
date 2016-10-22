@@ -50,14 +50,19 @@ export class CheckOutComponent {
     confirmOrder(){
         console.log(this.orderCart);
         // FIXME: for now
-        this.orderCart.From.AddressLine1 = "GObd";
+        this.orderCart.From.AddressLine1 = "GObd, H-28, R-20, Block-K, Banani";
         this.orderCart.Type = "Delivery";
         this.orderSubmission = 'IN_PROGRESS';
         this.orderCart.OrderCart.SubTotal = 0;
         this.orderCart.OrderCart.TotalToPay = 0;
-        this.orderCart.OrderCart.PackageList.forEach(item => {
-            item.Total = 0;
-        })
+        if(this.orderCart.OrderCart.PackageList){
+            console.log(this.orderCart.OrderCart.PackageList);
+
+            this.orderCart.OrderCart.PackageList.forEach(item => {
+                item.Total = 0;
+            })
+        }
+
         this._orderService.createOrder(this.orderCart)
 
             .subscribe((result)=> {

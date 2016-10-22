@@ -40,6 +40,8 @@ export class CartIconComponent implements OnInit{
     public update(){
         this.numberOfItems = this._orderCartService.totalQuantity();
         this.packageListHasItem = this._orderCartService.hasPackageListItem();
+        console.log(this.packageListHasItem);
+
         if(this.numberOfItems > 0)
             this.cartNumberCss = "has-item";
         else this.cartNumberCss = "";

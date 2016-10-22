@@ -72,7 +72,12 @@ export class OrderCartService {
     public hasPackageListItem(){
         let packageListItems: number = 0;
         let orderCart = this.getOrderCart();
+        console.log(orderCart);
+
         if(orderCart.OrderCart.PackageList && orderCart.OrderCart.PackageList.length === 0){
+            return false;
+        }
+        if(!orderCart.OrderCart.PackageList){
             return false;
         }
         return true;

@@ -60,3 +60,51 @@ select.empty {
 select option[disabled]:first-child {
 	display: none;
 }
+
+.area-box {
+    background-color: #3498db;
+    height: 100px;
+
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+.area-container{
+    margin: 10%;
+}
+.area {
+    color: white;
+    font-size: 2em;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+a.area:hover {
+    font-size: 3em;
+    font-weight: 600;
+    padding: 0px 0px 0px 0px;
+}
+
+div.area-box:hover{
+    background-color: black;
+}
+
+
+@media only screen and (max-width: 780px){
+    .area {
+        margin: 20px;
+        padding: 10px 0px;
+    }
+    .area-box {
+        background-color: #3498db;
+        padding: 10px 0px;
+    }
+    .area-container{
+        margin: 5%;
+    }
+}
