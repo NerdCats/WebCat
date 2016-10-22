@@ -1,29 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router, ROUTER_DIRECTIVES, RouteParams } from '@angular/router-deprecated';
 import { Vendor, Item }           from '../shared/model/vendor';
 import { VendorService }    from './vendor.service';
-
+import { ProgressBubbleComponent } from './../common/progress-bubble/progress-bubble.component'
+import { ComponentServiceStatus } from './../shared/component-service-status';
 @Component({
     selector: 'vendors-dashboard',
     templateUrl: 'app/vendors-list/vendors.component.html',
     styleUrls: ['app/vendors-list/vendors.component.css'],
-    providers: [VendorService]
+    providers: [VendorService],
+    directives: [ProgressBubbleComponent]
 })
 
 export class VendorsComponent implements OnInit {
     flag = 0;
     vendors: Vendor[] = [];
     area:string = "";
+    status: ComponentServiceStatus;
     constructor(private vendorService: VendorService,
                 private router: Router,
                 private routeParams: RouteParams) {  }
 
     ngOnInit() {
+        this.status = "IN_PROGRESS";
         this.area = this.routeParams.get("area");
         this.vendorService.getVendors(this.area)
             .subscribe(res => {
                 this.vendors = res;
+                this.status = "SUCCESSFUL";
             }, error => {
 
             })
@@ -58,6 +62,7 @@ export class VendorsComponent implements OnInit {
                         'http://i.imgur.com/DvmzsbV.jpg',
                         'http://i.imgur.com/DvmzsbV.jpg'
                     ]
+        if(index === 1) return images[11];
         if(index%2 === 0) return images[0];
         if(index%3 === 0) return images[1];
         if(index%5 === 0) return images[2];

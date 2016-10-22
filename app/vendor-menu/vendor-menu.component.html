@@ -1,4 +1,8 @@
-<div class="container center-block">
+ <div *ngIf="status == 'IN_PROGRESS'">
+        <progress-bubble></progress-bubble>
+</div>
+<div class="container center-block" *ngIf="status == 'SUCCESSFUL'">
+
     <div class="row">
         <!--<ul class="list-inline center-block catagories">
             <li class="catagories-list" *ngFor="let cat of vendor.catagories">-->

@@ -1,6 +1,9 @@
 <h2 class="title">Vendors in {{area}}</h2>
 <div class="container">
-    <div class="row">
+    <div *ngIf="status == 'IN_PROGRESS'">
+        <progress-bubble></progress-bubble>
+    </div>
+    <div class="row" *ngIf="status == 'SUCCESSFUL'">
         <div class="center {{getTileClass(i)}}"
             (click)="goToVendorMenuPage(vendor.StoreName)"
             *ngFor="let vendor of vendors; let i = index"

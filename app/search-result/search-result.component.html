@@ -1,12 +1,17 @@
 <div class="container">
     <h1 id="header">Search Result for "{{keyword}}" in {{area}}</h1>
-    <div class="row">
+     <div *ngIf="status == 'IN_PROGRESS'">
+        <progress-bubble></progress-bubble>
+    </div>
+    <div class="row" *ngIf="status == 'SUCCESSFUL'">
+        <p class="pull-right">Total {{vendors.length}} store found</p>
+        <br>
         <ul>
             <li *ngFor="let vendor of vendors ; let i = index">
                 <div class="row">
                     <div class="col-md-4">
                         <a href="#/vendors/{{area}}/{{vendor.StoreName}}">
-                            <img class="img-rounded img-responsive" src="{{vendor.Image || '/assets/img/default-logo.png'}}" alt="">
+                            <img class="img-rounded img-responsive" src="{{getImage(i)}}" alt="">
                         </a>
                     </div>
                     <div class="col-md-8">

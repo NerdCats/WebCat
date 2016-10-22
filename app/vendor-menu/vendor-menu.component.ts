@@ -9,13 +9,14 @@ import { OrderModel, PackageListModel } from ".././shared/model/order-model";
 import { Vendor, Item } from ".././shared/model/vendor";
 import { OrderCartService } from '.././shared/order-cart.service';
 import { Router, RouteParams } from '@angular/router-deprecated';
-
+import { ProgressBubbleComponent } from './../common/progress-bubble/progress-bubble.component'
+import { ComponentServiceStatus } from './../shared/component-service-status';
 
 @Component({
     selector: 'vendor-menu',
     templateUrl: 'app/vendor-menu/vendor-menu.component.html',
     styleUrls: ['app/vendor-menu/vendor-menu.component.css'],
-    directives: [MODAL_DIRECTIVES, ModalComponent],
+    directives: [MODAL_DIRECTIVES, ModalComponent, ProgressBubbleComponent],
     providers: [VendorDetailsService, CartBusService, OrderCartService]
 })
 
@@ -26,19 +27,18 @@ export class VendorMenuComponent implements OnInit {
     public categories: {[category: string] : any[]} = {}
     vendorName: string;
     selectedItem : PackageListModel;
-    clickedItem : Vendor;
+    clickedItem : Item;
     customeOrder: string = "";
     orderCart: OrderModel;
     openOrClosed: string;
-
+    status: ComponentServiceStatus;
 
     ngOnInit(){
         this.vendorName = this.routeparams.get('vendorId');
+        this.status = "IN_PROGRESS";
         this.vendorDetailsService.getVendorDetails(this.vendorName)
             .subscribe(store=>{
                 this.vendor = store;
-
-
                 this.vendor.Products.forEach(element => {
                     let prodCat = element.ProductCategories[0];
                     if(this.categories[prodCat]){
@@ -48,9 +48,7 @@ export class VendorMenuComponent implements OnInit {
                         this.categories[prodCat].push({Name: element.Name, Price: element.Price});
                     }
                 });
-                console.log("categories: ");
-                console.log(this.categories);
-
+                this.status = "SUCCESSFUL";
             }, error=>{
 
             });
