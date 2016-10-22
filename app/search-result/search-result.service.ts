@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MockVendors } from '../shared/mock-vendors';
 // import { Vendor } from '../shared/model/vendor';
-
-import { SecureHttp } from '../shared/secure-http';
-import { Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -15,7 +13,7 @@ export class SearchResultService {
 
     // private Vendors: Vendor[];
 
-    constructor(private shttp: SecureHttp) {}
+    constructor(private http: Http) {}
     public search(area:string, keyword:string){
 
         // this.Vendors = [];
@@ -32,7 +30,7 @@ export class SearchResultService {
         //     }
         // });
 
-        return this.shttp.secureGet("http://gobdsif.cloudapp.net/api/store-search?area="+area+"&keyword="+keyword)
+        return this.http.get("http://gobdsif.cloudapp.net/api/store-search?area="+area+"&keyword="+keyword)
                 .map((res: Response) => {
                     let stores:any = res.json();
                     return stores;

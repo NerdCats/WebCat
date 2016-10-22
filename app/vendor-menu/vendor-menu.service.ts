@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Vendor } from '.././shared/model/vendor';
 import { MockVendors } from '.././shared/mock-vendors';
 
-import { SecureHttp } from '../shared/secure-http';
-import { Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -14,7 +13,7 @@ import 'rxjs/add/operator/catch';
 export class VendorDetailsService {
 
     selectedVendor:Vendor = new Vendor();
-    constructor(private shttp: SecureHttp) {}
+    constructor(private http: Http) {}
     getVendorDetails(vendorName: string){
         console.log(vendorName);
         // MockVendors.VENDORS.forEach(vendor => {
@@ -28,7 +27,7 @@ export class VendorDetailsService {
 
         // return this.selectedVendor;
 
-        return this.shttp.secureGet("http://gobdsif.cloudapp.net/api/store?storename=" + vendorName)
+        return this.http.get("http://gobdsif.cloudapp.net/api/store?storename=" + vendorName)
             .map((res: Response)=> {
                 console.log(this.selectedVendor);
                 if(res.json().store){
