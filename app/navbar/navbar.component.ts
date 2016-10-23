@@ -116,10 +116,10 @@ export class NavbarComponent {
             Event: () => { this.navigateToDashboard(); }
         });
 
-        this._secureNavElements.push({
-            Title: this.userNameString,
-            Event: () => { console.log("Not Implemented Yet"); }
-        });
+        // this._secureNavElements.push({
+        //     Title: this.userNameString,
+        //     Event: () => { console.log("Not Implemented Yet"); }
+        // });
 
         this._secureNavElements.push({
             Title: "Log Out",
