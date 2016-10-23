@@ -202,10 +202,16 @@ gulp.task('build:prod-asset', function (done) {
         .pipe(revReplace())
         .pipe(gulp.dest('prod/'))
         .on('finish', done);
+
+    gulp.src('./prod/app/*.js')
+        .pipe(rev())
+        .pipe(revReplace())
+        .pipe(gulp.dest('prod/app'))
 });
 
 gulp.task('build:inject-index', function (done) {
-    var bundleSources = gulp.src('./prod/app/bundle.js', { read: false });
+
+    var bundleSources = gulp.src('./prod/app/bundle-*.js', { read: false });
     gulp.src('./prod/index.html')
         .pipe(inject(bundleSources, { ignorePath: 'prod' }))
         .pipe(gulp.dest('prod/'))

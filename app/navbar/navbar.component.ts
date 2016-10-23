@@ -135,8 +135,8 @@ export class NavbarComponent {
         this.userNameString = userName;
 
         // INFO : This is literally shameless, but sometimes, you just gotta do it
-        if(this._secureNavElements) {
-            this._secureNavElements[1].Title = this.userNameString;
-        }
+        // if(this._secureNavElements) {
+        //     this._secureNavElements[1].Title = this.userNameString;
+        // }
     }
 }
