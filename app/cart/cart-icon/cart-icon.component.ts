@@ -24,9 +24,9 @@ export class CartIconComponent implements OnInit{
 
 
     constructor(private cartBusService: CartBusService,
-                private _router: Router,
-                private _orderCartService: OrderCartService,
-                private _loginService: LoginService){
+                private router: Router,
+                private orderCartService: OrderCartService,
+                private loginService: LoginService){
             this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
                 this.update();
                 console.log("cart icon updated " + newCartNumber);
@@ -35,53 +35,55 @@ export class CartIconComponent implements OnInit{
 
     ngOnInit(){
         this.update();
-        this.orderCart = this._orderCartService.getOrderCart();
+        this.orderCart = this.orderCartService.getOrderCart();
     }
 
     public update(){
-        this.numberOfItems = this._orderCartService.totalQuantity();
-        this.packageListHasItem = this._orderCartService.hasPackageListItem();
-        console.log(this.packageListHasItem);
-
+        this.orderCart = this.orderCartService.getOrderCart();
+        console.log(this.orderCart.OrderCart.PackageList);
+        this.numberOfItems = this.orderCartService.totalQuantity();
+        this.packageListHasItem = this.orderCartService.hasPackageListItem();
         if(this.numberOfItems > 0)
             this.cartNumberCss = "has-item";
         else this.cartNumberCss = "";
-        this.orderCart = this._orderCartService.getOrderCart();
         console.log(this.orderCart);
     }
 
     itemChanged(value){
-        this._orderCartService.save(this.orderCart);
+        this.orderCartService.save(this.orderCart);
         this.update();
     }
 
     removeItem(index: number) {
-        let _orderCart: OrderCartModel = new OrderCartModel();
-        _orderCart.PackageList = [];
-        for(let i = 0; i < this.orderCart.OrderCart.PackageList.length; i++){
-            if(i !== index){
-                _orderCart.PackageList.push(this.orderCart.OrderCart.PackageList[i]);
-                console.log("added");
+        // let _orderCart: OrderCartModel = new OrderCartModel();
+        // _orderCart.PackageList = [];
+        // for(let i = 0; i < this.orderCart.OrderCart.PackageList.length; i++){
+        //     if(i !== index){
+        //         _orderCart.PackageList.push(this.orderCart.OrderCart.PackageList[i]);
+        //         console.log("added");
 
-            }
-        }
-
-        this.orderCart.OrderCart = _orderCart;
-        this._orderCartService.save(this.orderCart);
+        //     }
+        // }
+        this.orderCart.OrderCart.PackageList.splice(index, 1);
+        console.log(this.orderCart.OrderCart.PackageList);
+        // this.orderCart.OrderCart = _orderCart;
+        this.orderCartService.save(this.orderCart);
         this.update();
     }
 
     clearCustomOrder(){
         this.orderCart.Description = '';
-        this._orderCartService.save(this.orderCart);
+        this.orderCartService.save(this.orderCart);
         this.update();
     }
 
 
     checkOut(){
-        this._orderCartService.save(this.orderCart);
-        if(this._loginService.isLoggedIn) {
-            this._router.navigateByUrl("/checkout");
+        this.orderCartService.save(this.orderCart);
+        if(this.loginService.isLoggedIn) {
+            this.router.navigateByUrl("/checkout");
+            console.log("checkout");
+
         } else {
             alert("Please log in first!");
         }

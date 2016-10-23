@@ -124,6 +124,7 @@ export class VendorMenuComponent implements OnInit {
     }
 
     addToCart(){
+        this.orderCart = this.orderCartService.getOrderCart();
         console.log(this.orderCart.OrderCart.PackageList);
         this.orderCart.OrderCart.PackageList.push(this.selectedItem);
         console.log(this.orderCart.OrderCart.PackageList);

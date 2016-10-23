@@ -72,7 +72,7 @@
         <form>
             <div class="form-group">
                 <button class="btn btn-primary pull-right" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
-                <button class="btn btn-primary pull-right" (click)="checkOut()" *ngIf="packageListHasItem || orderCart.Description">CHECKOUT</button>
+                <a class="btn btn-primary pull-right" href="#/checkout" *ngIf="packageListHasItem || orderCart.Description">CHECKOUT</a>
             </div>
         </form>
     </modal-footer>
