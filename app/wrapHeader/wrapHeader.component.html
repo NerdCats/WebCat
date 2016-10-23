@@ -40,7 +40,7 @@
 	</ul>-->
 	<br>
 	<div class="row">
-		<div class="col-md-2 area-box" *ngFor="let area of areas">
+		<div class="col-md-3 area-box" *ngFor="let area of areas">
 			<div class="area-container">
 				<a class="pointer area" href="#/vendors/{{area}}">{{area}}</a>
 			</div>
@@ -54,17 +54,17 @@
 	<br>
 	<span id="about-us-detail">Get your daily essentials through our partner vendors</span>
 	<br><br>
-	<div class="row featured">
-		<div class="col-md-4 col-xs-12 center module"
-			(click)="goToVendorMenuPage(vendor.area, vendor.Name)"
+	<div class="row">
+		<a class="col-md-4 col-xs-12 center module"
+			href="#/vendors/{{vendor.Area}}/{{vendor.Name}}"
             *ngFor="let vendor of vendors; let i = index"
             [ngStyle]="{'background-image': 'url(' + vendor.Image + ')'}">
             <div class="gradient">
-                <h1>{{vendor.Name}}</h1>
-                <h2>{{vendor.Address}}</h2>
-				<h3>{{vendor.Category}}</h3>
+                <span class="featured-vendor-name">{{vendor.Name}}</span><br>
+                <span class="featured-vendor-address">{{vendor.Address}}</span><br>
+				<span class="featured-vendor-category">{{vendor.Category}}</span>
             </div>
-        </div>
+        </a>
 	</div>
 </div>
 <br><br>
