@@ -15,8 +15,10 @@
     </div>
     <div class="vendor-name-div" [ngStyle]="{'background-image':'url('+(vendor.Image || '/assets/img/default-logo.png')+')'}">
        <div class="gradient">
-            <h1 class="text-center">{{vendor.StoreName}}</h1>
-            <p class="text-center">{{vendor.Address}}</p>
+            <div class="vendor-info">
+                <h1 class="text-center">{{vendor.StoreName}}</h1>
+                <div class="text-center">{{vendor.Address}}</div>
+            </div>
             <!--<p class="text-center">{{openOrClosed}}</p>-->
        </div>
         <!--<img class="gradient" src="{{vendor.image}}" alt="">-->
