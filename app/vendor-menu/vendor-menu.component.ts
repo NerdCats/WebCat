@@ -76,7 +76,6 @@ export class VendorMenuComponent implements OnInit {
                 this.orderCart.Description += "\n" + this.vendorName + " : " + this.customeOrder;
             }
             this.orderCartService.save(this.orderCart);
-            console.log(this.orderCartService.getOrderCart());
         }
     }
 
@@ -99,7 +98,6 @@ export class VendorMenuComponent implements OnInit {
     }
 
     addItem(item) {
-        console.log(item);
 
         this.clickedItem.item = item.Name;
         // this.clickedItem.description = item.description;
@@ -125,11 +123,9 @@ export class VendorMenuComponent implements OnInit {
 
     addToCart(){
         this.orderCart = this.orderCartService.getOrderCart();
-        console.log(this.orderCart.OrderCart.PackageList);
         this.orderCart.OrderCart.PackageList.push(this.selectedItem);
-        console.log(this.orderCart.OrderCart.PackageList);
         this.orderCartService.save(this.orderCart);
-        // console.log(this.orderCartService.getOrderCart());
+    //
 
         this.cartBusService.announceCartNumberChange("cart number updated");
         this.selectedItem = new PackageListModel();

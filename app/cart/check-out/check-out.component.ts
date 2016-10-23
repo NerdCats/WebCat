@@ -48,7 +48,6 @@ export class CheckOutComponent {
     }
 
     confirmOrder(){
-        console.log(this.orderCart);
         // FIXME: for now
         this.orderCart.From.AddressLine1 = "GObd, H-28, R-20, Block-K, Banani";
         this.orderCart.Type = "Delivery";
@@ -56,8 +55,6 @@ export class CheckOutComponent {
         this.orderCart.OrderCart.SubTotal = 0;
         this.orderCart.OrderCart.TotalToPay = 0;
         if(this.orderCart.OrderCart.PackageList){
-            console.log(this.orderCart.OrderCart.PackageList);
-
             this.orderCart.OrderCart.PackageList.forEach(item => {
                 item.Total = 0;
             })

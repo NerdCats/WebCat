@@ -4,7 +4,7 @@
         <div class="alert alert-danger">{{errorMessage}}</div>
     </div>
     <form class="form-horizontal center-block half-width" [ngFormModel]="checkOutForm">
-        <fieldset>
+        <fieldset [disabled]="orderSubmission === 'IN_PROGRESS'">
             <div class="form-group">
                 <h3>1. Enter delivery address</h3>
                 <textarea ngControl="deliveryAddress"  class="form-control" rows="5"

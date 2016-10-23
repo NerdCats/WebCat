@@ -29,7 +29,6 @@ export class CartIconComponent implements OnInit{
                 private loginService: LoginService){
             this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
                 this.update();
-                console.log("cart icon updated " + newCartNumber);
             });
     }
 
@@ -40,13 +39,11 @@ export class CartIconComponent implements OnInit{
 
     public update(){
         this.orderCart = this.orderCartService.getOrderCart();
-        console.log(this.orderCart.OrderCart.PackageList);
         this.numberOfItems = this.orderCartService.totalQuantity();
         this.packageListHasItem = this.orderCartService.hasPackageListItem();
         if(this.numberOfItems > 0)
             this.cartNumberCss = "has-item";
         else this.cartNumberCss = "";
-        console.log(this.orderCart);
     }
 
     itemChanged(value){
@@ -60,12 +57,11 @@ export class CartIconComponent implements OnInit{
         // for(let i = 0; i < this.orderCart.OrderCart.PackageList.length; i++){
         //     if(i !== index){
         //         _orderCart.PackageList.push(this.orderCart.OrderCart.PackageList[i]);
-        //         console.log("added");
+    //
 
         //     }
         // }
         this.orderCart.OrderCart.PackageList.splice(index, 1);
-        console.log(this.orderCart.OrderCart.PackageList);
         // this.orderCart.OrderCart = _orderCart;
         this.orderCartService.save(this.orderCart);
         this.update();
@@ -82,7 +78,6 @@ export class CartIconComponent implements OnInit{
         this.orderCartService.save(this.orderCart);
         if(this.loginService.isLoggedIn) {
             this.router.navigateByUrl("/checkout");
-            console.log("checkout");
 
         } else {
             alert("Please log in first!");
