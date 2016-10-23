@@ -1,20 +1,20 @@
 import { DefaultAddress } from './geocoding.defaultAddress';
 
 export class Vendor {
-    id: number;
-    name: string;
-    username: string;
-    address: DefaultAddress;
-    phone_number: string;
-    isOpen: boolean;
-    products: any[];
-    image: string;
-    catagories: Catagory[];
+
+    StoreName: string = "Not Found";
+    Address: string = "";
+    products: any[] = [];
+    Image: string = "";
+    ProductCategories: string[] = [];
+    SupportedAreas: string[] = [];
+    Products: Product[] = [];
 }
 
-export class Catagory {
-    catagory: string;
-    itemlist: Item[];
+export class Product {
+    Name: string;
+    Price: number;
+    ProductCategories: string[];
 }
 
 export class Item {

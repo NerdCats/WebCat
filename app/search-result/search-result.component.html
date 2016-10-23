@@ -1,28 +1,34 @@
 <div class="container">
     <h1 id="header">Search Result for "{{keyword}}" in {{area}}</h1>
-    <div class="row">
+     <div *ngIf="status == 'IN_PROGRESS'">
+        <progress-bubble></progress-bubble>
+    </div>
+    <div class="row" *ngIf="status == 'SUCCESSFUL'">
+        <p class="pull-right">Total {{vendors.length}} store found</p>
+        <br>
         <ul>
-            <li *ngFor="let vendor of vendors">
+            <li *ngFor="let vendor of vendors ; let i = index">
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="#/vendors/{{vendor.address.Locality}}/{{vendor.username}}">
-                            <img class="img-rounded img-responsive" src="{{vendor.image}}" alt="">
+                        <a href="#/vendors/{{area}}/{{vendor.StoreName}}">
+                            <img class="img-rounded img-responsive" src="{{getImage(i)}}" alt="">
                         </a>
                     </div>
                     <div class="col-md-8">
-                        <a href="#/vendors/{{vendor.address.Locality}}/{{vendor.username}}">
-                            <h2>{{vendor.name + " "}}
-                                <span class="open" *ngIf="vendor.isOpen">(Open)</span>
-                                <span class="close" *ngIf="!vendor.isOpen">(Close)</span>
+                        <a href="#/vendors/{{area}}/{{vendor.StoreName}}">
+                            <h2>{{vendor.StoreName + " "}}
+                                <!--<span class="open" *ngIf="vendor.isOpen">(Open)</span>
+                                <span class="close" *ngIf="!vendor.isOpen">(Close)</span>-->
                             </h2>
                         </a>
 
-                        <h3>{{vendor.address.AddressLine1}}</h3>
+                        <h3>{{vendor.Address}}</h3>
                         <ul class="list-inline">
-                            <li *ngFor="let product of vendor.products"> {{product + " "}} </li>
+                            <li *ngFor="let product of vendor.ProductCategories"> {{product + " "}} </li>
                         </ul>
                     </div>
                 </div>
+                <hr>
             </li>
         </ul>
     </div>

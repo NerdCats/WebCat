@@ -13,8 +13,11 @@
     background-size: cover;
     color: white;
 }
+.vendor-info {
+    padding: 150px 0px;
+}
 .vendor-name-div h1 {
-    padding: 200px 200px 0 200px;
+    /*padding: 200px 200px 0 200px;*/
     position: relative;
     z-index: 2;
     color: white;
@@ -52,7 +55,6 @@
 @media only screen and (max-width: 780px){
 
     .vendor-name-div h1 {
-        padding: 100px 0 0 0;
         position: relative;
         z-index: 2;
     }
@@ -120,3 +122,15 @@ textarea {
     padding: 10px;
 }
 
+.order-cart {
+    background-color: #3498db;
+    padding: 20px 9px;
+    border-radius: 33px;
+    width: 60px;
+    color: white;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 2%;
+    margin-right: 2%;
+}

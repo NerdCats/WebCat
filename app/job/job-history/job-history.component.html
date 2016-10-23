@@ -26,7 +26,7 @@
                         <th>Created</th>
                         <th>Modified</th>
                     </tr>
-                    <tr *ngFor="let job of jobs" (click)="goToTrackingPage(job.HRID)">
+                    <tr *ngFor="let job of jobs">
                         <td class="pointer"><a href="#/track/{{job.HRID}}">{{job.HRID}}</a></td>
                         <td>{{job.Name}}</td>
                         <td>

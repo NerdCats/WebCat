@@ -12,6 +12,6 @@ export class CartBusService {
 
     announceCartNumberChange(newNumber: string){
         this.cartNumberChangedSource.next(newNumber);
-        console.log(newNumber);
+        console.log("*** : " + newNumber);
     }
 }

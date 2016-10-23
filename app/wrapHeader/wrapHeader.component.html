@@ -23,18 +23,53 @@
 	</div>
 </div>
 
-
+<br><br>
 <div class="center-block text-center">
-	<h1>Find us in the following areas</h1>
-	<ul class="list-inline">
-		<li *ngFor="let area of areas">
-			<a class="pointer" href="#/vendors/{{area}}">{{area}}</a>
-		</li>
-	</ul>
+	<h1 class="header">About Us</h1>
+	<br>
+	<span id="about-us-detail">Fetch is a platform through which we would like to provide a hyper express delivery service for ANYTHING* quickly, easily!</span>
 </div>
 
+<br><br>
 <div class="center-block text-center">
+	<h1>Find us in the following areas</h1>
+	<!--<ul class="list-inline area-list">
+		<li *ngFor="let area of areas">
+			<a class="pointer area-box" href="#/vendors/{{area}}">{{area}}</a>
+		</li>
+	</ul>-->
+	<br>
+	<div class="row">
+		<div class="col-md-2 area-box" *ngFor="let area of areas">
+			<div class="area-container">
+				<a class="pointer area" href="#/vendors/{{area}}">{{area}}</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br><br>
+<div class="center-block text-center">
+	<h1 class="header">Featured Vendors</h1>
+	<br>
+	<span id="about-us-detail">Get your daily essentials through our partner vendors</span>
+	<br><br>
+	<div class="row featured">
+		<div class="col-md-4 col-xs-12 center module"
+			(click)="goToVendorMenuPage(vendor.area, vendor.Name)"
+            *ngFor="let vendor of vendors; let i = index"
+            [ngStyle]="{'background-image': 'url(' + vendor.Image + ')'}">
+            <div class="gradient">
+                <h1>{{vendor.Name}}</h1>
+                <h2>{{vendor.Address}}</h2>
+				<h3>{{vendor.Category}}</h3>
+            </div>
+        </div>
+	</div>
+</div>
+<br><br>
+<!--<div class="center-block text-center">
 	<h2>GO! Fetch at your finger tips</h2>
 	<img src="/assets/img/ios.png" width="148" height="51">
 	<img src="/assets/img/droid.png" width="148" height="51">
-</div>
+</div>-->

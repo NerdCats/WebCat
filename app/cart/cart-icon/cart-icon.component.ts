@@ -6,13 +6,14 @@ import { OrderModel, OrderCartModel, PackageListModel } from '../../shared/model
 import { OrderCartService } from '../../shared/order-cart.service'
 import { CartBusService } from '../cart-bus.service';
 import { LoginService } from '../../account/login/login.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'cart-icon',
     templateUrl: 'app/cart/cart-icon/cart-icon.component.html',
     styleUrls: ['app/cart/cart-icon/cart-icon.component.css'],
     directives: [MODAL_DIRECTIVES, ModalComponent],
-    providers: [CartBusService, OrderCartService, LoginService]
+    providers: [OrderCartService, LoginService]
 })
 
 export class CartIconComponent implements OnInit{
@@ -22,63 +23,62 @@ export class CartIconComponent implements OnInit{
     cartNumberCss: string = "no-item";
 
 
-    constructor(private _cartBusService: CartBusService,
-                private _router: Router,
-                private _orderCartService: OrderCartService,
-                private _loginService: LoginService){
-        this._cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
-            this.update();
-            console.log("cart icon updated " + newCartNumber);
-        });
+    constructor(private cartBusService: CartBusService,
+                private router: Router,
+                private orderCartService: OrderCartService,
+                private loginService: LoginService){
+            this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
+                this.update();
+            });
     }
 
     ngOnInit(){
         this.update();
-        this.orderCart = this._orderCartService.getOrderCart();
+        this.orderCart = this.orderCartService.getOrderCart();
     }
 
     public update(){
-        this.numberOfItems = this._orderCartService.totalQuantity();
-        this.packageListHasItem = this._orderCartService.hasPackageListItem();
+        this.orderCart = this.orderCartService.getOrderCart();
+        this.numberOfItems = this.orderCartService.totalQuantity();
+        this.packageListHasItem = this.orderCartService.hasPackageListItem();
         if(this.numberOfItems > 0)
             this.cartNumberCss = "has-item";
         else this.cartNumberCss = "";
-        this.orderCart = this._orderCartService.getOrderCart();
-        console.log(this.orderCart);
     }
 
     itemChanged(value){
-        this._orderCartService.save(this.orderCart);
+        this.orderCartService.save(this.orderCart);
         this.update();
     }
 
     removeItem(index: number) {
-        let _orderCart: OrderCartModel = new OrderCartModel();
-        _orderCart.PackageList = [];
-        for(let i = 0; i < this.orderCart.OrderCart.PackageList.length; i++){
-            if(i !== index){
-                _orderCart.PackageList.push(this.orderCart.OrderCart.PackageList[i]);
-                console.log("added");
+        // let _orderCart: OrderCartModel = new OrderCartModel();
+        // _orderCart.PackageList = [];
+        // for(let i = 0; i < this.orderCart.OrderCart.PackageList.length; i++){
+        //     if(i !== index){
+        //         _orderCart.PackageList.push(this.orderCart.OrderCart.PackageList[i]);
+    //
 
-            }
-        }
-
-        this.orderCart.OrderCart = _orderCart;
-        this._orderCartService.save(this.orderCart);
+        //     }
+        // }
+        this.orderCart.OrderCart.PackageList.splice(index, 1);
+        // this.orderCart.OrderCart = _orderCart;
+        this.orderCartService.save(this.orderCart);
         this.update();
     }
 
     clearCustomOrder(){
         this.orderCart.Description = '';
-        this._orderCartService.save(this.orderCart);
+        this.orderCartService.save(this.orderCart);
         this.update();
     }
 
 
     checkOut(){
-        this._orderCartService.save(this.orderCart);
-        if(this._loginService.isLoggedIn) {
-            this._router.navigateByUrl("/checkout");
+        this.orderCartService.save(this.orderCart);
+        if(this.loginService.isLoggedIn) {
+            this.router.navigateByUrl("/checkout");
+
         } else {
             alert("Please log in first!");
         }
