@@ -24,6 +24,8 @@ export class DashboardComponent implements OnInit {
     constructor(private busService: DashboardBusService) {
         this.busService.sectionChangeAnnounced$.subscribe(newSectionName => {
             this.sectionName = newSectionName;
+            console.log("bus : " + newSectionName);
+
         })
     }
 

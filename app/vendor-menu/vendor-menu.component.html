@@ -1,7 +1,10 @@
  <div *ngIf="status == 'IN_PROGRESS'">
         <progress-bubble></progress-bubble>
 </div>
-<div class="container center-block" *ngIf="status == 'SUCCESSFUL'">
+<div class="pointer order-cart">
+    <cart-icon></cart-icon>
+</div>
+<div class="container" *ngIf="status == 'SUCCESSFUL'">
 
     <div class="row">
         <!--<ul class="list-inline center-block catagories">
@@ -48,7 +51,6 @@
         </form>
     </div>
 </div>
-
 <modal #cartModal class="modal_vcenter">
     <modal-header [show-close]="true">
         <h1> {{clickedItem.item}} </h1>

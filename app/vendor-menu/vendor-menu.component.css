@@ -120,3 +120,15 @@ textarea {
     padding: 10px;
 }
 
+.order-cart {
+    background-color: #3498db;
+    padding: 20px 9px;
+    border-radius: 33px;
+    width: 60px;
+    color: white;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 2%;
+    margin-right: 2%;
+}

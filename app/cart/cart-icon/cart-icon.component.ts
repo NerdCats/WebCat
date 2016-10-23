@@ -6,13 +6,14 @@ import { OrderModel, OrderCartModel, PackageListModel } from '../../shared/model
 import { OrderCartService } from '../../shared/order-cart.service'
 import { CartBusService } from '../cart-bus.service';
 import { LoginService } from '../../account/login/login.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'cart-icon',
     templateUrl: 'app/cart/cart-icon/cart-icon.component.html',
     styleUrls: ['app/cart/cart-icon/cart-icon.component.css'],
     directives: [MODAL_DIRECTIVES, ModalComponent],
-    providers: [CartBusService, OrderCartService, LoginService]
+    providers: [OrderCartService, LoginService]
 })
 
 export class CartIconComponent implements OnInit{
@@ -22,14 +23,14 @@ export class CartIconComponent implements OnInit{
     cartNumberCss: string = "no-item";
 
 
-    constructor(private _cartBusService: CartBusService,
+    constructor(private cartBusService: CartBusService,
                 private _router: Router,
                 private _orderCartService: OrderCartService,
                 private _loginService: LoginService){
-        this._cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
-            this.update();
-            console.log("cart icon updated " + newCartNumber);
-        });
+            this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
+                this.update();
+                console.log("cart icon updated " + newCartNumber);
+            });
     }
 
     ngOnInit(){

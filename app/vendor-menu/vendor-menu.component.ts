@@ -1,10 +1,8 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-
-
 import { VendorDetailsService } from "./vendor-menu.service";
 import { CartBusService } from '../cart/cart-bus.service';
-
+import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { OrderModel, PackageListModel } from ".././shared/model/order-model";
 import { Vendor, Item } from ".././shared/model/vendor";
 import { OrderCartService } from '.././shared/order-cart.service';
@@ -16,7 +14,7 @@ import { ComponentServiceStatus } from './../shared/component-service-status';
     selector: 'vendor-menu',
     templateUrl: 'app/vendor-menu/vendor-menu.component.html',
     styleUrls: ['app/vendor-menu/vendor-menu.component.css'],
-    directives: [MODAL_DIRECTIVES, ModalComponent, ProgressBubbleComponent],
+    directives: [MODAL_DIRECTIVES, ModalComponent, ProgressBubbleComponent, CartIconComponent],
     providers: [VendorDetailsService, CartBusService, OrderCartService]
 })
 
@@ -32,6 +30,13 @@ export class VendorMenuComponent implements OnInit {
     orderCart: OrderModel;
     openOrClosed: string;
     status: ComponentServiceStatus;
+
+    constructor(private routeparams: RouteParams,
+                private vendorDetailsService: VendorDetailsService,
+                private cartBusService: CartBusService,
+                private orderCartService: OrderCartService){
+    }
+
 
     ngOnInit(){
         this.vendorName = this.routeparams.get('vendorId');
@@ -62,14 +67,6 @@ export class VendorMenuComponent implements OnInit {
             this.orderCart.OrderCart.PackageList = [];
         }
     }
-
-    constructor(private routeparams: RouteParams,
-                private vendorDetailsService: VendorDetailsService,
-                private cartBuseService: CartBusService,
-                private orderCartService: OrderCartService){
-
-    }
-
 
     addCustomOrder(){
         if(this.customeOrder){
@@ -133,7 +130,7 @@ export class VendorMenuComponent implements OnInit {
         this.orderCartService.save(this.orderCart);
         // console.log(this.orderCartService.getOrderCart());
 
-        this.cartBuseService.announceCartNumberChange("cart number updated");
+        this.cartBusService.announceCartNumberChange("cart number updated");
         this.selectedItem = new PackageListModel();
         this.closeCartModal();
     }
