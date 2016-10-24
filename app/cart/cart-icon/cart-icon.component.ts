@@ -30,8 +30,8 @@ export class CartIconComponent implements OnInit{
                 private loginService: LoginService){
             this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
                 this.update();
-                this.isLoggedIn = this.loginService.isLoggedIn;
             });
+            this.isLoggedIn = this.loginService.isLoggedIn;
     }
 
     ngOnInit(){
@@ -60,7 +60,7 @@ export class CartIconComponent implements OnInit{
     }
 
     clearCustomOrder(){
-        this.orderCart.Description = '';
+        this.orderCart.Description = "";
         this.orderCartService.save(this.orderCart);
         this.update();
     }

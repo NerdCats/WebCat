@@ -76,6 +76,7 @@ export class VendorMenuComponent implements OnInit {
                 this.orderCart.Description += "\n" + this.vendorName + " : " + this.customeOrder;
             }
             this.orderCartService.save(this.orderCart);
+            this.cartBusService.announceCartNumberChange("cart number updated");
         }
     }
 

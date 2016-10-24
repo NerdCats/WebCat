@@ -11,7 +11,7 @@ export class OrderCartService {
     public save(orderCart: OrderModel){
         if(orderCart!== undefined){
             orderCart = this.update(orderCart);
-            this.localStorage.setObject(this.ORDER_CART_KEY,orderCart);
+            this.localStorage.setObject(this.ORDER_CART_KEY, orderCart);
         }
     }
 
