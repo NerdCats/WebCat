@@ -1,8 +1,16 @@
 ul {
     list-style: none;
-    margin-left: -30px;
 }
 
 li {
     margin-bottom: 5px;
+}
+.footer {
+    font-size: 1.5em;
+}
+
+@media only screen and (max-width: 780px){
+    .footer {
+        font-size: 10px;
+    }
 }
