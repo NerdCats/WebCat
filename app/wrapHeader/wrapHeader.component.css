@@ -95,6 +95,18 @@ div.area-box:hover{
 
 #about-us-detail {
     font-size: 2em;
+    background-color: #dcdbdb;
+    padding: 0px 0px 20px 0px;
+}
+
+#about-us-focus{
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+#custom-order-button {
+    padding: 10px 20px;
+    font-size: 1.5em;
 }
 
 #header {
@@ -109,6 +121,9 @@ div.area-box:hover{
 }
 .featured-vendor-category{
     font-size: 1em;
+}
+.featured-vendor-text{
+    font-size: 2em;
 }
 
 .center {
@@ -170,12 +185,21 @@ div.area-box:hover{
     .area-container{
         margin-top: 5%;
     }
+    #custom-order-button {
+        padding: 2% 2%;
+        font-size: 1em;
+    }
 }
 
 @media only screen and (max-width: 991px){
     .area-container{
         margin-top: 0%;
         padding-top: 5%;
+    }
+    #about-us-detail {
+        font-size: 2em;
+        background-color: #dcdbdb;
+        padding: 20px 0px 20px 20px;
     }
 }
 

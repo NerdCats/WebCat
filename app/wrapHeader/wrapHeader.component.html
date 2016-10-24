@@ -15,7 +15,7 @@
 						<option value="Uttara">Uttara</option>
 					</select>
 					<input [(ngModel)]="selectedItem" [typeahead]="items" (typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control large-control"
-						placeholder="Search Anything!" required>
+						placeholder="Search Anything!">
 				</div>
 				<button [disabled]="(!selectedArea && !selectedItem)" type="submit" class="btn btn-info btn-lg">Search</button>
 			</form>
@@ -24,11 +24,27 @@
 </div>
 
 <br><br>
-<div class="center-block text-center">
-	<h1 class="header">About Us</h1>
-	<br>
-	<span id="about-us-detail">Fetch is a platform through which we would like to provide a hyper express delivery service for ANYTHING* quickly, easily!</span>
-</div>
+
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div id="about-us-detail" class="col-md-6 text-center">
+			<h1 class="header">About Us</h1>
+			<br>
+			<span>
+				Need to deposit a cheque?<br>
+				Pickup a document or laundry?<br>
+				Send flower to your loved ones?<br>
+				or diapers for baby?<br>
+				<span id="about-us-focus">Fetch is The platform to provide you <br>
+						 hyper express delivery service for <br>
+						 ANYTHING* quickly, easily!</span>
+			</span>
+			<br><br>
+			<button id="custom-order-button" class="btn btn-info" (click)="gotoCustomOrder()">Create Your Custom Order</button>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
 
 <br><br>
 <div class="center-block text-center">
@@ -52,7 +68,7 @@
 <div class="center-block text-center">
 	<h1 class="header">Featured Vendors</h1>
 	<br>
-	<span id="about-us-detail">Get your daily essentials through our partner vendors</span>
+	<span id="featured-vendor-text">Get your daily essentials through our partner vendors</span>
 	<br><br>
 	<div class="row">
 		<a class="col-md-4 col-xs-12 center module"
@@ -73,3 +89,18 @@
 	<img src="/assets/img/ios.png" width="148" height="51">
 	<img src="/assets/img/droid.png" width="148" height="51">
 </div>-->
+
+
+<modal #loginAlert class="modal_vcenter">
+    <modal-header [show-close]="true">
+        <h1>Login First!</h1>
+    </modal-header>
+    <modal-body>
+        <div class="alert alert-danger" role="alert">
+            You have to login to create a custom delivery order. Currently You are not logged in!
+        </div>
+    </modal-body>
+    <modal-footer>
+       <button class="btn btn-danger pull-right" (click)="closeloginAlertModal()">Close</button>
+    </modal-footer>
+</modal>
