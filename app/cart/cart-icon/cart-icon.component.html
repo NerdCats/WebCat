@@ -9,6 +9,9 @@
 <modal #shoppingCart class="modal_vcenter">
     <modal-header [show-close]="true">
         <h1>SHOPPING CART</h1>
+        <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
+            You have to login first to checkout!
+        </div>
     </modal-header>
     <modal-body>
         <div class="alert alert-danger" role="alert" *ngIf="!packageListHasItem && !orderCart.Description">
@@ -72,7 +75,8 @@
         <form>
             <div class="form-group">
                 <button class="btn btn-primary pull-right" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
-                <a class="btn btn-primary pull-right" href="#/checkout" *ngIf="packageListHasItem || orderCart.Description">CHECKOUT</a>
+                <button class="btn btn-primary pull-right" (click)="notLoginAlert()" *ngIf="(packageListHasItem || orderCart.Description) && !isLoggedIn">CHECKOUT</button>
+                <a class="btn btn-primary pull-right" href="#/checkout" *ngIf="(packageListHasItem || orderCart.Description) && isLoggedIn">CHECKOUT</a>
             </div>
         </form>
     </modal-footer>

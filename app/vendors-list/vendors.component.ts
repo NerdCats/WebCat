@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, RouteParams } from '@angular/router-deprecated';
 import { Vendor, Item }           from '../shared/model/vendor';
 import { VendorService }    from './vendor.service';
+import { CartBusService } from '../cart/cart-bus.service';
+import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { ProgressBubbleComponent } from './../common/progress-bubble/progress-bubble.component'
 import { ComponentServiceStatus } from './../shared/component-service-status';
 @Component({
     selector: 'vendors-dashboard',
     templateUrl: 'app/vendors-list/vendors.component.html',
     styleUrls: ['app/vendors-list/vendors.component.css'],
-    providers: [VendorService],
-    directives: [ProgressBubbleComponent]
+    providers: [VendorService, CartBusService],
+    directives: [ProgressBubbleComponent, CartIconComponent]
 })
 
 export class VendorsComponent implements OnInit {

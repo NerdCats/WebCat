@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouteParams, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-// import { Vendor } from '../shared/model/vendor';
+import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { SearchResultService } from './search-result.service';
 import { ProgressBubbleComponent } from './../common/progress-bubble/progress-bubble.component'
 import { ComponentServiceStatus } from './../shared/component-service-status';
-
+import { CartBusService } from '../cart/cart-bus.service';
 @Component({
     selector: 'search-result',
     templateUrl: 'app/search-result/search-result.component.html',
     styleUrls: ['app/search-result/search-result.component.css'],
-    providers: [SearchResultService],
-    directives: [ProgressBubbleComponent]
+    providers: [SearchResultService, CartBusService],
+    directives: [ProgressBubbleComponent, CartIconComponent]
 })
 
 

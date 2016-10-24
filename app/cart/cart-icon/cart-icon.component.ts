@@ -21,6 +21,7 @@ export class CartIconComponent implements OnInit{
     packageListHasItem = false;
     orderCart: OrderModel;
     cartNumberCss: string = "no-item";
+    isLoggedIn: boolean = false;
 
 
     constructor(private cartBusService: CartBusService,
@@ -29,6 +30,7 @@ export class CartIconComponent implements OnInit{
                 private loginService: LoginService){
             this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
                 this.update();
+                this.isLoggedIn = this.loginService.isLoggedIn;
             });
     }
 
@@ -52,17 +54,7 @@ export class CartIconComponent implements OnInit{
     }
 
     removeItem(index: number) {
-        // let _orderCart: OrderCartModel = new OrderCartModel();
-        // _orderCart.PackageList = [];
-        // for(let i = 0; i < this.orderCart.OrderCart.PackageList.length; i++){
-        //     if(i !== index){
-        //         _orderCart.PackageList.push(this.orderCart.OrderCart.PackageList[i]);
-    //
-
-        //     }
-        // }
         this.orderCart.OrderCart.PackageList.splice(index, 1);
-        // this.orderCart.OrderCart = _orderCart;
         this.orderCartService.save(this.orderCart);
         this.update();
     }
@@ -74,14 +66,9 @@ export class CartIconComponent implements OnInit{
     }
 
 
-    checkOut(){
+    notLoginAlert(){
         this.orderCartService.save(this.orderCart);
-        if(this.loginService.isLoggedIn) {
-            this.router.navigateByUrl("/checkout");
-
-        } else {
-            alert("Please log in first!");
-        }
+        alert("Please log in first!");
         this.closeShoppingCartModal();
     }
 

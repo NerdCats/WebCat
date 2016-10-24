@@ -23,9 +23,21 @@
 	</div>
 </div>
 
+<br>
+<div class="center-block text-center">
+	<h1>Find us in the following areas</h1>
+	<br>
+	<div class="row">
+		<div class="col-md-3 area-box" *ngFor="let area of areas">
+			<div class="area-container">
+				<a class="pointer area" href="#/vendors/{{area}}">{{area}}</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <br><br>
-
-
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div id="about-us-detail" class="col-md-6 text-center">
@@ -36,9 +48,10 @@
 				Pickup a document or laundry?<br>
 				Send flower to your loved ones?<br>
 				or diapers for baby?<br>
-				<span id="about-us-focus">Fetch is The platform to provide you <br>
-						 hyper express delivery service for <br>
-						 ANYTHING* quickly, easily!</span>
+				<span id="about-us-focus">
+					Fetch provides hyper express delivery service for<br>
+					ANYTHING quickly, easily!
+				</span>
 			</span>
 			<br><br>
 			<button id="custom-order-button" class="btn btn-info" (click)="gotoCustomOrder()">Create Your Custom Order</button>
@@ -46,23 +59,7 @@
 		<div class="col-md-3"></div>
 	</div>
 
-<br><br>
-<div class="center-block text-center">
-	<h1>Find us in the following areas</h1>
-	<!--<ul class="list-inline area-list">
-		<li *ngFor="let area of areas">
-			<a class="pointer area-box" href="#/vendors/{{area}}">{{area}}</a>
-		</li>
-	</ul>-->
-	<br>
-	<div class="row">
-		<div class="col-md-3 area-box" *ngFor="let area of areas">
-			<div class="area-container">
-				<a class="pointer area" href="#/vendors/{{area}}">{{area}}</a>
-			</div>
-		</div>
-	</div>
-</div>
+
 
 <br><br>
 <div class="center-block text-center">
@@ -89,7 +86,9 @@
 	<img src="/assets/img/ios.png" width="148" height="51">
 	<img src="/assets/img/droid.png" width="148" height="51">
 </div>-->
-
+<div class="pointer order-cart">
+    <cart-icon></cart-icon>
+</div>
 
 <modal #loginAlert class="modal_vcenter">
     <modal-header [show-close]="true">
