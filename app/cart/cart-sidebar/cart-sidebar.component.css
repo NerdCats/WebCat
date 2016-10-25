@@ -1,11 +1,12 @@
 #cart-sidebar {
     background: #f8f7f4;
     width: 30%;
+    min-width: 400px;
     position: fixed;
     right: 0;
     top: 5%;
     padding: 10px;
-    z-index: 2;
+    z-index: 4;
     -webkit-box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
     -moz-box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
     box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
@@ -18,8 +19,8 @@
     padding: 10px;
 
 }
-.order-cart-item-holder{
-    height: 70%;
+#order-cart-item-holder{
+    min-width: 400px;
 }
 .checkout-buttons{
 
@@ -47,4 +48,9 @@
 }
 .cart-sidebar-item-img{
     width: 50px;
+}
+@media only screen and (max-width: 768px) {
+   #cart-sidebar {
+       display: none;
+   }
 }
