@@ -30,12 +30,12 @@ export class CartSidebarComponent implements OnInit {
                 private orderCartService: OrderCartService,
                 private loginService: LoginService){
 
-            this.sidebarHeight = (window.innerHeight - 100);
+            this.sidebarHeight = (window.innerHeight - 250);
             console.log(this.sidebarHeight);
 
             this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
                 this.update();
-                this.sidebarHeight = (window.innerHeight - 100);
+                this.sidebarHeight = (window.innerHeight - 250);
                 console.log(this.sidebarHeight);
             });
             this.isLoggedIn = this.loginService.isLoggedIn;
@@ -49,7 +49,7 @@ export class CartSidebarComponent implements OnInit {
         this.toggle = !this.toggle;
     }
     onResize(event) {
-        this.sidebarHeight = (window.innerHeight - 200);
+        this.sidebarHeight = (window.innerHeight - 250);
         console.log(this.sidebarHeight);
     }
     public update(){

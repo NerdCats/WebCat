@@ -1,30 +1,34 @@
-<div (click)="toggleSidebar()" class="pointer sidebar-cart toggler">
+<div (click)="toggleSidebar()" class="pointer sidebar-cart toggler"
+    [style.margin-top]="(sidebarHeight/2)+'px'" (window:resize)="onResize($event)">
     <i class="fa fa-shopping-cart fa-2x cart-icon" aria-hidden="true"></i>
-    <div class="quantity-background {{cartNumberCss}}">
-        <strong>{{numberOfItems}}</strong>
+    <div *ngIf="numberOfItems>0" class="quantity-background {{cartNumberCss}}">
+        <strong>{{numberOfItems}} Items</strong>
+        <br>
+        <strong>৳ {{orderCart.OrderCart.TotalToPay}}</strong>
     </div>
 </div>
 
-<div id="cart-sidebar" *ngIf="toggle">
+<div id="cart-sidebar" *ngIf="toggle" [style.min-height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
+    <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
+        You have to login first to checkout!
+    </div>
     <div class="row text-center sidebar-header">
         <span class="pull-left">Total {{numberOfItems}} items</span>
         <span class="pull-right">{{orderCart.OrderCart.TotalToPay | number:'1.2-2'}} ৳</span>
-        <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
-            You have to login first to checkout!
-        </div>
     </div>
-    <div (click)="toggleSidebar()" class="pointer sidebar-cart-in-sidebar toggler">
-        <i class="fa fa-shopping-cart fa-2x cart-icon" aria-hidden="true"></i>
-        <div class="quantity-background {{cartNumberCss}}">
+    <div (click)="toggleSidebar()" class="pointer sidebar-cart-in-sidebar toggler"
+        [style.margin-top]="(sidebarHeight/2 - 130)+'px'" (window:resize)="onResize($event)">
+        <i class="fa fa-arrow-right fa-2x cart-icon" aria-hidden="true"></i>
+        <!--<div *ngIf="numberOfItems>0" class="quantity-background {{cartNumberCss}}">
             <strong>{{numberOfItems}}</strong>
-        </div>
+        </div>-->
     </div>
     <div>
         <div class="alert alert-danger" role="alert" *ngIf="!packageListHasItem && !orderCart.Description">
             Currently You have no Item in the Cart!
         </div>
         <div *ngIf="packageListHasItem" class="scroll" id="order-cart-item-holder"
-            [style.max-height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
+            [style.height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
             <div class="row" *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
                     <div class="col-sm-1 col-md-1">
                     <i class="fa fa-plus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
