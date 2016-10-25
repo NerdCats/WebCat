@@ -11,6 +11,8 @@ import { CartBusService } from '../cart/cart-bus.service';
 import { LocalStorage } from '../shared/local-storage';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+
 type NavbarState = "PUBLIC" | "SECURED";
 
 interface NavbarElement {
@@ -21,16 +23,27 @@ interface NavbarElement {
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, SignupComponent, LoginComponent, CartIconComponent],
+    directives: [
+        ROUTER_DIRECTIVES,
+        CollapseDirective,
+        SignupComponent,
+        LoginComponent,
+        CartIconComponent,
+        ModalComponent
+    ],
     providers: [LocalStorage, CartBusService],
     styleUrls: ['app/navbar/navbar.component.css']
 })
+
 export class NavbarComponent {
     @ViewChild('signup')
     public signUpComponent: SignupComponent;
 
     @ViewChild('login')
     public loginComponent: LoginComponent;
+
+    @ViewChild('trackingModal')
+    public trackingModal : ModalComponent;
 
     AppTitle: string;
     State: NavbarState = "PUBLIC";
@@ -93,10 +106,26 @@ export class NavbarComponent {
 
     searchJob(event){
         this.router.navigateByUrl("/track/" + this.trackJobForm.value.jobid);
+        this.trackingModal.close();
     }
+
+    // Tracking
+
+    trackingProperty = {
+        Title: "Tracking",
+        Event: () => { this.showTrackingModal(); }
+    }
+
+    private showTrackingModal() {
+        this.trackingModal.open();
+    }
+    // End --- Tracking
 
     private _initiatePublicNavElements() {
         this._publicNavElements = new Array<NavbarElement>();
+
+        this._publicNavElements.push(this.trackingProperty);
+
         this._publicNavElements.push({
             Title: "Sign Up",
             Event: () => { this.showSignUpComponent(); }
@@ -115,6 +144,8 @@ export class NavbarComponent {
             Title: "Dashboard",
             Event: () => { this.navigateToDashboard(); }
         });
+
+        this._secureNavElements.push(this.trackingProperty);
 
         // this._secureNavElements.push({
         //     Title: this.userNameString,

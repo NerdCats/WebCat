@@ -38,3 +38,7 @@ i {
 #job-search-form {
     min-width: 270px !important;
 }
+
+.tracking-modal {
+    margin: 0px 15px 0px 15px;
+}
