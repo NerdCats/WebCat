@@ -203,3 +203,8 @@ div.area-box:hover{
     }
 }
 
+
+.btn-container {
+    width: 500px;
+    margin: auto;
+}
