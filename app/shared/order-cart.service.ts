@@ -41,7 +41,13 @@ export class OrderCartService {
         if(orderCart.OrderCart.PackageList){
             orderCart.OrderCart.SubTotal = 0;
             orderCart.OrderCart.TotalToPay = 0;
-            orderCart.OrderCart.ServiceCharge = 150;
+
+            if(orderCart.OrderCart.PackageList.length > 1){
+                orderCart.OrderCart.ServiceCharge = 150;
+            } else {
+                orderCart.OrderCart.ServiceCharge = 0;
+            }
+
 
             orderCart.OrderCart.PackageList.forEach(item =>
             {

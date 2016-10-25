@@ -71,5 +71,18 @@ export class CartSidebarComponent implements OnInit {
         alert("Please log in first!");
     }
 
+    increaseQuantity(i:number){
+        this.orderCart.OrderCart.PackageList[i].Quantity ++;
+        this.orderCartService.save(this.orderCart);
+        this.update();
+    }
+
+    decreaseQuantity(i:number){
+        if(this.orderCart.OrderCart.PackageList[i].Quantity > 1){
+            this.orderCart.OrderCart.PackageList[i].Quantity --;
+            this.orderCartService.save(this.orderCart);
+            this.update();
+        }
+    }
 
 }

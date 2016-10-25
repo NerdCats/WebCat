@@ -13,8 +13,8 @@
         <div *ngIf="packageListHasItem">
                 <div class="row" *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
                      <div class="col-md-1">
-                        <i class="fa fa-plus-circle pointer fa-lg up-down-icon" aria-hidden="true"></i>
-                        <i class="fa fa-minus-circle pointer fa-lg up-down-icon" aria-hidden="true"></i>
+                        <i class="fa fa-plus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
+                        <i class="fa fa-minus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="decreaseQuantity(i)"></i>
                     </div>
                     <div class="col-md-5">
                         {{ item.Item }}
@@ -24,25 +24,22 @@
                             <span>{{item.Quantity}}</span>
                         </div>
                     </div>
-                    <div class="col-md-2">{{ item.Price }}</div>
                     <div class="col-md-2">{{ item.Total | number:'1.2-2' }}</div>
-                    <div class="col-md-1" (click)="removeItem(i)">
-                        <i class="fa fa-times remove-icon" aria-hidden="true"></i>
+                    <div class="col-md-1">
+                        <i class="fa fa-times remove-icon" aria-hidden="true" (click)="removeItem(i)"></i>
                     </div>
                 </div>
-                <div>
-                    <div class="text-right">Total Weight</div>
-                    <div>{{ orderCart.OrderCart.TotalWeight }}</div>
-                    <div class="text-right">Subtotal</div>
-                    <div>{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</div>
+                <div class="row">
+                    <div class="col-md-10 text-right">Subtotal : </div>
+                    <div class="col-md-2 text-right">{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</div>
                 </div>
-                <div>
-                    <div colspan="3" class="text-right">Delivery Charge</div>
-                    <div>{{ orderCart.OrderCart.ServiceCharge }}</div>
+                <div class="row">
+                    <div class="col-md-10 text-right">Delivery Charge</div>
+                    <div class="col-md-2 text-right">{{ orderCart.OrderCart.ServiceCharge }}</div>
                 </div>
-                <div>
-                    <div colspan="3" class="text-right">Total</div>
-                    <div>{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</div>
+                <div class="row">
+                    <div class="col-md-10 text-right">Total</div>
+                    <div class="col-md-2 text-right">{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</div>
                 </div>
         </div>
 
