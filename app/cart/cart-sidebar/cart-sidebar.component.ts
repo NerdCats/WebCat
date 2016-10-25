@@ -28,8 +28,14 @@ export class CartSidebarComponent implements OnInit {
                 private router: Router,
                 private orderCartService: OrderCartService,
                 private loginService: LoginService){
+
+            this.sidebarHeight = (window.innerHeight - 200);
+            console.log(this.sidebarHeight);
+
             this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
                 this.update();
+                this.sidebarHeight = (window.innerHeight - 200);
+                console.log(this.sidebarHeight);
             });
             this.isLoggedIn = this.loginService.isLoggedIn;
     }

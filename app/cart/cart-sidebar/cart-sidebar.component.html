@@ -59,9 +59,9 @@
     <div class="checkout-buttons">
         <form>
             <div class="form-group">
-                <button class="btn btn-primary pull-right" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
-                <button class="btn btn-primary pull-right" (click)="notLoginAlert()" *ngIf="(packageListHasItem || orderCart.Description) && !isLoggedIn">CHECKOUT</button>
-                <a class="btn btn-primary pull-right" href="#/checkout" *ngIf="(packageListHasItem || orderCart.Description) && isLoggedIn">CHECKOUT</a>
+                <button class="btn btn-primary col-md-12" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
+                <button class="btn btn-primary col-md-12" (click)="notLoginAlert()" *ngIf="(packageListHasItem || orderCart.Description) && !isLoggedIn">CHECKOUT</button>
+                <a class="btn btn-primary col-md-12" href="#/checkout" *ngIf="(packageListHasItem || orderCart.Description) && isLoggedIn">CHECKOUT</a>
             </div>
         </form>
     </div>
