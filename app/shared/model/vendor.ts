@@ -21,4 +21,5 @@ export class Item {
     item: string;
     price: number;
     description: string;
+    image: string;
 }

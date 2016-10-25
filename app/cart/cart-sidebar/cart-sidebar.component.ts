@@ -65,7 +65,6 @@ export class CartSidebarComponent implements OnInit {
         this.update();
     }
 
-
     notLoginAlert(){
         this.orderCartService.save(this.orderCart);
         alert("Please log in first!");
@@ -84,5 +83,4 @@ export class CartSidebarComponent implements OnInit {
             this.update();
         }
     }
-
 }

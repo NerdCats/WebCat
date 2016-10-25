@@ -50,7 +50,12 @@ export class VendorMenuComponent implements OnInit {
                 this.vendor.Products.forEach(element => {
                     let prodCat = element.ProductCategories[0];
                     if(this.categories[prodCat]){
-                        this.categories[prodCat].push({Name: element.Name, Price: element.Price});
+                        this.categories[prodCat].push({
+                            Name: element.Name,
+                            Price: element.Price,
+                            Image: element.Image,
+                            ShortDescription: element.ShortDescription
+                        });
                     } else {
                         this.categories[prodCat] = [];
                         this.categories[prodCat].push({Name: element.Name, Price: element.Price});
@@ -104,9 +109,11 @@ export class VendorMenuComponent implements OnInit {
     addItem(item) {
 
         this.clickedItem.item = item.Name;
-        // this.clickedItem.description = item.description;
+        this.clickedItem.description = item.ShortDescription;
+        this.clickedItem.image = item.Image;
         this.selectedItem.Item = item.Name + " (" + this.vendorName + ")";
         this.selectedItem.Price = item.Price;
+        this.selectedItem.PicUrl = item.Image;
         this.selectedItem.Total = item.Price;
         this.selectedItem.Quantity = 1;
     }
