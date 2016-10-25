@@ -10,7 +10,8 @@
         <div class="alert alert-danger" role="alert" *ngIf="!packageListHasItem && !orderCart.Description">
             Currently You have no Item in the Cart!
         </div>
-        <div *ngIf="packageListHasItem">
+        <div *ngIf="packageListHasItem" class="scroll" id="order-cart-item-holder"
+            [style.max-height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
             <div class="row" *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
                     <div class="col-sm-1 col-md-1">
                     <i class="fa fa-plus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>

@@ -22,7 +22,7 @@ export class CartSidebarComponent implements OnInit {
     orderCart: OrderModel;
     cartNumberCss: string = "no-item";
     isLoggedIn: boolean = false;
-
+    sidebarHeight: number = window.innerHeight;
 
     constructor(private cartBusService: CartBusService,
                 private router: Router,
@@ -38,7 +38,10 @@ export class CartSidebarComponent implements OnInit {
         this.update();
         this.orderCart = this.orderCartService.getOrderCart();
     }
-
+    onResize(event) {
+        this.sidebarHeight = (window.innerHeight - 200);
+        console.log(this.sidebarHeight);
+    }
     public update(){
         this.orderCart = this.orderCartService.getOrderCart();
         this.numberOfItems = this.orderCartService.totalQuantity();
