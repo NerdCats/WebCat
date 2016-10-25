@@ -1,0 +1,42 @@
+#cart-sidebar {
+    background: #f8f7f4;
+    width: 30%;
+    height: 70%;
+    position: fixed;
+    right: 0;
+    top: 10%;
+    padding: 10px;
+    z-index: 2;
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
+    box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
+}
+.scroll {
+     overflow-y: scroll;
+}
+.sidebar-header{
+    font-size: 2em;
+    padding: 10px;
+
+}
+.checkout-buttons{
+
+}
+
+.remove-icon {
+    color: red;
+    margin: 0px 0px 0px 0px;
+}
+.up-down-icon {
+    margin: 0px;
+    color: #949090;
+}
+.up-down-icon:hover{
+    color: black;
+}
+.up-down-icon-div{
+    margin-top: -17px;
+}
+.item-quanity{
+    margin-left: 2px;
+}
