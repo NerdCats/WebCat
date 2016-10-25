@@ -23,18 +23,19 @@ export class CartSidebarComponent implements OnInit {
     cartNumberCss: string = "no-item";
     isLoggedIn: boolean = false;
     sidebarHeight: number = window.innerHeight;
+    toggle: boolean = false;
 
     constructor(private cartBusService: CartBusService,
                 private router: Router,
                 private orderCartService: OrderCartService,
                 private loginService: LoginService){
 
-            this.sidebarHeight = (window.innerHeight - 200);
+            this.sidebarHeight = (window.innerHeight - 100);
             console.log(this.sidebarHeight);
 
             this.cartBusService.cartNumberChangeAnnounced$.subscribe(newCartNumber => {
                 this.update();
-                this.sidebarHeight = (window.innerHeight - 200);
+                this.sidebarHeight = (window.innerHeight - 100);
                 console.log(this.sidebarHeight);
             });
             this.isLoggedIn = this.loginService.isLoggedIn;
@@ -43,6 +44,9 @@ export class CartSidebarComponent implements OnInit {
     ngOnInit(){
         this.update();
         this.orderCart = this.orderCartService.getOrderCart();
+    }
+    toggleSidebar(){
+        this.toggle = !this.toggle;
     }
     onResize(event) {
         this.sidebarHeight = (window.innerHeight - 200);

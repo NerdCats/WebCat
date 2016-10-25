@@ -1,9 +1,22 @@
-<div id="cart-sidebar">
+<div (click)="toggleSidebar()" class="pointer sidebar-cart toggler">
+    <i class="fa fa-shopping-cart fa-2x cart-icon" aria-hidden="true"></i>
+    <div class="quantity-background {{cartNumberCss}}">
+        <strong>{{numberOfItems}}</strong>
+    </div>
+</div>
+
+<div id="cart-sidebar" *ngIf="toggle">
     <div class="row text-center sidebar-header">
         <span class="pull-left">Total {{numberOfItems}} items</span>
         <span class="pull-right">{{orderCart.OrderCart.TotalToPay | number:'1.2-2'}} ৳</span>
         <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
             You have to login first to checkout!
+        </div>
+    </div>
+    <div (click)="toggleSidebar()" class="pointer sidebar-cart-in-sidebar toggler">
+        <i class="fa fa-shopping-cart fa-2x cart-icon" aria-hidden="true"></i>
+        <div class="quantity-background {{cartNumberCss}}">
+            <strong>{{numberOfItems}}</strong>
         </div>
     </div>
     <div>
