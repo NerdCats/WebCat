@@ -64,7 +64,7 @@
                 <!--<div class="col-sm-2 col-md-2">
                     <img class="cart-sidebar-item-img" src="{{item.PicUrl}}" alt="">
                 </div>-->
-                <div class="col-sm-6 col-md-6">
+                <div class="col-sm-7 col-md-7">
                     {{ item.Item }}
                 </div>
                 <div class="col-sm-1 col-md-1">
@@ -109,7 +109,7 @@
         </div>
         <div class="row text-center sidebar-header">
             <span class="pull-left">Total {{numberOfItems}} items</span>
-            <span class="pull-right">{{orderCart.OrderCart.TotalToPay | number:'1.2-2'}} ৳</span>
+            <span class="pull-right">{{ orderCart.OrderCart.TotalToPay }} ৳</span>
         </div>
     </modal-header>
     <modal-body>
@@ -118,11 +118,11 @@
                 Currently You have no Item in the Cart!
             </div>
             <div *ngIf="packageListHasItem" class="scroll" id="order-cart-item-holder"
-                [style.height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
+                [style.max-height]="(sidebarHeight-100)+'px'" (window:resize)="onResize($event)">
                 <div class="row" *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
                     <div class="col-xs-1 col-sm-1 col-md-1">
-                        <i class="fa fa-plus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
-                        <i class="fa fa-minus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="decreaseQuantity(i)"></i>
+                        <i class="fa fa-plus-circle pointer fa-lg add-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
+                        <i class="fa fa-minus-circle pointer fa-lg remove-icon" aria-hidden="true" (click)="decreaseQuantity(i)"></i>
                     </div>
                     <!--<div class="col-xs-2 col-sm-2 col-md-2">
                         <img class="cart-sidebar-item-img" src="{{item.PicUrl}}" alt="">
@@ -130,19 +130,19 @@
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         {{ item.Item }}
                     </div>
-                    <div class="col-xs-1 col-sm-1 col-md-1">
+                    <div class="col-xs-2 col-sm-2 col-md-2">
                         <div class="item-quanity">
                             <span>{{item.Quantity}}</span>
                         </div>
                     </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2">{{ item.Total | number:'1.2-2' }}</div>
-                    <div class="col-xs-1 col-sm-1 col-md-1">
+                    <div class="col-xs-2 col-sm-2 col-md-2">{{ item.Total }}</div>
+                    <!--<div class="col-xs-1 col-sm-1 col-md-1">
                         <i class="fa fa-times remove-icon" aria-hidden="true" (click)="removeItem(i)"></i>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="row">
                     <div class="col-xs-8 col-sm-10 col-md-10 text-right">Subtotal : </div>
-                    <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</div>
+                    <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.SubTotal }}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-8 col-sm-10 col-md-10 text-right">Delivery Charge : </div>
@@ -150,12 +150,12 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-8 col-sm-10 col-md-10 text-right">Total : </div>
-                    <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</div>
+                    <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.TotalToPay }}</div>
                 </div>
             </div>
 
 
-            <form id="custom-order" *ngIf="orderCart.Description">
+            <form *ngIf="orderCart.Description">
                 <div class="form-group">
                     <h3>CUSTOM ORDER</h3>
                     <textarea class="form-control" rows="5" [(ngModel)]="orderCart.Description"></textarea>
@@ -168,7 +168,7 @@
         <div class="checkout-buttons">
             <form>
                 <div class="form-group">
-                    <button class="btn btn-primary col-xs-12 col-sm-12" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
+                    <button class="btn btn-primary col-xs-12 col-sm-12" (click)="closeOrderCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
                     <button class="btn btn-primary col-xs-12 col-sm-12" (click)="notLoginAlert()" *ngIf="(packageListHasItem || orderCart.Description) && !isLoggedIn">CHECKOUT</button>
                     <a class="btn btn-primary col-xs-12 col-sm-12" href="#/checkout" *ngIf="(packageListHasItem || orderCart.Description) && isLoggedIn">CHECKOUT</a>
                 </div>

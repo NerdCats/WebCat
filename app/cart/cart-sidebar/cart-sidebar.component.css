@@ -97,12 +97,8 @@
     color: white;
 }
 
-.checkout-buttons {
-    /*position: fixed;
-    bottom: 10px;*/
-}
-
 @media only screen and (max-width: 768px) {
+
    #cart-sidebar {
        display: none;
    }
