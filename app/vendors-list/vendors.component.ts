@@ -4,6 +4,7 @@ import { Vendor, Item }           from '../shared/model/vendor';
 import { VendorService }    from './vendor.service';
 import { CartBusService } from '../cart/cart-bus.service';
 import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
+import { CartSidebarComponent } from '../cart/cart-sidebar/cart-sidebar.component';
 import { ProgressBubbleComponent } from './../common/progress-bubble/progress-bubble.component'
 import { ComponentServiceStatus } from './../shared/component-service-status';
 @Component({
@@ -11,7 +12,7 @@ import { ComponentServiceStatus } from './../shared/component-service-status';
     templateUrl: 'app/vendors-list/vendors.component.html',
     styleUrls: ['app/vendors-list/vendors.component.css'],
     providers: [VendorService, CartBusService],
-    directives: [ProgressBubbleComponent, CartIconComponent]
+    directives: [ProgressBubbleComponent, CartIconComponent, CartSidebarComponent]
 })
 
 export class VendorsComponent implements OnInit {

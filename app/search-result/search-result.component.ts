@@ -5,12 +5,14 @@ import { SearchResultService } from './search-result.service';
 import { ProgressBubbleComponent } from './../common/progress-bubble/progress-bubble.component'
 import { ComponentServiceStatus } from './../shared/component-service-status';
 import { CartBusService } from '../cart/cart-bus.service';
+import { CartSidebarComponent } from '../cart/cart-sidebar/cart-sidebar.component';
+
 @Component({
     selector: 'search-result',
     templateUrl: 'app/search-result/search-result.component.html',
     styleUrls: ['app/search-result/search-result.component.css'],
     providers: [SearchResultService, CartBusService],
-    directives: [ProgressBubbleComponent, CartIconComponent]
+    directives: [ProgressBubbleComponent, CartIconComponent, CartSidebarComponent]
 })
 
 

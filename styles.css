@@ -121,7 +121,7 @@
     }
 
     .order-cart {
-        background-color: #3498db;
+        /*background-color: #3498db;
         padding: 20px 9px;
         border-radius: 33px;
         width: 60px;
@@ -130,11 +130,12 @@
         right: 0;
         bottom: 0;
         margin-bottom: 2%;
-        margin-right: 2%;
+        margin-right: 2%;*/
+        display: none;
     }
     /* Small Devices, Tablets */
 
-    @media only screen and (min-width: 768px) {
+    @media only screen and (max-width: 768px) {
         /* this will vertically center modals in devices larger tha phones */
         .modal.modal_vcenter {
             text-align: center;
@@ -154,5 +155,20 @@
         }
         .btn_wrap {
             white-space: normal;
+        }
+        .order-cart {
+            background-color: #287d33;
+            padding: 20px 9px;
+            border-radius: 33px;
+            width: 66px;
+            color: white;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            margin-bottom: 2%;
+            margin-right: 2%;
+            border-color: #d9edf7;
+            border-style: solid;
+            display: block;
         }
     }

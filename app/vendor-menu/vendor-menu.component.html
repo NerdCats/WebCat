@@ -1,9 +1,11 @@
  <div *ngIf="status == 'IN_PROGRESS'">
         <progress-bubble></progress-bubble>
 </div>
-<div class="pointer order-cart">
+<!--<div class="pointer order-cart">
     <cart-icon></cart-icon>
-</div>
+</div>-->
+
+<cart-sidebar></cart-sidebar>
 <div class="container" *ngIf="status == 'SUCCESSFUL'">
 
     <div class="row">
@@ -34,6 +36,7 @@
                        <div>
                            <div class="price">{{item.Price}}</div>
                            <div>{{item.Name}}</div>
+                           <!--<div><img src="{{item.Image}}" alt=""></div>-->
                        </div>
                     </a>
                 </li>
@@ -59,7 +62,7 @@
         <h3> {{selectedItem.Total | number:'1.2-2'}} </h3>
     </modal-header>
     <modal-body>
-        <!--<img class="selected-item-img" src="/assets/img/pop-up-pizza.jpg" alt="{{selectedItem.Item}}">-->
+        <img class="selected-item-img" src="{{clickedItem.image}}">
         <span>
             {{clickedItem.description}}
         </span>
