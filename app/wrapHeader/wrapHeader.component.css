@@ -62,19 +62,21 @@ select option[disabled]:first-child {
 }
 
 .area-box {
-    background-color: #3498db;
     height: 100px;
+    padding-right: 0;
+    padding-left: 0;
 }
 .area-container{
-    margin-top: 25px;
+    background-color: #3498db;
+    padding: 30px;
 }
 .area {
     color: white;
     font-size: 2em;
 }
 
-div.area-box:hover{
-    background-color: #3477FF;
+.area-container:hover{
+    background-color: #42A5F5;
 }
 
 #about-us-detail {
@@ -177,8 +179,7 @@ div.area-box:hover{
 
 @media only screen and (max-width: 991px){
     .area-container{
-        margin-top: 0%;
-        padding-top: 5%;
+        margin-top: 5%;
     }
     #about-us-detail {
         font-size: 2em;
