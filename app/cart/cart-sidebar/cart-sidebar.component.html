@@ -64,7 +64,7 @@
                 <!--<div class="col-sm-2 col-md-2">
                     <img class="cart-sidebar-item-img" src="{{item.PicUrl}}" alt="">
                 </div>-->
-                <div class="col-sm-7 col-md-7">
+                <div class="col-sm-5 col-md-5">
                     {{ item.Item }}
                 </div>
                 <div class="col-sm-1 col-md-1">
@@ -79,15 +79,15 @@
             </div>
             <div class="row">
                 <div class="col-sm-7 col-md-7 text-right">Subtotal : </div>
-                <div class="col-sm-5  col-md-5 text-right">{{ orderCart.OrderCart.SubTotal  }}</div> <!--| number:'1.2-2'-->
+                <div class="col-sm-5  col-md-5 text-left">{{ orderCart.OrderCart.SubTotal  }}</div> <!--| number:'1.2-2'-->
             </div>
             <div class="row">
                 <div class="col-sm-7 col-md-7 text-right">Delivery Charge : </div>
-                <div class="col-sm-5 col-md-5 text-right">{{ orderCart.OrderCart.ServiceCharge }}</div>
+                <div class="col-sm-5 col-md-5 text-left">{{ orderCart.OrderCart.ServiceCharge }}</div>
             </div>
             <div class="row">
                 <div class="col-sm-7 col-md-7 text-right">Total : </div>
-                <div class="col-sm-5 col-md-5 text-right">{{ orderCart.OrderCart.TotalToPay  }}</div> <!--| number:'1.2-2'-->
+                <div class="col-sm-5 col-md-5 text-left">{{ orderCart.OrderCart.TotalToPay  }}</div> <!--| number:'1.2-2'-->
             </div>
         </div>
     </div>

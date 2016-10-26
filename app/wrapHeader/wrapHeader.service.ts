@@ -5,7 +5,7 @@ export class WrapHeaderService {
     WrapHeaderDetails = {
         featuredVendors: [
             {
-                "Name": "North End",
+                "Name": "North End Coffee Roasters",
                 "Address": "Banani",
                 "Image": "http://i.imgur.com/9Cfolu9.jpg",
                 "Area": "Banani",
@@ -19,9 +19,9 @@ export class WrapHeaderService {
                 "Category": "Premium grocery"
             },
             {
-                "Name": "The Jar",
+                "Name": "Izumi",
                 "Address": "Gulshan",
-                "Image": "http://i.imgur.com/vwhkzyk.jpg",
+                "Image": "http://imgur.com/uPOpIzn.jpg",
                 "Area": "Gulshan",
                 "Category": "Breakfast, Lunch"
             },
@@ -33,16 +33,16 @@ export class WrapHeaderService {
                 "Category": "Medicine"
             },
             {
-                "Name": "Unimart",
+                "Name": "Pressto",
                 "Address": "Gulshan 2",
-                "Image": "http://i.imgur.com/FFlqY6p.jpg",
+                "Image": "http://i.imgur.com/a7t4aLX.gif",
                 "Area": "Gulshan 2",
                 "Category": "Daily Needs"
             },
             {
-                "Name": "Farm Fresh",
+                "Name": "Döner and Gyros",
                 "Address": "Banani",
-                "Image": "http://i.imgur.com/58PCC4d.jpg",
+                "Image": "http://imgur.com/hz5r6jW.jpg",
                 "Area": "Banani",
                 "Category": "Fresh fruits, vegetables"
             }

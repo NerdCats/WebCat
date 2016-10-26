@@ -59,6 +59,8 @@ export class CartSidebarComponent implements OnInit {
         if(this.numberOfItems > 0)
             this.cartNumberCss = "has-item";
         else this.cartNumberCss = "";
+        console.log(this.orderCart.OrderCart.TotalToPay);
+
     }
 
     itemChanged(value){
