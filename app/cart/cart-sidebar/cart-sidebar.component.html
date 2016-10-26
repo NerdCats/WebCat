@@ -8,6 +8,22 @@
     </div>
 </div>
 
+<div class="bottombar-cart">
+    <div class="bottombar-cart-content">
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <i class="fa fa-shopping-cart fa-3x cart-icon" aria-hidden="true"></i>
+            <strong class="quantity-background {{cartNumberCss}}">{{numberOfItems}}</strong>
+        </div>
+        <div *ngIf="numberOfItems>0" class="col-xs-4 col-sm-4 col-md-4">
+            <strong class="pull-right">৳ {{orderCart.OrderCart.TotalToPay}}</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+            <button class="btn btn-default">CART</button>
+        </div>
+    </div>
+</div>
+
+
 <div id="cart-sidebar" *ngIf="toggle" [style.min-height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
     <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
         You have to login first to checkout!
