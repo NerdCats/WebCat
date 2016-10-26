@@ -1,7 +1,6 @@
 #cart-sidebar {
     background: #f8f7f4;
-    width: 30%;
-    min-width: 400px;
+    width: 300px;
     position: fixed;
     right: 0;
     /*top: 5%;*/
@@ -17,13 +16,13 @@
 }
 
 .sidebar-header{
-    font-size: 2em;
-    padding: 10px;
-
+    font-size: 1.3em;
+    padding: 10px 0px;
+    width: 200px;
 }
 
 #order-cart-item-holder{
-    min-width: 400px;
+    margin-top: 10px;
 }
 
 #custom-order{
@@ -41,12 +40,12 @@
 .remove-icon:hover {
     color: red;
 }
-.up-down-icon {
-    margin: 0px;
+.add-icon {
     color: #cbc8c8;
+    margin: 0px;
 }
-.up-down-icon:hover{
-    color: black;
+.add-icon:hover{
+    color: green;
 }
 .up-down-icon-div{
     margin-top: -17px;
@@ -57,12 +56,14 @@
 .cart-sidebar-item-img{
     width: 50px;
 }
+
 .quantity-background {
     border-radius: 50%;
     margin-left: 5px;
     text-align: center;
 }
 .sidebar-cart{
+    z-index: 4;
     background: #3498db;
     width: 80px;
     text-align: center;
@@ -76,13 +77,15 @@
 }
 .sidebar-cart-in-sidebar{
     background: #3498db;
-    border-radius: 4px 0px 0px 4px;
-    position: fixed;
-    margin-left: -38px;
-    padding: 26px 3px;
+    border-radius: 25px;
+    /*position: fixed;*/
+    width: 44px;
+    /* margin-left: -38px; */
+    padding: 10px;
     -webkit-box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
     -moz-box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
     box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
+    text-align: center;
 }
 .toggler:hover {
     background: #42A5F5;
@@ -92,6 +95,11 @@
 }
 .has-item {
     color: white;
+}
+
+.checkout-buttons {
+    /*position: fixed;
+    bottom: 10px;*/
 }
 
 @media only screen and (max-width: 768px) {

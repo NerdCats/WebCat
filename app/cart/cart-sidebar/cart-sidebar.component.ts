@@ -94,6 +94,8 @@ export class CartSidebarComponent implements OnInit {
             this.orderCart.OrderCart.PackageList[i].Quantity --;
             this.orderCartService.save(this.orderCart);
             this.update();
+        } else if (this.orderCart.OrderCart.PackageList[i].Quantity == 1){
+            this.removeItem(i);
         }
     }
 

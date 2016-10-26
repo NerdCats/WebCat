@@ -23,23 +23,28 @@
 
 
 <div id="cart-sidebar" *ngIf="toggle" [style.height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
-    <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
-        You have to login first to checkout!
-    </div>
-    <div class="row text-center sidebar-header">
-        <span class="pull-left">Total {{numberOfItems}} items</span>
-        <span class="pull-right">{{orderCart.OrderCart.TotalToPay | number:'1.2-2'}} ৳</span>
-    </div>
-    <div (click)="toggleSidebar()" class="pointer sidebar-cart-in-sidebar toggler"
-        [style.margin-top]="(sidebarHeight/2 - 130)+'px'" (window:resize)="onResize($event)">
-        <i class="fa fa-arrow-right fa-2x cart-icon" aria-hidden="true"></i>
-    </div>
     <div>
+        <div (click)="toggleSidebar()" class="pointer sidebar-cart-in-sidebar toggler col-sm-4 col-md-4">
+            <!--[style.margin-top]="(sidebarHeight/2 - 130)+'px'" (window:resize)="onResize($event)"-->
+            <i class="fa fa-arrow-right fa-2x cart-icon" aria-hidden="true"></i>
+        </div>
+        <div class="col-sm-8 col-md-8">
+            <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
+                You have to login first to checkout!
+            </div>
+            <div class="row text-center sidebar-header">
+                <span class="pull-left">{{numberOfItems}} items</span>
+                <span class="pull-right">{{orderCart.OrderCart.TotalToPay}} ৳</span>  <!--| number:'1.2-2' -->
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 60px;">
         <div class="alert alert-danger" role="alert" *ngIf="!packageListHasItem && !orderCart.Description">
             Currently You have no Item in the Cart!
         </div>
-        <div id="custom-order">
-            <form *ngIf="orderCart.Description">
+        <div id="custom-order" *ngIf="orderCart.Description">
+            <form>
                 <div class="form-group">
                     <h3>CUSTOM ORDER</h3>
                     <textarea class="form-control" rows="2" [(ngModel)]="orderCart.Description"></textarea>
@@ -50,16 +55,16 @@
             </form>
         </div>
         <div *ngIf="packageListHasItem" class="scroll" id="order-cart-item-holder"
-            [style.height]="(sidebarHeight-250)+'px'" (window:resize)="onResize($event)">
+            [style.max-height]="(sidebarHeight-350)+'px'" (window:resize)="onResize($event)">
             <div class="row" *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
                     <div class="col-sm-1 col-md-1">
-                    <i class="fa fa-plus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
-                    <i class="fa fa-minus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="decreaseQuantity(i)"></i>
+                    <i class="fa fa-plus-circle pointer fa-lg add-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
+                    <i class="fa fa-minus-circle pointer fa-lg remove-icon" aria-hidden="true" (click)="decreaseQuantity(i)"></i>
                 </div>
-                <div class="col-sm-2 col-md-2">
+                <!--<div class="col-sm-2 col-md-2">
                     <img class="cart-sidebar-item-img" src="{{item.PicUrl}}" alt="">
-                </div>
-                <div class="col-sm-5 col-md-5">
+                </div>-->
+                <div class="col-sm-6 col-md-6">
                     {{ item.Item }}
                 </div>
                 <div class="col-sm-1 col-md-1">
@@ -67,22 +72,22 @@
                         <span>{{item.Quantity}}</span>
                     </div>
                 </div>
-                <div class="col-sm-2 col-md-2">{{ item.Total | number:'1.2-2' }}</div>
-                <div class="col-sm-1 col-md-1">
+                <div class="col-sm-2 col-md-2">{{ item.Total  }}</div> <!--| number:'1.2-2'-->
+                <!--<div class="col-sm-1 col-md-1">
                     <i class="fa fa-times remove-icon" aria-hidden="true" (click)="removeItem(i)"></i>
-                </div>
+                </div>-->
             </div>
             <div class="row">
-                <div class="col-sm-9 col-md-10 text-right">Subtotal : </div>
-                <div class="col-sm-3  col-md-2 text-right">{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</div>
+                <div class="col-sm-7 col-md-7 text-right">Subtotal : </div>
+                <div class="col-sm-5  col-md-5 text-right">{{ orderCart.OrderCart.SubTotal  }}</div> <!--| number:'1.2-2'-->
             </div>
             <div class="row">
-                <div class="col-sm-9 col-md-10 text-right">Delivery Charge : </div>
-                <div class="col-sm-3  col-md-2 text-right">{{ orderCart.OrderCart.ServiceCharge }}</div>
+                <div class="col-sm-7 col-md-7 text-right">Delivery Charge : </div>
+                <div class="col-sm-5 col-md-5 text-right">{{ orderCart.OrderCart.ServiceCharge }}</div>
             </div>
             <div class="row">
-                <div class="col-sm-9 col-md-10 text-right">Total : </div>
-                <div class="col-sm-3  col-md-2 text-right">{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</div>
+                <div class="col-sm-7 col-md-7 text-right">Total : </div>
+                <div class="col-sm-5 col-md-5 text-right">{{ orderCart.OrderCart.TotalToPay  }}</div> <!--| number:'1.2-2'-->
             </div>
         </div>
     </div>
@@ -115,14 +120,14 @@
             <div *ngIf="packageListHasItem" class="scroll" id="order-cart-item-holder"
                 [style.height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
                 <div class="row" *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
-                        <div class="col-xs-1 col-sm-1 col-md-1">
+                    <div class="col-xs-1 col-sm-1 col-md-1">
                         <i class="fa fa-plus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
                         <i class="fa fa-minus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="decreaseQuantity(i)"></i>
                     </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2">
+                    <!--<div class="col-xs-2 col-sm-2 col-md-2">
                         <img class="cart-sidebar-item-img" src="{{item.PicUrl}}" alt="">
-                    </div>
-                    <div class="col-xs-5 col-sm-5 col-md-5">
+                    </div>-->
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         {{ item.Item }}
                     </div>
                     <div class="col-xs-1 col-sm-1 col-md-1">
