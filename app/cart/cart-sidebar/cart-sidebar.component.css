@@ -4,7 +4,7 @@
     min-width: 400px;
     position: fixed;
     right: 0;
-    top: 5%;
+    /*top: 5%;*/
     padding: 10px;
     z-index: 4;
     -webkit-box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
@@ -26,11 +26,14 @@
     min-width: 400px;
 }
 
-
+#custom-order{
+    margin-bottom: 70px;
+}
 .cart-icon {
-    color: black;
+    color: white;
     margin: 0px;
 }
+
 .remove-icon {
     color: #cbc8c8;
     margin: 0px;
@@ -60,19 +63,20 @@
     text-align: center;
 }
 .sidebar-cart{
-    background: #d4d0d0;
+    background: #3498db;
     width: 80px;
     text-align: center;
     right: 0;
-    border-radius: 15px 0px 0px 15px;
+    padding: 15px 0px;
+    border-radius: 4px 0px 0px 4px;
     position: fixed;
     -webkit-box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
     -moz-box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
     box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
 }
 .sidebar-cart-in-sidebar{
-    background: #d4d0d0;
-    border-radius: 15px 0px 0px 15px;
+    background: #3498db;
+    border-radius: 4px 0px 0px 4px;
     position: fixed;
     margin-left: -38px;
     padding: 26px 3px;
@@ -81,13 +85,13 @@
     box-shadow: 0px 0px 10px 1px rgba(139,138,145,0.41);
 }
 .toggler:hover {
-    background: #b4afaf;
+    background: #42A5F5;
 }
 .bottombar-cart {
     display: none;
 }
 .has-item {
-    color: black;
+    color: white;
 }
 
 @media only screen and (max-width: 768px) {
@@ -97,11 +101,13 @@
    .sidebar-cart{
        display: none;
    }
-
+   .has-item {
+        color: black;
+    }
    .bottombar-cart {
         display: block;
         position: fixed;
-        background: #d4d0d0;
+        background: #3498db;
         bottom: 0;
         z-index: 4;
         width: 100%;
@@ -125,6 +131,7 @@
     }
     .bottombar-cart-price {
         font-size: 1.5em;
+        color: white;
     }
     .bottombar-cart-price-div {
         margin-left: -25px;

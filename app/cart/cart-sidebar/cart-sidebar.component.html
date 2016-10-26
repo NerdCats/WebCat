@@ -22,7 +22,7 @@
 </div>
 
 
-<div id="cart-sidebar" *ngIf="toggle" [style.min-height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
+<div id="cart-sidebar" *ngIf="toggle" [style.height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
     <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
         You have to login first to checkout!
     </div>
@@ -38,8 +38,19 @@
         <div class="alert alert-danger" role="alert" *ngIf="!packageListHasItem && !orderCart.Description">
             Currently You have no Item in the Cart!
         </div>
+        <div id="custom-order">
+            <form *ngIf="orderCart.Description">
+                <div class="form-group">
+                    <h3>CUSTOM ORDER</h3>
+                    <textarea class="form-control" rows="2" [(ngModel)]="orderCart.Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-danger col-sm-12 col-md-12" (click)="clearCustomOrder()">CLEAR</button>
+                </div>
+            </form>
+        </div>
         <div *ngIf="packageListHasItem" class="scroll" id="order-cart-item-holder"
-            [style.height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
+            [style.height]="(sidebarHeight-250)+'px'" (window:resize)="onResize($event)">
             <div class="row" *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
                     <div class="col-sm-1 col-md-1">
                     <i class="fa fa-plus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
@@ -62,34 +73,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-10 text-right">Subtotal : </div>
-                <div class="col-md-2 text-right">{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</div>
+                <div class="col-sm-9 col-md-10 text-right">Subtotal : </div>
+                <div class="col-sm-3  col-md-2 text-right">{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</div>
             </div>
             <div class="row">
-                <div class="col-md-10 text-right">Delivery Charge</div>
-                <div class="col-md-2 text-right">{{ orderCart.OrderCart.ServiceCharge }}</div>
+                <div class="col-sm-9 col-md-10 text-right">Delivery Charge : </div>
+                <div class="col-sm-3  col-md-2 text-right">{{ orderCart.OrderCart.ServiceCharge }}</div>
             </div>
             <div class="row">
-                <div class="col-md-10 text-right">Total</div>
-                <div class="col-md-2 text-right">{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</div>
+                <div class="col-sm-9 col-md-10 text-right">Total : </div>
+                <div class="col-sm-3  col-md-2 text-right">{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</div>
             </div>
         </div>
-
-
-        <form id="custom-order" *ngIf="orderCart.Description">
-            <div class="form-group">
-                <h3>CUSTOM ORDER</h3>
-                <textarea class="form-control" rows="5" [(ngModel)]="orderCart.Description"></textarea>
-            </div>
-            <button class="btn btn-danger pull-right" (click)="clearCustomOrder()">CLEAR</button>
-        </form>
     </div>
     <div class="checkout-buttons">
         <form>
             <div class="form-group">
-                <button class="btn btn-primary col-md-12" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
-                <button class="btn btn-primary col-md-12" (click)="notLoginAlert()" *ngIf="(packageListHasItem || orderCart.Description) && !isLoggedIn">CHECKOUT</button>
-                <a class="btn btn-primary col-md-12" href="#/checkout" *ngIf="(packageListHasItem || orderCart.Description) && isLoggedIn">CHECKOUT</a>
+                <button class="btn btn-primary col-sm-12 col-md-12" (click)="toggleSidebar()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
+                <button class="btn btn-primary col-sm-12 col-md-12" (click)="notLoginAlert()" *ngIf="(packageListHasItem || orderCart.Description) && !isLoggedIn">CHECKOUT</button>
+                <a class="btn btn-primary col-sm-12 col-md-12" href="#/checkout" *ngIf="(packageListHasItem || orderCart.Description) && isLoggedIn">CHECKOUT</a>
             </div>
         </form>
     </div>
@@ -138,11 +140,11 @@
                     <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-8 col-sm-10 col-md-10 text-right">Delivery Charge</div>
+                    <div class="col-xs-8 col-sm-10 col-md-10 text-right">Delivery Charge : </div>
                     <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.ServiceCharge }}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-8 col-sm-10 col-md-10 text-right">Total</div>
+                    <div class="col-xs-8 col-sm-10 col-md-10 text-right">Total : </div>
                     <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</div>
                 </div>
             </div>
@@ -161,9 +163,9 @@
         <div class="checkout-buttons">
             <form>
                 <div class="form-group">
-                    <button class="btn btn-primary col-md-12" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
-                    <button class="btn btn-primary col-md-12" (click)="notLoginAlert()" *ngIf="(packageListHasItem || orderCart.Description) && !isLoggedIn">CHECKOUT</button>
-                    <a class="btn btn-primary col-md-12" href="#/checkout" *ngIf="(packageListHasItem || orderCart.Description) && isLoggedIn">CHECKOUT</a>
+                    <button class="btn btn-primary col-xs-12 col-sm-12" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
+                    <button class="btn btn-primary col-xs-12 col-sm-12" (click)="notLoginAlert()" *ngIf="(packageListHasItem || orderCart.Description) && !isLoggedIn">CHECKOUT</button>
+                    <a class="btn btn-primary col-xs-12 col-sm-12" href="#/checkout" *ngIf="(packageListHasItem || orderCart.Description) && isLoggedIn">CHECKOUT</a>
                 </div>
             </form>
         </div>
