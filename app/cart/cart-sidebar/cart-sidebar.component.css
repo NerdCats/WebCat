@@ -119,4 +119,27 @@
     .bottombar-cart-content{
         margin-top: 5%;
     }
+    .bottombar-cart-price {
+        font-size: 1.5em;
+    }
+    .bottombar-cart-price-div {
+        margin-left: -25px;
+        margin-top: 5%;
+    }
+    .cart-icon-div {
+        margin-top: 5%;
+    }
+    .cart-button {
+        padding: 10px 30px;
+        margin-top: 8%;
+    }
+    .cart-button-div {
+        margin-left: 24px;
+    }
+    #order-cart-item-holder{
+        min-width: 100%;
+    }
+    .cart-sidebar-item-img{
+        width: 40px;
+    }
 }

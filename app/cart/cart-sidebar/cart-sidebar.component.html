@@ -8,18 +8,16 @@
     </div>
 </div>
 
-<div class="bottombar-cart">
-    <div class="bottombar-cart-content">
-        <div class="col-xs-2 col-sm-2 col-md-2">
-            <i class="fa fa-shopping-cart fa-3x cart-icon" aria-hidden="true"></i>
-            <strong class="quantity-background {{cartNumberCss}}">{{numberOfItems}}</strong>
-        </div>
-        <div *ngIf="numberOfItems>0" class="col-xs-4 col-sm-4 col-md-4">
-            <strong class="pull-right">৳ {{orderCart.OrderCart.TotalToPay}}</strong>
-        </div>
-        <div class="col-xs-4 col-sm-4 col-md-4">
-            <button class="btn btn-default">CART</button>
-        </div>
+<div class="bottombar-cart" (click)="openOrderCartModal()">
+    <div class="col-xs-3 col-sm-3 col-md-3 cart-icon-div">
+        <i class="fa fa-shopping-cart fa-3x cart-icon" aria-hidden="true"></i>
+        <strong class="quantity-background {{cartNumberCss}}">{{numberOfItems}}</strong>
+    </div>
+    <div *ngIf="numberOfItems>0" class="col-xs-4 col-sm-4 col-md-4 bottombar-cart-price-div">
+        <strong class="pull-left bottombar-cart-price">৳ {{orderCart.OrderCart.TotalToPay}}</strong>
+    </div>
+    <div class="col-xs-5 col-sm-5 col-md-5 cart-button-div">
+        <button class="btn btn-default pull-right cart-button">CART</button>
     </div>
 </div>
 
@@ -35,9 +33,6 @@
     <div (click)="toggleSidebar()" class="pointer sidebar-cart-in-sidebar toggler"
         [style.margin-top]="(sidebarHeight/2 - 130)+'px'" (window:resize)="onResize($event)">
         <i class="fa fa-arrow-right fa-2x cart-icon" aria-hidden="true"></i>
-        <!--<div *ngIf="numberOfItems>0" class="quantity-background {{cartNumberCss}}">
-            <strong>{{numberOfItems}}</strong>
-        </div>-->
     </div>
     <div>
         <div class="alert alert-danger" role="alert" *ngIf="!packageListHasItem && !orderCart.Description">
@@ -99,3 +94,78 @@
         </form>
     </div>
 </div>
+
+<modal #orderCartModal class="modal_vcenter">
+    <modal-header [show-close]="true">
+        <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
+            You have to login first to checkout!
+        </div>
+        <div class="row text-center sidebar-header">
+            <span class="pull-left">Total {{numberOfItems}} items</span>
+            <span class="pull-right">{{orderCart.OrderCart.TotalToPay | number:'1.2-2'}} ৳</span>
+        </div>
+    </modal-header>
+    <modal-body>
+        <div>
+            <div class="alert alert-danger" role="alert" *ngIf="!packageListHasItem && !orderCart.Description">
+                Currently You have no Item in the Cart!
+            </div>
+            <div *ngIf="packageListHasItem" class="scroll" id="order-cart-item-holder"
+                [style.height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
+                <div class="row" *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
+                        <div class="col-xs-1 col-sm-1 col-md-1">
+                        <i class="fa fa-plus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
+                        <i class="fa fa-minus-circle pointer fa-lg up-down-icon" aria-hidden="true" (click)="decreaseQuantity(i)"></i>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2">
+                        <img class="cart-sidebar-item-img" src="{{item.PicUrl}}" alt="">
+                    </div>
+                    <div class="col-xs-5 col-sm-5 col-md-5">
+                        {{ item.Item }}
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1">
+                        <div class="item-quanity">
+                            <span>{{item.Quantity}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2">{{ item.Total | number:'1.2-2' }}</div>
+                    <div class="col-xs-1 col-sm-1 col-md-1">
+                        <i class="fa fa-times remove-icon" aria-hidden="true" (click)="removeItem(i)"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8 col-sm-10 col-md-10 text-right">Subtotal : </div>
+                    <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8 col-sm-10 col-md-10 text-right">Delivery Charge</div>
+                    <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.ServiceCharge }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8 col-sm-10 col-md-10 text-right">Total</div>
+                    <div class="col-xs-3 col-sm-2  col-md-2 text-right">{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</div>
+                </div>
+            </div>
+
+
+            <form id="custom-order" *ngIf="orderCart.Description">
+                <div class="form-group">
+                    <h3>CUSTOM ORDER</h3>
+                    <textarea class="form-control" rows="5" [(ngModel)]="orderCart.Description"></textarea>
+                </div>
+                <button class="btn btn-danger pull-right" (click)="clearCustomOrder()">CLEAR</button>
+            </form>
+        </div>
+    </modal-body>
+    <modal-footer>
+        <div class="checkout-buttons">
+            <form>
+                <div class="form-group">
+                    <button class="btn btn-primary col-md-12" (click)="closeShoppingCartModal()" *ngIf="!packageListHasItem && !orderCart.Description">CONTINUE SHOPPING</button>
+                    <button class="btn btn-primary col-md-12" (click)="notLoginAlert()" *ngIf="(packageListHasItem || orderCart.Description) && !isLoggedIn">CHECKOUT</button>
+                    <a class="btn btn-primary col-md-12" href="#/checkout" *ngIf="(packageListHasItem || orderCart.Description) && isLoggedIn">CHECKOUT</a>
+                </div>
+            </form>
+        </div>
+    </modal-footer>
+</modal>

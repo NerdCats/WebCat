@@ -96,4 +96,13 @@ export class CartSidebarComponent implements OnInit {
             this.update();
         }
     }
+
+    @ViewChild('orderCartModal')
+    orderCartModal: ModalComponent;
+    openOrderCartModal(){
+        this.orderCartModal.open();
+    }
+    closeOrderCartModal(){
+        this.orderCartModal.close();
+    }
 }
