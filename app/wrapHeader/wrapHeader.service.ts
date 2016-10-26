@@ -26,10 +26,10 @@ export class WrapHeaderService {
                 "Category": "Breakfast, Lunch"
             },
             {
-                "Name": "Al-Falah Pharmacy",
-                "Address": "Gulshan 2",
+                "Name": "Medicine Mart",
+                "Address": "Banani",
                 "Image": "http://i.imgur.com/lyqS3A7.jpg",
-                "Area": "Gulshan 2",
+                "Area": "Banani",
                 "Category": "Medicine"
             },
             {

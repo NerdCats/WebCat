@@ -47,6 +47,12 @@ export class CheckOutComponent {
         this.orderCart = this._orderCartService.getOrderCart();
     }
 
+    removeItem(index: number) {
+        this.orderCart.OrderCart.PackageList.splice(index, 1);
+        this._orderCartService.save(this.orderCart);
+        window.location.reload();
+    }
+
     confirmOrder(){
         // FIXME: for now
         this.orderCart.From.AddressLine1 = "GObd, H-28, R-20, Block-K, Banani";
