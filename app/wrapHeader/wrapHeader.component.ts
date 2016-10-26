@@ -7,11 +7,13 @@ import { WrapHeaderService } from './wrapHeader.service';
 import { LoginService } from '../account/login/login.service';
 import { CartBusService } from '../cart/cart-bus.service';
 import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
+import { CartSidebarComponent } from '../cart/cart-sidebar/cart-sidebar.component';
 @Component({
     selector: 'wrap-header',
     templateUrl: 'app/wrapHeader/wrapHeader.component.html',
     styleUrls: ['app/wrapHeader/wrapHeader.component.css'],
-    directives: [MODAL_DIRECTIVES, ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES, CartIconComponent],
+    directives: [MODAL_DIRECTIVES, ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES,
+        CartIconComponent, CartSidebarComponent],
     providers: [WrapHeaderService, LoginService, CartBusService]
 })
 

@@ -11,6 +11,7 @@ import { Router, RouteParams } from '@angular/router-deprecated';
 import { ProgressBubbleComponent } from './../common/progress-bubble/progress-bubble.component'
 import { ComponentServiceStatus } from './../shared/component-service-status';
 
+
 @Component({
     selector: 'vendor-menu',
     templateUrl: 'app/vendor-menu/vendor-menu.component.html',
