@@ -205,6 +205,11 @@ div.area-box:hover{
 
 
 .btn-container {
-    width: 500px;
+    width: 600px;
     margin: auto;
+}
+
+#text-btn-custom-order {
+    color: white;
+    font-size: 35px;
 }
