@@ -18,8 +18,15 @@
     <div class="vendor-name-div" [ngStyle]="{'background-image':'url('+(vendor.Image || '/assets/img/default-logo.png')+')'}">
        <div class="gradient">
             <div class="vendor-info">
-                <h1 class="text-center">{{vendor.StoreName}}</h1>
-                <div class="text-center">{{vendor.Address}}</div>
+                <div class="col-xs-2 col-sm-2 col-md-2"></div>
+                <div class="col-xs-2 col-sm-2 col-md-2">
+                    <img class="logo pull-right" src="{{vendor.Logo}}" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 pull-left">
+                    <h1 class="text-center pull-left">{{vendor.StoreName}}</h1>
+                    <div class="text-center pull-left">{{vendor.Address}}</div>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2"></div>
             </div>
             <!--<p class="text-center">{{openOrClosed}}</p>-->
        </div>
