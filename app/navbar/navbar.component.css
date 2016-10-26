@@ -42,3 +42,8 @@ i {
 .tracking-modal {
     margin: 0px 15px 0px 15px;
 }
+
+.navbar-brand {
+    width: 50px;
+    margin: 0px 4px;
+}
