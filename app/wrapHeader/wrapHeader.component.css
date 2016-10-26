@@ -203,3 +203,13 @@ div.area-box:hover{
     }
 }
 
+
+.btn-container {
+    width: 600px;
+    margin: auto;
+}
+
+#text-btn-custom-order {
+    color: white;
+    font-size: 35px;
+}
