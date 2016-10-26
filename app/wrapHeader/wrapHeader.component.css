@@ -187,22 +187,7 @@ div.area-box:hover{
     }
 }
 
-
-.btn-container {
-    width: 600px;
-    margin: auto;
-}
-
-#text-btn-custom-order {
-    color: white;
-    font-size: 35px;
-}
-
-@media only screen and (max-width: 780px) {
-    .btn-container {
-        width: 95%;
-    }
-    #text-btn-custom-order {
-        font-size: 1.2em;
-    }
+#block-custom-order {
+    background-image: url("http://i.imgur.com/zBCwaSU.png");
+    background-repeat: no-repeat;
 }
