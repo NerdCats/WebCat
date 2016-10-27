@@ -12,6 +12,9 @@
             <div class="gradient">
                 <h3>{{vendor.StoreName}}</h3>
                 <h5>{{vendor.Address}}</h5>
+               <ul class="list-inline">
+                    <li *ngFor="let product of vendor.ProductCategories"> {{product + " "}} </li>
+                </ul>
             </div>
         </div>
     </div>
