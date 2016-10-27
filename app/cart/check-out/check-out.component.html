@@ -5,20 +5,33 @@
     </div>
     <form class="form-horizontal center-block half-width" [ngFormModel]="checkOutForm">
         <fieldset [disabled]="orderSubmission === 'IN_PROGRESS'">
+             <div class="form-group">
+                <h3>1. Enter Recipient's Name</h3>
+                <input ngControl="receiversName"  class="form-control"
+                        [(ngModel)]="receiversName"
+                        required>
+            </div>
+             <div class="form-group">
+                <h3>2. Enter Recipient's Phonenumber</h3>
+                <input ngControl="receiversPhonenumber"  class="form-control"
+                        [(ngModel)]="receiversPhonenumber"
+                        required>
+            </div>
             <div class="form-group">
-                <h3>1. Enter delivery address</h3>
+                <h3>3. Enter Recipient's address</h3>
                 <textarea ngControl="deliveryAddress"  class="form-control" rows="5"
-                        placeholder="ex: name, phone, address etc" [(ngModel)]="orderCart.To.AddressLine1"
+                        [(ngModel)]="orderCart.To.AddressLine1"
                         required></textarea>
             </div>
             <div class="form-group">
-                <h3>2. Select Payment Method</h3>
-                <select required ngControl="orderType" #orderType="ngForm" class="form-control" name="orderType" [(ngModel)]="orderCart.PaymentMethod">
+                <h3>4. Select Payment Method</h3>
+                <select required ngControl="orderType" #orderType="ngForm" class="form-control"
+                 name="orderType" [(ngModel)]="orderCart.PaymentMethod">
                     <option value="CashOnDelivery">Cash On Delivery</option>
                 </select>
             </div>
             <div class="form-group">
-                <h3>3. Order Summary</h3>
+                <h3>5. Order Summary</h3>
                 <table class="table table-sm table-hover table-responsive">
                     <thead>
                         <tr>

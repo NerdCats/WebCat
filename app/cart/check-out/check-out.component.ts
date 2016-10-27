@@ -21,6 +21,8 @@ export class CheckOutComponent {
     userId: string;
     errorMessage: string;
     orderSubmission: string;
+    receiversName: string;
+    receiversPhonenumber: string;
     checkOutForm: ControlGroup;
 
     constructor(private _router: Router,
@@ -31,11 +33,14 @@ export class CheckOutComponent {
         this.initiateForm();
         this.orderSubmission = 'PENDING';
         this.orderCart = _orderCartService.getOrderCart();
+        this.orderCart.PaymentMethod = "CashOnDelivery"
         this.orderCart.UserId = _localStorage.getObject(AppSettings.AUTH_TOKEN_KEY).userId;
     }
 
     initiateForm() {
         let checkOutControls = {
+            "receiversName": ['', Validators.required],
+            "receiversPhonenumber": ['', Validators.required],
             "deliveryAddress": ['', Validators.required],
             "orderType": ['', Validators.required]
         };
@@ -56,6 +61,8 @@ export class CheckOutComponent {
     confirmOrder(){
         // FIXME: for now
         this.orderCart.From.AddressLine1 = "GObd, H-28, R-20, Block-K, Banani";
+        this.orderCart.To.AddressLine1 = this.receiversName + ", \n " + this.receiversPhonenumber
+                                        + ", \n " + this.orderCart.To.AddressLine1;
         this.orderCart.Type = "Delivery";
         this.orderSubmission = 'IN_PROGRESS';
         this.orderCart.OrderCart.SubTotal = 0;
