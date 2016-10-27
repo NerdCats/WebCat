@@ -15,7 +15,6 @@ export class VendorMenuService {
     selectedVendor:Vendor = new Vendor();
     constructor(private http: Http) {}
     getVendorDetails(vendorName: string){
-        console.log(vendorName);
         return this.http.get("http://gobdsif.cloudapp.net/api/store?storename=" + vendorName)
             .map((res: Response)=> {
                 if(res.json().store){
