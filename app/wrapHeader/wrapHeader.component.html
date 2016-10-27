@@ -29,7 +29,7 @@
 	<h1>Find us in the following areas</h1>
 	<br>
 	<div class="row">
-		<a class="col-md-2 area-box" *ngFor="let area of areas" href="#/vendors/{{area}}">
+		<a class="col-xs-6 col-sm-4 col-md-2 area-box" *ngFor="let area of areas" href="#/vendors/{{area}}">
 			<div class="area-container">
 				<span class="pointer area">{{area}}</span>
 			</div>
@@ -37,62 +37,11 @@
 	</div>
 </div>
 
-<!-- Featured vendor tiles -->
 <br><br>
-<div class="center-block text-center">
-	<h1 class="header">Featured Vendors</h1>
-	<br>
-	<span id="featured-vendor-text">Get your daily essentials through our partner vendors</span>
-	<br><br>
-	<div class="row">
-		<a class="col-md-4 col-xs-12 center module"
-			href="#/vendors/{{vendor.Area}}/{{vendor.Name}}"
-            *ngFor="let vendor of vendors; let i = index"
-            [ngStyle]="{'background-image': 'url(' + vendor.Image + ')'}">
-            <div class="gradient">
-                <span class="featured-vendor-name">{{vendor.Name}}</span><br>
-                <span class="featured-vendor-address">{{vendor.Address}}</span><br>
-				<span class="featured-vendor-category">{{vendor.Category}}</span>
-            </div>
-        </a>
-	</div>
-</div>
 
-
-<!-- Custom Order block -->
-<div class="center-block text-center">
-	<div class="row">
-		<div class="col-md-4"></div>
-		<a class="col-md-4 col-xs-12 center module"
-			 id="block-custom-order"
-			(click)="gotoCustomOrder()" >
-            <div class="gradient">
-				<br><br>
-                <span class="featured-vendor-name">Custom Order</span><br>
-            </div>
-        </a>
-	</div>
-</div>
-
-
-<br><br>
+<vendors-featured></vendors-featured>
 <!--<div class="center-block text-center">
 	<h2>GO! Fetch at your finger tips</h2>
 	<img src="/assets/img/ios.png" width="148" height="51">
 	<img src="/assets/img/droid.png" width="148" height="51">
 </div>-->
-
-
-<modal #loginAlert class="modal_vcenter">
-    <modal-header [show-close]="true">
-        <h1>Login First!</h1>
-    </modal-header>
-    <modal-body>
-        <div class="alert alert-danger" role="alert">
-            You have to login to create a custom delivery order. Currently You are not logged in!
-        </div>
-    </modal-body>
-    <modal-footer>
-       <button class="btn btn-danger pull-right" (click)="closeloginAlertModal()">Close</button>
-    </modal-footer>
-</modal>

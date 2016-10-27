@@ -2,7 +2,6 @@ import { Component, ViewChild, OnInit } from "@angular/core";
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { VendorMenuService } from "./vendor-menu.service";
 import { CartBusService } from '../cart/cart-bus.service';
-import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { CartSidebarComponent } from '../cart/cart-sidebar/cart-sidebar.component';
 import { OrderModel, PackageListModel } from ".././shared/model/order-model";
 import { Vendor, Item } from ".././shared/model/vendor";
@@ -15,10 +14,8 @@ import { ComponentServiceStatus } from './../shared/component-service-status';
 @Component({
     selector: 'vendor-menu',
     templateUrl: 'app/vendor-menu/vendor-menu.component.html',
-    styleUrls: ['app/vendor-menu/vendor-menu.component.css'],
-    directives: [MODAL_DIRECTIVES, ModalComponent,
-            ProgressBubbleComponent, CartIconComponent,
-            CartSidebarComponent],
+    styleUrls: [ 'app/vendor-menu/vendor-menu.component.css' ],
+    directives: [ MODAL_DIRECTIVES, ModalComponent, ProgressBubbleComponent, CartSidebarComponent],
     providers: [VendorMenuService, CartBusService, OrderCartService]
 })
 

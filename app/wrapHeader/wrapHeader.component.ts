@@ -6,14 +6,13 @@ import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { WrapHeaderService } from './wrapHeader.service';
 import { LoginService } from '../account/login/login.service';
 import { CartBusService } from '../cart/cart-bus.service';
-import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { CartSidebarComponent } from '../cart/cart-sidebar/cart-sidebar.component';
+import { VendorsFeaturedComponent } from '../vendors-featured/vendors-featured.component'
 @Component({
     selector: 'wrap-header',
     templateUrl: 'app/wrapHeader/wrapHeader.component.html',
     styleUrls: ['app/wrapHeader/wrapHeader.component.css'],
-    directives: [MODAL_DIRECTIVES, ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES,
-        CartIconComponent, CartSidebarComponent],
+    directives: [MODAL_DIRECTIVES, ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES, CartSidebarComponent, VendorsFeaturedComponent],
     providers: [WrapHeaderService, LoginService, CartBusService]
 })
 
@@ -39,26 +38,10 @@ export class WrapHeaderComponent {
         }
     }
 
-    gotoCustomOrder(){
-        if(this.loginService.isLoggedIn){
-            this.router.navigateByUrl("/dashboard/order");
-        } else {
-            this.openloginAlertModal();
-        }
-
-    }
 
     public typeaheadOnSelect(e: any) {
         console.log('Selected item: ', e.item);
     }
 
-    @ViewChild('loginAlert')
-    loginAlert: ModalComponent;
-    openloginAlertModal(){
-        this.loginAlert.open();
-    }
 
-    closeloginAlertModal(){
-        this.loginAlert.close();
-    }
 }
