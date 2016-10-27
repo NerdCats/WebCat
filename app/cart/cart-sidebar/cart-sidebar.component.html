@@ -102,7 +102,7 @@
     </div>
 </div>
 
-<modal #orderCartModal class="modal_vcenter">
+<modal #orderCartModal>
     <modal-header [show-close]="true">
         <div class="alert alert-danger" role="alert" *ngIf="!isLoggedIn && (packageListHasItem || orderCart.Description)">
             You have to login first to checkout!
