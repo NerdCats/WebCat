@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouteParams, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { SearchResultService } from './search-result.service';
 import { ProgressBubbleComponent } from './../common/progress-bubble/progress-bubble.component'
 import { ComponentServiceStatus } from './../shared/component-service-status';
@@ -12,7 +11,7 @@ import { CartSidebarComponent } from '../cart/cart-sidebar/cart-sidebar.componen
     templateUrl: 'app/search-result/search-result.component.html',
     styleUrls: ['app/search-result/search-result.component.css'],
     providers: [SearchResultService, CartBusService],
-    directives: [ProgressBubbleComponent, CartIconComponent, CartSidebarComponent]
+    directives: [ProgressBubbleComponent, CartSidebarComponent]
 })
 
 

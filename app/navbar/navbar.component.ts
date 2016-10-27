@@ -4,7 +4,6 @@ import { FormBuilder, Validators, ControlGroup } from '@angular/common';
 import { AppSettings } from '../shared/app.settings';
 import { SignupComponent } from '../account/signup/signup.component';
 import { LoginComponent, LoginStatus } from '../account/login/login.component';
-import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { LoginService } from '../account/login/login.service';
 import { CartBusService } from '../cart/cart-bus.service';
 
@@ -28,7 +27,6 @@ interface NavbarElement {
         CollapseDirective,
         SignupComponent,
         LoginComponent,
-        CartIconComponent,
         ModalComponent
     ],
     providers: [LocalStorage, CartBusService],

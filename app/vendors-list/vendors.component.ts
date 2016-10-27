@@ -3,7 +3,6 @@ import { Router, ROUTER_DIRECTIVES, RouteParams } from '@angular/router-deprecat
 import { Vendor, Item }           from '../shared/model/vendor';
 import { VendorService }    from './vendor.service';
 import { CartBusService } from '../cart/cart-bus.service';
-import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { CartSidebarComponent } from '../cart/cart-sidebar/cart-sidebar.component';
 import { ProgressBubbleComponent } from './../common/progress-bubble/progress-bubble.component'
 import { ComponentServiceStatus } from './../shared/component-service-status';
@@ -12,7 +11,7 @@ import { ComponentServiceStatus } from './../shared/component-service-status';
     templateUrl: 'app/vendors-list/vendors.component.html',
     styleUrls: ['app/vendors-list/vendors.component.css'],
     providers: [VendorService, CartBusService],
-    directives: [ProgressBubbleComponent, CartIconComponent, CartSidebarComponent]
+    directives: [ProgressBubbleComponent, CartSidebarComponent]
 })
 
 export class VendorsComponent implements OnInit {
