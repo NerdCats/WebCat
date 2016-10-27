@@ -16,20 +16,8 @@ export class VendorMenuService {
     constructor(private http: Http) {}
     getVendorDetails(vendorName: string){
         console.log(vendorName);
-        // MockVendors.VENDORS.forEach(vendor => {
-        //     if(vendor.username === vendorName)
-        //     {
-        //         this.selectedVendor = vendor;
-        //     }
-        // })
-        // console.log(this.selectedVendor);
-
-
-        // return this.selectedVendor;
-
         return this.http.get("http://gobdsif.cloudapp.net/api/store?storename=" + vendorName)
             .map((res: Response)=> {
-                console.log(this.selectedVendor);
                 if(res.json().store){
                     this.selectedVendor = res.json().store;
                 }
@@ -38,6 +26,5 @@ export class VendorMenuService {
             .catch(error=>{
                 return Observable.throw(error);
             })
-
     }
 }

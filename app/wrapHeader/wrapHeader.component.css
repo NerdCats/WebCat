@@ -106,7 +106,6 @@ select option[disabled]:first-child {
         font-size: 1.2em;
     }
     .area-box {
-        /*background-color: #3498db;*/
         padding: 10px 0px;
     }
     .area-container{

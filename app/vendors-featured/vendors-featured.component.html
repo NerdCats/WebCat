@@ -7,12 +7,12 @@
 	<div class="row">
 		<a class="col-md-4 col-xs-12 center module"
 			href="#/vendors/{{vendor.Area}}/{{vendor.Name}}"
-            *ngFor="let vendor of vendors; let i = index"
+            *ngFor="let vendor of featuredVendors; let i = index"
             [ngStyle]="{'background-image': 'url(' + vendor.Image + ')'}">
             <div class="gradient">
-                <span class="featured-vendor-name">{{vendor.Name}}</span><br>
+                <span class="featured-vendor-name">{{vendor.StoreName}}</span><br>
                 <span class="featured-vendor-address">{{vendor.Address}}</span><br>
-				<span class="featured-vendor-category">{{vendor.Category}}</span>
+				<span class="featured-vendor-category">{{vendor.ProductCategories[0]}}</span>
             </div>
         </a>
 	</div>

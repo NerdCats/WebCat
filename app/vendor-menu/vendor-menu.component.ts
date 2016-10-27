@@ -20,7 +20,6 @@ import { ComponentServiceStatus } from './../shared/component-service-status';
 })
 
 
-
 export class VendorMenuComponent implements OnInit {
     public vendor: any = {};
     public categories: {[category: string] : any[]} = {}
