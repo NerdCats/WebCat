@@ -8,7 +8,7 @@
 		<a class="col-md-4 col-xs-12 center module"
 			href="#/vendors/{{vendor.SupportedAreas[0]}}/{{vendor.StoreName}}"
             *ngFor="let vendor of featuredVendors; let i = index"
-            [ngStyle]="{'background-image': 'url(' + vendor.Image + ')'}">
+            [ngStyle]="{'background-image': 'url(' + (vendor.Image || '/assets/img/default-logo.png') + ')'}">
             <div class="gradient">
                 <span class="featured-vendor-name">{{vendor.StoreName}}</span><br>
                 <span class="featured-vendor-address">{{vendor.Address}}</span><br>
