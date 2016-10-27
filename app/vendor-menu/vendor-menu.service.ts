@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 
 
 @Injectable()
-export class VendorDetailsService {
+export class VendorMenuService {
 
     selectedVendor:Vendor = new Vendor();
     constructor(private http: Http) {}

@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-import { VendorDetailsService } from "./vendor-menu.service";
+import { VendorMenuService } from "./vendor-menu.service";
 import { CartBusService } from '../cart/cart-bus.service';
 import { CartIconComponent } from '../cart/cart-icon/cart-icon.component';
 import { CartSidebarComponent } from '../cart/cart-sidebar/cart-sidebar.component';
@@ -19,7 +19,7 @@ import { ComponentServiceStatus } from './../shared/component-service-status';
     directives: [MODAL_DIRECTIVES, ModalComponent,
             ProgressBubbleComponent, CartIconComponent,
             CartSidebarComponent],
-    providers: [VendorDetailsService, CartBusService, OrderCartService]
+    providers: [VendorMenuService, CartBusService, OrderCartService]
 })
 
 
@@ -36,7 +36,7 @@ export class VendorMenuComponent implements OnInit {
     status: ComponentServiceStatus;
 
     constructor(private routeparams: RouteParams,
-                private vendorDetailsService: VendorDetailsService,
+                private vendorDetailsService: VendorMenuService,
                 private cartBusService: CartBusService,
                 private orderCartService: OrderCartService){
     }
