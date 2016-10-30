@@ -1,23 +1,32 @@
+.vendor-list {
+  margin: auto;
+  display: block;
+  width: 70%;
+}
 .module {
   text-align: center;
   height: 240px;
-  /*width: 360px;*/
   background: no-repeat;
   background-size: cover;
   border-radius: 2px;
   display: inline-block;
+}
+.module h3 {
+  margin-top: 40%;
 }
 .big-module, .module:hover {
   cursor: pointer;
 }
 .big-module {
   text-align: center;
-  height: 480px;
-  /*width: 720px;*/
+  height: 240px;
   background: no-repeat;
   background-size: cover;
   border-radius: 2px;
   display: inline-block;
+}
+.big-module h3 {
+  margin-top: 20%;
 }
 h2 {
   text-align: center;
@@ -26,7 +35,6 @@ h3 {
   color: white;
   position: relative;
   font-weight: bold;
-  margin-top: 15%;
 }
 h5 {
   color: white;

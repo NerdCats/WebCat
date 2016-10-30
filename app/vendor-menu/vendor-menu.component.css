@@ -118,7 +118,9 @@ li a {
 }
 
 .selected-item-img {
-    width: 100%;
+    width: 250px;
+    margin: auto;
+    display: block;
     margin-bottom: 20px;
 }
 

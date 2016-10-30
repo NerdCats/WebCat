@@ -1,10 +1,10 @@
 <cart-sidebar></cart-sidebar>
-<h2 class="title">Vendors in {{area}}</h2>
+<h2 class="title">Stores in {{area}}</h2>
 <div class="container">
     <div *ngIf="status == 'IN_PROGRESS'">
         <progress-bubble></progress-bubble>
     </div>
-    <div class="row" *ngIf="status == 'SUCCESSFUL'">
+    <div class="vendor-list" *ngIf="status == 'SUCCESSFUL'">
         <div class="center {{getTileClass(i)}}"
             (click)="goToVendorMenuPage(vendor.StoreName)"
             *ngFor="let vendor of vendors; let i = index"
@@ -12,9 +12,9 @@
             <div class="gradient">
                 <h3>{{vendor.StoreName}}</h3>
                 <h5>{{vendor.Address}}</h5>
-               <ul class="list-inline">
+               <!--<ul class="list-inline">
                     <li *ngFor="let product of vendor.ProductCategories"> {{product + " "}} </li>
-                </ul>
+                </ul>-->
             </div>
         </div>
     </div>
