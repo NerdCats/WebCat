@@ -4,6 +4,7 @@ export class Vendor {
 
     StoreName: string = "Not Found";
     Address: string = "";
+    Type: string = "";
     products: any[] = [];
     Image: string = "";
     ProductCategories: string[] = [];
