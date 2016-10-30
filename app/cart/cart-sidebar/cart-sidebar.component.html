@@ -119,42 +119,45 @@
             <div class="alert alert-danger" role="alert" *ngIf="!packageListHasItem && !orderCart.Description">
                 Currently You have no Item in the Cart!
             </div>
-            <div *ngIf="packageListHasItem" class="scroll" id="order-cart-item-holder"
+            <table *ngIf="packageListHasItem" class="scroll" id="order-cart-item-holder"
                 [style.max-height]="(sidebarHeight-100)+'px'" (window:resize)="onResize($event)">
-                <div class="row" *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
-                    <div class="col-xs-1 col-sm-1 col-md-1">
-                        <i class="fa fa-plus-circle pointer fa-lg add-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
-                        <i class="fa fa-minus-circle pointer fa-lg remove-icon" aria-hidden="true" (click)="decreaseQuantity(i)"></i>
-                    </div>
-                    <!--<div class="col-xs-2 col-sm-2 col-md-2">
-                        <img class="cart-sidebar-item-img" src="{{item.PicUrl}}" alt="">
-                    </div>-->
-                    <div class="col-xs-6 col-sm-6 col-md-6 text-center">
-                        {{ item.Item }}
-                    </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2 text-center">
-                        <div class="item-quanity">
-                            <span>{{item.Quantity}}</span>
-                        </div>
-                    </div>
-                    <div class="col-xs-3 col-sm-2 col-md-2 text-center">৳ {{ item.Total }}</div>
-                    <!--<div class="col-xs-1 col-sm-1 col-md-1">
-                        <i class="fa fa-times remove-icon" aria-hidden="true" (click)="removeItem(i)"></i>
-                    </div>-->
-                </div>
-                <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-8 text-right">Subtotal : </div>
-                    <div class="col-xs-4 col-sm-4  col-md-4 text-left text-center">{{ orderCart.OrderCart.SubTotal }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-8 text-right">Delivery Charge : </div>
-                    <div class="col-xs-4 col-sm-4  col-md-4 text-left text-center">{{ orderCart.OrderCart.ServiceCharge }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-8 text-right">Total : </div>
-                    <div class="col-xs-4 col-sm-4  col-md-4 text-left text-center">{{ orderCart.OrderCart.TotalToPay }}</div>
-                </div>
-            </div>
+                <tbody>
+                    <tr *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
+                        <td>
+                            <i class="fa fa-plus-circle pointer fa-lg add-icon" aria-hidden="true" (click)="increaseQuantity(i)"></i>
+                            <i class="fa fa-minus-circle pointer fa-lg remove-icon" aria-hidden="true" (click)="decreaseQuantity(i)"></i>
+                        </td>
+                        <!--<div class="">
+                            <img class="cart-sidebar-item-img" src="{{item.PicUrl}}" alt="">
+                        </div>-->
+                        <td class="text-center" style="width: 50%;">
+                            {{ item.Item }}
+                        </td>
+                        <td class=" text-center">
+                            <div class="item-quanity">
+                                <span>{{item.Quantity}}</span>
+                            </div>
+                        </td>
+                        <td class="text-center">৳ {{ item.Total }}</td>
+                        <td class="">
+                            <i class="fa fa-times remove-icon" aria-hidden="true" (click)="removeItem(i)"></i>
+                        </td>
+                    </tr>
+                    <br><br>
+                    <tr>
+                        <td colspan="3" class="text-right">Subtotal : </td>
+                        <td colspan="2" class="text-center">{{ orderCart.OrderCart.SubTotal }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right">Delivery Charge : </td>
+                        <td colspan="2" class="text-center">{{ orderCart.OrderCart.ServiceCharge }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right">Total : </td>
+                        <td colspan="2" class="text-center">{{ orderCart.OrderCart.TotalToPay }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
 
             <form *ngIf="orderCart.Description">

@@ -18,7 +18,6 @@
 .sidebar-header{
     font-size: 1.3em;
     padding: 10px 0px;
-    width: 200px;
 }
 
 #order-cart-item-holder{
@@ -149,13 +148,11 @@
         padding: 10px 30px;
         margin-top: 8%;
     }
-    #order-cart-item-holder{
-        min-width: 100%;
-    }
     .cart-sidebar-item-img{
         width: 40px;
     }
     #order-cart-item-holder{
         margin-top: 10px;
+        width: 100%;
     }
 }
