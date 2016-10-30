@@ -12,13 +12,13 @@
                         required>
             </div>
              <div class="form-group">
-                <h3>2. Enter Recipient's Phonenumber</h3>
+                <h3>2. Enter Recipient's PhoneNumber</h3>
                 <input ngControl="receiversPhonenumber"  class="form-control"
                         [(ngModel)]="receiversPhonenumber"
                         required>
             </div>
             <div class="form-group">
-                <h3>3. Enter Recipient's address</h3>
+                <h3>3. Enter Recipient's Address</h3>
                 <textarea ngControl="deliveryAddress"  class="form-control" rows="5"
                         [(ngModel)]="orderCart.To.AddressLine1"
                         required></textarea>
@@ -38,7 +38,7 @@
                             <th>#</th>
                             <th>Item</th>
                             <th>Qty</th>
-                            <th>Unit Price</th>
+                            <th style="width: 72px;">Unit Price</th>
                             <th>Weight</th>
                             <th>Total</th>
                         </tr>

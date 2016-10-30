@@ -6,12 +6,13 @@ import { LocalStorage } from '../../shared/local-storage';
 import { OrderService } from '../../dashboard/order/order.service';
 import { OrderModel, PackageListModel } from '../../shared/model/order-model';
 import { AppSettings } from '../../shared/app.settings';
+import { AccountService } from '../../../app/account/shared/account.service';
 
 @Component({
     selector: 'check-out',
     templateUrl: 'app/cart/check-out/check-out.component.html',
     styleUrls: ['app/cart/check-out/check-out.component.css'],
-    providers: [OrderCartService, LocalStorage, OrderService]
+    providers: [OrderCartService, LocalStorage, OrderService, AccountService]
 })
 
 
@@ -24,17 +25,28 @@ export class CheckOutComponent {
     receiversName: string;
     receiversPhonenumber: string;
     checkOutForm: ControlGroup;
+    profile:any;
 
-    constructor(private _router: Router,
+    constructor(private router: Router,
                 private formBuilder: FormBuilder,
-                private _orderCartService: OrderCartService,
-                private _orderService: OrderService,
-                private _localStorage: LocalStorage){
+                private orderCartService: OrderCartService,
+                private orderService: OrderService,
+                private localStorage: LocalStorage,
+                private accountService: AccountService){
         this.initiateForm();
         this.orderSubmission = 'PENDING';
-        this.orderCart = _orderCartService.getOrderCart();
+        this.orderCart = orderCartService.getOrderCart();
         this.orderCart.PaymentMethod = "CashOnDelivery"
-        this.orderCart.UserId = _localStorage.getObject(AppSettings.AUTH_TOKEN_KEY).userId;
+        this.orderCart.UserId = localStorage.getObject(AppSettings.AUTH_TOKEN_KEY).userId;
+        this.accountService.getProfile(this.orderCart.UserId)
+            .subscribe(res=>{
+                if(res.Profile.FirstName && res.Profile.LastName)
+                    this.receiversName =  (res.Profile.FirstName + " " + res.Profile.LastName)
+                else this.receiversName = res.UserName;
+                this.receiversPhonenumber = res.PhoneNumber;
+            }, error => {
+
+            })
     }
 
     initiateForm() {
@@ -48,13 +60,13 @@ export class CheckOutComponent {
     }
 
     itemChanged(value){
-        this._orderCartService.save(this.orderCart);
-        this.orderCart = this._orderCartService.getOrderCart();
+        this.orderCartService.save(this.orderCart);
+        this.orderCart = this.orderCartService.getOrderCart();
     }
 
     removeItem(index: number) {
         this.orderCart.OrderCart.PackageList.splice(index, 1);
-        this._orderCartService.save(this.orderCart);
+        this.orderCartService.save(this.orderCart);
         window.location.reload();
     }
 
@@ -73,13 +85,13 @@ export class CheckOutComponent {
             })
         }
 
-        this._orderService.createOrder(this.orderCart)
+        this.orderService.createOrder(this.orderCart)
 
             .subscribe((result)=> {
                 let job = JSON.parse(result._body);
                 this.orderSubmission = 'COMPLETED';
-                this._orderCartService.resetOrderCart();
-                this._router.navigateByUrl("/track/" + job.HRID);
+                this.orderCartService.resetOrderCart();
+                this.router.navigateByUrl("/track/" + job.HRID);
             },
             (error)=> {
                 this.orderSubmission = 'FAILED';

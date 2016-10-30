@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { SecureHttp } from '../../shared/secure-http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -15,7 +16,7 @@ import { AppSettings } from '../../shared/app.settings';
 
 @Injectable()
 export class AccountService {
-    constructor(private http: Http) { }
+    constructor(private http: Http, private shttp: SecureHttp) { }
 
     private accountUrl = AppSettings.TASKCAT_API_BASE + 'account';  // URL to web API
 
@@ -63,6 +64,12 @@ export class AccountService {
         params.set('userId', userId);
 
         return this.http.get(this.accountUrl + '/ResendConfirmEmail', { search: params })
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getProfile(userId: string){
+        return this.shttp.secureGet(this.accountUrl + "/Profile/" + userId)
             .map(this.extractData)
             .catch(this.handleError);
     }
