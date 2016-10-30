@@ -155,4 +155,7 @@
     .cart-sidebar-item-img{
         width: 40px;
     }
+    #order-cart-item-holder{
+        margin-top: 10px;
+    }
 }

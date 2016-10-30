@@ -45,11 +45,11 @@ export class VendorsComponent implements OnInit {
     getTileClass(i) {
         if (i % 5 == 0) {
             // return 'big-module';
-            return "col-xs-8 col-md-8 col-sm-8 col-lg-8 big-module";
+            return "col-xs-12 col-md-8 col-sm-8 col-lg-8 big-module";
         }
         else {
             // return 'module';
-            return "col-xs-4 col-md-4 col-sm-4 col-lg-4 module";
+            return "col-xs-12 col-md-4 col-sm-4 col-lg-4 module";
         }
     }
 }

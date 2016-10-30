@@ -129,30 +129,30 @@
                     <!--<div class="col-xs-2 col-sm-2 col-md-2">
                         <img class="cart-sidebar-item-img" src="{{item.PicUrl}}" alt="">
                     </div>-->
-                    <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6 text-center">
                         {{ item.Item }}
                     </div>
-                    <div class="col-xs-1 col-sm-1 col-md-1">
+                    <div class="col-xs-2 col-sm-2 col-md-2 text-center">
                         <div class="item-quanity">
                             <span>{{item.Quantity}}</span>
                         </div>
                     </div>
-                    <div class="col-xs-3 col-sm-2 col-md-2">৳ {{ item.Total }}</div>
+                    <div class="col-xs-3 col-sm-2 col-md-2 text-center">৳ {{ item.Total }}</div>
                     <!--<div class="col-xs-1 col-sm-1 col-md-1">
                         <i class="fa fa-times remove-icon" aria-hidden="true" (click)="removeItem(i)"></i>
                     </div>-->
                 </div>
                 <div class="row">
                     <div class="col-xs-8 col-sm-8 col-md-8 text-right">Subtotal : </div>
-                    <div class="col-xs-4 col-sm-4  col-md-4 text-left">{{ orderCart.OrderCart.SubTotal }}</div>
+                    <div class="col-xs-4 col-sm-4  col-md-4 text-left text-center">{{ orderCart.OrderCart.SubTotal }}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-8 col-sm-8 col-md-8 text-right">Delivery Charge : </div>
-                    <div class="col-xs-4 col-sm-4  col-md-4 text-left">{{ orderCart.OrderCart.ServiceCharge }}</div>
+                    <div class="col-xs-4 col-sm-4  col-md-4 text-left text-center">{{ orderCart.OrderCart.ServiceCharge }}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-8 col-sm-8 col-md-8 text-right">Total : </div>
-                    <div class="col-xs-4 col-sm-4  col-md-4 text-left">{{ orderCart.OrderCart.TotalToPay }}</div>
+                    <div class="col-xs-4 col-sm-4  col-md-4 text-left text-center">{{ orderCart.OrderCart.TotalToPay }}</div>
                 </div>
             </div>
 

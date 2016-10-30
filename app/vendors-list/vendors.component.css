@@ -76,3 +76,15 @@ h5 {
 ul {
   color: white;
 }
+
+@media only screen and (max-width: 768px) {
+    .big-module h3 {
+      margin-top: 20%;
+    }
+    .module h3 {
+      margin-top: 20%;
+    }
+    .vendor-list {
+      width: 100%;
+    }
+}
