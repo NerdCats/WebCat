@@ -57,8 +57,8 @@ export class CartSidebarComponent implements OnInit {
         this.numberOfItems = this.orderCartService.totalQuantity();
         this.packageListHasItem = this.orderCartService.hasPackageListItem();
         if(this.numberOfItems > 0)
-            this.cartNumberCss = "has-item";
-        else this.cartNumberCss = "";
+            this.cartNumberCss = "cart-full";
+        else this.cartNumberCss = "cart-empty";
         console.log(this.orderCart.OrderCart.TotalToPay);
 
     }

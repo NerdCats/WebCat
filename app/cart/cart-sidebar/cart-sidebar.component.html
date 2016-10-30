@@ -1,4 +1,4 @@
-<div (click)="toggleSidebar()" class="pointer sidebar-cart toggler"
+<div (click)="toggleSidebar()" class="pointer sidebar-cart {{cartNumberCss}}"
     [style.margin-top]="(sidebarHeight/2)+'px'" (window:resize)="onResize($event)">
     <i class="fa fa-shopping-cart fa-2x cart-icon" aria-hidden="true"></i>
     <div *ngIf="numberOfItems>0" class="quantity-background {{cartNumberCss}}">
@@ -8,23 +8,25 @@
     </div>
 </div>
 
-<div class="bottombar-cart" (click)="openOrderCartModal()">
-    <div class="col-xs-3 col-sm-3 col-md-3 cart-icon-div">
-        <i class="fa fa-shopping-cart fa-3x cart-icon" aria-hidden="true"></i>
-        <strong class="quantity-background {{cartNumberCss}}">{{numberOfItems}}</strong>
-    </div>
-    <div *ngIf="numberOfItems>0" class="col-xs-4 col-sm-4 col-md-4 bottombar-cart-price-div">
-        <strong class="pull-left bottombar-cart-price">৳ {{orderCart.OrderCart.TotalToPay}}</strong>
-    </div>
-    <div class="col-xs-5 col-sm-5 col-md-5 cart-button-div">
-        <button class="btn btn-default pull-right cart-button">CART</button>
+<div class="bottombar-cart {{cartNumberCss}}" (click)="openOrderCartModal()">
+    <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 cart-icon-div">
+            <i class="fa fa-shopping-cart fa-3x cart-icon" aria-hidden="true"></i>
+            <strong class="quantity-background">{{numberOfItems}}</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 cart-icon-div">
+            <strong class="pull-left bottombar-cart-price">৳ {{orderCart.OrderCart.TotalToPay}}</strong>
+        </div>
+        <div class="col-xs-5 col-sm-5 col-md-5">
+            <button class="btn btn-default pull-right cart-button">CART</button>
+        </div>
     </div>
 </div>
 
 
 <div id="cart-sidebar" *ngIf="toggle" [style.height]="sidebarHeight+'px'" (window:resize)="onResize($event)">
     <div>
-        <div (click)="toggleSidebar()" class="pointer sidebar-cart-in-sidebar toggler col-sm-4 col-md-4">
+        <div (click)="toggleSidebar()" class="pointer sidebar-cart-in-sidebar {{cartNumberCss}} col-sm-4 col-md-4">
             <!--[style.margin-top]="(sidebarHeight/2 - 130)+'px'" (window:resize)="onResize($event)"-->
             <i class="fa fa-arrow-right fa-2x cart-icon" aria-hidden="true"></i>
         </div>
