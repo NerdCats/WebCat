@@ -19,7 +19,7 @@ install:
   - ps: $env:path = $env:appdata + "\npm;" + $env:path
   - npm install
 
-script:
+after_success:
   - ps: npm serve-prod
 
 cache:
