@@ -20,5 +20,10 @@ install:
   - npm install
   - npm run build-prod
 
+artifacts:
+  - path: dist
+    name: WebCat
+    type: zip
+
 cache:
   - node_modules -> package.json
