@@ -21,7 +21,7 @@ install:
   - npm run build-prod
 
 artifacts:
-  - path: dist
+  - path: prod
     name: WebCat
     type: zip
 
