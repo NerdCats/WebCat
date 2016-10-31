@@ -19,5 +19,8 @@ install:
   - ps: $env:path = $env:appdata + "\npm;" + $env:path
   - npm install
 
+after_build:
+  - ps: npm serve-prod
+
 cache:
   - node_modules -> package.json
