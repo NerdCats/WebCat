@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SecureHttp } from '../../shared/secure-http';
-import { Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';

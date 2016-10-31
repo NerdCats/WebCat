@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Request, XHRBackend, RequestOptionsArgs, Response, RequestOptions, ConnectionBackend, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {LocalStorage, LOCAL_STORAGE_PROVIDERS} from '../shared/local-storage';
+import { AppSettings } from '../shared/app.settings';
 import { provide } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 
@@ -15,9 +16,12 @@ export class SecureHttp extends Http {
     constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private _router: Router, _localStorage: LocalStorage) {
         super(backend, defaultOptions);
         this.localStorage = _localStorage;
-        this._authToken = this.localStorage.getObject('auth_token');
+        this._authToken = this.localStorage.getObject(AppSettings.AUTH_TOKEN_KEY);
         if (!this._authToken) {
-            throw new Error("Auth token is empty");
+            // FIXME: Since users will be able to browse vendors without logging in
+            // Lets not throw this error now!
+            // throw new Error("Invalid/blank auth data, Fatal Error");
+            // throw new Error("Auth token is empty");
         }
     }
 
@@ -61,6 +65,9 @@ export class SecureHttp extends Http {
         return observable.catch((err, source) => {
             if (err.status == 401) {
                 this._router.navigate(['/Home']);
+                // FIXME:
+                // We should really use the refresh token and get another token
+                // due to deadline, had to do this blund hack, will come back to this
                 return Observable.empty();
             } else {
                 return Observable.throw(err);

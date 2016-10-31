@@ -1,9 +1,6 @@
-.form-control
-{
-    font-size: 18px;
-
-    width: 280px;
+.large-control {
     height: 42px;
+    font-size: 18px;
 }
 
 /* HeaderWrap */
@@ -13,11 +10,10 @@
     min-height: 650px;
     margin-top: -20px;
     padding-top: 200px;
-    /* background: url(../img/bg01.jpg) no-repeat center top; */
-
-    background-color: #3498db;
+    background: url(../assets/img/gofetch.jpg) no-repeat center top ;
     background-attachment: relative;
     background-position: center center;
+
     -webkit-background-size: 100%;
     -webkit-background-size: cover;
        -moz-background-size: 100%;
@@ -40,3 +36,101 @@
 
     color: white;
 }
+
+h3 {
+    margin-bottom: 50px;
+    color: white;
+}
+
+ul li{
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #00afab;
+    list-style: none;
+}
+
+
+select option:first-child {
+	color: #999999;
+}
+select.empty {
+	color: #999999;
+}
+select option[disabled]:first-child {
+	display: none;
+}
+
+.area-box {
+    height: 100px;
+    padding-right: 0;
+    padding-left: 0;
+}
+.area-container{
+    background-color: #3498db;
+    padding: 30px;
+}
+.area {
+    color: white;
+    font-size: 1.6em;
+}
+
+.area-container:hover{
+    background-color: #42A5F5;
+}
+
+#about-us-detail {
+    font-size: 2em;
+    background-color: #dcdbdb;
+    padding: 0px 0px 20px 0px;
+}
+
+#about-us-focus{
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+#custom-order-button {
+    padding: 10px 20px;
+    font-size: 1.5em;
+}
+
+#header {
+    font-size: 3em;
+}
+
+@media only screen and (max-width: 780px){
+    .area {
+        margin: 20px;
+        padding: 10px 0px;
+        font-size: 1.2em;
+    }
+    .area-box {
+        padding: 10px 0px;
+    }
+    .area-container{
+        margin-top: 5%;
+    }
+    #custom-order-button {
+        padding: 2% 2%;
+        font-size: 1em;
+    }
+}
+
+@media only screen and (max-width: 991px){
+    .area-container{
+        margin: 10%;
+    }
+    .area {
+        margin: 0px;
+        padding: 0px 0px;
+        font-size: 1em;
+    }
+    #about-us-detail {
+        font-size: 2em;
+        background-color: #dcdbdb;
+        padding: 20px 0px 20px 20px;
+    }
+}
+
+

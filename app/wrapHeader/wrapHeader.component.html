@@ -1,19 +1,47 @@
+<cart-sidebar></cart-sidebar>
 <div id="headerwrap">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        <h1>Delivery<br/>
-          Simplified</h1>
-          <form [ngFormModel]="trackJobForm" (submit)="gotoSearchpage($event)" class="form-inline" role="form">
-            <div class="form-group">
-              <input ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Enter Your Job Id ex. JOB-XXXXXX">
-            </div>
-            <button type="submit" class="btn btn-info btn-lg">Track Your Order</button>
-          </form>
-      </div>
-    </div>
-    <!-- /row -->
-  </div>
-  <!-- /container -->
+	<div class="container">
+		<div class="center-block text-center">
+			<h1>ANYTHING ON DEMAND</h1>
+			<h3>Lightning fast deliveries at your fingertips</h3>
+			<form (submit)="gotoSearchResultPage($event)" class="form-inline" role="form">
+				<div class="form-group">
+					<select class="dropdown form-control large-control" [(ngModel)]="selectedArea" required>
+						<option value="" selected disabled>Select Area</option>
+						<option value="Banani">Banani</option>
+						<option value="Baridhara">Baridhara</option>
+						<option value="Dhanmondi">Dhanmondi</option>
+						<option value="Gulshan 1">Gulshan 1</option>
+						<option value="Gulshan 2">Gulshan 2</option>
+						<option value="Uttara">Uttara</option>
+					</select>
+					<input [(ngModel)]="selectedItem" [typeahead]="items" (typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control large-control"
+						placeholder="Search Anything!">
+				</div>
+				<button [disabled]="(!selectedArea && !selectedItem)" type="submit" class="btn btn-info btn-lg">Search</button>
+			</form>
+		</div>
+	</div>
 </div>
-<!-- /headerwrap -->
+
+<!-- Find us navbar -->
+<div class="center-block text-center ">
+	<h1>Find us in the following areas</h1>
+	<br>
+	<div class="row">
+		<a class="col-xs-6 col-sm-4 col-md-2 area-box" *ngFor="let area of areas" href="#/vendors/{{area}}">
+			<div class="area-container">
+				<span class="pointer area">{{area}}</span>
+			</div>
+		</a>
+	</div>
+</div>
+
+<br><br>
+
+<vendors-featured></vendors-featured>
+<!--<div class="center-block text-center">
+	<h2>GO! Fetch at your finger tips</h2>
+	<img src="/assets/img/ios.png" width="148" height="51">
+	<img src="/assets/img/droid.png" width="148" height="51">
+</div>-->

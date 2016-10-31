@@ -5,3 +5,9 @@
 .sebm-google-map-container {
   height: 300px;
 }
+
+#panel-heading-custom {
+    color: #fff !important;
+    background-color: #3498db !important;
+    border-color: #3498db !important;
+}

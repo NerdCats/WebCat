@@ -1,0 +1,90 @@
+.vendor-list {
+  margin: auto;
+  display: block;
+  width: 70%;
+}
+.module {
+  text-align: center;
+  height: 240px;
+  background: no-repeat;
+  background-size: cover;
+  border-radius: 2px;
+  display: inline-block;
+}
+.module h3 {
+  margin-top: 40%;
+}
+.big-module, .module:hover {
+  cursor: pointer;
+}
+.big-module {
+  text-align: center;
+  height: 240px;
+  background: no-repeat;
+  background-size: cover;
+  border-radius: 2px;
+  display: inline-block;
+}
+.big-module h3 {
+  margin-top: 20%;
+}
+h2 {
+  text-align: center;
+}
+h3 {
+  color: white;
+  position: relative;
+  font-weight: bold;
+}
+h5 {
+  color: white;
+  position: relative;
+  text-shadow: 0px 1px 0px rgba(192, 192, 192, .5);
+}
+.center {
+  padding: 0 !important;
+  margin: 0 auto;
+  border: 1px solid #fff;
+}
+.title {
+  padding: 25px;
+  color: #404040;
+}
+
+.gradient {
+    display: block;
+    width: 100%;
+    height: 100%;
+    float: left;
+
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(50%,rgba(0,0,0,.3)),to(rgba(0,0,0,.4)));
+    background-image: -webkit-linear-gradient(top,rgba(0,0,0,.3) 50%,rgba(0,0,0,.4));
+    background-image: linear-gradient(180deg,rgba(0,0,0,.3) 50%,rgba(0,0,0,.4));
+}
+
+.gradient:hover {
+    display: block;
+    width: 100%;
+    height: 100%;
+    float: left;
+
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(50%,rgba(0,0,0,.5)),to(rgba(0,0,0,.7)));
+    background-image: -webkit-linear-gradient(top,rgba(0,0,0,.5) 50%,rgba(0,0,0,.7));
+    background-image: linear-gradient(180deg,rgba(0,0,0,.5) 50%,rgba(0,0,0,.7));
+}
+
+ul {
+  color: white;
+}
+
+@media only screen and (max-width: 768px) {
+    .big-module h3 {
+      margin-top: 20%;
+    }
+    .module h3 {
+      margin-top: 20%;
+    }
+    .vendor-list {
+      width: 100%;
+    }
+}

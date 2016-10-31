@@ -15,7 +15,7 @@ export class LoginService {
 
     private loggedIn = false;
     private tokenUrl = AppSettings.TASKCAT_BASE + "token";
-    private AUTH_TOKEN_KEY = "auth_token";
+    private AUTH_TOKEN_KEY = AppSettings.AUTH_TOKEN_KEY;
 
     private isLoggedInSource = new Subject<boolean>();
 
@@ -49,8 +49,9 @@ export class LoginService {
     }
 
     logout() {
-        this._localStorage.remove(this.AUTH_TOKEN_KEY);
+        this._removeSessionData()
         this.loggedIn = false;
+        window.location.reload();
     }
 
     announceLoggedIn(isLoggedIn: boolean) {
@@ -61,6 +62,11 @@ export class LoginService {
         this._checkAlreadyLoggedIn();
         this.announceLoggedIn(this.loggedIn);
         return this.loggedIn;
+    }
+
+    private _removeSessionData(){
+        this._localStorage.remove(this.AUTH_TOKEN_KEY);
+        this._localStorage.remove(AppSettings.ORDER_CART_KEY);
     }
 
     private _extractAuthError(res: Response) {
@@ -76,7 +82,10 @@ export class LoginService {
             this.loggedIn = true;
         }
         else {
-            throw new Error("Invalid/blank auth data, Fatal Error");
+            // FIXME: Since users will be able to browse vendors without logging in
+            // Lets not throw this error now!
+            // throw new Error("Invalid/blank auth data, Fatal Error");
+            this.loggedIn = false;
         }
 
         this._localStorage.setObject(this.AUTH_TOKEN_KEY, data);

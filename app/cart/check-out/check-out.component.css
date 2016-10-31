@@ -1,0 +1,12 @@
+.half-width{
+    width: 50%;
+}
+
+@media only screen and (max-width: 780px){
+    .half-width{
+        width: 90%;
+    }
+    h3 {
+        font-size: 1.5em;
+    }
+}

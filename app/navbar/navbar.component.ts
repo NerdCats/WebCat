@@ -1,13 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
 import { CollapseDirective } from 'ng2-bootstrap/components/collapse/collapse.directive';
-
+import { FormBuilder, Validators, ControlGroup } from '@angular/common';
 import { AppSettings } from '../shared/app.settings';
 import { SignupComponent } from '../account/signup/signup.component';
 import { LoginComponent, LoginStatus } from '../account/login/login.component';
 import { LoginService } from '../account/login/login.service';
+import { CartBusService } from '../cart/cart-bus.service';
 
 import { LocalStorage } from '../shared/local-storage';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 type NavbarState = "PUBLIC" | "SECURED";
 
@@ -19,10 +22,17 @@ interface NavbarElement {
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, SignupComponent, LoginComponent],
-    providers: [LocalStorage],
+    directives: [
+        ROUTER_DIRECTIVES,
+        CollapseDirective,
+        SignupComponent,
+        LoginComponent,
+        ModalComponent
+    ],
+    providers: [LocalStorage, CartBusService],
     styleUrls: ['app/navbar/navbar.component.css']
 })
+
 export class NavbarComponent {
     @ViewChild('signup')
     public signUpComponent: SignupComponent;
@@ -30,8 +40,13 @@ export class NavbarComponent {
     @ViewChild('login')
     public loginComponent: LoginComponent;
 
+    @ViewChild('trackingModal')
+    public trackingModal : ModalComponent;
+
     AppTitle: string;
     State: NavbarState = "PUBLIC";
+    public trackJobForm: ControlGroup;
+
 
     profileNavElement: NavbarElement;
     userNameString: string;
@@ -41,20 +56,23 @@ export class NavbarComponent {
 
     navBarElementDict = {};
 
-    isCollapsed: boolean;
+    isCollapsed: boolean = true;
 
-    constructor(
-        private localStorage: LocalStorage,
+    constructor(private localStorage: LocalStorage,
         private loginService: LoginService,
-        private router: Router) {
-        this.AppTitle = AppSettings.APP_NAME;
+        private router: Router,
+        private trackJobFormBuilder: FormBuilder) {
+            this.AppTitle = AppSettings.APP_NAME;
 
-        if (this.loginService.isLoggedIn) {
-            this._setToSecuredState();
-        }
+            if (this.loginService.isLoggedIn) {
+                this._setToSecuredState();
+            }
+            this.trackJobForm = this.trackJobFormBuilder.group({
+                jobid: [""]
+            });
 
-        this._initiatePublicNavElements();
-        this._initiateSecureNavElements();
+            this._initiatePublicNavElements();
+            this._initiateSecureNavElements();
     }
 
     onLoginCompleted(loginStatus: LoginStatus) {
@@ -84,8 +102,28 @@ export class NavbarComponent {
         this.router.navigate(["Dashboard"]);
     }
 
+    searchJob(event){
+        this.router.navigateByUrl("/track/" + this.trackJobForm.value.jobid);
+        this.trackingModal.close();
+    }
+
+    // Tracking
+
+    trackingProperty = {
+        Title: "Tracking",
+        Event: () => { this.showTrackingModal(); }
+    }
+
+    private showTrackingModal() {
+        this.trackingModal.open();
+    }
+    // End --- Tracking
+
     private _initiatePublicNavElements() {
         this._publicNavElements = new Array<NavbarElement>();
+
+        this._publicNavElements.push(this.trackingProperty);
+
         this._publicNavElements.push({
             Title: "Sign Up",
             Event: () => { this.showSignUpComponent(); }
@@ -105,10 +143,12 @@ export class NavbarComponent {
             Event: () => { this.navigateToDashboard(); }
         });
 
-        this._secureNavElements.push({
-            Title: this.userNameString,
-            Event: () => { console.log("Not Implemented Yet"); }
-        });
+        this._secureNavElements.push(this.trackingProperty);
+
+        // this._secureNavElements.push({
+        //     Title: this.userNameString,
+        //     Event: () => { console.log("Not Implemented Yet"); }
+        // });
 
         this._secureNavElements.push({
             Title: "Log Out",
@@ -124,8 +164,8 @@ export class NavbarComponent {
         this.userNameString = userName;
 
         // INFO : This is literally shameless, but sometimes, you just gotta do it
-        if(this._secureNavElements) {
-            this._secureNavElements[1].Title = this.userNameString;
-        }
+        // if(this._secureNavElements) {
+        //     this._secureNavElements[1].Title = this.userNameString;
+        // }
     }
 }

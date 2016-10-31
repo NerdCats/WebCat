@@ -17,7 +17,7 @@
 	<div class="row" *ngIf="status=='SUCCESSFUL'">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Order Information
@@ -52,7 +52,7 @@
 			</div>
 
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Order Status
@@ -78,26 +78,29 @@
 							<p>{{job.PaymentStatus}}</p>
 						</div>
 					</div>
-					<div class="col-md-12">
-						<table class="table table-sm table-hover table-bordere table-responsive">
+					<div class="col-md-12 table-responsive">
+
+						<table class="table table-sm table-hover table-bordered">
 							<thead>
 								<tr>
 									<th>Task</th>
-									<th>Mentioned ETA</th>
+									<th>Status</th>
+									<!--<th>Mentioned ETA</th>-->
 									<th>Started</th>
 									<th>Completed</th>
 									<th>Duration</th>
-									<th>ETA Failed?</th>
+									<!--<th>ETA Failed?</th>-->
 								</tr>
 							</thead>
 							<tbody>
 								<tr *ngFor="let task of tasksTiming">
-									<td class="col-md-2"> {{task.Type}} </td>
-									<td class="col-md-2"> {{(task.ETA | date:"EEE d MMM y,h:m TT") || "Not Mentioned"}} </td>
+									<td class="col-md-1"> {{task.Type}} </td>
+									<td class="col-md-1"> {{task.State}} </td>
+									<!--<td class="col-md-2"> {{(task.ETA | date:"EEE d MMM y,h:m TT") || "Not Mentioned"}} </td>-->
 									<td class="col-md-2"> {{(task.InitiationTime | date:"EEE d MMM y,h:m TT") || "Not Started"}} </td>
 									<td class="col-md-2"> {{(task.CompletionTime | date:"EEE d MMM y,h:m TT") || "Not Finished"}} </td>
 									<td class="col-md-2"> {{task.Duration || "Not Finished"}} </td>
-									<td class="col-md-2"> {{task.ETAFailed}} </td>
+									<!--<td class="col-md-2"> {{task.ETAFailed}} </td>-->
 								</tr>
 							</tbody>
 						</table>
@@ -106,7 +109,7 @@
 			</div>
 
 			<div class="panel panel-primary" *ngIf="assetInfo.length != 0 || (coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable)">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Tracking Information
@@ -193,7 +196,7 @@
 			</div>
 
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div id="panel-heading-custom" class="panel-heading">
 					<div class="row">
 						<h3 class="panel-title col-md-11">
 							Item List
@@ -204,8 +207,12 @@
 					</div>
 				</div>
 				<div id="itemListInfo" class="panel-body collapse">
+					<div class="row">
+						<strong>Order Description</strong>
+						<p>{{job.Order.Description}}</p>
+					</div>
 					<div class="table-responsive">
-						<table class="table table-sm table-hover table-bordered">
+						<table class="table table-sm table-hover table-bordered table-responsive">
 							<thead>
 								<tr>
 									<th>#</th>

@@ -1,6 +1,6 @@
 export class AppSettings {
    public static get APP_NAME(): string {
-     return 'GO! Fetch!';
+     return 'GO! Fetch';
    }
 
    public static get TASKCAT_API_BASE(): string {
@@ -8,7 +8,8 @@ export class AppSettings {
    }
 
    public static get TASKCAT_BASE(): string{
-     return 'http://taskcatdev.azurewebsites.net/';
+    //  return 'http://taskcatdev.azurewebsites.net/';
+     return 'http://gofetch.cloudapp.net/';
    }
 
    public static get CLIENT_ID(): string {
@@ -25,5 +26,13 @@ export class AppSettings {
 
    public static get GOOGLE_MAP_API_KEY(): string {
      return 'AIzaSyCKMIEYdB0YPJkDr89n0WuaG3qQDjE9ndY';
+   }
+
+   public static get AUTH_TOKEN_KEY(): string {
+     return 'auth_token';
+   }
+
+   public static get ORDER_CART_KEY(): string {
+     return 'ordercart';
    }
 }

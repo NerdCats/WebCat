@@ -7,7 +7,7 @@ import { LocalStorage } from '../../shared/local-storage'
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import { TimepickerComponent } from 'ng2-bootstrap/ng2-bootstrap';
-import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import { DATEPICKER_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 
 
@@ -34,7 +34,7 @@ export class OrderComponent {
     public orderResponseMessage: string = "";
     public areas: Array<string>;
     public itemAddOrUpdateText: string = "Add";
-    public formTitle:string = "Create your Delivery Order";
+    public formTitle:string = "Create your Custom Delivery Order";
     public submittedJobId: string;
 
     public pickupTime: Date; //= new Date();
@@ -59,6 +59,8 @@ export class OrderComponent {
         this.processJobTaskPreferrenceETA();
         this.orderService.createOrder(this.orderModel)
             .subscribe((result) => {
+                console.log(result);
+
                 let job = JSON.parse(result._body);
                 this.submittedJobId = job.HRID;
                 this.orderCreationStatus = 'SUCCESS';

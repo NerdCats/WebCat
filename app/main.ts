@@ -1,4 +1,5 @@
 import { provide } from '@angular/core';
+import {enableProdMode} from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { LocationStrategy, Location, HashLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { GOOGLE_MAPS_PROVIDERS, provideLazyMapsAPILoaderConfig } from 'angular2-
 import { AppSettings } from './shared/app.settings';
 import 'rxjs/add/operator/catch';
 
+enableProdMode();
 // INFO: Need to use a proper logging module here
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,

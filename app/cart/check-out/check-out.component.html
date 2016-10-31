@@ -1,0 +1,92 @@
+<div class="container center-block">
+     <div *ngIf="orderSubmission =='FAILED'" class="form-group">
+        <label class="control-label" for="error"></label>
+        <div class="alert alert-danger">{{errorMessage}}</div>
+    </div>
+    <form class="form-horizontal center-block half-width" [ngFormModel]="checkOutForm">
+        <fieldset [disabled]="orderSubmission === 'IN_PROGRESS'">
+             <div class="form-group">
+                <h3>1. Enter Recipient's Name</h3>
+                <input ngControl="receiversName"  class="form-control"
+                        [(ngModel)]="receiversName"
+                        required>
+            </div>
+             <div class="form-group">
+                <h3>2. Enter Recipient's PhoneNumber</h3>
+                <input ngControl="receiversPhonenumber"  class="form-control"
+                        [(ngModel)]="receiversPhonenumber"
+                        required>
+            </div>
+            <div class="form-group">
+                <h3>3. Enter Recipient's Address</h3>
+                <textarea ngControl="deliveryAddress"  class="form-control" rows="5"
+                        [(ngModel)]="orderCart.To.AddressLine1"
+                        required></textarea>
+            </div>
+            <div class="form-group">
+                <h3>4. Select Payment Method</h3>
+                <select required ngControl="orderType" #orderType="ngForm" class="form-control"
+                 name="orderType" [(ngModel)]="orderCart.PaymentMethod">
+                    <option value="CashOnDelivery">Cash On Delivery</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <h3>5. Order Summary</h3>
+                <table class="table table-sm table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Item</th>
+                            <th>Qty</th>
+                            <th style="width: 72px;">Unit Price</th>
+                            <th>Weight</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of orderCart.OrderCart.PackageList; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>
+                                {{ item.Item }}
+                                <ul class="list-inline">
+                                    <li><a class="pointer" (click)="removeItem(i)">Remove</a></li>
+                                </ul>
+                            </td>
+                            <td id="item-quanity">
+                                <input type="number" class="form-control" [(ngModel)]="item.Quantity" (ngModelChange)="itemChanged($event)">
+                            </td>
+                            <td>{{ item.Price }}</td>
+                            <td>{{ item.Weight }}</td>
+                            <td>{{ item.Total | number:'1.2-2' }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-right">Total Weight</td>
+                            <td>{{ orderCart.OrderCart.TotalWeight }}</td>
+                            <td colspan="2" class="text-right">Subtotal</td>
+                            <td>{{ orderCart.OrderCart.SubTotal | number:'1.2-2' }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-right">Delivery Charge</td>
+                            <td>{{ orderCart.OrderCart.ServiceCharge }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-right">Total</td>
+                            <td>{{ orderCart.OrderCart.TotalToPay | number:'1.2-2' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div *ngIf="orderCart.Description">
+                    <h3>CUSTOM ORDER</h3>
+                    <textarea class="form-control" rows="5" [(ngModel)]="orderCart.Description"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary pull-right" [disabled]="!checkOutForm.valid" (click)="confirmOrder()">
+                     <span *ngIf="orderSubmission=='IN_PROGRESS'" class="fa fa-refresh fa-spin"></span>
+                        CONFIRM ORDER
+                </button>
+            </div>
+        </fieldset>
+    </form>
+</div>

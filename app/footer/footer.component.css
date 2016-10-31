@@ -1,0 +1,13 @@
+ul {
+    list-style: none;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 780px){
+    .footer {
+        font-size: 10px;
+    }
+}

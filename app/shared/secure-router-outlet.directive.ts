@@ -44,9 +44,16 @@ export class SecureRouterOutlet extends RouterOutlet {
     }
 
     private _canActivate(url: string) {
+        // need to move this regex out and fix them in router-config.ts
         let jobTrackPageUrlRegex = "track/Job-[A-Z|0-9]{8}";
-        return this.publicRoutes.indexOf(url) !== -1
+        let vendorListPageReges = "vendors/.*";
+        let vendorMenuPageReges = "vendors/.*/.*";
+        let searchResultPageRegex = "search/.*/.*";
+      return this.publicRoutes.indexOf(url) !== -1
             || (url.match(jobTrackPageUrlRegex) !== null && url.match(jobTrackPageUrlRegex).indexOf(url) !== -1)
+            || (url.match(vendorListPageReges) !== null && url.match(vendorListPageReges).indexOf(url) !== -1)
+            || (url.match(vendorMenuPageReges) !== null && url.match(vendorMenuPageReges).indexOf(url) !== -1)
+            || (url.match(searchResultPageRegex) !== null && url.match(searchResultPageRegex).indexOf(url) !== -1)
             || this.loginService.isLoggedIn;
     }
 }
