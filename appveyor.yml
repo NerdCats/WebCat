@@ -25,5 +25,11 @@ artifacts:
     name: WebCat
     type: zip
 
+deploy:
+  - provider: Environment
+    name: TaskCatDev
+    on:
+      branch: master
+
 cache:
   - node_modules -> package.json
