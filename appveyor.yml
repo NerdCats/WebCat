@@ -9,7 +9,6 @@ build: off
 
 clone_depth: 10
 
-# Fix line endings on Windows
 init:
   - git config --global core.autocrlf true
 
@@ -30,7 +29,8 @@ deploy:
     name: TaskCatDev
     on:
       branch: master
-- provider: Environment
+      
+  - provider: Environment
     name: TaskCatProd
     on:
       branch: prod
