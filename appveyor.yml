@@ -30,6 +30,10 @@ deploy:
     name: TaskCatDev
     on:
       branch: master
+- provider: Environment
+    name: TaskCatProd
+    on:
+      branch: prod
 
 cache:
   - node_modules -> package.json
