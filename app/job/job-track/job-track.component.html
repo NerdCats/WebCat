@@ -95,7 +95,6 @@
 									<th>Started</th>
 									<th>Completed</th>
 									<th>Duration</th>
-									<th>ETA Failed?</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -106,7 +105,6 @@
 									<td class="col-md-2"> {{(task.InitiationTime | date:"EEE d MMM y,h:m TT") || "Not Started"}} </td>
 									<td class="col-md-2"> {{(task.CompletionTime | date:"EEE d MMM y,h:m TT") || "Not Finished"}} </td>
 									<td class="col-md-2"> {{task.Duration || "Not Finished"}} </td>
-									<td class="col-md-2"> {{task.ETAFailed}} </td>
 								</tr>
 							</tbody>
 						</table>
