@@ -18,6 +18,7 @@ import { CoordinateInfo } from '../shared/coordinateInfo';
 import { OrderInfoService } from '../shared/orderInfo.service';
 
 import { ComponentServiceStatus } from '../../shared/component-service-status';
+import { Comment } from '../shared/comment';
 import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-bubble.component';
 
 
@@ -32,6 +33,7 @@ export class JobTrackComponent implements OnInit {
 
     public jobId: string;
     public job: Job;
+    public comments: Comment;
 
 
     public status: ComponentServiceStatus = "IN_PROGRESS";
@@ -62,6 +64,7 @@ export class JobTrackComponent implements OnInit {
     ngOnInit() {
         this.jobId = this.routeparams.get('jobId');
         this.getJob();
+        this.getComment();
     }
 
     getJob() {
@@ -106,6 +109,14 @@ export class JobTrackComponent implements OnInit {
                 }
                 console.log(this.errorMessage);
             });
+    }
+
+    getComment() {
+        this.jobTrackService.getComments(this.jobId)
+            .subscribe(comments => {
+                this.comments = comments["data"];
+                console.log(this.comments);
+            })
     }
 
     getCssClass(word){
