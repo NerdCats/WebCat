@@ -4,6 +4,7 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 import {JobService} from '../shared/job.service';
 import {Job} from '../shared/job';
+import {JobTask} from '../shared/jobtasks';
 import {Pagination} from '../../shared/pagination';
 import {CssHelper} from '../../shared/css-helper';
 
@@ -85,6 +86,7 @@ export class JobHistoryComponent implements OnInit {
     private manageHistory(pagedJob){
         this.status = "SUCCESSFUL";
         this.jobs = pagedJob.data;
+        console.log(JSON.stringify(this.jobs[0]));
         this.pagination = pagedJob.pagination;
 
         // FIXME: This is an ugly code I confess
@@ -105,6 +107,13 @@ export class JobHistoryComponent implements OnInit {
     private manageError(error){
         this.statusMessage = error.Message || "Failed to fetch data from server";
         this.status = "FAILED";
+    }
+
+    getTasksState(task: JobTask){
+        if(task === undefined)
+            return CssHelper.getCssLabel("N/A");
+        else
+            return CssHelper.getCssLabel(task.State);
     }
 
     setJobStatusLabelClass(state: string) {

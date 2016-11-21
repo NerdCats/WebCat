@@ -3,6 +3,7 @@ import { ROUTER_DIRECTIVES, RouterOutlet, RouteConfig } from '@angular/router-de
 
 import { GlimpseComponent } from './glimpse/glimpse.component';
 import { OrderComponent } from './order/order.component';
+import { ReportComponent } from './report/report.component';
 
 import { DashboardBusService } from './dashboard-bus.service';
 import { Observable } from 'rxjs';
@@ -15,7 +16,8 @@ import { Observable } from 'rxjs';
 })
 @RouteConfig([
     { path: '/glimpse', name: 'Glimpse', component: GlimpseComponent, useAsDefault: true },
-    { path: '/order', name: 'Order', component: OrderComponent }
+    { path: '/order', name: 'Order', component: OrderComponent },
+    { path: '/report', name: 'Report', component: ReportComponent }
 ])
 export class DashboardComponent implements OnInit {
     isSideBarOpen: boolean = true;

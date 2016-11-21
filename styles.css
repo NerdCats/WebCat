@@ -111,6 +111,10 @@
     .pending {
         background-color: #FF5722 !important;
     }
+
+    .na {
+        background-color: #616161 !important;
+    }
     .in-progress {
         background-color: #FFEB3B !important;
         color: black;
