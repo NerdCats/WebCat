@@ -1,8 +1,14 @@
-<h1>Reporting</h1>
-
-<div class="form-group">
-    <div class="" >
-    <datepicker [(ngModel)]="pickupTime" [showWeeks]="true"></datepicker>
-    <span>{{pickupTime | date:'EEE d MMM y,h:m a'}}</span>
+<div class="form-group row">
+    <h3>Select the Dates and Click the button to Export an excel report in between selected dates</h3>
+    <div class="col-md-3">
+        <datepicker [(ngModel)]="startTime" [showWeeks]="true"></datepicker>
+        <span>{{startTime | date:'EEE d MMM y'}}</span>
+    </div>
+    <div class="col-md-3">
+        <datepicker [(ngModel)]="endTime" [showWeeks]="true"></datepicker>
+        <span>{{endTime | date:'EEE d MMM y'}}</span>
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-primary" (click)="generateReport()">Export Report</button>
     </div>
 </div>
