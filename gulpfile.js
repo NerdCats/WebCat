@@ -190,6 +190,9 @@ gulp.task('build:prod-asset', function (done) {
         .pipe(cssnano())
         .pipe(gulp.dest('prod/'));
 
+    gulp.src(['node_modules/bootstrap/dist/fonts/*'])
+        .pipe(gulp.dest('prod/fonts'));
+
     gulp.src('app/**/*.css', { base: './' })
         .pipe(cssnano())
         .pipe(gulp.dest('prod/'));
@@ -226,7 +229,6 @@ gulp.task('build:prod', function (callback) {
         'clean:prod',
         'compile',
         'copy:libs',
-        'copy:fonts',
         'copy:assets',
         'build-systemjs',
         'build:prod-asset',
