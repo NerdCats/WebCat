@@ -1,5 +1,4 @@
 import { DefaultAddress } from './geocoding.defaultAddress'
-import { OrderType } from './order-type';
 
 export class OrderModel {
     public Name: string;

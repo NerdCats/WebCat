@@ -1,1 +1,8 @@
 <h1>Reporting</h1>
+
+<div class="form-group">
+    <div class="" >
+    <datepicker [(ngModel)]="pickupTime" [showWeeks]="true"></datepicker>
+    <span>{{pickupTime | date:'EEE d MMM y,h:m a'}}</span>
+    </div>
+</div>

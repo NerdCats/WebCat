@@ -72,7 +72,6 @@ gulp.task('copy:libs', function () {
         'bootstrap/dist/css/bootstrap.min.css',
         'bootstrap/dist/css/bootstrap.min.css.map',
         'bootstrap/dist/js/bootstrap.js',
-        'bootstrap/fonts/**',
         'jquery/dist/jquery.min.js',
         'jquery/dist/jquery.min.map',
         'es6-shim/es6-shim.min.js',
@@ -94,6 +93,12 @@ gulp.task('copy:libs', function () {
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("dist/lib"));
 });
+
+gulp.task('copy:fonts', function(){
+    return gulp.src([
+        'node_modules/bootstrap/dist/fonts/*',
+    ]).pipe(gulp.dest("dist/lib/bootstrap/dist/fonts"));
+})
 
 // copy dependencies from node_modules
 // we are just mimicking the dev environment now, but for production a lot more has to be done
@@ -144,7 +149,7 @@ gulp.task('watch-ts', function () {
 gulp.task('build', function (callback) {
     runSequence('clean',
         'compile',
-        ['copy:assets', 'copy:test-assets', 'copy:libs', 'copy:test-libs'],
+        ['copy:assets', 'copy:test-assets', 'copy:libs', 'copy:fonts', 'copy:test-libs'],
         callback);
 });
 
@@ -221,6 +226,7 @@ gulp.task('build:prod', function (callback) {
         'clean:prod',
         'compile',
         'copy:libs',
+        'copy:fonts',
         'copy:assets',
         'build-systemjs',
         'build:prod-asset',
