@@ -41,7 +41,7 @@ export class JobService {
                 propName: "CreateTime",
                 orderDirection: "desc"
             }]).toQueryString();
-        let historyUrl = this.jobUrl + '/odata' + queryString
+        let historyUrl = this.jobUrl + '/odata' + queryString + "&pageSize=50";
 
         return this.getJobs(historyUrl);
     }

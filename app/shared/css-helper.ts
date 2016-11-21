@@ -2,6 +2,11 @@ export class CssHelper {
    public static getCssLabel(word):any {
 
        switch(word){
+            case "N/A":
+			return {
+				value: "N/A",
+				class: "label na"
+			}
             case "ENQUEUED":
 			return {
 				value: "PENDING",
