@@ -14,7 +14,7 @@ import { LocalStorage } from '../../shared/local-storage';
 export class LoginService {
 
     private loggedIn = false;
-    private tokenUrl = AppSettings.TASKCAT_BASE + "token";
+    private tokenUrl = AppSettings.TASKCAT_API_BASE + "auth/token";
     private AUTH_TOKEN_KEY = "auth_token";
 
     private isLoggedInSource = new Subject<boolean>();
