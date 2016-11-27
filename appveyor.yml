@@ -1,0 +1,39 @@
+# Build version format
+version: "{build}"
+
+# Test against this version of Node.js
+environment:
+  nodejs_version: "4.4.7"
+
+build: off
+
+clone_depth: 10
+
+init:
+  - git config --global core.autocrlf true
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install -g npm
+  - ps: $env:path = $env:appdata + "\npm;" + $env:path
+  - npm install
+  - npm run build-prod
+
+artifacts:
+  - path: prod
+    name: WebCat
+    type: zip
+
+deploy:
+  - provider: Environment
+    name: TaskCatDev
+    on:
+      branch: master
+
+  - provider: Environment
+    name: TaskCatProd
+    on:
+      branch: temp_prod
+
+cache:
+  - node_modules -> package.json
