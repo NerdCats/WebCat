@@ -30,8 +30,9 @@ export class JobHistoryComponent implements OnInit {
         this.componentMode = componentMode || "WIDGET";
     }
 
-    jobs: Array<Job>;
+    jobs: Array<Job> = new Array<Job>();;
     jobState: string = "ALL";
+    paymentStatus: string = "ALL";
     status: ComponentServiceStatus = "IN_PROGRESS";
     accessMode: AccessMode = "DEFAULT";
     componentMode: ComponentMode = "WIDGET";
@@ -43,46 +44,26 @@ export class JobHistoryComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getJobs();
+        this.getJobsWithPageNumber("ALL", "ALL", 0);
     }
 
     jobStateChange(){
-        this.getJobsWithPageNumber(this.jobState, 0);
-    }
-    goToTrackingPage(jobId: string){
-        this.router.navigateByUrl("/track/" + jobId);
+        this.getJobsWithPageNumber(this.jobState, this.paymentStatus, 0);
     }
 
-    getJobs() {
-        this.jobs = new Array<Job>();
+    getJobsWithPageNumber(jobState:string, paymentStatus:string, page: number){
         this.status = "IN_PROGRESS";
-        this.jobService.getHistoryWithPageNumber(this.jobState, 0)
-            .subscribe((pagedJob) => {
-                this.manageHistory(pagedJob);
-            }, (error) => {
-                this.manageError(error);
-            });
-    }
+        if(paymentStatus !== "ALL") {
+            jobState = "ALL";
+            this.jobState  = "ALL";
+        }
+        if(page > 0) page = 0;
+        if(this.pagination && page >= this.pagination.TotalPages) page = this.pagination.TotalPages;
 
-
-
-    getJobsWithPageNumber(jobState:string, page: number){
-        this.status = "IN_PROGRESS";
-        this.jobService.getHistoryWithPageNumber(jobState, page)
+        this.jobService.getHistoryWithPageNumber(jobState, paymentStatus, page)
             .subscribe((pagedJob) => {
                 this.manageHistory(pagedJob)
             },(error) => {
-                this.manageError(error);
-            })
-    }
-
-
-    loadJobWithUrl(url: string){
-        this.status = "IN_PROGRESS";
-        this.jobService.getJobs(url)
-            .subscribe((pagedJob)=> {
-                this.manageHistory(pagedJob)
-            }, (error) => {
                 this.manageError(error);
             })
     }
