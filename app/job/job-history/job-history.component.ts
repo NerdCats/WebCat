@@ -40,27 +40,57 @@ export class JobHistoryComponent implements OnInit {
     pagination: Pagination;
     paginationArray: Object[];
 
+    startTime: Date = new Date();
+    endTime: Date = new Date();
+
+
+
     constructor(private jobService: JobService, private router: Router) {
     }
 
     ngOnInit() {
-        this.getJobsWithPageNumber("ALL", "ALL", 0);
+        this.search();
     }
 
-    jobStateChange(){
-        this.getJobsWithPageNumber(this.jobState, this.paymentStatus, 0);
+    search(){
+        console.log(this.jobState)
+        console.log(this.paymentStatus)
+        console.log(0)
+        console.log(this.startTime)
+        console.log(this.endTime)
+
+        this.getJobsWithPageNumber(this.jobState, this.paymentStatus, 0, this.startTime, this.endTime);
     }
 
-    getJobsWithPageNumber(jobState:string, paymentStatus:string, page: number){
+    clearDate(){
+        this.startTime = null;
+        this.endTime = null;
+        this.search();
+    }
+
+    getJobsWithPageNumber(jobState:string, paymentStatus:string, page: number, startTime: Date, endTime: Date){
         this.status = "IN_PROGRESS";
+        let startTimeISO:string;
+        let endTimeISO:string;
         if(paymentStatus !== "ALL") {
             jobState = "ALL";
             this.jobState  = "ALL";
         }
+
         if(page > 0) page = 0;
         if(this.pagination && page >= this.pagination.TotalPages) page = this.pagination.TotalPages;
 
-        this.jobService.getHistoryWithPageNumber(jobState, paymentStatus, page)
+        if(startTime){
+            startTime = new Date(startTime);
+            startTimeISO = startTime? new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 0, 0, 0).toISOString() : null;
+        }
+
+        if(endTime){
+            endTime = new Date(endTime);
+            endTimeISO = endTime? new Date(endTime.getFullYear(), endTime.getMonth(), endTime.getDate(), 23, 59, 59).toISOString() : null;
+        }
+
+        this.jobService.getHistoryWithPageNumber(jobState, paymentStatus, page, startTimeISO, endTimeISO)
             .subscribe((pagedJob) => {
                 this.manageHistory(pagedJob)
             },(error) => {

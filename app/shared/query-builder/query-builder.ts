@@ -25,7 +25,7 @@ export class QueryBuilder {
             let querySegment: string = "$filter";
             let filterbySegment = props.map(
                 p => p.value ? p.propName.concat(" " + p.comparator + " " , p.value) : "")
-                .join(",");
+                .join(" and ");
             this._querySegments.push(querySegment.concat("=" , filterbySegment));
         }
         return this;

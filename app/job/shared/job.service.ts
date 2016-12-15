@@ -33,7 +33,9 @@ export class JobService {
             });
     }
 
-    getHistoryWithPageNumber(state:string, paymentStatus: string, page:number): Observable<PageEnvelope<Job>> {
+    getHistoryWithPageNumber(state:string, paymentStatus: string, page:number,
+                            startTimeISO: string, endTimeISO: string)
+                            : Observable<PageEnvelope<Job>> {
         this._queryBuilder = new QueryBuilder();
         let filterArray: any = [];
         if(state !== "ALL") {
@@ -50,6 +52,40 @@ export class JobService {
                                 value: "'" + paymentStatus + "'"
                             })
         }
+        if(state === "ENQUEUED"){
+            if(startTimeISO){
+                filterArray.push({
+                    propName: "CreateTime",
+                    comparator: "gt",
+                    value: "datetime'"+ startTimeISO +"'"
+                })
+            }
+            if(endTimeISO){
+                filterArray.push({
+                    propName: "CreateTime",
+                    comparator: "lt",
+                    value: "datetime'"+ endTimeISO +"'"
+                })
+            }
+        }
+        else {
+            if(startTimeISO){
+                filterArray.push({
+                    propName: "ModifiedTime",
+                    comparator: "gt",
+                    value: "datetime'"+ startTimeISO +"'"
+                })
+            }
+            if(endTimeISO){
+                filterArray.push({
+                    propName: "ModifiedTime",
+                    comparator: "lt",
+                    value: "datetime'"+ endTimeISO +"'"
+                })
+            }
+        }
+
+
         let queryString: string = this._queryBuilder
             .filterBy(filterArray)
             .orderBy([
