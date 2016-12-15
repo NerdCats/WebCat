@@ -10,12 +10,13 @@
             {{statusMessage}}
         </div>
         <div class="error" *ngIf="status=='FAILED'">
-            {{statusMessage}}
+            {{statusMessage}} <button class="btn btn-danger" (click)="getJobs()">click here to refresh</button>
         </div>
         <div class="table-responsive" *ngIf="status=='SUCCESSFUL'">
             <table class="table">
                 <thead>
                     <tr>
+                        <th>S/L</th>
                         <th>HRID</th>
                         <th>Package</th>
                         <th>Package Total Price(BDT)</th>
@@ -29,7 +30,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let job of jobs">
+                    <tr *ngFor="let job of jobs; let i = index">
+                        <td>{{ i + pagination.Start}}</td>
                         <td class="pointer"><a href="#/track/{{job.HRID}}">{{job.HRID}}</a></td>
                         <td>
                             <ol>

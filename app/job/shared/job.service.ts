@@ -18,8 +18,6 @@ export class JobService {
     private _queryBuilder: QueryBuilder;
 
     constructor(private shttp: SecureHttp) {
-        // INFO: Should be injected here
-        this._queryBuilder = new QueryBuilder();
     }
 
     private jobUrl = AppSettings.TASKCAT_API_BASE + 'job';
@@ -35,20 +33,18 @@ export class JobService {
             });
     }
 
-    getHistory(): Observable<PageEnvelope<Job>> {
+    getHistoryWithPageNumber(page:number): Observable<PageEnvelope<Job>> {
+        this._queryBuilder = new QueryBuilder();
         let queryString: string = this._queryBuilder.orderBy([
             {
-                propName: "CreateTime",
+                propName: "ModifiedTime",
                 orderDirection: "desc"
-            }]).toQueryString();
-        let historyUrl = this.jobUrl + '/odata' + queryString + "&pageSize=50";
+            }])
+            .page(page)
+            .pageSize(50)
+            .toQueryString();
 
-        return this.getJobs(historyUrl);
-    }
-
-    getHistoryWithPageNumber(page:number): Observable<PageEnvelope<Job>> {
-        let queryString: string = this._queryBuilder.toQueryString();
-        let historyUrl = this.jobUrl + '/odata' + queryString + "&page=" + page; //FIXME: this url should be constructed by _queryBuilder
+        let historyUrl = this.jobUrl + '/odata' + queryString;
         return this.getJobs(historyUrl)
     }
 

@@ -52,7 +52,8 @@ export class JobHistoryComponent implements OnInit {
 
     getJobs() {
         this.jobs = new Array<Job>();
-        this.jobService.getHistory()
+        this.status = "IN_PROGRESS";
+        this.jobService.getHistoryWithPageNumber(0)
             .subscribe((pagedJob) => {
                 this.manageHistory(pagedJob);
             }, (error) => {
@@ -86,7 +87,6 @@ export class JobHistoryComponent implements OnInit {
     private manageHistory(pagedJob){
         this.status = "SUCCESSFUL";
         this.jobs = pagedJob.data;
-        console.log(JSON.stringify(this.jobs[0]));
         this.pagination = pagedJob.pagination;
 
         // FIXME: This is an ugly code I confess

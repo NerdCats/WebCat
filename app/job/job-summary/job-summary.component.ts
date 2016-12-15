@@ -50,6 +50,10 @@ export class JobSummaryComponent implements OnInit {
     constructor(private jobService: JobService) { }
 
     ngOnInit() {
+        this.getAllJobCount();
+    }
+
+    getAllJobCount(){
         this.getJobCount("COMPLETED");
         this.getJobCount("IN_PROGRESS");
         this.getJobCount("ENQUEUED");

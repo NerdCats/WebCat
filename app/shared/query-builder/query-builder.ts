@@ -28,6 +28,15 @@ export class QueryBuilder {
         return this;
     }
 
+    public pageSize(props: number): QueryBuilder {
+        let querySegment: string = "pageSize";
+        let pageSegment = props.toString();
+        this._querySegments.push(querySegment.concat("=", pageSegment));
+
+        return this;
+    }
+
+
     public toQueryString(): string {
         return "?".concat(this._querySegments.join("&"));
     }
