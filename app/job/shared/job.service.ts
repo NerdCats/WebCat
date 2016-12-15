@@ -33,9 +33,19 @@ export class JobService {
             });
     }
 
-    getHistoryWithPageNumber(page:number): Observable<PageEnvelope<Job>> {
+    getHistoryWithPageNumber(state:string, page:number): Observable<PageEnvelope<Job>> {
         this._queryBuilder = new QueryBuilder();
-        let queryString: string = this._queryBuilder.orderBy([
+        if(state !== "ALL") {
+            this._queryBuilder = this._queryBuilder.filterBy([
+                                            {
+                                                propName: "State",
+                                                comparator: "eq",
+                                                value: "'" + state + "'"
+                                            }
+                                        ])
+        }
+        let queryString: string = this._queryBuilder
+            .orderBy([
             {
                 propName: "ModifiedTime",
                 orderDirection: "desc"
@@ -45,6 +55,9 @@ export class JobService {
             .toQueryString();
 
         let historyUrl = this.jobUrl + '/odata' + queryString;
+
+        console.log(historyUrl);
+
         return this.getJobs(historyUrl)
     }
 

@@ -20,9 +20,9 @@ export type ComponentMode = "WIDGET" | "FULL";
 @Component({
     selector: 'job-history',
     templateUrl: 'app/job/job-history/job-history.component.html',
+    styleUrls: ['app/job/job-history/job-history.component.css'],
     directives: [ProgressBubbleComponent, WidgetHeaderComponent, WidgetBodyComponent],
-    providers: [JobService],
-    styleUrls: ['app/job/job-history/job-history.component.css']
+    providers: [JobService]
 })
 export class JobHistoryComponent implements OnInit {
     @Input()
@@ -31,6 +31,7 @@ export class JobHistoryComponent implements OnInit {
     }
 
     jobs: Array<Job>;
+    jobState: string = "ALL";
     status: ComponentServiceStatus = "IN_PROGRESS";
     accessMode: AccessMode = "DEFAULT";
     componentMode: ComponentMode = "WIDGET";
@@ -45,7 +46,9 @@ export class JobHistoryComponent implements OnInit {
         this.getJobs();
     }
 
-
+    jobStateChange(){
+        this.getJobsWithPageNumber(this.jobState, 0);
+    }
     goToTrackingPage(jobId: string){
         this.router.navigateByUrl("/track/" + jobId);
     }
@@ -53,7 +56,7 @@ export class JobHistoryComponent implements OnInit {
     getJobs() {
         this.jobs = new Array<Job>();
         this.status = "IN_PROGRESS";
-        this.jobService.getHistoryWithPageNumber(0)
+        this.jobService.getHistoryWithPageNumber(this.jobState, 0)
             .subscribe((pagedJob) => {
                 this.manageHistory(pagedJob);
             }, (error) => {
@@ -63,9 +66,9 @@ export class JobHistoryComponent implements OnInit {
 
 
 
-    getJobsWithPageNumber(page: number){
+    getJobsWithPageNumber(jobState:string, page: number){
         this.status = "IN_PROGRESS";
-        this.jobService.getHistoryWithPageNumber(page)
+        this.jobService.getHistoryWithPageNumber(jobState, page)
             .subscribe((pagedJob) => {
                 this.manageHistory(pagedJob)
             },(error) => {

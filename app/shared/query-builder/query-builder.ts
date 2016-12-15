@@ -20,6 +20,17 @@ export class QueryBuilder {
         return this;
     }
 
+    public filterBy(props: Array<{propName: string, comparator: string, value: string}>){
+        if (props && props.length > 0) {
+            let querySegment: string = "$filter";
+            let filterbySegment = props.map(
+                p => p.value ? p.propName.concat(" " + p.comparator + " " , p.value) : "")
+                .join(",");
+            this._querySegments.push(querySegment.concat("=" , filterbySegment));
+        }
+        return this;
+    }
+
     public page(props: number): QueryBuilder {
         let querySegment: string = "page";
         let pageSegment = props.toString();

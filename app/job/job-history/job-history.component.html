@@ -3,16 +3,35 @@
         <a href="#" *ngIf="mode=='ADMIN'">Manage</a>
     </widget-header>
     <widget-body classes="no-padding">
-        <div *ngIf="status=='IN_PROGRESS'">
+        <div class="row">
+            <form class="form-horizontal center-block" #searchForm="ngForm">
+                <fieldset>
+                    <div class="form-group mt col-md-3">
+                        <label class="col-md-4 control-label">Order State</label>
+                        <div class="col-md-8">
+                            <select class="form-control" [(ngModel)]="jobState" (ngModelChange)="jobStateChange($event)">
+                                <option value="ALL" selected>ALL</option>
+                                <option value="ENQUEUED">PENDING</option>
+                                <option value="IN_PROGRESS">IN PROGRESS</option>
+                                <option value="COMPLETED">COMPLETED</option>
+                                <option value="CANCELLED">CANCELLED</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="row" *ngIf="status=='IN_PROGRESS'">
             <progress-bubble></progress-bubble>
         </div>
-        <div class="message" *ngIf="status=='EMPTY'">
+        <div class="message row" *ngIf="status=='EMPTY'">
             {{statusMessage}}
         </div>
-        <div class="error" *ngIf="status=='FAILED'">
+        <div class="error row" *ngIf="status=='FAILED'">
             {{statusMessage}} <button class="btn btn-danger" (click)="getJobs()">click here to refresh</button>
         </div>
-        <div class="table-responsive" *ngIf="status=='SUCCESSFUL'">
+
+        <div class="row table-responsive" *ngIf="status=='SUCCESSFUL'">
             <table class="table">
                 <thead>
                     <tr>
