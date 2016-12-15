@@ -40,8 +40,8 @@ export class JobHistoryComponent implements OnInit {
     pagination: Pagination;
     paginationArray: Object[];
 
-    startTime: Date = new Date();
-    endTime: Date = new Date();
+    startTime: Date;
+    endTime: Date;
 
 
 
@@ -77,7 +77,7 @@ export class JobHistoryComponent implements OnInit {
             this.jobState  = "ALL";
         }
 
-        if(page > 0) page = 0;
+        if(page < 0) page = 0;
         if(this.pagination && page >= this.pagination.TotalPages) page = this.pagination.TotalPages;
 
         if(startTime){
