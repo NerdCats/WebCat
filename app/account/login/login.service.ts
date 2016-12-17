@@ -51,7 +51,7 @@ export class LoginService {
     logout() {
         this._localStorage.remove(this.AUTH_TOKEN_KEY);
         this.loggedIn = false;
-         window.location.reload();
+        window.location.reload();
     }
 
     announceLoggedIn(isLoggedIn: boolean) {

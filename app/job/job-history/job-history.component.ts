@@ -39,6 +39,8 @@ export class JobHistoryComponent implements OnInit {
     statusMessage: string;
     pagination: Pagination;
     paginationArray: Object[];
+    prevPageNo: number;
+    nextPageNo: number;
 
     startTime: Date;
     endTime: Date;
@@ -102,16 +104,30 @@ export class JobHistoryComponent implements OnInit {
         this.status = "SUCCESSFUL";
         this.jobs = pagedJob.data;
         this.pagination = pagedJob.pagination;
+        let currentPageIndex = pagedJob.pagination.Page
 
         // FIXME: This is an ugly code I confess
         this.paginationArray = new Array();
         for (var i = 0; i < pagedJob.pagination.TotalPages; i++) {
-            let page = { isSelected: "", pageNo: i }
-            if (pagedJob.pagination.Page == i) {
-                page.isSelected = "selected"
+            let page = { isSelected: "", pageNo: i , show: false}
+            if(i > (currentPageIndex-5) && i < (currentPageIndex + 5)){
+                console.log(i);
+                if (currentPageIndex == i) {
+                    page.isSelected = "selected";
+                }
+                if(pagedJob.pagination.TotalPages > i){
+                    this.prevPageNo = currentPageIndex - 1;
+                }
+                if(pagedJob.pagination.TotalPages > 0){
+                    this.nextPageNo = currentPageIndex + 1;
+                }
+                console.log("prevPageNo : " + this.prevPageNo + "  nextPageNo : " + this.nextPageNo);
+                this.paginationArray.push(page);
             }
-            this.paginationArray.push(page);
+
         }
+
+
 
         if (!this.jobs.length) {
             this.status = "EMPTY";

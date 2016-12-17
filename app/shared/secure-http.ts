@@ -61,6 +61,8 @@ export class SecureHttp extends Http {
         return observable.catch((err, source) => {
             if (err.status == 401) {
                 this._router.navigate(['/Home']);
+                this.localStorage.remove("auth_token");
+                window.location.reload();
                 return Observable.empty();
             } else {
                 return Observable.throw(err);

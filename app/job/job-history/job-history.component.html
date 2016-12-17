@@ -123,15 +123,15 @@
         </div>
     </widget-body>
     <widget-footer>
-        <ul class="pagination pagination-sm pull-right" *ngIf="status=='SUCCESSFUL'">
-            <li *ngIf="pagination.PrevPage">
-                <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, pagination.PrevPage-1, startTime, endTime)">&laquo;</a>
+        <ul class="pagination pagination-sm pull-right mr50" *ngIf="status=='SUCCESSFUL'">
+            <li *ngIf="prevPageNo !== -1">
+                <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, prevPageNo, startTime, endTime)">&laquo;</a>
             </li>
-            <li  *ngFor="let page of paginationArray">
+            <li *ngFor="let page of paginationArray">
                 <a class="{{page.isSelected}} pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, page.pageNo, startTime, endTime)">{{page.pageNo + 1}}</a>
             </li>
-            <li *ngIf="pagination.NextPage">
-                <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, pagination.NextPage, startTime, endTime)">&raquo;</a>
+            <li *ngIf="nextPageNo">
+                <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, nextPageNo, startTime, endTime)">&raquo;</a>
             </li>
         </ul>
         <div class=clearfix></div>
