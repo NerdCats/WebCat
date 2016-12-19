@@ -45,6 +45,8 @@ export class JobHistoryComponent implements OnInit {
     startTime: Date;
     endTime: Date;
 
+    searchText: string;
+
 
 
     constructor(private jobService: JobService, private router: Router) {
@@ -55,13 +57,7 @@ export class JobHistoryComponent implements OnInit {
     }
 
     search(){
-        console.log(this.jobState)
-        console.log(this.paymentStatus)
-        console.log(0)
-        console.log(this.startTime)
-        console.log(this.endTime)
-
-        this.getJobsWithPageNumber(this.jobState, this.paymentStatus, 0, this.startTime, this.endTime);
+        this.getJobsWithPageNumber(this.jobState, this.paymentStatus, 0, this.startTime, this.endTime, this.searchText)
     }
 
     clearDate(){
@@ -70,7 +66,7 @@ export class JobHistoryComponent implements OnInit {
         this.search();
     }
 
-    getJobsWithPageNumber(jobState:string, paymentStatus:string, page: number, startTime: Date, endTime: Date){
+    getJobsWithPageNumber(jobState:string, paymentStatus:string, page: number, startTime: Date, endTime: Date, reference: string = null){
         this.status = "IN_PROGRESS";
         let startTimeISO:string;
         let endTimeISO:string;
@@ -92,7 +88,7 @@ export class JobHistoryComponent implements OnInit {
             endTimeISO = endTime? new Date(endTime.getFullYear(), endTime.getMonth(), endTime.getDate(), 23, 59, 59).toISOString() : null;
         }
 
-        this.jobService.getHistoryWithPageNumber(jobState, paymentStatus, page, startTimeISO, endTimeISO)
+        this.jobService.getHistoryWithPageNumber(jobState, paymentStatus, page, startTimeISO, endTimeISO, reference)
             .subscribe((pagedJob) => {
                 this.manageHistory(pagedJob)
             },(error) => {
@@ -111,7 +107,6 @@ export class JobHistoryComponent implements OnInit {
         for (var i = 0; i < pagedJob.pagination.TotalPages; i++) {
             let page = { isSelected: "", pageNo: i , show: false}
             if(i > (currentPageIndex-5) && i < (currentPageIndex + 5)){
-                console.log(i);
                 if (currentPageIndex == i) {
                     page.isSelected = "selected";
                 }
@@ -121,10 +116,8 @@ export class JobHistoryComponent implements OnInit {
                 if(pagedJob.pagination.TotalPages > 0){
                     this.nextPageNo = currentPageIndex + 1;
                 }
-                console.log("prevPageNo : " + this.prevPageNo + "  nextPageNo : " + this.nextPageNo);
                 this.paginationArray.push(page);
             }
-
         }
 
 

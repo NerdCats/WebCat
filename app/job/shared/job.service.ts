@@ -34,7 +34,7 @@ export class JobService {
     }
 
     getHistoryWithPageNumber(state:string, paymentStatus: string, page:number,
-                            startTimeISO: string, endTimeISO: string)
+                            startTimeISO: string, endTimeISO: string, reference: string)
                             : Observable<PageEnvelope<Job>> {
         this._queryBuilder = new QueryBuilder();
         let filterArray: any = [];
@@ -85,6 +85,15 @@ export class JobService {
             }
         }
 
+        if(reference){
+            filterArray.push(
+            {
+                propName: "",
+                comparator: "",
+                value: "substringof('"+ reference +"',Order/To/Address) or substringof('"+ reference +"',HRID)"
+            })
+        }
+
 
         let queryString: string = this._queryBuilder
             .filterBy(filterArray)
@@ -102,6 +111,25 @@ export class JobService {
         console.log(historyUrl);
 
         return this.getJobs(historyUrl)
+    }
+
+    getJobsWithReference(reference: string, page: number){
+        let filterArray: any = [];
+
+        filterArray.push([
+            {
+                propName: "substringof('"+ reference +"',Order/To/Address)"
+            },
+            {
+                propName: "substringof('"+ reference +"',HRID)"
+            }
+        ])
+        let queryString: string = this._queryBuilder.filterBy(filterArray)
+                                                    .page(0)
+                                                    .toQueryString();
+        let historyUrl = this.jobUrl + '/odata' + queryString;
+        console.log(historyUrl);
+
     }
 
 

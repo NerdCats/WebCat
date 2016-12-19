@@ -7,6 +7,10 @@
     margin-top: 15px;
 }
 
-.mr50 {
-    margin-right: 50px;
+.search {
+    margin-top: 20px;
+}
+
+.search-input {
+    width: 2%;
 }
