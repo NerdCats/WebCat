@@ -91,6 +91,7 @@
                     <tr>
                         <th>S/L</th>
                         <th>HRID</th>
+                        <th>Invoice</th>
                         <th>Package</th>
                         <th>Package Total Price(BDT)</th>
                         <th>Pickup</th>
@@ -106,6 +107,7 @@
                     <tr *ngFor="let job of jobs; let i = index">
                         <td>{{ i + pagination.Start}}</td>
                         <td class="pointer"><a href="#/track/{{job.HRID}}">{{job.HRID}}</a></td>
+                        <td>{{job.Order.ReferenceInvoiceId}}</td>
                         <td>
                             <ol>
                                 <li *ngFor="let item of job.Order.OrderCart.PackageList">{{item.Item}}</li>

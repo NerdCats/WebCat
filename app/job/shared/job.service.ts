@@ -90,7 +90,7 @@ export class JobService {
             {
                 propName: "",
                 comparator: "",
-                value: "substringof('"+ reference +"',Order/To/Address) or substringof('"+ reference +"',HRID)"
+                value: " substringof('"+ reference +"',Order/From/Address) or substringof('"+ reference +"',Order/To/Address) or substringof('"+ reference +"',HRID) or substringof('"+ reference +"',Order/ReferenceInvoiceId)"
             })
         }
 

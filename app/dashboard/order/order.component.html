@@ -265,6 +265,13 @@
       <br>
 
       <div class="form-group">
+        <label class="col-md-4 control-label" for="description">Reference Invoice</label>
+        <div class="col-md-4">
+          <input class="form-control" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.ReferenceInvoiceId">
+        </div>
+      </div>
+
+      <div class="form-group">
         <label class="col-md-4 control-label" for="description">Package Description</label>
         <div class="col-md-4">
           <textarea class="form-control" id="description" name="description" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.Description"></textarea>

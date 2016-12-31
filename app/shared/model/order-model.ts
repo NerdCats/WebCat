@@ -12,6 +12,7 @@ export class OrderModel {
     public ETAMinutes: number;
     public PaymentMethod: string;
     public Description: string;
+    public ReferenceInvoiceId: string;
     public OrderCart: OrderCartModel;
     public JobTaskETAPreference: JobTaskETAPreferenceModel[];
 
