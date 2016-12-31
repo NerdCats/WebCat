@@ -79,37 +79,40 @@
         <label class="col-md-4 control-label" for="select-pick-up-area">Pickup Area</label>
         <div class="col-md-4">
           <select id="select-pick-up-area" name="select-pick-up-area" class="form-control" [disabled]="orderCreationStatus =='IN_PROGRESS'" [(ngModel)]="orderModel.From.Locality">
-          <option *ngFor="let area of areas" [value]="area">{{area}}</option>
-        </select>
+            <option value=""></option>
+            <option *ngFor="let area of areas" [value]="area">{{area}}</option>
+          </select>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-md-4 control-label" for="select-pick-up-time">Pickup Time</label>
-        <div class="col-md-4">
-          <input type="text" class="form-control" [(ngModel)]="pickupTime"  value="{{pickupTime | date:'EEE d MMM y,h:m a'}}" (click)="openPickupTimeModal()">
+        <div class="col-md-1">
+          <select class="form-control" [(ngModel)]="_pickupYear">
+            <option [value]=""></option>
+            <option *ngFor="let year of years" [value]="year">{{year}}</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          <select class="form-control" [(ngModel)]="_pickupMonth">
+            <option [value]=""></option>
+            <option *ngFor="let month of months" [value]="month.value">{{month.month}}</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          <select class="form-control" [(ngModel)]="_pickupDate">
+            <option [value]=""></option>
+            <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          <select class="form-control" [(ngModel)]="_pickupTime">
+            <option [value]=""></option>
+            <option *ngFor="let time of timeHourMin" [value]="time.value">{{time.time}}</option>
+          </select>
         </div>
       </div>
 
-
-      <modal #pickupTimeModal class="modal_vcenter" [size]="sm">
-        <modal-header>Select Pickup Time</modal-header>
-        <modal-body>
-          <div>
-            <div class="form-group">
-              <div class="" >
-                <datepicker [(ngModel)]="pickupTime" [showWeeks]="true"></datepicker>
-                <timepicker [(ngModel)]="pickupTime"></timepicker>
-                <span>{{pickupTime | date:'EEE d MMM y,h:m a'}}</span>
-              </div>
-            </div>
-          </div>
-        </modal-body>
-        <modal-footer>
-          <button class="btn btn-primary" (click)="closePickupTimeModal()">Ok</button>
-          <button class="btn btn-danger" (click)="clearPickupTime()">Clear</button>
-        </modal-footer>
-      </modal>
 
 
       <br>
@@ -150,38 +153,39 @@
         <label class="col-md-4 control-label" for="delivery-area">Delivery Area</label>
         <div class="col-md-4">
           <select id="delivery-area" name="delivery-area" class="form-control" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.To.Locality">
-          <option *ngFor="let area of areas" [value]="area">{{area}}</option>
-        </select>
+            <option value=""></option>
+            <option *ngFor="let area of areas" [value]="area">{{area}}</option>
+          </select>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-md-4 control-label" for="select-pick-up-time">Delivery Time</label>
-        <div class="col-md-4">
-          <input type="text" class="form-control" [(ngModel)]="deliveryTime" value="{{deliveryTime | date:'EEE d MMM y,h:m a'}}" (click)="openDeliveryTimeModal()">
+        <div class="col-md-1">
+          <select class="form-control" [(ngModel)]="_deliveryYear">
+            <option [value]=""></option>
+            <option *ngFor="let year of years" [value]="year">{{year}}</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          <select class="form-control" [(ngModel)]="_deliveryMonth">
+            <option [value]=""></option>
+            <option *ngFor="let month of months" [value]="month.value">{{month.month}}</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          <select class="form-control" [(ngModel)]="_deliveryDate">
+            <option [value]=""></option>
+            <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          <select class="form-control" [(ngModel)]="_deliveryTime">
+            <option [value]=""></option>
+            <option *ngFor="let time of timeHourMin" [value]="time.value">{{time.time}}</option>
+          </select>
         </div>
       </div>
-
-
-      <modal #deliveryTimeModal class="modal_vcenter" [size]="sm">
-        <modal-header>Select Delivery Time</modal-header>
-        <modal-body>
-          <div>
-            <div class="form-group">
-              <div class="" >
-                <datepicker [(ngModel)]="deliveryTime" [showWeeks]="true"></datepicker>
-                <timepicker [(ngModel)]="deliveryTime"  ></timepicker>
-                <span>{{deliveryTime | date:'EEE d MMM y,h:m a' }}</span>
-              </div>
-            </div>
-          </div>
-        </modal-body>
-        <modal-footer>
-          <button class="btn btn-primary" (click)="closeDeliveryTimeModal()">Ok</button>
-          <button class="btn btn-danger" (click)="clearDeliveryTime()">Clear</button>
-        </modal-footer>
-
-      </modal>
 
       <br>
       <hr>
@@ -190,8 +194,9 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="payment-method">Payment Method</label>
         <div class="col-md-4">
-          <select required ngControl="paymentMethod" #paymentMethod="ngForm" id="payment-method" name="payment-method" class="form-control" [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.paymentMethod">
-            <option value="CashOnDelivery" selected>Cash On Delivery</option>
+          <select required ngControl="paymentMethod" #paymentMethod="ngForm" id="payment-method" name="payment-method" class="form-control"
+              [disabled]="orderCreationStatus=='IN_PROGRESS'" [(ngModel)]="orderModel.paymentMethod">
+              <option value="CashOnDelivery" selected>CashOnDelivery</option>
           </select>
         </div>
       </div>

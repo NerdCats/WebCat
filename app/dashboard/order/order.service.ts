@@ -34,6 +34,13 @@ export class OrderService {
             });
     }
 
+    dateConstructor(year: string, month:string, date: string, time: string){
+        let timeString = year + "-" + month + "-" + date + time;
+        console.log(timeString);
+
+        return new Date(timeString).toISOString();
+    }
+
     private _extractOrderCreationError(res: Response){
         let error = res.json();
         console.log(error);
@@ -65,4 +72,5 @@ export class OrderService {
         console.log(errorMsg);
         return Observable.throw(errorMsg)
     }
+
 }

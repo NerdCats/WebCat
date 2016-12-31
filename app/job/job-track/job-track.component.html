@@ -49,7 +49,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-6" *ngIf="job.Order.ReferenceInvoiceId">
 							<strong>Reference Invoice Id</strong>
 							<p>{{job.Order.ReferenceInvoiceId}}</p>
 						</div>

@@ -30,6 +30,8 @@ export class OrderModel {
 
         this.SellerInfo = new PersonInfo();
         this.BuyerInfo = new PersonInfo();
+
+        this.PaymentMethod = "CashOnDelivery";
     }
 }
 
