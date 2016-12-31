@@ -175,10 +175,6 @@ export class OrderComponent {
 
         let isTherAnyDeliveryETA = this._deliveryYear && this._deliveryMonth && this._deliveryDate && this._deliveryTime? true : false;
 
-        console.log("is there any pickup eta : " + isTherAnyPickUpETA);
-
-        console.log("is there any delivery eta : " + isTherAnyDeliveryETA);
-
         if(isTherAnyPickUpETA || isTherAnyDeliveryETA){
             this.orderModel.JobTaskETAPreference = [];
             if(isTherAnyPickUpETA) {
@@ -192,8 +188,6 @@ export class OrderComponent {
                 this.orderModel.JobTaskETAPreference.push(deliveryETA);
             }
         }
-        console.log(this.orderModel.JobTaskETAPreference);
-
     }
 
     goToTrackingPage(){

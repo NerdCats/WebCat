@@ -36,8 +36,6 @@ export class OrderService {
 
     dateConstructor(year: string, month:string, date: string, time: string){
         let timeString = year + "-" + month + "-" + date + time;
-        console.log(timeString);
-
         return new Date(timeString).toISOString();
     }
 

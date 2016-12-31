@@ -23,8 +23,6 @@ export class QueryBuilder {
     public filterBy(props: Array<{propName: string, comparator: string, value: string}>){
         if (props && props.length > 0) {
             let querySegment: string = "$filter";
-            console.log(props);
-            console.log(props[0].value);
             let filterbySegment = props.map(p => p.value ? p.propName.concat(" " + p.comparator + " " , p.value).trim() : "").join(" and ");
             this._querySegments.push(querySegment.concat("=" , filterbySegment));
         }

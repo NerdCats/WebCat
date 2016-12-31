@@ -107,9 +107,6 @@ export class JobService {
             .toQueryString();
 
         let historyUrl = this.jobUrl + '/odata' + queryString;
-
-        console.log(historyUrl);
-
         return this.getJobs(historyUrl)
     }
 

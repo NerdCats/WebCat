@@ -6,7 +6,7 @@
         <div class="row">
             <form class="form-horizontal center-block" #searchForm="ngForm">
                 <div class="row">
-                    <div class="form-group col-md-6 search">
+                    <div class="form-group col-md-12 search">
                         <label class="col-md-2 control-label">Search </label>
                         <div class="col-md-10">
                             <span class="input-group-btn search-input">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group mt15 col-md-3">
+                    <div class="form-group mt15 col-md-6">
                         <label class="col-md-4 control-label">Order State</label>
                         <div class="col-md-8">
                             <select class="form-control" [(ngModel)]="jobState" (ngModelChange)="search($event)">
@@ -33,7 +33,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group mt15 col-md-3">
+                    <div class="form-group mt15 col-md-6">
                         <label class="col-md-4 control-label">Payment Status</label>
                         <div class="col-md-8">
                             <select class="form-control" [(ngModel)]="paymentStatus" (ngModelChange)="search($event)">
@@ -43,7 +43,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group mt15 col-md-3">
+                    <div class="form-group mt15 col-md-6">
                         <label class="col-md-4 control-label">Start Date</label>
                         <div class="col-md-8">
                             <span class="input-group-btn">
@@ -56,7 +56,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group mt15 col-md-3">
+                    <div class="form-group mt15 col-md-6">
                         <label class="col-md-4 control-label">End Date</label>
                         <div class="col-md-8">
                             <span class="input-group-btn">
@@ -69,8 +69,8 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group mt15 col-md-1">
-                        <button class="btn btn-primary" (click)="search()">SEARCH</button>
+                    <div class="form-group mt15 col-md-12">
+                        <button class="pull-right btn btn-primary" (click)="search()">SEARCH</button>
                     </div>
                 </div>
             </form>
