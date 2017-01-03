@@ -59,7 +59,9 @@ export class PackageListModel {
     public TotalPlusVAT: number;
     public Weight: number;
     constructor() {
+        this.Item = null;
         this.Quantity = 1;
+        this.Price = 0;
     }
 }
 
