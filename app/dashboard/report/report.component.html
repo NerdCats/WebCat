@@ -1,16 +1,16 @@
-<div class="col-md-6">
+<div class="col-md-12">
     <h3>Select the Dates and Click the button to Export an excel report in between selected dates</h3>
     <div class="form-group row">
-        <div class="col-md-6">
+        <div class="col-md-6 calender">
             <datepicker [(ngModel)]="startTime" [showWeeks]="true"></datepicker>
             <span>{{startTime | date:'EEE d MMM y'}}</span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 calender">
             <datepicker [(ngModel)]="endTime" [showWeeks]="true"></datepicker>
             <span>{{endTime | date:'EEE d MMM y'}}</span>
         </div>
     </div>
     <div>
-        <button class="pull-right btn btn-primary" (click)="generateReport()">Export Report</button>
+        <button class="btn btn-primary" (click)="generateReport()">Export Report</button>
     </div>
 </div>

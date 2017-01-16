@@ -17,7 +17,7 @@ export class ReportService {
     getReport(startTime: string, endTime: string){
         let auth_token = JSON.parse(this.localStorage.get("auth_token"));
         console.log(auth_token);
-        var url = AppSettings.SPYCAT_BASE + "/api/details?startdate="+startTime+
+        var url = AppSettings.SPYCAT_BASE + "/api/detailssummary?startdate="+startTime+
                                             "&enddate="+endTime+"&usertype=ENTERPRISE&"+
                                             "username=" + auth_token["userName"] +
                                             "&generateexcel=true";
