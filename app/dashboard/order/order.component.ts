@@ -4,23 +4,17 @@ import { NgForm, FormBuilder, Control, ControlGroup, Validators, CORE_DIRECTIVES
 import { Router } from '@angular/router-deprecated';
 import { Observable } from 'rxjs/Observable';
 import { LocalStorage } from '../../shared/local-storage'
-import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-
-import { TimepickerComponent } from 'ng2-bootstrap/ng2-bootstrap';
-import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-
-
 
 import { LocalityService } from '../../shared/app-locality.service';
 import { OrderModel, OrderCartModel, PackageListModel, JobTaskETAPreferenceModel } from '../../shared/model/order-model';
 import { OrderService } from './order.service';
 import { DashboardBusService } from  '../dashboard-bus.service';
-
+import { LoginService } from '../../account/login/login.service';
 
 @Component({
     selector: 'order',
     templateUrl: 'app/dashboard/order/order.component.html',
-    directives: [MODAL_DIRECTIVES, ModalComponent, FORM_DIRECTIVES, CORE_DIRECTIVES,TimepickerComponent, DATEPICKER_DIRECTIVES],
+    directives: [FORM_DIRECTIVES, CORE_DIRECTIVES],
     providers: [OrderService, LocalStorage, LocalityService],
     styleUrls: ['app/dashboard/order/order.component.css']
 })
@@ -114,7 +108,7 @@ export class OrderComponent {
     constructor(private formBuilder: FormBuilder,
         private orderService: OrderService,
         private router: Router,
-        private _localStorage: LocalStorage,
+        private _loginService: LoginService,
         private busService: DashboardBusService,
         private localityService: LocalityService) {
         this.busService.annouceSectionChange("New Order");
@@ -201,92 +195,51 @@ export class OrderComponent {
             this.orderModel.OrderCart.PackageList.push(this.packageListItem);
         }
         this.packageListItem = new PackageListModel();
-        this.close();
     }
+
+
 
     initiateOrderModel(orderType: string) {
         this.orderModel = new OrderModel();
         this.orderModel.Type = orderType;
-        this.orderModel.PayloadType = "default";
-        this.orderModel.OrderCart.PackageList = [];
-        this.orderModel.UserId = JSON.parse(this._localStorage.get('auth_token')).userId;
+        let profile = JSON.parse(this._loginService.ProfileData);
+        switch(orderType){
+            case "Delivery":
+                this.orderModel.PayloadType = "enterprise";
+                this.orderModel.SellerInfo.Name = profile.UserName;
+                this.orderModel.SellerInfo.PhoneNumber = profile.PhoneNumber;
+                break;
+            case "ClassifiedDelivery":
+                this.orderModel.PayloadType = "default";
+                break;
+            default:
+                break;
+        }
+        this.orderModel.UserId = JSON.parse(this._loginService.AuthData).userId;
+        this.orderModel.OrderCart.PackageList = new Array<PackageListModel>();
+        this.addItem();
+    }
+
+    addItem(){
         this.packageListItem = new PackageListModel();
+        this.orderModel.OrderCart.PackageList.push(this.packageListItem);
     }
 
     removeItem(index: number) {
-        this.orderModel.OrderCart.PackageList.splice(index);
-    }
-
-    editItem(item: PackageListModel) {
-        this.itemAddOrUpdateText = "Update";
-        this.isUpdating = true;
-        this.packageListItem = item;
-        this.modal.open();
-    }
-
-    addItem() {
-        this.itemAddOrUpdateText = "Add";
-        this.open();
-    }
-
-    cancelModal() {
-        this.packageListItem = new PackageListModel();
-        this.close();
-    }
-
-    pickupDateChanged(){
-        console.log(this.pickupTime)
-        console.log("ami ekta modon");
-
-    }
-
-    @ViewChild('pickupTimeModal')
-    pickupTimeModal: ModalComponent;
-    openPickupTimeModal(){
-        this.pickupTimeModal.open();
-    }
-    closePickupTimeModal(){
-        this.pickupTimeModal.close();
-    }
-    clearPickupTime(){
-        this.pickupTime = null;
-        this.closePickupTimeModal();
-    }
-
-    @ViewChild('deliveryTimeModal')
-    deliveryTimeModal: ModalComponent;
-    openDeliveryTimeModal(){
-        this.deliveryTimeModal.open();
-    }
-    closeDeliveryTimeModal(){
-        this.deliveryTimeModal.close();
-    }
-    clearDeliveryTime(){
-        this.deliveryTime = null;
-        this.closeDeliveryTimeModal();
+        this.orderModel.OrderCart.PackageList.splice(index,1);
     }
 
 
-    @ViewChild('itemModal')
-    modal: ModalComponent;
-
-    close() {
-        this.modal.close();
-    }
-
-    open() {
-        this.modal.open();
-    }
-
-    onModalClosed() {
-
-    }
-
-    onModalDismissed() {
-
-    }
 
     resetForm() {
+        this._pickupYear = null;
+        this._pickupMonth = null;
+        this._pickupDate = null;
+        this._pickupTime = null;
+        this._deliveryYear = null;
+        this._deliveryMonth = null;
+        this._deliveryDate = null;
+        this._deliveryTime = null;
         this.initiateOrderModel("Delivery");
     }
 }
