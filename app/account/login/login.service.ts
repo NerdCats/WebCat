@@ -50,6 +50,7 @@ export class LoginService {
 
     logout() {
         this._localStorage.remove(this.AUTH_TOKEN_KEY);
+        this._localStorage.remove(this.UserId);
         this.loggedIn = false;
         window.location.reload();
     }
@@ -62,6 +63,18 @@ export class LoginService {
         this._checkAlreadyLoggedIn();
         this.announceLoggedIn(this.loggedIn);
         return this.loggedIn;
+    }
+
+    public get AuthData() {
+        return this._localStorage.get(this.AUTH_TOKEN_KEY);
+    }
+
+    public get ProfileData() {
+        return this._localStorage.get(this.UserId);
+    }
+
+    public get UserId() {
+        return JSON.parse(this._localStorage.get(this.AUTH_TOKEN_KEY)).userId;
     }
 
     private _extractAuthError(res: Response) {
@@ -79,9 +92,21 @@ export class LoginService {
         else {
             throw new Error("Invalid/blank auth data, Fatal Error");
         }
-
         this._localStorage.setObject(this.AUTH_TOKEN_KEY, data);
+        this._getAndSaveProfileData();
         return data;
+    }
+
+    private _getAndSaveProfileData(){
+        let profileUrl = AppSettings.TASKCAT_API_BASE + "Account/Profile/" + this.UserId;
+        this.http.get(profileUrl)
+            .subscribe(
+                res => {
+                    this._localStorage.setObject(this.UserId, res.json())
+                }, err => {
+                    return Observable.throw(err);
+                }
+            )
     }
 
     private _checkAlreadyLoggedIn() {
