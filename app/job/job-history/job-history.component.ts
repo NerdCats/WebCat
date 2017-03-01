@@ -120,13 +120,12 @@ export class JobHistoryComponent implements OnInit {
             }
         }
 
-
-
         if (!this.jobs.length) {
             this.status = "EMPTY";
             this.statusMessage = "It looks lonely here. Why don't you put an order?";
         }
     }
+
     private manageError(error){
         this.statusMessage = error.Message || "Failed to fetch data from server";
         this.status = "FAILED";
