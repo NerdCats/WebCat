@@ -22,3 +22,8 @@ table {
 th, td {
     text-align: center;
 }
+
+.hrstate {
+    font-size: 100%;
+    font-weight: 500;
+}

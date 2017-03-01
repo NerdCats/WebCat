@@ -1,142 +1,228 @@
-<div [ngClass]="{widget: componentMode=='WIDGET'}">
-    <widget-header title="Job History" icon="fa-tasks">
-        <a href="#" *ngIf="mode=='ADMIN'">Manage</a>
-    </widget-header>
-    <widget-body classes="no-padding">
-        <div class="row">
-            <form class="form-horizontal center-block" #searchForm="ngForm">
-                <div class="row">
-                    <div class="form-group col-md-12 search">
-                        <label class="col-md-2 control-label">Search </label>
-                        <div class="col-md-10">
-                            <span class="input-group-btn search-input">
-                                <input type="text" class="form-control" placeholder="search by GO! Fetch tracking, your invoice no or customer phonenumber" [(ngModel)]="searchText">
+<div *ngIf="status=='SUCCESSFUL'">
+    <div class="row">
+        <form class="form-horizontal center-block" #searchForm="ngForm">
+            <!--<div class="row">
+                <div class="form-group col-md-12 search">
+                    <label class="col-md-2 control-label">Search</label>
+                    <div class="col-md-10">
+                        <span class="input-group-btn search-input">
+                            <input type="text" class="form-control" placeholder="search by GO! Fetch tracking, your invoice no or customer phonenumber" [(ngModel)]="searchText">
+                        </span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" (click)="search()">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group mt15 col-md-6">
+                    <label class="col-md-4 control-label">Order State</label>
+                    <div class="col-md-8">
+                        <select class="form-control" [(ngModel)]="jobState" (ngModelChange)="search($event)">
+                            <option value="ALL" selected>ALL</option>
+                            <option value="ENQUEUED">PENDING</option>
+                            <option value="IN_PROGRESS">IN PROGRESS</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mt15 col-md-6">
+                    <label class="col-md-4 control-label">Payment Status</label>
+                    <div class="col-md-8">
+                        <select class="form-control" [(ngModel)]="paymentStatus" (ngModelChange)="search($event)">
+                            <option value="ALL" selected>ALL</option>
+                            <option value="PAID">PAID</option>
+                            <option value="PENDING">PENDING</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mt15 col-md-6">
+                    <label class="col-md-4 control-label">Start Date</label>
+                    <div class="col-md-8">
+                        <span class="input-group-btn">
+                            <input class="form-control" [(ngModel)]="startTime" type="date">
+                        </span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" (click)="clearDate()">
+                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group mt15 col-md-6">
+                    <label class="col-md-4 control-label">End Date</label>
+                    <div class="col-md-8">
+                        <span class="input-group-btn">
+                            <input class="form-control" [(ngModel)]="endTime" type="date">
+                        </span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" (click)="clearDate()">
+                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group mt15 col-md-12">
+                    <button class="pull-right btn btn-primary" (click)="search()">SEARCH</button>
+                </div>
+            </div>-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Search:</label>
+                            <span class="input-group-btn" style="width: 20%">
+                                <input type="text" class="form-control" ng-model="SearchKey" ng-disabled="newOrders.isCompleted === 'IN_PROGRESS'" placeholder="Recipeint's Phone, GO! Fetch Tracking No"  ng-keypress="($event.which === 13)?activate():0">
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" (click)="search()">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                <button class="btn btn-default" ng-click="SearchKey=null; activate()">
+                                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
                                 </button>
                             </span>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group mt15 col-md-6">
-                        <label class="col-md-4 control-label">Order State</label>
-                        <div class="col-md-8">
-                            <select class="form-control" [(ngModel)]="jobState" (ngModelChange)="search($event)">
-                                <option value="ALL" selected>ALL</option>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Select Job State</label>
+                            <select class="form-control" ng-model="SelectedState" ng-change="activate()">
+                                <option value="All">All</option>
+                                <option disabled>──────────────────────────────</option>
                                 <option value="ENQUEUED">PENDING</option>
+                                <option disabled>──────────────────────────────</option>
                                 <option value="IN_PROGRESS">IN PROGRESS</option>
+                                <option value="PICKUP_IN_IN_PROGRESS">PICKUP IN PROGRESS</option>
+                                <option value="DELIVERY_IN_PROGRESS">DELIVERY IN PROGRESS</option>
+                                <option value="CASH_DELIVERY_IN_PROGRESS">CASH DELIVERY IN PROGRESS</option>
+                                <option value="RETURN_DELIVERY_IN_PROGRESS">RETURN DELIVERY IN PROGRESS</option>
+                                <option value="RETRY_DELIVERY_IN_PROGRESS">RETRY DELIVERY IN PROGRESS</option>
+                                <option disabled>──────────────────────────────</option>
                                 <option value="COMPLETED">COMPLETED</option>
+                                <option value="PICKUP_COMPLETED">PICKUP COMPLETED</option>
+                                <option value="DELIVERY_COMPLETED">DELIVERY COMPLETED</option>
+                                <option value="CASH_DELIVERY_COMPLETED">CASH DELIVERY COMPLETED</option>
+                                <option value="RETURNED_DELIVERY_COMPLETED">RETURNED DELIVERY COMPLETED</option>
+                                <option value="RETRY_DELIVERY_COMPLETED">RETRY DELIVERY COMPLETED</option>
+                                <option disabled>──────────────────────────────</option>
                                 <option value="CANCELLED">CANCELLED</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group mt15 col-md-6">
-                        <label class="col-md-4 control-label">Payment Status</label>
-                        <div class="col-md-8">
-                            <select class="form-control" [(ngModel)]="paymentStatus" (ngModelChange)="search($event)">
-                                <option value="ALL" selected>ALL</option>
-                                <option value="PAID">PAID</option>
-                                <option value="PENDING">PENDING</option>
+                        <div class="col-md-3">
+                            <label>Select Date Range:</label>
+                            <div>
+                                <span class="input-group-btn" style="float: left;width: 50%">
+                                    <input class="form-control date-picker" date-range-picker placeholder="select date" type="text" ng-model="SelectDateRange"/>
+                                </span>
+                                <span class="input-group-btn" style="float: left;width: 10%">
+                                    <button class="btn btn-default" ng-click="removeDateRange()">
+                                        <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                                <select class="form-control" ng-model="SelectedTimeProperty" style="width: 40%" ng-change="selectDateRange()">
+                                    <option value=""></option>
+                                    <option value="CreateTime">Create Time</option>
+                                    <option value="CompletionTime">Completion Time</option>
+                                    <option value="ModifiedTime">Modified Time</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Order By:</label>
+                            <div>
+                                <select class="form-control" ng-model="SelectedOrderByProperty" ng-change="SelectOrderBy()">
+                                    <option value="CreateTime asc">By <b>Oldest</b> Create Time</option>
+                                    <option value="CompletionTime asc">By <b>Oldest</b> Completion Time</option>
+                                    <option value="ModifiedTime asc">By <b>Oldest</b> Modified Time</option>
+                                    <option value="CreateTime desc">By <b>Latest</b> Create Time</option>
+                                    <option value="CompletionTime desc">By <b>Latest</b> Completion Time</option>
+                                    <option value="ModifiedTime desc">By <b>Latest</b> Modified Time</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <label>Show per page:</label>
+                            <select class="form-control" ng-model="JobsPerPage" ng-change="searchJobs()" ng-disabled="newOrders.isCompleted === 'IN_PROGRESS'">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">60</option>
+                                <option value="50">70</option>
+                                <option value="50">80</option>
+                                <option value="50">90</option>
+                                <option value="50">100</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group mt15 col-md-6">
-                        <label class="col-md-4 control-label">Start Date</label>
-                        <div class="col-md-8">
-                            <span class="input-group-btn">
-                                <input class="form-control" [(ngModel)]="startTime" type="date">
-                            </span>
-                            <span class="input-group-btn">
-                                <button class="btn btn-danger" (click)="clearDate()">
-                                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                                </button>
-                            </span>
+                        <div class="col-md-1">
+                            <br>
+                            <button class="btn btn-primary" ng-click="activate()" >SEARCH JOBS</button>
                         </div>
                     </div>
-                    <div class="form-group mt15 col-md-6">
-                        <label class="col-md-4 control-label">End Date</label>
-                        <div class="col-md-8">
-                            <span class="input-group-btn">
-                                <input class="form-control" [(ngModel)]="endTime" type="date">
-                            </span>
-                            <span class="input-group-btn">
-                                <button class="btn btn-danger" (click)="clearDate()">
-                                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group mt15 col-md-12">
-                        <button class="pull-right btn btn-primary" (click)="search()">SEARCH</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="row" *ngIf="status=='IN_PROGRESS'">
-            <progress-bubble></progress-bubble>
-        </div>
-        <div class="message row" *ngIf="status=='EMPTY'">
-            {{statusMessage}}
-        </div>
-        <div class="error row" *ngIf="status=='FAILED'">
-            {{statusMessage}} <button class="btn btn-danger" (click)="getJobsWithPageNumber('ALL', 'ALL', 0)">click here to refresh</button>
-        </div>
 
-        <div class="row table-responsive" *ngIf="status=='SUCCESSFUL'">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th style="width:20px">S/L</th>
-                        <th style="width:150px">HRID</th>
-                        <th style="width:120px">Created</th>
-                        <th style="width:200px">Status</th>
-                        <th style="width:200px">Reference Invoice</th>
-                        <th style="width:300px">Package</th>
-                        <th style="width:300px">Pickup Address</th>
-                        <th style="width:300px">Delivery Address</th>
-                        <th *ngIf="accessMode=='ADMIN'">User</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let job of jobs; let i = index">
-                        <td>{{ i + pagination.Start}}</td>
-                        <td class="pointer"><a href="#/track/{{job.HRID}}">{{job.HRID}}</a></td>
-                        <td>
-                            {{job.CreateTime | date:"EEE d MMM y"}}
-                        </td>
-                        <td>
-                            <span [ngClass]="getJobStateCSS(job.State).class">{{ job.HRState }}</span>
-                        </td>
-                        <td>{{job.Order.ReferenceInvoiceId}}</td>
-                        <td>
-                            <ul style="text-align: left">
-                                <li *ngFor="let item of job.Order.OrderCart.PackageList">{{item.Item}}</li>
-                                <li>Total Price : {{job.Order.OrderCart.TotalToPay}} BDT</li>
-                            </ul>
-                        </td>
-                        <td>{{job.Order.From.Address}}</td>
-                        <td>{{job.Order.To.Address}}</td>
-                        <td *ngIf="accessMode=='ADMIN'">{{job.User.UserName}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </widget-body>
-    <widget-footer>
-        <ul class="pagination pagination-sm pull-right mr50" *ngIf="status=='SUCCESSFUL'">
-            <li *ngIf="prevPageNo !== -1">
-                <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, prevPageNo, startTime, endTime)">&laquo;</a>
-            </li>
-            <li *ngFor="let page of paginationArray">
-                <a class="{{page.isSelected}} pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, page.pageNo, startTime, endTime)">{{page.pageNo + 1}}</a>
-            </li>
-            <li *ngIf="nextPageNo">
-                <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, nextPageNo, startTime, endTime)">&raquo;</a>
-            </li>
-        </ul>
-        <div class=clearfix></div>
-    </widget-footer>
+                    <br>
+        </form>
+    </div>
+    <div class="row" *ngIf="status=='IN_PROGRESS'">
+        <progress-bubble></progress-bubble>
+    </div>
+    <div class="message row" *ngIf="status=='EMPTY'">
+        {{statusMessage}}
+    </div>
+    <div class="error row" *ngIf="status=='FAILED'">
+        {{statusMessage}} <button class="btn btn-danger" (click)="getJobsWithPageNumber('ALL', 'ALL', 0)">click here to refresh</button>
+    </div>
+
+    <div class="row table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width:20px">S/L</th>
+                    <th style="width:150px">Tracking Id</th>
+                    <th style="width:120px">Created</th>
+                    <th style="width:200px">Status</th>
+                    <th style="width:200px">Reference Invoice</th>
+                    <th style="width:300px">Package</th>
+                    <th style="width:300px">Pickup Address</th>
+                    <th style="width:300px">Delivery Address</th>
+                    <th *ngIf="accessMode=='ADMIN'">User</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let job of jobs; let i = index">
+                    <td>{{ i + pagination.Start}}</td>
+                    <td class="pointer"><a href="#/track/{{job.HRID}}">{{job.HRID}}</a></td>
+                    <td>
+                        {{job.CreateTime | date:"EEE d MMM y"}}
+                    </td>
+                    <td>
+                        <span class="hrstate" [ngClass]="getJobStateCSS(job.State).class">{{ job.HRState }}</span>
+                    </td>
+                    <td>{{job.Order.ReferenceInvoiceId}}</td>
+                    <td>
+                        <ul style="text-align: left">
+                            <li *ngFor="let item of job.Order.OrderCart.PackageList">{{item.Item}}</li>
+                            <li>Total Price : {{job.Order.OrderCart.TotalToPay}} BDT</li>
+                        </ul>
+                    </td>
+                    <td>{{job.Order.From.Address}}</td>
+                    <td>{{job.Order.To.Address}}</td>
+                    <td *ngIf="accessMode=='ADMIN'">{{job.User.UserName}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul class="pagination pagination-sm pull-right mr50" *ngIf="status=='SUCCESSFUL'">
+        <li *ngIf="prevPageNo !== -1">
+            <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, prevPageNo, startTime, endTime)">&laquo;</a>
+        </li>
+        <li *ngFor="let page of paginationArray">
+            <a class="{{page.isSelected}} pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, page.pageNo, startTime, endTime)">{{page.pageNo + 1}}</a>
+        </li>
+        <li *ngIf="nextPageNo">
+            <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, nextPageNo, startTime, endTime)">&raquo;</a>
+        </li>
+    </ul>
+    <div class=clearfix></div>
 </div>
