@@ -33,16 +33,64 @@ export class JobService {
             });
     }
 
+    private jobStateQueryString(state: string){
+        var jobStateParam = "";
+        switch(state){
+				case 'ENQUEUED':
+				case 'COMPLETED':
+				case 'IN_PROGRESS':
+				case 'CANCELLED':
+					jobStateParam = "State eq '"+ state +"'";
+					break;
+
+				case 'PICKUP_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Type eq 'PackagePickUp')";
+					break;
+				case 'DELIVERY_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Type eq 'Delivery')";
+					break;
+				case 'CASH_DELIVERY_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Type eq 'SecureCashDelivery')";
+					break;
+				case 'RETURN_DELIVERY_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Variant eq 'return' and task/Type eq 'Delivery')";
+					break;
+				case 'RETRY_DELIVERY_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Variant eq 'retry' and task/Type eq 'Delivery')";
+					break;
+
+
+				case 'PICKUP_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Type eq 'PackagePickUp')";
+					break;
+				case 'DELIVERY_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Type eq 'Delivery')";
+					break;
+				case 'CASH_DELIVERY_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Type eq 'SecureCashDelivery')";
+					break;
+				case 'RETURNED_DELIVERY_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Variant eq 'return' and task/Type eq 'Delivery')";
+					break;
+				case 'RETRY_DELIVERY_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Variant eq 'retry' and task/Type eq 'Delivery')";
+					break;
+			}
+        console.log(state)
+        console.log(jobStateParam)
+        return jobStateParam;
+    }
+
     getHistoryWithPageNumber(state:string, paymentStatus: string, page:number,
                             startTimeISO: string, endTimeISO: string, reference: string)
                             : Observable<PageEnvelope<Job>> {
         this._queryBuilder = new QueryBuilder();
         let filterArray: any = [];
-        if(state !== "ALL") {
+        if(state !== undefined && state !== "" && state !== "ALL") {
             filterArray.push({
-                                propName: "State",
-                                comparator: "eq",
-                                value: "'" + state + "'"
+                                propName: "",
+                                comparator: "",
+                                value: this.jobStateQueryString(state)
                             })
         }
         if(paymentStatus !== "ALL"){
