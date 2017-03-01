@@ -8,7 +8,7 @@ export class AppSettings {
    }
 
    public static get TASKCAT_BASE(): string{
-     return 'http://fetchprod.gobd.co/'
+     return 'http://localhost:8177/'
    }
 
    public static get CLIENT_ID(): string {

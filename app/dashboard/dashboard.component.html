@@ -1,7 +1,7 @@
 <div>
     <div id="page-wrapper" [ngClass]="{open: isSideBarOpen}" class="open">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+        <div id="sidebar-wrapper" (mouseenter)="toggleSidebar()" (mouseleave)="toggleSidebar()">
             <ul class="sidebar">
                 <li class="sidebar-main">
                     <a (click)="toggleSidebar()">

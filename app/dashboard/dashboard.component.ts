@@ -20,8 +20,9 @@ import { Observable } from 'rxjs';
     { path: '/report', name: 'Report', component: ReportComponent }
 ])
 export class DashboardComponent implements OnInit {
-    isSideBarOpen: boolean = true;
+    isSideBarOpen: boolean = false;
     sectionName: string;
+
 
     constructor(private busService: DashboardBusService) {
         this.busService.sectionChangeAnnounced$.subscribe(newSectionName => {
@@ -29,7 +30,10 @@ export class DashboardComponent implements OnInit {
         })
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        document.getElementById("sidebar-wrapper").addEventListener("onmouseenter", this.toggleSidebar);
+        document.getElementById("sidebar-wrapper").addEventListener("onmouseleave", this.toggleSidebar);
+    }
 
     toggleSidebar() {
         this.isSideBarOpen = !this.isSideBarOpen;
