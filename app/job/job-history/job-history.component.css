@@ -14,3 +14,11 @@
 .search-input {
     width: 2%;
 }
+
+table {
+    table-layout: fixed;
+}
+
+th, td {
+    text-align: center;
+}

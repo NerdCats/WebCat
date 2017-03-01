@@ -132,11 +132,11 @@ export class JobHistoryComponent implements OnInit {
         this.status = "FAILED";
     }
 
-    getTasksState(task: JobTask){
-        if(task === undefined)
+    getJobStateCSS(taskState: string){
+        if(taskState === undefined)
             return CssHelper.getCssLabel("N/A");
         else
-            return CssHelper.getCssLabel(task.State);
+            return CssHelper.getCssLabel(taskState);
     }
 
     setJobStatusLabelClass(state: string) {

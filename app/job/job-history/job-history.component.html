@@ -89,50 +89,37 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>S/L</th>
-                        <th>HRID</th>
-                        <th>Invoice</th>
-                        <th>Package</th>
-                        <th>Package Total Price(BDT)</th>
-                        <th>Pickup</th>
-                        <th>Delivery</th>
-                        <th>CashDelivery</th>
+                        <th style="width:20px">S/L</th>
+                        <th style="width:150px">HRID</th>
+                        <th style="width:120px">Created</th>
+                        <th style="width:200px">Status</th>
+                        <th style="width:200px">Reference Invoice</th>
+                        <th style="width:300px">Package</th>
+                        <th style="width:300px">Pickup Address</th>
+                        <th style="width:300px">Delivery Address</th>
                         <th *ngIf="accessMode=='ADMIN'">User</th>
-                        <th>Payment Method</th>
-                        <th>Payment Status</th>
-                        <th>Created</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let job of jobs; let i = index">
                         <td>{{ i + pagination.Start}}</td>
                         <td class="pointer"><a href="#/track/{{job.HRID}}">{{job.HRID}}</a></td>
+                        <td>
+                            {{job.CreateTime | date:"EEE d MMM y"}}
+                        </td>
+                        <td>
+                            <span [ngClass]="getJobStateCSS(job.State).class">{{ job.HRState }}</span>
+                        </td>
                         <td>{{job.Order.ReferenceInvoiceId}}</td>
                         <td>
-                            <ol>
+                            <ul style="text-align: left">
                                 <li *ngFor="let item of job.Order.OrderCart.PackageList">{{item.Item}}</li>
-                            </ol>
+                                <li>Total Price : {{job.Order.OrderCart.TotalToPay}} BDT</li>
+                            </ul>
                         </td>
-                        <td>
-                            {{job.Order.OrderCart.TotalToPay}}
-                        </td>
-                        <td>
-                            <span [ngClass]="getTasksState(job.Tasks[1]).class">{{ getTasksState(job.Tasks[1]).value }}</span>
-                        </td>
-                        <td>
-                            <span [ngClass]="getTasksState(job.Tasks[2]).class">{{ getTasksState(job.Tasks[2]).value }}</span>
-                        </td>
-                        <td>
-                            <span [ngClass]="getTasksState(job.Tasks[3]).class">{{ getTasksState(job.Tasks[3]).value }}</span>
-                        </td>
+                        <td>{{job.Order.From.Address}}</td>
+                        <td>{{job.Order.To.Address}}</td>
                         <td *ngIf="accessMode=='ADMIN'">{{job.User.UserName}}</td>
-                        <td>{{job.PaymentMethod}}</td>
-                        <td>
-                            <span [ngClass]="setPaymentStatusLabelClass(job.PaymentStatus).class">{{setPaymentStatusLabelClass(job.PaymentStatus).value | uppercase}}</span>
-                        </td>
-                        <td>
-                            {{job.CreateTime | date:"EEE d MMM y,h:m TT"}}
-                        </td>
                     </tr>
                 </tbody>
             </table>
