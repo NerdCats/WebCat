@@ -155,7 +155,23 @@ export class JobService {
     }
 
     getJobsByState(state: JobState): Observable<PageEnvelope<Job>> {
-        return this.shttp.secureGet(this.jobUrl + '/odata' + "?$filter=State eq " + "'" + state + "'")
+        var url = "";
+        switch(state){
+            case "ENQUEUED":
+            case "IN_PROGRESS":
+            case "COMPLETED":
+            case "CANCELLED":
+                url = this.jobUrl + '/odata' + "?$filter=State eq " + "'" + state + "'";
+                break;
+            case "RETURNED":
+                url = this.jobUrl + '/odata' + "?$filter=Tasks/any(task: task/State eq 'COMPLETED' and task/Variant eq 'return' and task/Type eq 'Delivery')";
+                break;
+            default:
+                url = this.jobUrl + '/odata'
+                break;
+
+        }
+        return this.shttp.secureGet(url)
             .map(this._extractData)
             .catch(error => {
                 let errMsg = error.message || 'Exception when fetching job by state';

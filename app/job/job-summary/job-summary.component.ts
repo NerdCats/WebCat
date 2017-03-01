@@ -23,14 +23,17 @@ export class JobSummaryComponent implements OnInit {
         COMPLETED: 0,
         IN_PROGRESS: 0,
         CANCELLED: 0,
-        ENQUEUED: 0
+        ENQUEUED: 0,
+        RETURNED: 0,
+        ALL: 0
     };
 
     jobCountProcessState = {
         COMPLETED: "PENDING",
         IN_PROGRESS: "PENDING",
         CANCELLED: "PENDING",
-        ENQUEUED: "PENDING"
+        ENQUEUED: "PENDING",
+        RETURNED: "RETURNED"
     };
 
     public get status(): ComponentServiceStatus {
@@ -58,6 +61,8 @@ export class JobSummaryComponent implements OnInit {
         this.getJobCount("IN_PROGRESS");
         this.getJobCount("ENQUEUED");
         this.getJobCount("CANCELLED");
+        this.getJobCount("RETURNED");
+        this.getJobCount("ALL");
     }
 
     getJobCount(state: JobState) {

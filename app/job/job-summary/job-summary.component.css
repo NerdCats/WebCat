@@ -9,3 +9,41 @@
 .in-progress-icon {
     margin-left: 16px;
 }
+
+.global-status-block {
+    font-size: 24px;
+    padding: 10px;
+}
+
+.global-status-block-count {
+    font-size: 23px;
+    padding: 10px;
+}
+
+.all {
+    background-color: bisque;
+    color: black;
+}
+.pending {
+    background-color: #FF5722;
+    color: white;
+}
+.in-progress {
+    background-color: #FFEB3B;
+    color: black;
+}
+.in-progress span {
+    color: black;
+}
+.completed {
+    background-color: #4CAF50;
+    color: white;
+}
+.returned {
+    background-color: dodgerblue;
+    color: white;
+}
+.cancelled {
+    background-color: #b71c1c;
+    color: white;
+}

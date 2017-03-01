@@ -83,4 +83,4 @@ export class Job {
     }
 }
 
-export type JobState = "ENQUEUED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
+export type JobState = "ENQUEUED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED" | "RETURNED" | "ALL";
