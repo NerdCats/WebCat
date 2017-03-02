@@ -37,6 +37,8 @@ export class JobHistoryComponent implements OnInit {
     accessMode: AccessMode = "DEFAULT";
     componentMode: ComponentMode = "WIDGET";
     statusMessage: string;
+    pageNo: number;
+    pageCount: number = 20;
     pagination: Pagination;
     paginationArray: Object[];
     prevPageNo: number;
@@ -44,6 +46,13 @@ export class JobHistoryComponent implements OnInit {
 
     startTime: Date;
     endTime: Date;
+
+    orderBy: string;
+    orderByTimeDirectionText: string = "CreateTime asc";
+    orderByTime: string = "ModifiedTime";
+    orderByTimeDirection: string = "desc";
+
+    filterTime: string = "CreateTime";
 
     searchText: string;
 
@@ -57,7 +66,46 @@ export class JobHistoryComponent implements OnInit {
     }
 
     search(){
-        this.getJobsWithPageNumber(this.jobState, this.paymentStatus, 0, this.startTime, this.endTime, this.searchText)
+        switch(this.orderByTimeDirectionText){
+            case "CreateTime asc":
+                this.orderByTime = "CreateTime";
+                this.orderByTimeDirection = "asc";
+                break;
+            case "CompletionTime asc":
+                this.orderByTime = "CompletionTime";
+                this.orderByTimeDirection = "asc";
+                break;
+            case "ModifiedTime asc":
+                this.orderByTime = "ModifiedTime";
+                this.orderByTimeDirection = "asc";
+                break;
+            case "CreateTime desc":
+                this.orderByTime = "CreateTime";
+                this.orderByTimeDirection = "desc";
+                break;
+            case "CompletionTime desc":
+                this.orderByTime = "CompletionTime";
+                this.orderByTimeDirection = "desc";
+                break;
+            case "ModifiedTime desc":
+                this.orderByTime = "ModifiedTime";
+                this.orderByTimeDirection = "desc";
+                break;
+        }
+
+        this.getJobsWithPageNumber(this.jobState,
+                                    this.paymentStatus, 0, this.pageCount,
+                                    this.startTime, this.endTime,
+                                    this.searchText, this.orderBy,
+                                    this.orderByTime, this.orderByTimeDirection, this.filterTime)
+    }
+
+    loadPage(pageNo: number){
+        this.getJobsWithPageNumber(this.jobState,
+                                    this.paymentStatus, pageNo, this.pageCount,
+                                    this.startTime, this.endTime,
+                                    this.searchText, this.orderBy,
+                                    this.orderByTime, this.orderByTimeDirection, this.filterTime)
     }
 
     clearDate(){
@@ -66,7 +114,13 @@ export class JobHistoryComponent implements OnInit {
         this.search();
     }
 
-    getJobsWithPageNumber(jobState:string, paymentStatus:string, page: number, startTime: Date, endTime: Date, reference: string = null){
+    getJobsWithPageNumber(jobState:string,
+                        paymentStatus:string,
+                        page: number, pageCount:number,
+                        startTime: Date, endTime: Date,
+                        reference: string = null,
+                        orderBy: string, orderByTime: string, orderByTimeDirection: string,
+                        filterTime: string){
         this.status = "IN_PROGRESS";
         let startTimeISO:string;
         let endTimeISO:string;
@@ -88,7 +142,13 @@ export class JobHistoryComponent implements OnInit {
             endTimeISO = endTime? new Date(endTime.getFullYear(), endTime.getMonth(), endTime.getDate(), 23, 59, 59).toISOString() : null;
         }
 
-        this.jobService.getHistoryWithPageNumber(jobState, paymentStatus, page, startTimeISO, endTimeISO, reference)
+        this.jobService.getHistoryWithPageNumber(jobState,
+                                                paymentStatus,
+                                                page, pageCount,
+                                                startTimeISO, endTimeISO,
+                                                reference,
+                                                orderBy, orderByTime, orderByTimeDirection,
+                                                filterTime)
             .subscribe((pagedJob) => {
                 this.manageHistory(pagedJob)
             },(error) => {

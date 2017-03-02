@@ -27,3 +27,11 @@ th, td {
     font-size: 100%;
     font-weight: 500;
 }
+
+#search-button {
+    margin: 4px 0px 0px 16px;
+}
+
+h3 {
+    margin: 10px;
+}

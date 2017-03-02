@@ -76,13 +76,16 @@ export class JobService {
 					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Variant eq 'retry' and task/Type eq 'Delivery')";
 					break;
 			}
-        console.log(state)
-        console.log(jobStateParam)
         return jobStateParam;
     }
 
-    getHistoryWithPageNumber(state:string, paymentStatus: string, page:number,
-                            startTimeISO: string, endTimeISO: string, reference: string)
+    getHistoryWithPageNumber(state:string,
+                            paymentStatus: string,
+                            page:number, pageCount: number,
+                            startTimeISO: string, endTimeISO: string,
+                            searchText: string,
+                            orderBy: string, orderByTime:string, orderByTimeDirection: string,
+                            filterTime: string)
                             : Observable<PageEnvelope<Job>> {
         this._queryBuilder = new QueryBuilder();
         let filterArray: any = [];
@@ -100,46 +103,30 @@ export class JobService {
                                 value: "'" + paymentStatus + "'"
                             })
         }
-        if(state === "ENQUEUED"){
-            if(startTimeISO){
-                filterArray.push({
-                    propName: "CreateTime",
-                    comparator: "gt",
-                    value: "datetime'"+ startTimeISO +"'"
-                })
-            }
-            if(endTimeISO){
-                filterArray.push({
-                    propName: "CreateTime",
-                    comparator: "lt",
-                    value: "datetime'"+ endTimeISO +"'"
-                })
-            }
+
+        if(startTimeISO){
+            filterArray.push({
+                propName: filterTime,
+                comparator: "gt",
+                value: "datetime'"+ startTimeISO +"'"
+            })
         }
-        else {
-            if(startTimeISO){
-                filterArray.push({
-                    propName: "ModifiedTime",
-                    comparator: "gt",
-                    value: "datetime'"+ startTimeISO +"'"
-                })
-            }
-            if(endTimeISO){
-                filterArray.push({
-                    propName: "ModifiedTime",
-                    comparator: "lt",
-                    value: "datetime'"+ endTimeISO +"'"
-                })
-            }
+        if(endTimeISO){
+            filterArray.push({
+                propName: filterTime,
+                comparator: "lt",
+                value: "datetime'"+ endTimeISO +"'"
+            })
         }
 
-        if(reference){
+
+        if(searchText){
             filterArray.push(
             {
                 propName: "",
                 comparator: "",
-                value: " substringof('"+ reference +"',Order/From/Address) or substringof('"+ reference +"',Order/To/Address) or substringof('"+ reference +
-                "',HRID) or substringof('"+ reference +"',Order/ReferenceInvoiceId) or Order/OrderCart/PackageList/any(package: substringof('"+reference+"',package/Item))"
+                value: " substringof('"+ searchText +"',Order/From/Address) or substringof('"+ searchText +"',Order/To/Address) or substringof('"+ searchText +
+                "',HRID) or substringof('"+ searchText +"',Order/ReferenceInvoiceId) or Order/OrderCart/PackageList/any(package: substringof('"+searchText+"',package/Item))"
             })
         }
 
@@ -148,26 +135,26 @@ export class JobService {
             .filterBy(filterArray)
             .orderBy([
             {
-                propName: "ModifiedTime",
-                orderDirection: "desc"
+                propName: orderByTime,
+                orderDirection: orderByTimeDirection
             }])
             .page(page)
-            .pageSize(50)
+            .pageSize(pageCount)
             .toQueryString();
 
         let historyUrl = this.jobUrl + '/odata' + queryString;
         return this.getJobs(historyUrl)
     }
 
-    getJobsWithReference(reference: string, page: number){
+    getJobsWithReference(searchText: string, page: number){
         let filterArray: any = [];
 
         filterArray.push([
             {
-                propName: "substringof('"+ reference +"',Order/To/Address)"
+                propName: "substringof('"+ searchText +"',Order/To/Address)"
             },
             {
-                propName: "substringof('"+ reference +"',HRID)"
+                propName: "substringof('"+ searchText +"',HRID)"
             }
         ])
         let queryString: string = this._queryBuilder.filterBy(filterArray)

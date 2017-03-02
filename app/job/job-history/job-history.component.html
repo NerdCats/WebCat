@@ -1,74 +1,6 @@
 <div>
     <div class="row">
         <form class="form-horizontal center-block" #searchForm="ngForm">
-            <!--<div class="row">
-                <div class="form-group col-md-12 search">
-                    <label class="col-md-2 control-label">Search</label>
-                    <div class="col-md-10">
-                        <span class="input-group-btn search-input">
-                            <input type="text" class="form-control" placeholder="search by GO! Fetch tracking, your invoice no or customer phonenumber" [(ngModel)]="searchText">
-                        </span>
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" (click)="search()">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group mt15 col-md-6">
-                    <label class="col-md-4 control-label">Order State</label>
-                    <div class="col-md-8">
-                        <select class="form-control" [(ngModel)]="jobState" (ngModelChange)="search($event)">
-                            <option value="ALL" selected>ALL</option>
-                            <option value="ENQUEUED">PENDING</option>
-                            <option value="IN_PROGRESS">IN PROGRESS</option>
-                            <option value="COMPLETED">COMPLETED</option>
-                            <option value="CANCELLED">CANCELLED</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group mt15 col-md-6">
-                    <label class="col-md-4 control-label">Payment Status</label>
-                    <div class="col-md-8">
-                        <select class="form-control" [(ngModel)]="paymentStatus" (ngModelChange)="search($event)">
-                            <option value="ALL" selected>ALL</option>
-                            <option value="PAID">PAID</option>
-                            <option value="PENDING">PENDING</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group mt15 col-md-6">
-                    <label class="col-md-4 control-label">Start Date</label>
-                    <div class="col-md-8">
-                        <span class="input-group-btn">
-                            <input class="form-control" [(ngModel)]="startTime" type="date">
-                        </span>
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" (click)="clearDate()">
-                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group mt15 col-md-6">
-                    <label class="col-md-4 control-label">End Date</label>
-                    <div class="col-md-8">
-                        <span class="input-group-btn">
-                            <input class="form-control" [(ngModel)]="endTime" type="date">
-                        </span>
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" (click)="clearDate()">
-                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group mt15 col-md-12">
-                    <button class="pull-right btn btn-primary" (click)="search()">SEARCH</button>
-                </div>
-            </div>-->
             <div class="row">
                 <div class="col-md-3">
                     <label>Search:</label>
@@ -101,28 +33,24 @@
                 <div class="col-md-1">
                     <label>Order By:</label>
                     <div>
-                        <select class="form-control" ng-model="SelectedOrderByProperty" ng-change="SelectOrderBy()">
-                            <option value="CreateTime asc">By <b>Oldest</b> Create Time</option>
-                            <option value="CompletionTime asc">By <b>Oldest</b> Completion Time</option>
-                            <option value="ModifiedTime asc">By <b>Oldest</b> Modified Time</option>
-                            <option value="CreateTime desc">By <b>Latest</b> Create Time</option>
-                            <option value="CompletionTime desc">By <b>Latest</b> Completion Time</option>
-                            <option value="ModifiedTime desc">By <b>Latest</b> Modified Time</option>
+                        <select class="form-control" [(ngModel)]="orderByTimeDirectionText" (ngModelChange)="search($event)">
+                            <option value="CreateTime asc">By Oldest Create Time</option>
+                            <option value="CompletionTime asc">By Oldest Completion Time</option>
+                            <option value="ModifiedTime asc">By Oldest Modified Time</option>
+                            <option value="CreateTime desc">By Latest Create Time</option>
+                            <option value="CompletionTime desc">By Latest Completion Time</option>
+                            <option value="ModifiedTime desc">By Latest Modified Time</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-1">
                     <label>Show per page:</label>
-                    <select class="form-control" ng-model="JobsPerPage" ng-change="searchJobs()" ng-disabled="newOrders.isCompleted === 'IN_PROGRESS'">
+                    <select class="form-control" [(ngModel)]="pageCount" (ngModelChange)="search($event)">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
                         <option value="40">40</option>
-                        <option value="50">60</option>
-                        <option value="50">70</option>
-                        <option value="50">80</option>
-                        <option value="50">90</option>
-                        <option value="50">100</option>
+                        <option value="50">50</option>
                     </select>
                 </div>
             <!--</div>
@@ -152,7 +80,7 @@
                     </div>
                     <div class="form-group col-md-1">
                         <label>Filter By:</label>
-                        <select class="form-control" ng-model="SelectedTimeProperty" style="width: 100%" ng-change="selectDateRange()">
+                        <select class="form-control" [(ngModel)]="filterTime" style="width: 100%" (ngModelChange)="search($event)">
                             <option value=""></option>
                             <option value="CreateTime">Create Time</option>
                             <option value="CompletionTime">Completion Time</option>
@@ -162,7 +90,7 @@
                 <!--</div>-->
                 <div class="col-md-1">
                     <br>
-                    <button class="btn btn-primary" (click)="search()">SEARCH JOBS</button>
+                    <button id="search-button" class="btn btn-primary" (click)="search()">SEARCH JOBS</button>
                 </div>
             </div>
         </form>
@@ -178,12 +106,14 @@
     </div>
 
     <div class="row table-responsive" *ngIf="status=='SUCCESSFUL'">
+        <h3>{{pagination.Total}} Result found</h3>
         <table class="table">
             <thead>
                 <tr>
                     <th style="width:20px">S/L</th>
                     <th style="width:150px">Tracking Id</th>
                     <th style="width:120px">Created</th>
+                    <th style="width:120px">Last Modified</th>
                     <th style="width:200px">Status</th>
                     <th style="width:200px">Reference Invoice</th>
                     <th style="width:300px">Package</th>
@@ -196,9 +126,8 @@
                 <tr *ngFor="let job of jobs; let i = index">
                     <td>{{ i + pagination.Start}}</td>
                     <td class="pointer"><a href="#/track/{{job.HRID}}">{{job.HRID}}</a></td>
-                    <td>
-                        {{job.CreateTime | date:"EEE d MMM y"}}
-                    </td>
+                    <td>{{job.CreateTime | date:"EEE d MMM y"}}</td>
+                    <td>{{job.ModifiedTime | date:"EEE d MMM y"}}</td>
                     <td>
                         <span class="hrstate" [ngClass]="getJobStateCSS(job.State).class">{{ job.HRState }}</span>
                     </td>
@@ -219,13 +148,13 @@
 
     <ul class="pagination pagination-sm pull-right mr50" *ngIf="status=='SUCCESSFUL'">
         <li *ngIf="prevPageNo !== -1">
-            <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, prevPageNo, startTime, endTime)">&laquo;</a>
+            <a class="pointer" (click)="loadPage(prevPageNo)">&laquo;</a>
         </li>
         <li *ngFor="let page of paginationArray">
-            <a class="{{page.isSelected}} pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, page.pageNo, startTime, endTime)">{{page.pageNo + 1}}</a>
+            <a class="{{page.isSelected}} pointer" (click)="loadPage(page.pageNo)">{{page.pageNo + 1}}</a>
         </li>
         <li *ngIf="nextPageNo">
-            <a class="pointer" (click)="getJobsWithPageNumber(jobState, paymentStatus, nextPageNo, startTime, endTime)">&raquo;</a>
+            <a class="pointer" (click)="loadPage(nextPageNo)">&raquo;</a>
         </li>
     </ul>
     <div class=clearfix></div>

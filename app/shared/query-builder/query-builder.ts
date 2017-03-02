@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-export type OrderDirection = "asc" | "desc";
-
 @Injectable()
 export class QueryBuilder {
     private _querySegments: Array<string> = new Array<string>();
@@ -9,7 +7,7 @@ export class QueryBuilder {
     constructor() {
     }
 
-    public orderBy(props: Array<{ propName: string, orderDirection?: OrderDirection }>): QueryBuilder {
+    public orderBy(props: Array<{ propName: string, orderDirection: string }>): QueryBuilder {
         if (props && props.length > 0) {
             let querySegment: string = "$orderby";
             let orderbySegment = props.map(

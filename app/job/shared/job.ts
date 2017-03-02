@@ -14,6 +14,7 @@ export interface IJobJson {
     State: JobState; // INFO: Potential place for a string literal
     CreateTime: string;
     ModifiedTime: string;
+    CompletionTime: string;
     PreferredDeliveryTime: string;
     InvoiceId: string;
     PaymentMethod: string;
@@ -21,7 +22,6 @@ export interface IJobJson {
     Deleted: boolean;
     PaymentStatus: string; // INFO: Potential place for a string literal
     CancellationReason: string;
-    CompletionTime: string;
 }
 
 
@@ -37,6 +37,7 @@ export class Job {
     State: JobState; // INFO: Potential place for a string literal
     CreateTime: Date;
     ModifiedTime: Date;
+    CompletionTime: Date;
     PreferredDeliveryTime: Date;
     InvoiceId: string;
     PaymentMethod: string;
@@ -44,11 +45,11 @@ export class Job {
     Deleted: boolean;
     PaymentStatus: string; // INFO: Potential place for a string literal
     CancellationReason: string;
-    CompletionTime: string;
     toJSON(): IJobJson {
         return Object.assign({}, this, {
             CreateTime: this.CreateTime.toString(),
             ModifiedTime: this.ModifiedTime.toString(),
+            CompletionTime: this.CompletionTime.toString(),
             PreferredDeliveryTime: this.PreferredDeliveryTime.toString()
         });
     }
@@ -58,6 +59,7 @@ export class Job {
         var assignedJob =  Object.assign(job, json, {
             CreateTime: new Date(json.CreateTime),
             ModifiedTime: new Date(json.ModifiedTime),
+            CompletionTime: new Date(json.CompletionTime),
             PreferredDeliveryTime: new Date(json.PreferredDeliveryTime),
             Tasks: []
         });
