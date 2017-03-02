@@ -70,9 +70,8 @@
 				</div>
 				<div id="orderStatusInfo" class="panel-body collapse in">
 					<div class="col-md-12">
-						<strong>{{ orderStatusHeading }}</strong>
-						<!--injected html here because I wanted to highlight the email address substring! in the orderInfoDesc-->
-						<p [innerHtml]="orderStatusDesc"></p>
+						<strong>{{ job.HRState }}</strong>
+						<p *ngIf="job.State === 'CANCELLED'">Cancellation Reason : {{job.CancellationReason}}</p>
 					</div>
 					<div class="col-md-12">
 						<strong>Additional Information</strong>
@@ -98,6 +97,7 @@
 									<th>Task</th>
 									<th>Status</th>
 									<th>Mentioned ETA</th>
+									<th>Delivery Man</th>
 									<th>Started</th>
 									<th>Completed</th>
 									<th>Duration</th>
@@ -108,99 +108,13 @@
 									<td class="col-md-1"> {{task.Type}} </td>
 									<td class="col-md-1"> <span class="{{getCssClass(task.State).class}}">{{getCssClass(task.State).value}}</span> </td>
 									<td class="col-md-2"> {{(task.ETA | date:"EEE d MMM y,h:m TT") || "Not Mentioned"}} </td>
+									<td class="col-md-2">{{job.Assets[task.AssetRef].UserName}}</td>
 									<td class="col-md-2"> {{(task.InitiationTime | date:"EEE d MMM y,h:m TT") || "Not Started"}} </td>
 									<td class="col-md-2"> {{(task.CompletionTime | date:"EEE d MMM y,h:m TT") || "Not Finished"}} </td>
 									<td class="col-md-2"> {{task.Duration || "Not Finished"}} </td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
-				</div>
-			</div>
-
-			<div class="panel panel-primary" *ngIf="assetInfo.length != 0 || (coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable)">
-				<div id="panel-heading-custom" class="panel-heading">
-					<div class="row">
-						<h3 class="panel-title col-md-11">
-							Tracking Information
-						</h3>
-						<a class="col-md-1" data-toggle="collapse" href="#trackingInfo" aria-expanded="true">
-							<i class="collapse-i fa fa-sort-desc fa-lg" aria-hidden="true"></i>
-						</a>
-					</div>
-				</div>
-				<div id="trackingInfo" class="panel-body collapse in">
-					<div *ngIf="assetInfo.length != 0">
-						<p><strong>Delivery Man Assigned</strong></p>
-						<ul class="list-inline">
-							<li *ngFor="let asset of assetInfo">
-								<div class="row">
-									<div class="col-md-1">
-										<img class="img-circle" src="{{asset.Profile.PicUri || '/assets/img/ppnotfound.png'}}" alt="">
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-1"><span>{{asset.UserName}}</span></div>
-								</div>
-								<div class="row">
-									<div class="col-md-2">
-										<span class="fa fa-mobile" aria-hidden="true"></span>
-									</div>
-									<div class="col-md-1">
-										<span>{{asset.PhoneNumber}}</span>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div *ngIf="coordinateInfo.pickUpAddressAvailable && coordinateInfo.deliveryAddressAvailable">
-						<sebm-google-map
-							[latitude] = "23.797337"
-							[longitude] = "90.406987"
-							[zoom] = "10">
-							<sebm-google-map-marker
-								*ngIf="coordinateInfo.pickUpAddressAvailable"
-								[latitude]="job.Order.From.Point.coordinates[1]"
-								[longitude]="job.Order.From.Point.coordinates[0]"
-								[iconUrl] = "mapMarker.greenMarker"
-								[label]="P">
-									<sebm-google-map-info-window>
-									<strong>Pickup Location</strong>
-								</sebm-google-map-info-window>
-							</sebm-google-map-marker>
-							<sebm-google-map-marker
-								*ngIf="coordinateInfo.deliveryAddressAvailable"
-								[latitude]="job.Order.To.Point.coordinates[1]"
-								[longitude]="job.Order.To.Point.coordinates[0]"
-								[iconUrl] = "mapMarker.redMarker"
-								[label]="D">
-									<sebm-google-map-info-window>
-									<strong>Delivery Location</strong>
-								</sebm-google-map-info-window>
-							</sebm-google-map-marker>
-							<sebm-google-map-marker
-								*ngIf="coordinateInfo.assetLocationAvailable"
-								[latitude]="assetLocation.point.coordinates[1]"
-								[longitude]="assetLocation.point.coordinates[0]"
-								[iconUrl] = "mapMarker.blueMarker"
-								[label]="P">
-									<sebm-google-map-info-window>
-									<strong>Delivery Man</strong>
-								</sebm-google-map-info-window>
-							</sebm-google-map-marker>
-						</sebm-google-map>
-
-						<ul class="list-inline ">
-							<li class="pd-10">
-								<img src="{{mapMarker.greenMarker}}" alt="">Pick up
-							</li>
-							<li class="pd-10">
-								<img src="{{mapMarker.redMarker}}" alt="">Delivery
-							</li>
-							<li class="pd-10" *ngIf="coordinateInfo.assetLocationAvailable">
-								<img src="{{mapMarker.blueMarker}}" alt="">Delivery Man
-							</li>
-						</ul>
 					</div>
 				</div>
 			</div>

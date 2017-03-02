@@ -58,6 +58,16 @@ export class CssHelper {
                     value: "PAID",
                     class: "label completed"
                 }
+            case "FAILED":
+                return {
+                    value: "FAILED",
+                    class: "label failed"
+                }
+            case "RETURNED":
+                return {
+                    value: "RETURNED",
+                    class: "label returned"
+                }
             default:
                 return {
                     value: word,

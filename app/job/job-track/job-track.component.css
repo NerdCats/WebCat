@@ -5,3 +5,13 @@
 .sebm-google-map-container {
   height: 300px;
 }
+
+.failed {
+      background-color: #9e9e9e;
+      color: white;
+}
+
+.returned {
+      background-color: #1e90ff;
+      color: white;
+}
