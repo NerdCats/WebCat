@@ -35,3 +35,12 @@ th, td {
 h3 {
     margin: 10px;
 }
+
+.orderby-button {
+    color: #7d7979;
+    cursor: pointer;
+}
+
+.orderby-button:hover{
+    color: black;
+}

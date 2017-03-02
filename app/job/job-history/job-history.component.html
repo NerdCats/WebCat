@@ -31,19 +31,6 @@
                     </select>
                 </div>
                 <div class="col-md-1">
-                    <label>Order By:</label>
-                    <div>
-                        <select class="form-control" [(ngModel)]="orderByTimeDirectionText" (ngModelChange)="search($event)">
-                            <option value="CreateTime asc">By Oldest Create Time</option>
-                            <option value="CompletionTime asc">By Oldest Completion Time</option>
-                            <option value="ModifiedTime asc">By Oldest Modified Time</option>
-                            <option value="CreateTime desc">By Latest Create Time</option>
-                            <option value="CompletionTime desc">By Latest Completion Time</option>
-                            <option value="ModifiedTime desc">By Latest Modified Time</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-1">
                     <label>Show per page:</label>
                     <select class="form-control" [(ngModel)]="pageCount" (ngModelChange)="search($event)">
                         <option value="10">10</option>
@@ -53,41 +40,37 @@
                         <option value="50">50</option>
                     </select>
                 </div>
-            <!--</div>
-            <div class="row">
-                <div class="col-md-6">-->
-                    <div class="form-group col-md-2">
-                        <label>From:</label>
-                        <span class="input-group-btn">
-                            <input class="form-control" [(ngModel)]="startTime" type="date">
-                        </span>
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" (click)="clearDate()">
-                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label>To:</label>
-                        <span class="input-group-btn">
-                            <input class="form-control" [(ngModel)]="endTime" type="date">
-                        </span>
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" (click)="clearDate()">
-                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
-                    <div class="form-group col-md-1">
-                        <label>Filter By:</label>
-                        <select class="form-control" [(ngModel)]="filterTime" style="width: 100%" (ngModelChange)="search($event)">
-                            <option value=""></option>
-                            <option value="CreateTime">Create Time</option>
-                            <option value="CompletionTime">Completion Time</option>
-                            <option value="ModifiedTime">Modified Time</option>
-                        </select>
-                    </div>
-                <!--</div>-->
+                <div class="form-group col-md-2">
+                    <label>From:</label>
+                    <span class="input-group-btn">
+                        <input class="form-control" [(ngModel)]="startTime" type="date">
+                    </span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" (click)="clearDate()">
+                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>To:</label>
+                    <span class="input-group-btn">
+                        <input class="form-control" [(ngModel)]="endTime" type="date">
+                    </span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" (click)="clearDate()">
+                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Filter By:</label>
+                    <select class="form-control" [(ngModel)]="filterTime" style="width: 100%" (ngModelChange)="search($event)">
+                        <option value=""></option>
+                        <option value="CreateTime">Create Time</option>
+                        <option value="CompletionTime">Completion Time</option>
+                        <option value="ModifiedTime">Modified Time</option>
+                    </select>
+                </div>
                 <div class="col-md-1">
                     <br>
                     <button id="search-button" class="btn btn-primary" (click)="search()">SEARCH JOBS</button>
@@ -112,8 +95,24 @@
                 <tr>
                     <th style="width:20px">S/L</th>
                     <th style="width:150px">Tracking Id</th>
-                    <th style="width:120px">Created</th>
-                    <th style="width:120px">Last Modified</th>
+                    <th style="width:120px">
+                        Created
+                        <a class="orderby-button" (click)="orderByTimeWithDirection('CreateTime', 'asc')">
+                            <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                        </a>
+                        <a class="orderby-button" (click)="orderByTimeWithDirection('CreateTime', 'desc')">
+                            <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                        </a>
+                    </th>
+                    <th style="width:120px">
+                        Last Modified
+                        <a class="orderby-button" (click)="orderByTimeWithDirection('ModifiedTime', 'asc')">
+                            <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                        </a>
+                        <a class="orderby-button" (click)="orderByTimeWithDirection('ModifiedTime', 'desc')">
+                            <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                        </a>
+                    </th>
                     <th style="width:200px">Status</th>
                     <th style="width:200px">Reference Invoice</th>
                     <th style="width:300px">Package</th>

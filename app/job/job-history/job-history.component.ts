@@ -48,7 +48,6 @@ export class JobHistoryComponent implements OnInit {
     endTime: Date;
 
     orderBy: string;
-    orderByTimeDirectionText: string = "CreateTime asc";
     orderByTime: string = "ModifiedTime";
     orderByTimeDirection: string = "desc";
 
@@ -65,34 +64,13 @@ export class JobHistoryComponent implements OnInit {
         this.search();
     }
 
-    search(){
-        switch(this.orderByTimeDirectionText){
-            case "CreateTime asc":
-                this.orderByTime = "CreateTime";
-                this.orderByTimeDirection = "asc";
-                break;
-            case "CompletionTime asc":
-                this.orderByTime = "CompletionTime";
-                this.orderByTimeDirection = "asc";
-                break;
-            case "ModifiedTime asc":
-                this.orderByTime = "ModifiedTime";
-                this.orderByTimeDirection = "asc";
-                break;
-            case "CreateTime desc":
-                this.orderByTime = "CreateTime";
-                this.orderByTimeDirection = "desc";
-                break;
-            case "CompletionTime desc":
-                this.orderByTime = "CompletionTime";
-                this.orderByTimeDirection = "desc";
-                break;
-            case "ModifiedTime desc":
-                this.orderByTime = "ModifiedTime";
-                this.orderByTimeDirection = "desc";
-                break;
-        }
+    orderByTimeWithDirection(orderByTime: string, orderByTimeDirection: string){
+        this.orderByTime = orderByTime;
+        this.orderByTimeDirection = orderByTimeDirection;
+        this.search();
+    }
 
+    search(){
         this.getJobsWithPageNumber(this.jobState,
                                     this.paymentStatus, 0, this.pageCount,
                                     this.startTime, this.endTime,
