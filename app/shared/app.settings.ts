@@ -11,6 +11,10 @@ export class AppSettings {
      return 'http://fetchdev.gobd.co/';
    }
 
+   public static get PRODUCT_BASE(): string {
+     return 'http://127.0.0.1:8000/';
+   }
+
    public static get CLIENT_ID(): string {
      return 'GoFetchDevWebApp';
    }

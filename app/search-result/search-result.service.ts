@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MockVendors } from '../shared/mock-vendors';
+import { AppSettings } from '../shared/app.settings'
 // import { Vendor } from '../shared/model/vendor';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -30,7 +31,7 @@ export class SearchResultService {
         //     }
         // });
 
-        return this.http.get("http://gobdsif.cloudapp.net/api/store-search?area="+area+"&keyword="+keyword)
+        return this.http.get(AppSettings.PRODUCT_BASE + "api/store-search?area="+area+"&keyword="+keyword)
                 .map((res: Response) => {
                     let stores:any = res.json();
                     return stores;

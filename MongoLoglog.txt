@@ -1,0 +1,1 @@
+2017-03-05T10:03:56.396+0600 I CONTROL  [main] Trying to start Windows service 'MongoDB'
