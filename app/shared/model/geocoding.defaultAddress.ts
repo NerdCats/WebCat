@@ -2,6 +2,7 @@ export class DefaultAddress {
     public PostalCode: string;
     public Floor: string;
     public HouseNumber: string;
+    public Address: string;
     public AddressLine1: string;
     public AddressLine2: string;
     public Country: string;

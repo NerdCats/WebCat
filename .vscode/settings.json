@@ -9,5 +9,5 @@
         "dist/**/*": true
     }
 ,
-"typescript.tsdk": "./node_modules/typescript/lib"
+"typescript.check.workspaceVersion": false
 }

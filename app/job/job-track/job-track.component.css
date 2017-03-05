@@ -11,3 +11,12 @@
     background-color: #3498db !important;
     border-color: #3498db !important;
 }
+.failed {
+      background-color: #9e9e9e;
+      color: white;
+}
+
+.returned {
+      background-color: #1e90ff;
+      color: white;
+}

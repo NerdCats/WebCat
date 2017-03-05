@@ -65,9 +65,14 @@ export class SecureHttp extends Http {
         return observable.catch((err, source) => {
             if (err.status == 401) {
                 this._router.navigate(['/Home']);
+
                 // FIXME:
                 // We should really use the refresh token and get another token
                 // due to deadline, had to do this blund hack, will come back to this
+
+                this.localStorage.remove("auth_token");
+                window.location.reload();
+
                 return Observable.empty();
             } else {
                 return Observable.throw(err);

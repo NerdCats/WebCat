@@ -1,50 +1,58 @@
-<div class="widget">
-    <widget-header title="Job Summary" icon="fa-list-alt">
-    </widget-header>
-    <widget-body>
-        <div *ngIf="status=='IN_PROGRESS'">
-            <progress-bubble></progress-bubble>
+<div *ngIf="status=='IN_PROGRESS'">
+    <progress-bubble></progress-bubble>
+</div>
+
+<div class="error" *ngIf="status=='FAILED'">
+    {{statusMessage}} <button class="btn btn-danger" (click)="getAllJobCount()">click here to refresh</button>
+</div>
+
+<div class="row" *ngIf="status=='SUCCESSFUL'">
+    <div class="all col-lg-2 col-md-2 col-sm-6 col-xs-12">
+        <div class="global-status-block">
+            <span>Total</span>
         </div>
-        <div class="error" *ngIf="status=='FAILED'">
-            {{statusMessage}}
+        <div class="global-status-block-count">
+            <div class="text-right">{{jobCount.ALL}}</div>
         </div>
-        <div class="row" *ngIf="status=='SUCCESSFUL'">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="widget-content">
-                    <div class="widget-icon green pull-left">
-                        <i class="fa fa-check summary-icon" aria-hidden="true"></i>
-                    </div>
-                    <div class="title">{{jobCount.COMPLETED}}</div>
-                    <div class="comment">Completed</div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="widget-content">
-                    <div class="widget-icon blue pull-left">
-                        <i class="fa fa-play summary-icon in-progress-icon" aria-hidden="true"></i>
-                    </div>
-                    <div class="title">{{jobCount.IN_PROGRESS}}</div>
-                    <div class="comment">In Progress</div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="widget-content">
-                    <div class="widget-icon orange pull-left">
-                        <i class="fa fa-ellipsis-h summary-icon" aria-hidden="true"></i>
-                    </div>
-                    <div class="title">{{jobCount.ENQUEUED}}</div>
-                    <div class="comment">Pending</div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="widget-content">
-                    <div class="widget-icon red pull-left">
-                        <i class="fa fa-times summary-icon" aria-hidden="true"></i>
-                    </div>
-                    <div class="title">{{jobCount.CANCELLED}}</div>
-                    <div class="comment">Cancelled</div>
-                </div>
-            </div>
+    </div>
+    <div class="pending col-lg-2 col-md-2 col-sm-6 col-xs-12">
+        <div class="global-status-block">
+            <span>PENDING</span>
         </div>
-    </widget-body>
+        <div class="global-status-block-count">
+            <div class="text-right">{{jobCount.IN_PROGRESS}}</div>
+        </div>
+    </div>
+    <div class="in-progress col-lg-2 col-md-2 col-sm-6 col-xs-12">
+        <div class="global-status-block">
+            <span>IN PROGRESS</span>
+        </div>
+        <div class="global-status-block-count">
+            <div class="text-right">{{jobCount.COMPLETED}}</div>
+        </div>
+    </div>
+    <div class="completed col-lg-2 col-md-2 col-sm-6 col-xs-12">
+        <div class="global-status-block">
+            <span>COMPLETED</span>
+        </div>
+        <div class="global-status-block-count">
+            <div class="text-right">{{jobCount.CANCELLED}}</div>
+        </div>
+    </div>
+    <div class="returned col-lg-2 col-md-2 col-sm-6 col-xs-12">
+        <div class="global-status-block">
+            <span>RETURNED</span>
+        </div>
+        <div class="global-status-block-count">
+            <div class="text-right">{{jobCount.RETURNED}}</div>
+        </div>
+    </div>
+    <div class="cancelled col-lg-2 col-md-2 col-sm-6 col-xs-12">
+        <div class="global-status-block">
+            <span>CANCELLED</span>
+        </div>
+        <div class="global-status-block-count">
+            <div class="text-right">{{jobCount.ENQUEUED}}</div>
+        </div>
+    </div>
 </div>

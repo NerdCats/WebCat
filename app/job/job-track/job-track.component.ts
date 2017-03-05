@@ -1,6 +1,7 @@
 import { Component, provide, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, RouteParams } from '@angular/router-deprecated';
+import { CssHelper } from '../../shared/css-helper'
 
 import {
     MapsAPILoader,
@@ -17,6 +18,7 @@ import { CoordinateInfo } from '../shared/coordinateInfo';
 import { OrderInfoService } from '../shared/orderInfo.service';
 
 import { ComponentServiceStatus } from '../../shared/component-service-status';
+import { Comment } from '../shared/comment';
 import { ProgressBubbleComponent } from '../../common/progress-bubble/progress-bubble.component';
 
 
@@ -31,6 +33,7 @@ export class JobTrackComponent implements OnInit {
 
     public jobId: string;
     public job: Job;
+    public comments: Comment;
 
 
     public status: ComponentServiceStatus = "IN_PROGRESS";
@@ -61,6 +64,7 @@ export class JobTrackComponent implements OnInit {
     ngOnInit() {
         this.jobId = this.routeparams.get('jobId');
         this.getJob();
+        this.getComment();
     }
 
     getJob() {
@@ -107,6 +111,18 @@ export class JobTrackComponent implements OnInit {
             });
     }
 
+    getComment() {
+        this.jobTrackService.getComments(this.jobId)
+            .subscribe(comments => {
+                this.comments = comments["data"];
+                console.log(this.comments);
+            })
+    }
+
+    getCssClass(word){
+        return CssHelper.getCssLabel(word);
+    }
+
     fixingServerText() {
         // this weird function is to streamline server responses
         // like, CashOnDelivery to Cash On Deliver ||
@@ -119,6 +135,8 @@ export class JobTrackComponent implements OnInit {
             if(task.Type === "SecureDelivery") task.Type = "Secured Delivery";
 
             if(task.Duration){
+                console.log(task.Duration);
+
                 task.Duration = task.Duration.substr(0,8)
             }
 

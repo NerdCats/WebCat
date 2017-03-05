@@ -7,7 +7,9 @@ import {WidgetHeaderComponent} from '../../common/widget-header/widget-header.co
 import {WidgetBodyComponent} from '../../common/widget-body/widget-body.component';
 
 import {JobService} from '../shared/job.service';
+import {CssHelper} from '../../shared/css-helper';
 import {Job, JobState} from '../shared/job';
+
 
 @Component({
     selector: 'job-summary',
@@ -21,14 +23,17 @@ export class JobSummaryComponent implements OnInit {
         COMPLETED: 0,
         IN_PROGRESS: 0,
         CANCELLED: 0,
-        ENQUEUED: 0
+        ENQUEUED: 0,
+        RETURNED: 0,
+        ALL: 0
     };
 
     jobCountProcessState = {
         COMPLETED: "PENDING",
         IN_PROGRESS: "PENDING",
         CANCELLED: "PENDING",
-        ENQUEUED: "PENDING"
+        ENQUEUED: "PENDING",
+        RETURNED: "RETURNED"
     };
 
     public get status(): ComponentServiceStatus {
@@ -48,10 +53,16 @@ export class JobSummaryComponent implements OnInit {
     constructor(private jobService: JobService) { }
 
     ngOnInit() {
+        this.getAllJobCount();
+    }
+
+    getAllJobCount(){
         this.getJobCount("COMPLETED");
         this.getJobCount("IN_PROGRESS");
         this.getJobCount("ENQUEUED");
         this.getJobCount("CANCELLED");
+        this.getJobCount("RETURNED");
+        this.getJobCount("ALL");
     }
 
     getJobCount(state: JobState) {
@@ -64,5 +75,9 @@ export class JobSummaryComponent implements OnInit {
                 this.jobCountProcessState[state] = "FAILED";
                 this.statusMessage = error.Message || "Failed to fetch data from server";
             });
+    }
+
+    getStateCssClass(word: string):any {
+        return CssHelper.getCssLabel(word);
     }
 }

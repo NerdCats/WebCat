@@ -1,7 +1,7 @@
 <div>
     <div id="page-wrapper" [ngClass]="{open: isSideBarOpen}" class="open">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+        <div id="sidebar-wrapper" (mouseenter)="toggleSidebar()" (mouseleave)="toggleSidebar()">
             <ul class="sidebar">
                 <li class="sidebar-main">
                     <a (click)="toggleSidebar()">
@@ -11,6 +11,7 @@
                 <li class="sidebar-list">
                     <a [routerLink]="['Dashboard']">Glimpse<span class="menu-icon fa fa-tachometer"></span></a>
                     <a [routerLink]="['Order']">New Order<span class="menu-icon fa fa-plus"></span></a>
+                    <a [routerLink]="['Report']">Report<span class="menu-icon fa fa-plus"></span></a>
                 </li>
             </ul>
         </div>

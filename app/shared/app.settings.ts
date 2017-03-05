@@ -27,6 +27,10 @@ export class AppSettings {
      return "http://gofetch.cloudapp.net:1337/"
    }
 
+   public static get SPYCAT_BASE(): string {
+     return "http://gobdsif.cloudapp.net";
+   }
+
    public static get GOOGLE_MAP_API_KEY(): string {
      return 'AIzaSyCKMIEYdB0YPJkDr89n0WuaG3qQDjE9ndY';
    }

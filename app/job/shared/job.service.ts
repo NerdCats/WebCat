@@ -18,8 +18,6 @@ export class JobService {
     private _queryBuilder: QueryBuilder;
 
     constructor(private shttp: SecureHttp) {
-        // INFO: Should be injected here
-        this._queryBuilder = new QueryBuilder();
     }
 
     private jobUrl = AppSettings.TASKCAT_API_BASE + 'job';
@@ -35,21 +33,136 @@ export class JobService {
             });
     }
 
-    getHistory(): Observable<PageEnvelope<Job>> {
-        let queryString: string = this._queryBuilder.orderBy([
-            {
-                propName: "CreateTime",
-                orderDirection: "desc"
-            }]).toQueryString();
-        let historyUrl = this.jobUrl + '/odata' + queryString
+    private jobStateQueryString(state: string){
+        var jobStateParam = "";
+        switch(state){
+				case 'ENQUEUED':
+				case 'COMPLETED':
+				case 'IN_PROGRESS':
+				case 'CANCELLED':
+					jobStateParam = "State eq '"+ state +"'";
+					break;
 
-        return this.getJobs(historyUrl);
+				case 'PICKUP_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Type eq 'PackagePickUp')";
+					break;
+				case 'DELIVERY_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Type eq 'Delivery')";
+					break;
+				case 'CASH_DELIVERY_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Type eq 'SecureCashDelivery')";
+					break;
+				case 'RETURN_DELIVERY_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Variant eq 'return' and task/Type eq 'Delivery')";
+					break;
+				case 'RETRY_DELIVERY_IN_PROGRESS':
+					jobStateParam = "Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Variant eq 'retry' and task/Type eq 'Delivery')";
+					break;
+
+
+				case 'PICKUP_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Type eq 'PackagePickUp')";
+					break;
+				case 'DELIVERY_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Type eq 'Delivery')";
+					break;
+				case 'CASH_DELIVERY_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Type eq 'SecureCashDelivery')";
+					break;
+				case 'RETURNED_DELIVERY_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Variant eq 'return' and task/Type eq 'Delivery')";
+					break;
+				case 'RETRY_DELIVERY_COMPLETED':
+					jobStateParam = "Tasks/any(task: task/State eq 'COMPLETED' and task/Variant eq 'retry' and task/Type eq 'Delivery')";
+					break;
+			}
+        return jobStateParam;
     }
 
-    getHistoryWithPageNumber(page:number): Observable<PageEnvelope<Job>> {
-        let queryString: string = this._queryBuilder.toQueryString();
-        let historyUrl = this.jobUrl + '/odata' + queryString + "&page=" + page; //FIXME: this url should be constructed by _queryBuilder
+    getHistoryWithPageNumber(state:string,
+                            paymentStatus: string,
+                            page:number, pageCount: number,
+                            startTimeISO: string, endTimeISO: string,
+                            searchText: string,
+                            orderBy: string, orderByTime:string, orderByTimeDirection: string,
+                            filterTime: string)
+                            : Observable<PageEnvelope<Job>> {
+        this._queryBuilder = new QueryBuilder();
+        let filterArray: any = [];
+        if(state !== undefined && state !== "" && state !== "ALL") {
+            filterArray.push({
+                                propName: "",
+                                comparator: "",
+                                value: this.jobStateQueryString(state)
+                            })
+        }
+        if(paymentStatus !== "ALL"){
+            filterArray.push({
+                                propName: "PaymentStatus",
+                                comparator: "eq",
+                                value: "'" + paymentStatus + "'"
+                            })
+        }
+
+        if(startTimeISO){
+            filterArray.push({
+                propName: filterTime,
+                comparator: "gt",
+                value: "datetime'"+ startTimeISO +"'"
+            })
+        }
+        if(endTimeISO){
+            filterArray.push({
+                propName: filterTime,
+                comparator: "lt",
+                value: "datetime'"+ endTimeISO +"'"
+            })
+        }
+
+
+        if(searchText){
+            filterArray.push(
+            {
+                propName: "",
+                comparator: "",
+                value: " substringof('"+ searchText +"',Order/From/Address) or substringof('"+ searchText +"',Order/To/Address) or substringof('"+ searchText +
+                "',HRID) or substringof('"+ searchText +"',Order/ReferenceInvoiceId) or Order/OrderCart/PackageList/any(package: substringof('"+searchText+"',package/Item))"
+            })
+        }
+
+
+        let queryString: string = this._queryBuilder
+            .filterBy(filterArray)
+            .orderBy([
+            {
+                propName: orderByTime,
+                orderDirection: orderByTimeDirection
+            }])
+            .page(page)
+            .pageSize(pageCount)
+            .toQueryString();
+
+        let historyUrl = this.jobUrl + '/odata' + queryString;
         return this.getJobs(historyUrl)
+    }
+
+    getJobsWithReference(searchText: string, page: number){
+        let filterArray: any = [];
+
+        filterArray.push([
+            {
+                propName: "substringof('"+ searchText +"',Order/To/Address)"
+            },
+            {
+                propName: "substringof('"+ searchText +"',HRID)"
+            }
+        ])
+        let queryString: string = this._queryBuilder.filterBy(filterArray)
+                                                    .page(0)
+                                                    .toQueryString();
+        let historyUrl = this.jobUrl + '/odata' + queryString;
+        console.log(historyUrl);
+
     }
 
 
@@ -78,7 +191,23 @@ export class JobService {
     }
 
     getJobsByState(state: JobState): Observable<PageEnvelope<Job>> {
-        return this.shttp.secureGet(this.jobUrl + '/odata' + "?$filter=State eq " + "'" + state + "'")
+        var url = "";
+        switch(state){
+            case "ENQUEUED":
+            case "IN_PROGRESS":
+            case "COMPLETED":
+            case "CANCELLED":
+                url = this.jobUrl + '/odata' + "?$filter=State eq " + "'" + state + "'";
+                break;
+            case "RETURNED":
+                url = this.jobUrl + '/odata' + "?$filter=Tasks/any(task: task/State eq 'COMPLETED' and task/Variant eq 'return' and task/Type eq 'Delivery')";
+                break;
+            default:
+                url = this.jobUrl + '/odata'
+                break;
+
+        }
+        return this.shttp.secureGet(url)
             .map(this._extractData)
             .catch(error => {
                 let errMsg = error.message || 'Exception when fetching job by state';

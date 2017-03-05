@@ -14,7 +14,7 @@
         min-height: 100%;
         font-family: 'Roboto', sans-serif;
         font-size: 13px;
-        font-weight: 200;
+        font-weight: 500;
         color: #555;
         background-color: #f2f2f2;
         -webkit-font-smoothing: antialiased;
@@ -28,7 +28,7 @@
     h4,
     h5,
     h6 {
-        font-family: 'Roboto', sans-serif;
+        font-family: Gotham,Roboto,sans-serif;
         font-weight: 300;
         color: #333;
     }
@@ -103,11 +103,6 @@
         padding: 10px;
     }
 
-    i {
-        margin: 8px;
-        color: #3498db;
-    }
-
     .collapse-i {
         margin: 0 0 0 0;
         float: right;
@@ -117,6 +112,7 @@
     .pointer{
         cursor: pointer;
     }
+
 
     .order-cart {
         /*background-color: #3498db;
@@ -131,6 +127,44 @@
         margin-right: 2%;*/
         display: none;
     }
+
+    .pending {
+        background-color: #FF5722 !important;
+    }
+
+    .na {
+        background-color: #616161 !important;
+    }
+    .in-progress {
+        background-color: #FFEB3B !important;
+        color: black;
+    }
+    .completed {
+        background-color: #4CAF50 !important;
+    }
+    .cancelled {
+        background-color: #b71c1c !important;
+    }
+    .not-applicable {
+        background-color: #9E9E9E !important;
+    }
+    .failed {
+      background-color: #9e9e9e;
+      color: white;
+    }
+    .returned {
+        background-color: #1e90ff;
+        color: white;
+    }
+    .b2b {
+        background-color: #2196F3 !important;
+    }
+
+    .b2c {
+        background-color: #3F51B5 !important;
+    }
+
+
     /* Small Devices, Tablets */
 
     @media only screen and (max-width: 768px) {
