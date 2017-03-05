@@ -108,7 +108,9 @@
 									<td class="col-md-1"> {{task.Type}} </td>
 									<td class="col-md-1"> <span class="{{getCssClass(task.State).class}}">{{getCssClass(task.State).value}}</span> </td>
 									<td class="col-md-2"> {{(task.ETA | date:"EEE d MMM y,h:m TT") || "Not Mentioned"}} </td>
-									<td class="col-md-2">{{job.Assets[task.AssetRef].UserName}}</td>
+									<td class="col-md-2">
+										<span *ngIf="task.AssetRef">{{job.Assets[task.AssetRef].UserName}}</span>
+									</td>
 									<td class="col-md-2"> {{(task.InitiationTime | date:"EEE d MMM y,h:m TT") || "Not Started"}} </td>
 									<td class="col-md-2"> {{(task.CompletionTime | date:"EEE d MMM y,h:m TT") || "Not Finished"}} </td>
 									<td class="col-md-2"> {{task.Duration || "Not Finished"}} </td>
