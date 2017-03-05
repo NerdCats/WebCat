@@ -74,11 +74,7 @@
     "typings": "^0.8.1",
     "yargs": "^4.7.1"
   },
-<<<<<<< HEAD
-  "peerDependencies": {
-=======
   "peerDependency": {
->>>>>>> temp_prod
     "@angular/common": "2.0.0-rc.1"
   }
 }
