@@ -6,7 +6,7 @@
           Simplified</h1>
           <form [ngFormModel]="trackJobForm" (submit)="gotoSearchpage($event)" class="form-inline" role="form">
             <div class="form-group">
-              <input ngControl="jobid" class="form-control" pattern="Job-[A-Z|0-9]{8}" title="ex: Job-VV1XDFOW" placeholder="Enter Your Job Id ex. JOB-XXXXXX">
+              <input ngControl="jobid" class="form-control" pattern="(Job-[A-Z|0-9]{8}|[A-Z|0-9]{8})" title="ex: Job-XXXXXX or XXXXXX" placeholder="Job-XXXXXX or XXXXXX">
             </div>
             <button type="submit" class="btn btn-info btn-lg">Track Your Order</button>
           </form>
