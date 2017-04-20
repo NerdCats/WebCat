@@ -133,6 +133,10 @@ export class JobTrackComponent implements OnInit {
         this.tasksTiming.forEach(task => {
             if(task.Type === "PackagePickUp") task.Type = "Pickup";
             if(task.Type === "SecureDelivery") task.Type = "Secured Delivery";
+            if(task.Type === "Delivery" && task.Variant === "retry") task.Type = "Retry Delivery";
+            if(task.Type === "Delivery" && task.Variant === "return") task.Type = "Package Return";
+
+            console.log(task.Variant);
 
             if(task.Duration){
                 console.log(task.Duration);

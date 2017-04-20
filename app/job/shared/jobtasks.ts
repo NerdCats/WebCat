@@ -3,6 +3,7 @@ import {DefaultAddress} from '../../shared/model/geocoding.defaultAddress'
 export class JobTask {
     id: string;
     Type: string;
+    Variant: string;
     JobTaskStateString: string;
     State: string;
     AssetRef: string;
@@ -21,6 +22,7 @@ export class JobTask {
     constructor(task: any) {
         this.id = task["id"];
         this.Type = task["Type"];
+        this.Variant = task["Variant"];
         this.JobTaskStateString = task["JobTaskStateString"];
         this.State = task["State"];
         this.AssetRef = task["AssetRef"];

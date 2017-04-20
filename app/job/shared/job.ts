@@ -4,6 +4,7 @@ import {JobTask, FetchDeliveryManJobTask, PackagePickUpJobTask, DeliveryJobTask,
 
 export interface IJobJson {
     Id: string;
+    AttemptCount: number;
     HRID: string;
     HRState: string;
     Name: string;
@@ -28,6 +29,7 @@ export interface IJobJson {
 
 export class Job {
     Id: string;
+    AttemptCount: number;
     HRID: string;
     Name: string;
     Order: OrderModel; // INFO: Would come from #36
