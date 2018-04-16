@@ -35,7 +35,9 @@
                         </div>
                         <div class="col-md-6">
                             <strong>Delivery Address</strong>
-                            <p>{{job.Order.To.Address}}</p>
+                            <p>Name: {{job.Order.BuyerInfo.Name}}</p>
+                            <p>Address: {{job.Order.To.Address}}</p>
+                            <p>Contact: {{job.Order.BuyerInfo.PhoneNumber}}</p>
                         </div>
                     </div>
 					<div class="row" *ngIf="job.Order.NoteToDeliveryMan">
